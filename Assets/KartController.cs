@@ -71,7 +71,7 @@ public class KartController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            float time = Time.timeScale == 1 ? .2f : 1;
+            float time = Time.timeScale == 1 ? .9f : 1;
             Time.timeScale = time;
         }
 
