@@ -15,6 +15,11 @@ public class CarController : MonoBehaviour
     private float turnInput;
     private bool grounded;
 
+    //Car info to relay to UI
+    private float speedometer;
+
+    public float Speedometer { get { return speedometer; } }
+
     private void Start()
     {
         sphereRb.transform.parent = null;
@@ -37,6 +42,10 @@ public class CarController : MonoBehaviour
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3 (0, turnInput * turnStrenght * Time.deltaTime * Input.GetAxis("Vertical"), 0));
 
         transform.position = sphereRb.transform.position;
+
+        //Speedometer calculator
+        speedometer = Mathf.Abs(sphereRb.velocity.x) + Mathf.Abs(sphereRb.velocity.z);
+        GameManager.Instance.SpeedometerGM = speedometer;
     }
 
     private void FixedUpdate()
