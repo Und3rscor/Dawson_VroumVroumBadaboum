@@ -38,7 +38,7 @@ public class UI : MonoBehaviour
     private void Update()
     {
         //Modify speedometer values
-        speedometerText.text = "Speed: " + Mathf.Round(GameManager.Instance.SpeedometerGM);
+        speedometerText.text = "Speed: " + Mathf.Round(GameManager.Instance.SpeedometerGM) + " Km/h";
         speedometerSlider.value = GameManager.Instance.SpeedometerGM;
 
         //Modify lap counter value
