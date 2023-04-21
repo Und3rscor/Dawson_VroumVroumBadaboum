@@ -31,9 +31,24 @@ public class GameManager : MonoBehaviour
 
     public int Score { get { return score; } }
 
+    //Alive variable
+    private int alive;
+
+    public int Alive { get { return alive; } }
+
+    //Total Alive variable
+    private int totalAlive;
+    public int TotalAlive { get { return totalAlive; } }
+
     //private variables
     private int scoreBonus;
 
+
+    private void Start()
+    {
+        totalAlive = FindObjectsOfType<CarController>().Length;
+        alive = totalAlive;
+    }
 
     private void Awake()
     {
@@ -83,6 +98,7 @@ public class GameManager : MonoBehaviour
 
     private void Kill()
     {
+        alive--;
         scoreBonus += 1000;
     }
 }

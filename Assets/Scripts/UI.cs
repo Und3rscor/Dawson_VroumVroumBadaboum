@@ -16,6 +16,9 @@ public class UI : MonoBehaviour
     //Scoreboard variable
     private TextMeshProUGUI scoreboard;
 
+    //Alive counter variable
+    private TextMeshProUGUI aliveCounter;
+
     private void Start()
     {
         //Find speedometer components
@@ -27,6 +30,9 @@ public class UI : MonoBehaviour
 
         //Find scoreboard component
         scoreboard = transform.Find("Scoreboard/Text").GetComponent<TextMeshProUGUI>();
+
+        //Find Alive Counter component
+        aliveCounter = transform.Find("AliveCounter/Text").GetComponent<TextMeshProUGUI>();
     }
 
     private void Update()
@@ -40,5 +46,8 @@ public class UI : MonoBehaviour
 
         //Modify scoreboard value
         scoreboard.text = "Score: " + GameManager.Instance.Score;
+
+        //Modify Alive Counter value
+        aliveCounter.text = "Alive: " + GameManager.Instance.Alive + " / " + GameManager.Instance.TotalAlive;
     }
 }
