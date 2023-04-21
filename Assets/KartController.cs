@@ -139,9 +139,9 @@ public class KartController : MonoBehaviour
         }
 
         //b) Wheels
-        frontWheels.localEulerAngles = new Vector3(0, (Input.GetAxis("Horizontal") * 15), frontWheels.localEulerAngles.z);
-        frontWheels.localEulerAngles += new Vector3(0, 0, sphere.velocity.magnitude/2);
-        backWheels.localEulerAngles += new Vector3(0, 0, sphere.velocity.magnitude/2);
+        frontWheels.localEulerAngles = new Vector3(0, (Input.GetAxis("Horizontal") * 2), frontWheels.localEulerAngles.z);
+        frontWheels.localEulerAngles += new Vector3( sphere.velocity.magnitude/2,0,0);
+        backWheels.localEulerAngles += new Vector3( sphere.velocity.magnitude/2,0,0);
 
         //c) Steering Wheel
         steeringWheel.localEulerAngles = new Vector3(-25, 90, ((Input.GetAxis("Horizontal") * 45)));

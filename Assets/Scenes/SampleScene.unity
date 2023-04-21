@@ -31793,8 +31793,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 491349913}
-  m_LocalRotation: {x: 0.062137432, y: 0.000000016916497, z: -0.0000000010531827,
-    w: 0.9980676}
+  m_LocalRotation: {x: 0.06213745, y: -0.000000018100836, z: 0.0000000011269174, w: 0.9980676}
   m_LocalPosition: {x: 9, y: 2.38, z: -4.5360007}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -37568,6 +37567,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 82475357}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &761840899 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7760853451979023723, guid: 57c075ed78b128346942fc4d53648428,
+    type: 3}
+  m_PrefabInstance: {fileID: 744180944}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &824842948
 GameObject:
   m_ObjectHideFlags: 0
@@ -42942,8 +42947,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.062137432, y: 0.000000016916497, z: -0.0000000010531827,
-    w: 0.9980676}
+  m_LocalRotation: {x: 0.06213745, y: -0.000000018100836, z: 0.0000000011269174, w: 0.9980676}
   m_LocalPosition: {x: 9, y: 2.38, z: -4.5360007}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -53203,6 +53207,12 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 8262833186550602150, guid: 58540b59b491dda438c73d5077bdc85d, type: 3}
+--- !u!4 &1112110354 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8588086405737722814, guid: 57c075ed78b128346942fc4d53648428,
+    type: 3}
+  m_PrefabInstance: {fileID: 744180944}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1113458007 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2857741816023103153, guid: 57c075ed78b128346942fc4d53648428,
@@ -58844,7 +58854,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1550554210}
   m_LocalRotation: {x: 0.007979685, y: 0.004148182, z: -0.044037163, w: 0.99898946}
-  m_LocalPosition: {x: 1.165, y: -0.715, z: -0.134}
+  m_LocalPosition: {x: 1.165, y: -0.768, z: -0.121}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -74020,8 +74030,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 307
-  frontWheels: {fileID: 128832812}
-  backWheels: {fileID: 2058428362}
+  frontWheels: {fileID: 761840899}
+  backWheels: {fileID: 1112110354}
   steeringWheel: {fileID: 356980781}
   wheelParticles: {fileID: 376269232}
   flashParticles: {fileID: 464387577}
