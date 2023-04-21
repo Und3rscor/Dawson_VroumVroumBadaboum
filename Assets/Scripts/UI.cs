@@ -13,6 +13,9 @@ public class UI : MonoBehaviour
     //Lap counter variable
     private TextMeshProUGUI lapCounter;
 
+    //Scoreboard variable
+    private TextMeshProUGUI scoreboard;
+
     private void Start()
     {
         //Find speedometer components
@@ -21,6 +24,9 @@ public class UI : MonoBehaviour
 
         //Find lap counter component
         lapCounter = transform.Find("LapCounter/Text").GetComponent<TextMeshProUGUI>();
+
+        //Find scoreboard component
+        scoreboard = transform.Find("Scoreboard/Text").GetComponent<TextMeshProUGUI>();
     }
 
     private void Update()
@@ -31,5 +37,8 @@ public class UI : MonoBehaviour
 
         //Modify lap counter value
         lapCounter.text = "Lap: " + GameManager.Instance.Laps;
+
+        //Modify scoreboard value
+        scoreboard.text = "Score: " + GameManager.Instance.Score;
     }
 }

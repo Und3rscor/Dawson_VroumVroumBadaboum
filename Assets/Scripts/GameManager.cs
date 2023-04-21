@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private KeyCode increaseLaps;
 
+    [SerializeField]
+    private KeyCode kill;
+
     //Speedometer variable
     private float speedometerGM;
 
@@ -22,6 +25,14 @@ public class GameManager : MonoBehaviour
     private int laps;
 
     public int Laps { get { return laps; } }
+
+    //Score variable
+    private int score;
+
+    public int Score { get { return score; } }
+
+    //private variables
+    private int scoreBonus;
 
 
     private void Awake()
@@ -38,15 +49,40 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        Debug();
+        Scoreboard();
+
+        QuickDebug();
     }
 
-    private void Debug()
+    private void QuickDebug()
     {
         //Adds 1 lap to the lap counter if the debug key is pressed
         if (Input.GetKeyDown(increaseLaps))
         {
-            laps++;
+            Lap();
         }
+
+        //Simulates 1 kill
+        if (Input.GetKeyDown(kill))
+        {
+            Kill();
+        }
+    }
+
+    private void Scoreboard()
+    {
+        score = (int)Time.time + scoreBonus;
+        Debug.Log(scoreBonus);
+    }
+
+    private void Lap()
+    {
+        laps++;
+        scoreBonus += 100;
+    }
+
+    private void Kill()
+    {
+        scoreBonus += 1000;
     }
 }
