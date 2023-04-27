@@ -649,6 +649,11 @@ PrefabInstance:
       propertyPath: drivableSurface.m_Bits
       value: 576
       objectReference: {fileID: 0}
+    - target: {fileID: 1668652265441348594, guid: c9e904412020b334d85c8aec5b0b2711,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 1668652265441348599, guid: c9e904412020b334d85c8aec5b0b2711,
         type: 3}
       propertyPath: m_RootOrder
