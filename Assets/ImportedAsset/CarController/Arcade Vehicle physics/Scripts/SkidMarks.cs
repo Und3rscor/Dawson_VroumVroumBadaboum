@@ -53,7 +53,6 @@ public class SkidMarks : MonoBehaviour
         {
             fadeOutSpeed += Time.deltaTime/2;
             Color m_color = Color.Lerp(Color.black, new Color(0f, 0f, 0f, 0f), fadeOutSpeed);
-            Debug.Log(m_color);
             skidMark.materials[0].color = m_color;
             if(fadeOutSpeed > 1)
             {

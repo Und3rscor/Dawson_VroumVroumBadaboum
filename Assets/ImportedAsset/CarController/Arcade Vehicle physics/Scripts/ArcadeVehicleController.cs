@@ -46,6 +46,9 @@ public class ArcadeVehicleController : MonoBehaviour
     private float speedometer;
     public float Speedometer { get { return speedometer; } }
 
+    //Camera stuff
+    private CameraExtras camExtras;
+
     //Flip stuff
     [Header("Front Flip Stuff")]
     [SerializeField] private KeyCode flipKey = KeyCode.Space;
@@ -53,6 +56,10 @@ public class ArcadeVehicleController : MonoBehaviour
     private GameObject model;
     private Animator modelAnimator;
     private bool flip = false;
+
+    //Spin stuff
+    [Header("Spin Stuff")]
+    [SerializeField] private KeyCode spinKey = KeyCode.LeftShift;
 
     private void Start()
     {
@@ -65,6 +72,9 @@ public class ArcadeVehicleController : MonoBehaviour
         //Animation stuff
         model = transform.Find("Mesh").gameObject;
         modelAnimator = model.GetComponent<Animator>();
+
+        //Camera stuff
+        camExtras = GetComponentInChildren<CameraExtras>();
     }
     private void Update()
     {
@@ -78,8 +88,10 @@ public class ArcadeVehicleController : MonoBehaviour
         GameManager.Instance.SpeedometerGM = speedometer;
 
         //Flip stuff
-        SpinController();
+        FlipController();
 
+        //Spin stuff
+        SpinController();
     }
     public void AudioManager()
     {
@@ -238,7 +250,7 @@ public class ArcadeVehicleController : MonoBehaviour
 
     }
 
-    private void SpinController()
+    private void FlipController()
     {
         if (Input.GetKeyDown(flipKey) && !grounded() && !flip)
         {
@@ -260,4 +272,11 @@ public class ArcadeVehicleController : MonoBehaviour
         rb.AddForce(transform.forward * flipBoost, ForceMode.Impulse);
     }
 
+    private void SpinController()
+    {
+        if (Input.GetKeyDown(spinKey) && !camExtras.CinematicCamTurn)
+        {
+            camExtras.CinematicCamTurn = true;
+        }
+    }
 }

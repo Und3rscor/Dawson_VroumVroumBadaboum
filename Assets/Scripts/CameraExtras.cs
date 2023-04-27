@@ -9,14 +9,19 @@ public class CameraExtras : MonoBehaviour
     [Header("Camera controls")]
     [SerializeField] private KeyCode turnCamKey = KeyCode.LeftControl;
     [SerializeField] private bool cameraTurnHold = true;
+    [SerializeField] private int cinematicCamTurnSpeed;
 
     private CinemachineVirtualCamera vCam;
     private CinemachineTransposer transposer;
-    private bool camTurned = false;
-    public bool CamTurned { get { return camTurned; } set {  camTurned = value; } }
+    private Animator animator;
+    private bool cinematicCamTurned = false;
+    private bool cinematicCamTurn = false;
+    public bool CinematicCamTurn { get { return cinematicCamTurn; } set { cinematicCamTurn = value; } }
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
+
         vCam = GetComponent<CinemachineVirtualCamera>();
         transposer = vCam.GetCinemachineComponent<CinemachineTransposer>();
     }
@@ -24,6 +29,12 @@ public class CameraExtras : MonoBehaviour
     private void Update()
     {
         CameraControls();
+
+        if (cinematicCamTurn)
+        {
+            turnCamCinematic();
+            animator.SetBool("Spin", cinematicCamTurned);
+        }
     }
 
     private void CameraControls()
@@ -52,15 +63,20 @@ public class CameraExtras : MonoBehaviour
 
     private void turnCam()
     {
-        if (camTurned)
+        transposer.m_FollowOffset = new Vector3(transposer.m_FollowOffset.x, transposer.m_FollowOffset.y, -transposer.m_FollowOffset.z);
+    }
+
+    private void turnCamCinematic()
+    {
+        if (cinematicCamTurned)
         {
-            transposer.m_FollowOffset = new Vector3(0, 1.57f, -6);
-            camTurned = false;
+            cinematicCamTurned = false;
+            cinematicCamTurn = false;
         }
         else
         {
-            transposer.m_FollowOffset = new Vector3(0, 1.57f, 6);
-            camTurned = true;
+            cinematicCamTurned = true;
+            cinematicCamTurn = false;
         }
     }
 }
