@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        totalAlive = FindObjectsOfType<CarController>().Length;
+        totalAlive = FindObjectsOfType<ArcadeVehicleController>().Length;
         alive = totalAlive;
     }
 
@@ -87,7 +87,6 @@ public class GameManager : MonoBehaviour
     private void Scoreboard()
     {
         score = (int)Time.time + scoreBonus;
-        Debug.Log(scoreBonus);
     }
 
     private void Lap()

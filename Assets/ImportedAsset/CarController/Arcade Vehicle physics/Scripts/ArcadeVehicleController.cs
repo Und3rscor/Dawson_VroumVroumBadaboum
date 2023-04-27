@@ -42,6 +42,18 @@ public class ArcadeVehicleController : MonoBehaviour
     private float radius, horizontalInput, verticalInput;
     private Vector3 origin;
 
+    //Car info to relay to UI
+    private float speedometer;
+    public float Speedometer { get { return speedometer; } }
+
+    //Flip stuff
+    [Header("Front Flip Stuff")]
+    [SerializeField] private KeyCode flipKey = KeyCode.Space;
+    [SerializeField] private float flipBoost;
+    private GameObject model;
+    private Animator modelAnimator;
+    private bool flip = false;
+
     private void Start()
     {
         radius = rb.GetComponent<SphereCollider>().radius;
@@ -49,6 +61,10 @@ public class ArcadeVehicleController : MonoBehaviour
         {
             Physics.defaultMaxAngularSpeed = 100;
         }
+
+        //Animation stuff
+        model = transform.Find("Mesh").gameObject;
+        modelAnimator = model.GetComponent<Animator>();
     }
     private void Update()
     {
@@ -56,6 +72,13 @@ public class ArcadeVehicleController : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");     //accelaration input
         Visuals();
         AudioManager();
+
+        //Speedometer calculator
+        speedometer = Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.z);
+        GameManager.Instance.SpeedometerGM = speedometer;
+
+        //Flip stuff
+        SpinController();
 
     }
     public void AudioManager()
@@ -126,6 +149,9 @@ public class ArcadeVehicleController : MonoBehaviour
 
             //body tilt
             carBody.MoveRotation(Quaternion.Slerp(carBody.rotation, Quaternion.FromToRotation(carBody.transform.up, hit.normal) * carBody.transform.rotation, 0.12f));
+
+            //allow flipping again once the car lands
+            flip = false;
         }
         else
         {
@@ -183,13 +209,13 @@ public class ArcadeVehicleController : MonoBehaviour
             if (Physics.SphereCast(origin, radius + 0.1f, direction, out hit, maxdistance, drivableSurface))
             {
                 return true;
-
             }
             else
             {
                 return false;
             }
         }
+
         else { return false; }
     }
 
@@ -210,6 +236,22 @@ public class ArcadeVehicleController : MonoBehaviour
             
         }
 
+    }
+
+    private void SpinController()
+    {
+        if (Input.GetKeyDown(flipKey) && !grounded() && !flip)
+        {
+            flip = true;
+            modelAnimator.SetBool("FrontFlip", true);
+            Invoke("InterruptFlip", 0.5f);
+        }        
+    }
+
+    private void InterruptFlip()
+    {
+        modelAnimator.SetBool("FrontFlip", false);
+        rb.AddForce(transform.forward * flipBoost, ForceMode.Impulse);
     }
 
 }
