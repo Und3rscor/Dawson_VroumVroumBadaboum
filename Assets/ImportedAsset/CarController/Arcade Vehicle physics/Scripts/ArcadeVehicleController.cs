@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Bson;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -89,6 +90,7 @@ public class ArcadeVehicleController : MonoBehaviour
 
         //Flip stuff
         FlipController();
+        modelAnimator.SetBool("FrontFlip", flip);
 
         //Spin stuff
         SpinController();
@@ -255,20 +257,18 @@ public class ArcadeVehicleController : MonoBehaviour
         if (Input.GetKeyDown(flipKey) && !grounded() && !flip)
         {
             flip = true;
-            modelAnimator.SetBool("FrontFlip1", true);
         }
 
         if (Input.GetKeyUp(flipKey) && !grounded() && flip)
         {
-            modelAnimator.SetBool("FrontFlip2", true);
-            Invoke("InterruptFlip", 0.25f);
+            flip = false;
+
+            Invoke("FlipBoost", 0.3f);
         }
     }
 
-    private void InterruptFlip()
+    private void FlipBoost()
     {
-        modelAnimator.SetBool("FrontFlip1", false);
-        modelAnimator.SetBool("FrontFlip2", false);
         rb.AddForce(transform.forward * flipBoost, ForceMode.Impulse);
     }
 
