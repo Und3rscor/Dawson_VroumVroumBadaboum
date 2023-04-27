@@ -243,14 +243,20 @@ public class ArcadeVehicleController : MonoBehaviour
         if (Input.GetKeyDown(flipKey) && !grounded() && !flip)
         {
             flip = true;
-            modelAnimator.SetBool("FrontFlip", true);
-            Invoke("InterruptFlip", 0.5f);
-        }        
+            modelAnimator.SetBool("FrontFlip1", true);
+        }
+
+        if (Input.GetKeyUp(flipKey) && !grounded() && flip)
+        {
+            modelAnimator.SetBool("FrontFlip2", true);
+            Invoke("InterruptFlip", 0.25f);
+        }
     }
 
     private void InterruptFlip()
     {
-        modelAnimator.SetBool("FrontFlip", false);
+        modelAnimator.SetBool("FrontFlip1", false);
+        modelAnimator.SetBool("FrontFlip2", false);
         rb.AddForce(transform.forward * flipBoost, ForceMode.Impulse);
     }
 
