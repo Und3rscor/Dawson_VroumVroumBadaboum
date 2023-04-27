@@ -9,7 +9,6 @@ public class CameraExtras : MonoBehaviour
     [Header("Camera controls")]
     [SerializeField] private KeyCode turnCamKey = KeyCode.LeftControl;
     [SerializeField] private bool cameraTurnHold = true;
-    [SerializeField] private int cinematicCamTurnSpeed;
 
     private CinemachineVirtualCamera vCam;
     private CinemachineTransposer transposer;
