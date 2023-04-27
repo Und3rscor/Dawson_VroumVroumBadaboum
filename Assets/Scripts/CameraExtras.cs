@@ -8,6 +8,7 @@ public class CameraExtras : MonoBehaviour
     //Camera controls
     [Header("Camera controls")]
     [SerializeField] private KeyCode turnCamKey = KeyCode.LeftControl;
+    [SerializeField] private bool cameraTurnHold = true;
 
     private CinemachineVirtualCamera vCam;
     private CinemachineTransposer transposer;
@@ -22,14 +23,30 @@ public class CameraExtras : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(turnCamKey))
+        CameraControls();
+    }
+
+    private void CameraControls()
+    {
+        if (cameraTurnHold)
         {
-            turnCam();
+            if (Input.GetKeyDown(turnCamKey))
+            {
+                turnCam();
+            }
+
+            if (Input.GetKeyUp(turnCamKey))
+            {
+                turnCam();
+            }
         }
 
-        if (Input.GetKeyUp(turnCamKey))
+        else
         {
-            turnCam();
+            if (Input.GetKeyDown(turnCamKey))
+            {
+                turnCam();
+            }
         }
     }
 
