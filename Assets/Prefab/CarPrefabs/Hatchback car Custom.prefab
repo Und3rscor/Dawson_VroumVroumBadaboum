@@ -20679,9 +20679,11 @@ MonoBehaviour:
   MaxPitch: 3
   SkidSound: {fileID: 1925981547900679600}
   skidWidth: 0.13985014
+  resetPosition: 114
   flipKey: 32
   flipBoost: 100
   spinKey: 304
+  spinSpeedDebuff: 0.9
 --- !u!54 &1925981547900679246
 Rigidbody:
   m_ObjectHideFlags: 0
