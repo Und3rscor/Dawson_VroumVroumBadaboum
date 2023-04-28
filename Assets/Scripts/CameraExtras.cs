@@ -7,11 +7,11 @@ public class CameraExtras : MonoBehaviour
 {
     //Camera controls
     [Header("Camera controls")]
+    [SerializeField] private CinemachineVirtualCamera mainCam;
+    [SerializeField] private CinemachineVirtualCamera reverseCam;
     [SerializeField] private KeyCode turnCamKey = KeyCode.LeftControl;
     [SerializeField] private bool cameraTurnHold = true;
 
-    private CinemachineVirtualCamera vCam;
-    private CinemachineTransposer transposer;
     private Animator animator;
     private bool cinematicCamTurned = false;
     private bool cinematicCamTurn = false;
@@ -19,21 +19,21 @@ public class CameraExtras : MonoBehaviour
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
-
-        vCam = GetComponent<CinemachineVirtualCamera>();
-        transposer = vCam.GetCinemachineComponent<CinemachineTransposer>();
+        animator = mainCam.GetComponent<Animator>();
     }
 
     private void Update()
     {
-        CameraControls();
-
         if (cinematicCamTurn)
         {
             turnCamCinematic();
             animator.SetBool("Spin", cinematicCamTurned);
         }
+    }
+
+    private void LateUpdate()
+    {
+        CameraControls();
     }
 
     private void CameraControls()
@@ -62,7 +62,16 @@ public class CameraExtras : MonoBehaviour
 
     private void turnCam()
     {
-        transposer.m_FollowOffset = new Vector3(transposer.m_FollowOffset.x, transposer.m_FollowOffset.y, -transposer.m_FollowOffset.z);
+        if (mainCam.Priority == 1)
+        {
+            mainCam.Priority = 2;
+            reverseCam.Priority = 1;
+        }
+        else
+        {
+            mainCam.Priority = 1;
+            reverseCam.Priority = 2;
+        }
     }
 
     private void turnCamCinematic()
