@@ -57,6 +57,11 @@ public class ArcadeVehicleController : MonoBehaviour
     [SerializeField] private KeyCode resetPosition = KeyCode.R;
     private Vector3 spawnPosition;
 
+    //Nos stuff
+    [Header("Nos Stuff")]
+    [SerializeField] private KeyCode nosKey = KeyCode.E;
+    [SerializeField] private float nosSpeedBoost;
+
     //Flip stuff
     [Header("Front Flip Stuff")]
     [SerializeField] private KeyCode flipKey = KeyCode.Space;
@@ -103,6 +108,9 @@ public class ArcadeVehicleController : MonoBehaviour
         //Speedometer calculator
         speedometer = Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.z);
         GameManager.Instance.SpeedometerGM = speedometer;
+
+        //Nos stuff
+        NosController();
 
         //Flip stuff
         FlipController();
@@ -274,6 +282,19 @@ public class ArcadeVehicleController : MonoBehaviour
         if (Input.GetKeyDown(resetPosition))
         {
             transform.position = spawnPosition;
+        }
+    }
+
+    private void NosController()
+    {
+        if (Input.GetKey(nosKey))
+        {
+            accelaration = accelaration * nosSpeedBoost;
+        }
+
+        if (Input.GetKeyUp(nosKey))
+        {
+            accelaration = baseAccelaration;
         }
     }
 
