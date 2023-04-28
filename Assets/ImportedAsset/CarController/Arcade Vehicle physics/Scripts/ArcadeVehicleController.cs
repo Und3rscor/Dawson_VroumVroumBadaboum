@@ -2,6 +2,7 @@ using Newtonsoft.Json.Bson;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class ArcadeVehicleController : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class ArcadeVehicleController : MonoBehaviour
     public LayerMask drivableSurface;
 
     public float MaxSpeed, accelaration, turn, gravity = 7f;
+    private float baseAccelaration;
     public Rigidbody rb, carBody;
     
     [HideInInspector]
@@ -50,6 +52,11 @@ public class ArcadeVehicleController : MonoBehaviour
     //Camera stuff
     private CameraExtras camExtras;
 
+    //Debug Stuff
+    [Header("Debug Stuff")]
+    [SerializeField] private KeyCode resetPosition = KeyCode.R;
+    private Vector3 spawnPosition;
+
     //Flip stuff
     [Header("Front Flip Stuff")]
     [SerializeField] private KeyCode flipKey = KeyCode.Space;
@@ -61,6 +68,8 @@ public class ArcadeVehicleController : MonoBehaviour
     //Spin stuff
     [Header("Spin Stuff")]
     [SerializeField] private KeyCode spinKey = KeyCode.LeftShift;
+    [SerializeField] private float spinSpeedDebuff;
+    private bool spin = false;
 
     private void Start()
     {
@@ -69,6 +78,10 @@ public class ArcadeVehicleController : MonoBehaviour
         {
             Physics.defaultMaxAngularSpeed = 100;
         }
+
+        //Keeps values in mind for ease of return
+        spawnPosition = transform.position;
+        baseAccelaration = accelaration;
 
         //Animation stuff
         model = transform.Find("Mesh").gameObject;
@@ -84,6 +97,9 @@ public class ArcadeVehicleController : MonoBehaviour
         Visuals();
         AudioManager();
 
+        //Debug stuff
+        DebugController();
+
         //Speedometer calculator
         speedometer = Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.z);
         GameManager.Instance.SpeedometerGM = speedometer;
@@ -94,6 +110,7 @@ public class ArcadeVehicleController : MonoBehaviour
 
         //Spin stuff
         SpinController();
+        modelAnimator.SetBool("Spin", spin);
     }
     public void AudioManager()
     {
@@ -252,6 +269,14 @@ public class ArcadeVehicleController : MonoBehaviour
 
     }
 
+    private void DebugController()
+    {
+        if (Input.GetKeyDown(resetPosition))
+        {
+            transform.position = spawnPosition;
+        }
+    }
+
     private void FlipController()
     {
         if (Input.GetKeyDown(flipKey) && !grounded() && !flip)
@@ -277,6 +302,17 @@ public class ArcadeVehicleController : MonoBehaviour
         if (Input.GetKeyDown(spinKey) && !camExtras.CinematicCamTurn)
         {
             camExtras.CinematicCamTurn = true;
+
+            if (spin)
+            {
+                spin = false;
+                accelaration = baseAccelaration;
+            }
+            else
+            {
+                spin = true;
+                accelaration = accelaration * spinSpeedDebuff;
+            }
         }
     }
 }
