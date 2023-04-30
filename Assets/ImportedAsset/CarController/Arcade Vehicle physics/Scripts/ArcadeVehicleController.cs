@@ -60,6 +60,7 @@ public class ArcadeVehicleController : MonoBehaviour
     [Header("Nos Stuff")]
     [SerializeField] private KeyCode nosKey = KeyCode.E;
     [SerializeField] private float nosSpeedBoost;
+    private GameObject nosFX;
 
     //Flip stuff
     [Header("Front Flip Stuff")]
@@ -85,6 +86,10 @@ public class ArcadeVehicleController : MonoBehaviour
 
         //Keeps value in mind for ease of return
         baseAccelaration = accelaration;
+
+        //Nos Stuff
+        nosFX = transform.Find("Mesh/Body/Hatchback/Body/Exhaust/NOS").gameObject;
+        nosFX.SetActive(false);
 
         //Animation stuff
         model = transform.Find("Mesh").gameObject;
@@ -285,14 +290,16 @@ public class ArcadeVehicleController : MonoBehaviour
 
     private void NosController()
     {
-        if (Input.GetKey(nosKey))
+        if (Input.GetKeyDown(nosKey))
         {
             accelaration = accelaration * nosSpeedBoost;
+            nosFX.SetActive(true);
         }
 
         if (Input.GetKeyUp(nosKey))
         {
             accelaration = baseAccelaration;
+            nosFX.SetActive(false);
         }
     }
 

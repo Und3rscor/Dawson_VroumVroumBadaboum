@@ -2777,5 +2777,115 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hatchback car Custom
       objectReference: {fileID: 0}
+    - target: {fileID: 7332328706627226751, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423088353756173745, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: ShapeModule.type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423088353756173745, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: ShapeModule.angle
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423088353756173745, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: ShapeModule.m_Rotation.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423088353756173745, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423281386364063013, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: ShapeModule.type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423281386364063013, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: ShapeModule.angle
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423281386364063013, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: ShapeModule.m_Rotation.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423281386364063013, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423281386364063013, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423281386364063013, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423281386364063013, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: VelocityModule.speedModifier.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423309289043715529, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423309289043715529, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: VelocityModule.speedModifier.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423391626203892705, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: ShapeModule.type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423391626203892705, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: ShapeModule.angle
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423391626203892705, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: ShapeModule.m_Rotation.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423391626203892705, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423391626203892705, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423391626203892705, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: VelocityModule.speedModifier.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423424810967958245, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423424810967958245, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: VelocityModule.speedModifier.scalar
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3c3929ae8af3444eaacc02ab85eb5ef, type: 3}
