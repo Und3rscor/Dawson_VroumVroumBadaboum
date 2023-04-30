@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private KeyCode kill;
 
+    //Screenshot Key
+    [SerializeField] private KeyCode screenshotKey = KeyCode.F10;
+
     //Speedometer variable
     private float speedometerGM;
 
@@ -67,6 +70,11 @@ public class GameManager : MonoBehaviour
         Scoreboard();
 
         QuickDebug();
+
+        if (Input.GetKeyDown(screenshotKey))
+        {
+            Screenshot();
+        }
     }
 
     private void QuickDebug()
@@ -82,6 +90,12 @@ public class GameManager : MonoBehaviour
         {
             Kill();
         }
+    }
+
+    private void Screenshot()
+    {
+        ScreenCapture.CaptureScreenshot("screenshot.png");
+        Debug.Log("A screenshot was taken!");
     }
 
     private void Scoreboard()
