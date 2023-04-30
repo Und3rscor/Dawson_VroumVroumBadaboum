@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,12 +10,12 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get { return instance; } }
 
-    //Debug Keys
-    [SerializeField]
-    private KeyCode increaseLaps;
+    //Find the UI Manager
+    private UI ui;
 
-    [SerializeField]
-    private KeyCode kill;
+    //Debug Keys
+    [SerializeField] private KeyCode increaseLaps;
+    [SerializeField] private KeyCode kill;
 
     //Screenshot Key
     [SerializeField] private KeyCode screenshotKey = KeyCode.F10;
@@ -45,12 +46,18 @@ public class GameManager : MonoBehaviour
 
     //private variables
     private int scoreBonus;
+    private int previousScore = 0;
+    private bool gameOver = false;
 
 
     private void Start()
     {
         totalAlive = FindObjectsOfType<ArcadeVehicleController>().Length;
         alive = totalAlive;
+
+        previousScore = (int)Time.time;
+
+        FindUI();
     }
 
     private void Awake()
@@ -67,7 +74,10 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        Scoreboard();
+        if (!gameOver)
+        {
+            Scoreboard();
+        }
 
         QuickDebug();
 
@@ -100,7 +110,7 @@ public class GameManager : MonoBehaviour
 
     private void Scoreboard()
     {
-        score = (int)Time.time + scoreBonus;
+        score = (int)Time.time + scoreBonus - previousScore;
     }
 
     private void Lap()
@@ -113,5 +123,37 @@ public class GameManager : MonoBehaviour
     {
         alive--;
         scoreBonus += 1000;
+    }
+
+    public void Restart()
+    {
+        previousScore += score;
+        gameOver = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void GameOver()
+    {
+        gameOver = true;
+
+        if (ui != null)
+        {
+            ui.GameOverUIRedraw();
+        }
+        else
+        {
+            FindUI();
+            GameOver();
+        }
+    }
+
+    private void FindUI()
+    {
+        ui = FindObjectOfType<UI>();
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }

@@ -54,8 +54,7 @@ public class ArcadeVehicleController : MonoBehaviour
 
     //Debug Stuff
     [Header("Debug Stuff")]
-    [SerializeField] private KeyCode resetPosition = KeyCode.R;
-    private Vector3 spawnPosition;
+    [SerializeField] private KeyCode gameOver = KeyCode.R;
 
     //Nos stuff
     [Header("Nos Stuff")]
@@ -84,8 +83,7 @@ public class ArcadeVehicleController : MonoBehaviour
             Physics.defaultMaxAngularSpeed = 100;
         }
 
-        //Keeps values in mind for ease of return
-        spawnPosition = transform.position;
+        //Keeps value in mind for ease of return
         baseAccelaration = accelaration;
 
         //Animation stuff
@@ -279,9 +277,9 @@ public class ArcadeVehicleController : MonoBehaviour
 
     private void DebugController()
     {
-        if (Input.GetKeyDown(resetPosition))
+        if (Input.GetKeyDown(gameOver))
         {
-            transform.position = spawnPosition;
+            GameOver();
         }
     }
 
@@ -335,5 +333,11 @@ public class ArcadeVehicleController : MonoBehaviour
                 accelaration = accelaration * spinSpeedDebuff;
             }
         }
+    }
+
+    private void GameOver()
+    {
+        GameManager.Instance.GameOver();
+        Destroy(gameObject);
     }
 }

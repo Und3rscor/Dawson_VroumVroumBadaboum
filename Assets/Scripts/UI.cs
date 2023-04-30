@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject gameUI, gameOverUI;
+
     //Speedometer variables
     private TextMeshProUGUI speedometerText;
     private Slider speedometerSlider;
@@ -21,33 +24,69 @@ public class UI : MonoBehaviour
 
     private void Start()
     {
-        //Find speedometer components
-        speedometerText = transform.Find("Speedometer/Text").GetComponent<TextMeshProUGUI>();
-        speedometerSlider = transform.Find("Speedometer/Slider").GetComponent<Slider>();
+        if (gameUI != null)
+        {
+            gameUI.SetActive(true);
 
-        //Find lap counter component
-        lapCounter = transform.Find("LapCounter/Text").GetComponent<TextMeshProUGUI>();
+            //Find speedometer components
+            speedometerText = transform.Find("GameUI/Speedometer/Text").GetComponent<TextMeshProUGUI>();
+            speedometerSlider = transform.Find("GameUI/Speedometer/Slider").GetComponent<Slider>();
 
-        //Find scoreboard component
-        scoreboard = transform.Find("Scoreboard/Text").GetComponent<TextMeshProUGUI>();
+            //Find lap counter component
+            lapCounter = transform.Find("GameUI/LapCounter/Text").GetComponent<TextMeshProUGUI>();
 
-        //Find Alive Counter component
-        aliveCounter = transform.Find("AliveCounter/Text").GetComponent<TextMeshProUGUI>();
+            //Find scoreboard component
+            scoreboard = transform.Find("GameUI/Scoreboard/Text").GetComponent<TextMeshProUGUI>();
+
+            //Find Alive Counter component
+            aliveCounter = transform.Find("GameUI/AliveCounter/Text").GetComponent<TextMeshProUGUI>();
+        }
+
+        if (gameOverUI != null)
+        {
+            gameOverUI.SetActive(false);
+        }
     }
 
     private void Update()
     {
-        //Modify speedometer values
-        speedometerText.text = "Speed: " + Mathf.Round(GameManager.Instance.SpeedometerGM) + " Km/h";
-        speedometerSlider.value = GameManager.Instance.SpeedometerGM;
+        if (gameUI != null)
+        {
+            //Modify speedometer values
+            speedometerText.text = "Speed: " + Mathf.Round(GameManager.Instance.SpeedometerGM) + " Km/h";
+            speedometerSlider.value = GameManager.Instance.SpeedometerGM;
 
-        //Modify lap counter value
-        lapCounter.text = "Lap: " + GameManager.Instance.Laps;
+            //Modify lap counter value
+            lapCounter.text = "Lap: " + GameManager.Instance.Laps;
 
-        //Modify scoreboard value
-        scoreboard.text = "Score: " + GameManager.Instance.Score;
+            //Modify scoreboard value
+            scoreboard.text = "Score: " + GameManager.Instance.Score;
 
-        //Modify Alive Counter value
-        aliveCounter.text = "Alive: " + GameManager.Instance.Alive + " / " + GameManager.Instance.TotalAlive;
+            //Modify Alive Counter value
+            aliveCounter.text = "Alive: " + GameManager.Instance.Alive + " / " + GameManager.Instance.TotalAlive;
+        }
+    }
+
+    public void GameOverUIRedraw()
+    {
+        if (gameUI != null)
+        {
+            gameUI.SetActive(false);
+        }
+
+        if (gameOverUI != null)
+        {
+            gameOverUI.SetActive(true);
+        }
+    }
+
+    public void Restart()
+    {
+        GameManager.Instance.Restart();
+    }
+
+    public void MainMenu()
+    {
+        GameManager.Instance.MainMenu();
     }
 }
