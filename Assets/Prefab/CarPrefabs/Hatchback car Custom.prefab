@@ -20680,9 +20680,11 @@ MonoBehaviour:
   MaxPitch: 3
   SkidSound: {fileID: 1925981547900679600}
   skidWidth: 0.13985014
-  gameOver: 114
+  gameOverKey: 114
+  refillNosKey: 110
   nosKey: 101
   nosSpeedBoost: 1.1
+  nosCapacity: 100
   flipKey: 32
   flipBoost: 100
   spinKey: 304
@@ -21266,6 +21268,10 @@ PrefabInstance:
     - target: {fileID: 1223526616464650, guid: c590b17884b119046bc6412066500b7d, type: 3}
       propertyPath: m_Name
       value: NOS
+      objectReference: {fileID: 0}
+    - target: {fileID: 1223526616464650, guid: c590b17884b119046bc6412066500b7d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4731861580502952, guid: c590b17884b119046bc6412066500b7d, type: 3}
       propertyPath: m_RootOrder
