@@ -44,6 +44,10 @@ public class GameManager : MonoBehaviour
     private int totalAlive;
     public int TotalAlive { get { return totalAlive; } }
 
+    //Nos Counter Relay variable
+    private int nosCounterGM;
+    public int NosCounterGM { get { return nosCounterGM; } set { nosCounterGM = value; } }
+
     //private variables
     private int scoreBonus;
     private int previousScore = 0;

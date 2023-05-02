@@ -22,6 +22,9 @@ public class UI : MonoBehaviour
     //Alive counter variable
     private TextMeshProUGUI aliveCounter;
 
+    //Nos counter variable
+    private Slider nosCounter;
+
     private void Start()
     {
         if (gameUI != null)
@@ -40,6 +43,9 @@ public class UI : MonoBehaviour
 
             //Find Alive Counter component
             aliveCounter = transform.Find("GameUI/AliveCounter/Text").GetComponent<TextMeshProUGUI>();
+
+            //Find nos counter component
+            nosCounter = transform.Find("GameUI/NosCounter/Slider").GetComponent<Slider>();
         }
 
         if (gameOverUI != null)
@@ -64,6 +70,9 @@ public class UI : MonoBehaviour
 
             //Modify Alive Counter value
             aliveCounter.text = "Alive: " + GameManager.Instance.Alive + " / " + GameManager.Instance.TotalAlive;
+
+            //Modify Nos Counter value
+            nosCounter.value = GameManager.Instance.NosCounterGM;
         }
     }
 

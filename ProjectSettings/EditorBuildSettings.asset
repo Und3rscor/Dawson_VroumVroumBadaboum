@@ -11,7 +11,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main Menu.unity
     guid: 983e1067e13bc3e42b27cceaedff228b
-  - enabled: 1
-    path: Assets/Scenes/Logan Scene.unity
-    guid: 33fa49f921a65d4449aa806f6a1d4095
   m_configObjects: {}

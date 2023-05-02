@@ -54,12 +54,16 @@ public class ArcadeVehicleController : MonoBehaviour
 
     //Debug Stuff
     [Header("Debug Stuff")]
-    [SerializeField] private KeyCode gameOver = KeyCode.R;
+    [SerializeField] private KeyCode gameOverKey = KeyCode.R;
+    [SerializeField] private KeyCode refillNosKey = KeyCode.N;
 
     //Nos stuff
     [Header("Nos Stuff")]
     [SerializeField] private KeyCode nosKey = KeyCode.E;
     [SerializeField] private float nosSpeedBoost;
+    [SerializeField] private int nosCapacity;
+    private int currentNos;
+    public int CurrentNos { get { return currentNos; } }
     private GameObject nosFX;
 
     //Flip stuff
@@ -90,6 +94,8 @@ public class ArcadeVehicleController : MonoBehaviour
         //Nos Stuff
         nosFX = transform.Find("Mesh/Body/Hatchback/Body/Exhaust/NOS").gameObject;
         nosFX.SetActive(false);
+        currentNos = nosCapacity;
+        GameManager.Instance.NosCounterGM = currentNos;
 
         //Animation stuff
         model = transform.Find("Mesh").gameObject;
@@ -282,21 +288,33 @@ public class ArcadeVehicleController : MonoBehaviour
 
     private void DebugController()
     {
-        if (Input.GetKeyDown(gameOver))
+        if (Input.GetKeyDown(gameOverKey))
         {
             GameOver();
+        }
+
+        if (Input.GetKeyUp(refillNosKey))
+        {
+            currentNos = nosCapacity;
+            GameManager.Instance.NosCounterGM = currentNos;
         }
     }
 
     private void NosController()
     {
-        if (Input.GetKeyDown(nosKey))
+        if (Input.GetKeyDown(nosKey) && currentNos > 0)
         {
             accelaration = accelaration * nosSpeedBoost;
             nosFX.SetActive(true);
         }
 
-        if (Input.GetKeyUp(nosKey))
+        if (Input.GetKey(nosKey) && currentNos > 0)
+        {
+            currentNos--;
+            GameManager.Instance.NosCounterGM = currentNos;
+        }
+
+        if (Input.GetKeyUp(nosKey) || accelaration != baseAccelaration && currentNos <= 0)
         {
             accelaration = baseAccelaration;
             nosFX.SetActive(false);
