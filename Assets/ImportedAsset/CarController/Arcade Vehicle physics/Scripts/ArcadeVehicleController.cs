@@ -1,4 +1,5 @@
 using Newtonsoft.Json.Bson;
+using PowerslideKartPhysics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -78,6 +79,11 @@ public class ArcadeVehicleController : MonoBehaviour
     [SerializeField] private KeyCode spinKey = KeyCode.LeftShift;
     [SerializeField] private float spinSpeedDebuff;
     private bool spin = false;
+
+    //Bump stuff
+    [Header("Bump Stuff")]
+    [SerializeField] private float bumpForce;
+    private bool bumped = false;
 
     private void Start()
     {
@@ -363,6 +369,38 @@ public class ArcadeVehicleController : MonoBehaviour
                 accelaration = accelaration * spinSpeedDebuff;
             }
         }
+    }
+
+    // Check for collisions with other karts
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Player")
+        {
+            // Calculate the direction this car is going in compared to the collided car
+            Vector3 dir = collision.transform.position - transform.position;
+            float bumpForcesCombined = (speedometer * bumpForce / 100.0f);
+            dir.Normalize();
+
+            // Calculate the dot product of the direction and this car's forward vector
+            float dotProduct = Vector3.Dot(dir, transform.forward);
+
+            // Check if the dot product is positive, indicating this car is moving towards the collided car
+            if (dotProduct > 0f)
+            {
+                Rigidbody targetRigidbody = collision.transform.GetComponentInParent<Rigidbody>();
+
+                // Calculate the opposite direction from the this car to the collided car
+                Vector3 oppositeDir = transform.position - collision.transform.position;
+                oppositeDir.Normalize();
+
+                // Apply force in the opposite direction to the collided car
+                targetRigidbody.AddForce(-oppositeDir * bumpForcesCombined, ForceMode.Impulse);
+
+                // Apply upward force to the collided car
+                targetRigidbody.AddForce(Vector3.up * bumpForcesCombined, ForceMode.Impulse);
+            }
+        }
+
     }
 
     private void GameOver()
