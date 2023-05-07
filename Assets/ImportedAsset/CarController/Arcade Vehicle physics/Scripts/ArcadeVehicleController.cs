@@ -41,7 +41,6 @@ public class ArcadeVehicleController : MonoBehaviour
     [HideInInspector]
     public float skidWidth;
 
-
     private float radius, horizontalInput, verticalInput;
     private Vector3 origin;
 
@@ -52,10 +51,9 @@ public class ArcadeVehicleController : MonoBehaviour
     //Camera stuff
     private CameraExtras camExtras;
 
-    //Debug Stuff
-    [Header("Debug Stuff")]
-    [SerializeField] private KeyCode gameOverKey = KeyCode.R;
-    [SerializeField] private KeyCode refillNosKey = KeyCode.N;
+    // Debug Stuff
+    [HideInInspector][SerializeField] private KeyCode gameOverKey = KeyCode.R;
+    [HideInInspector][SerializeField] private KeyCode refillNosKey = KeyCode.N;
 
     //Nos stuff
     [Header("Nos Stuff")]
@@ -104,6 +102,7 @@ public class ArcadeVehicleController : MonoBehaviour
         //Camera stuff
         camExtras = GetComponentInChildren<CameraExtras>();
     }
+
     private void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal"); //turning input
