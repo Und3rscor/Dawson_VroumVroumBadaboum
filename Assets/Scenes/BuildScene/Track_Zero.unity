@@ -1370,6 +1370,11 @@ PrefabInstance:
       propertyPath: targetPoint
       value: 
       objectReference: {fileID: 1696697654}
+    - target: {fileID: 3033707988441234984, guid: c61b5a6534f01444e8dd62df28a948b9,
+        type: 3}
+      propertyPath: active
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3033707988441234987, guid: c61b5a6534f01444e8dd62df28a948b9,
         type: 3}
       propertyPath: m_Name
@@ -3294,11 +3299,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 594524847080706026, guid: c61b5a6534f01444e8dd62df28a948b9,
-        type: 3}
-      propertyPath: targetPoint
-      value: 
-      objectReference: {fileID: 1696697654}
     - target: {fileID: 3033707988441234987, guid: c61b5a6534f01444e8dd62df28a948b9,
         type: 3}
       propertyPath: m_Name
@@ -3308,21 +3308,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3033707988441234990, guid: c61b5a6534f01444e8dd62df28a948b9,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3033707988441234990, guid: c61b5a6534f01444e8dd62df28a948b9,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3033707988441234990, guid: c61b5a6534f01444e8dd62df28a948b9,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3033707988441234990, guid: c61b5a6534f01444e8dd62df28a948b9,
         type: 3}
@@ -3373,11 +3358,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4516078270664185875, guid: c61b5a6534f01444e8dd62df28a948b9,
-        type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c61b5a6534f01444e8dd62df28a948b9, type: 3}
@@ -4623,33 +4603,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1925981547900679245, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
         type: 3}
-      propertyPath: turn
-      value: 4.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1925981547900679245, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-        type: 3}
-      propertyPath: drivableSurface.m_Bits
-      value: 577
+      propertyPath: showDebugStuff
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1925981547900679601, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
         type: 3}
       propertyPath: m_Name
       value: Hatchback car Custom
-      objectReference: {fileID: 0}
-    - target: {fileID: 1925981547900679601, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1925981548005914503, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.5700002
-      objectReference: {fileID: 0}
-    - target: {fileID: 3274400591295095062, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.5700002
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3c3929ae8af3444eaacc02ab85eb5ef, type: 3}

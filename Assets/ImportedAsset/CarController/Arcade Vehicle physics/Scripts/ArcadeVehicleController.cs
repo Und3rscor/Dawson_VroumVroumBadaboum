@@ -52,8 +52,9 @@ public class ArcadeVehicleController : MonoBehaviour
     private CameraExtras camExtras;
 
     // Debug Stuff
-    [HideInInspector][SerializeField] private KeyCode gameOverKey = KeyCode.R;
-    [HideInInspector][SerializeField] private KeyCode refillNosKey = KeyCode.N;
+    [Header("Debug Stuff")]
+    [SerializeField] private KeyCode gameOverKey = KeyCode.R;
+    [SerializeField] private KeyCode refillNosKey = KeyCode.N;
 
     //Nos stuff
     [Header("Nos Stuff")]
