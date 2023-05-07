@@ -62,8 +62,8 @@ public class ArcadeVehicleController : MonoBehaviour
     [SerializeField] private KeyCode nosKey = KeyCode.E;
     [SerializeField] private float nosSpeedBoost;
     [SerializeField] private int nosCapacity;
-    private int currentNos;
-    public int CurrentNos { get { return currentNos; } }
+    private float currentNos;
+    public float CurrentNos { get { return currentNos; } }
     private GameObject nosFX;
 
     //Flip stuff
@@ -95,7 +95,7 @@ public class ArcadeVehicleController : MonoBehaviour
         nosFX = transform.Find("Mesh/Body/Hatchback/Body/Exhaust/NOS").gameObject;
         nosFX.SetActive(false);
         currentNos = nosCapacity;
-        GameManager.Instance.NosCounterGM = currentNos;
+        NosToGM();
 
         //Animation stuff
         model = transform.Find("Mesh").gameObject;
@@ -296,7 +296,7 @@ public class ArcadeVehicleController : MonoBehaviour
         if (Input.GetKeyUp(refillNosKey))
         {
             currentNos = nosCapacity;
-            GameManager.Instance.NosCounterGM = currentNos;
+            NosToGM();
         }
     }
 
@@ -310,8 +310,8 @@ public class ArcadeVehicleController : MonoBehaviour
 
         if (Input.GetKey(nosKey) && currentNos > 0)
         {
-            currentNos--;
-            GameManager.Instance.NosCounterGM = currentNos;
+            currentNos -= 10.0f * Time.deltaTime;
+            NosToGM();
         }
 
         if (Input.GetKeyUp(nosKey) || accelaration != baseAccelaration && currentNos <= 0)
@@ -319,6 +319,11 @@ public class ArcadeVehicleController : MonoBehaviour
             accelaration = baseAccelaration;
             nosFX.SetActive(false);
         }
+    }
+
+    private void NosToGM()
+    {
+        GameManager.Instance.NosCounterGM = Mathf.FloorToInt(currentNos);
     }
 
     private void FlipController()
