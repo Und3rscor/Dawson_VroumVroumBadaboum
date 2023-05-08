@@ -85,6 +85,10 @@ public class ArcadeVehicleController : MonoBehaviour
     [SerializeField] private float bumpForce;
     private bool bumped = false;
 
+    //Death stuff
+    [Header("Death Stuff")]
+    [SerializeField] private GameObject explosionParticleFX;
+
     private void Start()
     {
         radius = rb.GetComponent<SphereCollider>().radius;
@@ -296,7 +300,7 @@ public class ArcadeVehicleController : MonoBehaviour
     {
         if (Input.GetKeyDown(gameOverKey))
         {
-            GameOver();
+            BlowUp();
         }
 
         if (Input.GetKeyUp(refillNosKey))
@@ -308,10 +312,18 @@ public class ArcadeVehicleController : MonoBehaviour
 
     private void NosController()
     {
-        if (Input.GetKeyDown(nosKey) && currentNos > 0)
+        if (Input.GetKeyDown(nosKey))
         {
-            accelaration = accelaration * nosSpeedBoost;
-            nosFX.SetActive(true);
+            if (currentNos > 0)
+            {
+                accelaration = accelaration * nosSpeedBoost;
+                nosFX.SetActive(true);
+            }
+            else
+            {
+                BlowUp();
+            }
+            
         }
 
         if (Input.GetKey(nosKey) && currentNos > 0)
@@ -403,9 +415,10 @@ public class ArcadeVehicleController : MonoBehaviour
 
     }
 
-    private void GameOver()
+    private void BlowUp()
     {
-        GameManager.Instance.GameOver();
+        Instantiate(explosionParticleFX, transform.position, Quaternion.identity, null);
+        GameManager.Instance.GameOverDelay();
         Destroy(gameObject);
     }
 }

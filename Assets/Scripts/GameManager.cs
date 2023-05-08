@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        totalAlive = FindObjectsOfType<ArcadeVehicleController>().Length;
+        totalAlive = GameObject.FindGameObjectsWithTag("Player").Length;
         alive = totalAlive;
 
         previousScore = (int)Time.time;
@@ -136,7 +136,12 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void GameOver()
+    public void GameOverDelay()
+    {
+        Invoke("GameOver", 0.5f);
+    }
+
+    private void GameOver()
     {
         gameOver = true;
 

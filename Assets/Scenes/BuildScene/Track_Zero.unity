@@ -4611,6 +4611,12 @@ PrefabInstance:
       propertyPath: showDebugStuff
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1925981547900679245, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: explosionParticleFX
+      value: 
+      objectReference: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664,
+        type: 3}
     - target: {fileID: 1925981547900679601, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
         type: 3}
       propertyPath: m_Name
