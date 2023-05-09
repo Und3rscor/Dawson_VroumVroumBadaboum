@@ -9,6 +9,8 @@ public class Countdown : MonoBehaviour
 {
     public string[] Messages; //3, 2, 1, Go!
     public float countdownDuration;
+    public AudioSource countdownSound;
+
     private TextMeshProUGUI countdownText = null;
     private bool isCountdownRunning;
 
@@ -31,6 +33,11 @@ public class Countdown : MonoBehaviour
 
             if (Messages.Length > Mathf.FloorToInt(elapsedTime))
             {
+                if (countdownText.text != Messages[Mathf.FloorToInt(elapsedTime)])
+                {
+                    countdownSound.Play();
+                }
+
                 countdownText.text = Messages[Mathf.FloorToInt(elapsedTime)];
             }
 
@@ -38,7 +45,12 @@ public class Countdown : MonoBehaviour
         }
 
         Time.timeScale = 1.0f;
-        gameObject.SetActive(false);
+
+        countdownSound.pitch = 1.5f;
+        countdownSound.volume = 0.3f;
+        countdownSound.Play();
+
+        countdownText.text = null;
     }
 
     private void StartCountdown()
