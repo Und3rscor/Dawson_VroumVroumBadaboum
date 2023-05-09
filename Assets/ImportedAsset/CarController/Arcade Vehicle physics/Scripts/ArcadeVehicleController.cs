@@ -104,7 +104,7 @@ public class ArcadeVehicleController : MonoBehaviour
         baseAccelaration = accelaration;
 
         //Nos Stuff
-        nosFX = transform.Find("Mesh/Body/Hatchback/Body/Exhaust/NOS").gameObject;
+        nosFX = transform.Find("Mesh/Body/Hatchback/Exhaust/NOS").gameObject;
         nosFX.SetActive(false);
         currentNos = nosCapacity;
         NosToGM();
