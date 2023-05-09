@@ -56,7 +56,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 0}
   ammoDisplay: {fileID: 0}
   timeBetweenShooting: 0.1
-  ammoCount: 100
+  ammoCount: 500
   bullet: {fileID: 100002, guid: c2f9c173dc9aaab45a4a4cc86e403ef6, type: 3}
   shootForce: 300
   damage: 10

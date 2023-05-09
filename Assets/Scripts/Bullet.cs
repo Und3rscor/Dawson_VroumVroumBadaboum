@@ -5,20 +5,12 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public int damage;
-    private MeshCollider mColl;
 
-    private void Awake()
+    private void OnTriggerEnter(Collider coll)
     {
-        mColl = GetComponentInChildren<MeshCollider>();
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.transform.tag == "Player")
+        if (coll.transform.tag == "Bot")
         {
-            collision.gameObject.GetComponentInParent<BotHP>().DealDamage(damage);
-            Debug.Log(collision.gameObject.transform.position);
-            Time.timeScale = 0.0f;
+            coll.gameObject.GetComponentInParent<BotHP>().DealDamage(damage);
         }
 
         Destroy(gameObject);
