@@ -427,7 +427,6 @@ public class ArcadeVehicleController : MonoBehaviour
         {
             // Calculate the direction this car is going in compared to the collided car
             Vector3 dir = collision.transform.position - transform.position;
-            float bumpForcesCombined = (speedometer * bumpForce / 100.0f);
             dir.Normalize();
 
             // Calculate the dot product of the direction and this car's forward vector
@@ -443,10 +442,10 @@ public class ArcadeVehicleController : MonoBehaviour
                 oppositeDir.Normalize();
 
                 // Apply force in the opposite direction to the collided car
-                targetRigidbody.AddForce(-oppositeDir * bumpForcesCombined, ForceMode.Impulse);
+                targetRigidbody.AddForce(-oppositeDir * bumpForce, ForceMode.Impulse);
 
                 // Apply upward force to the collided car
-                targetRigidbody.AddForce(Vector3.up * bumpForcesCombined, ForceMode.Impulse);
+                targetRigidbody.AddForce(Vector3.up * (bumpForce / 2), ForceMode.Impulse);
             }
         }
 
