@@ -3714,11 +3714,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3033707989572808879, guid: c61b5a6534f01444e8dd62df28a948b9,
-        type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c61b5a6534f01444e8dd62df28a948b9, type: 3}
 --- !u!1 &1309151051
@@ -5211,10 +5206,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hatchback car Custom
       objectReference: {fileID: 0}
-    - target: {fileID: 2268018935610863250, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+    - target: {fileID: 1925981547900679601, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
         type: 3}
-      propertyPath: shootForce
-      value: 1000
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2268018935610863250, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
         type: 3}

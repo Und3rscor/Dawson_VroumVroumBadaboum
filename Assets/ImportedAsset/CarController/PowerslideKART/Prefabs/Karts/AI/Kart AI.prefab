@@ -136,7 +136,7 @@ PrefabInstance:
     - target: {fileID: 1764003789813687599, guid: e3a4b51f834dd8b4bad73af72b704252,
         type: 3}
       propertyPath: m_TagString
-      value: Bot
+      value: MainBot
       objectReference: {fileID: 0}
     - target: {fileID: 1764003790394547630, guid: e3a4b51f834dd8b4bad73af72b704252,
         type: 3}
@@ -212,6 +212,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Bot
+      objectReference: {fileID: 0}
+    - target: {fileID: 6995689894429530838, guid: e3a4b51f834dd8b4bad73af72b704252,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.5607036
+      objectReference: {fileID: 0}
+    - target: {fileID: 6995689894429530838, guid: e3a4b51f834dd8b4bad73af72b704252,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.2819398
       objectReference: {fileID: 0}
     - target: {fileID: 7237512890243895982, guid: e3a4b51f834dd8b4bad73af72b704252,
         type: 3}

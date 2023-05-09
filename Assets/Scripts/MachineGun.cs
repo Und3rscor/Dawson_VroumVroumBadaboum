@@ -55,7 +55,9 @@ public class MachineGun : MonoBehaviour
         ammoCount--;
 
         //Instantiate bullet
-        GameObject currentBullet = Instantiate(bullet, attackPoint.position, attackPoint.rotation);
+        Vector3 carVelocity = GetComponentInParent<Rigidbody>().velocity;
+        Vector3 newAttackpoint = attackPoint.position + (carVelocity / 75);
+        GameObject currentBullet = Instantiate(bullet, newAttackpoint, attackPoint.rotation);
         Vector3 dir = attackPoint.rotation * Vector3.forward;
         currentBullet.GetComponent<Rigidbody>().AddForce(dir.normalized * shootForce, ForceMode.Impulse);
         currentBullet.GetComponent<Bullet>().damage = damage + Random.Range(-damageRandomRange, damageRandomRange);

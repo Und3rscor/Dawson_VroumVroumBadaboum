@@ -5,6 +5,17 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public int damage;
+    public float lifespan;
+
+    private void Awake()
+    {
+        Invoke("Die", lifespan);
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
+    }
 
     private void OnTriggerEnter(Collider coll)
     {
@@ -13,6 +24,6 @@ public class Bullet : MonoBehaviour
             coll.gameObject.GetComponentInParent<BotHP>().DealDamage(damage);
         }
 
-        Destroy(gameObject);
+        Die();
     }
 }

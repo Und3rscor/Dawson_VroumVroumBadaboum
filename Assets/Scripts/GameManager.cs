@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        totalAlive = GameObject.FindGameObjectsWithTag("Player").Length;
+        totalAlive = GameObject.FindGameObjectsWithTag("MainPlayer").Length + GameObject.FindGameObjectsWithTag("MainBot").Length;
         alive = totalAlive;
 
         previousScore = (int)Time.time;
