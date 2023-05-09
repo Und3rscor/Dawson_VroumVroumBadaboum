@@ -682,12 +682,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!54 &237929184 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 1925981547900679246, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-    type: 3}
-  m_PrefabInstance: {fileID: 1887337056}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &246689575
 GameObject:
   m_ObjectHideFlags: 0
@@ -1035,12 +1029,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 273597420}
   m_CullTransparentMesh: 1
---- !u!1 &290959021 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5816559653468482013, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-    type: 3}
-  m_PrefabInstance: {fileID: 1887337056}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &291568982
 GameObject:
   m_ObjectHideFlags: 0
@@ -1955,12 +1943,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10.000001, y: 2.2204463e-16, z: 10.000001}
   m_Center: {x: -0.0000019073486, y: 0, z: -0.000000059604645}
---- !u!54 &493717431 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 3033707988441234985, guid: c61b5a6534f01444e8dd62df28a948b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 117691124}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &546767401
 GameObject:
   m_ObjectHideFlags: 0
@@ -3484,12 +3466,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1141754866}
   m_CullTransparentMesh: 1
---- !u!54 &1164687696 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 3033707988441234985, guid: c61b5a6534f01444e8dd62df28a948b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1851646478}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1247906294
 GameObject:
   m_ObjectHideFlags: 0
@@ -3873,12 +3849,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!54 &1313355830 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 3033707988441234985, guid: c61b5a6534f01444e8dd62df28a948b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 364796654}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1315446225
 GameObject:
   m_ObjectHideFlags: 0
@@ -3925,18 +3895,6 @@ Transform:
   m_Father: {fileID: 1526678545}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &1321758978 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 3033707988441234985, guid: c61b5a6534f01444e8dd62df28a948b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1658916025}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &1339466414 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 3033707988441234985, guid: c61b5a6534f01444e8dd62df28a948b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1271875307}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1401545488
 GameObject:
   m_ObjectHideFlags: 0
@@ -4616,12 +4574,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c61b5a6534f01444e8dd62df28a948b9, type: 3}
---- !u!54 &1671684616 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 3033707988441234985, guid: c61b5a6534f01444e8dd62df28a948b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1763342184}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1684593195
 GameObject:
   m_ObjectHideFlags: 0
@@ -4674,20 +4626,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Messages:
-  - GO!
-  - 1
-  - 2
   - 3
-  interval: 1
-  rigidbodies:
-  - {fileID: 237929184}
-  - {fileID: 1339466414}
-  - {fileID: 1313355830}
-  - {fileID: 1164687696}
-  - {fileID: 493717431}
-  - {fileID: 1321758978}
-  - {fileID: 1671684616}
-  machineGun: {fileID: 290959021}
+  - 2
+  - 1
+  - GO!
+  countdownDuration: 5
 --- !u!114 &1684593198
 MonoBehaviour:
   m_ObjectHideFlags: 0
