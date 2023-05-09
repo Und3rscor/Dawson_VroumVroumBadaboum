@@ -74,6 +74,9 @@ public class ArcadeVehicleController : MonoBehaviour
     private Animator modelAnimator;
     private bool flip = false;
 
+    //Reverse stuff
+    private Light[] brakeLights;
+
     //Spin stuff
     [Header("Spin Stuff")]
     [SerializeField] private KeyCode spinKey = KeyCode.LeftShift;
@@ -105,6 +108,11 @@ public class ArcadeVehicleController : MonoBehaviour
         nosFX.SetActive(false);
         currentNos = nosCapacity;
         NosToGM();
+
+        //Reverse Stuff
+        brakeLights = transform.GetComponentsInChildren<Light>();
+
+        ManageBrakeLights(false);
 
         //Animation stuff
         model = transform.Find("Mesh").gameObject;
@@ -374,12 +382,41 @@ public class ArcadeVehicleController : MonoBehaviour
             {
                 spin = false;
                 accelaration = baseAccelaration;
+
+                ManageBrakeLights(false);
+
             }
             else
             {
                 spin = true;
                 accelaration = accelaration * spinSpeedDebuff;
+
+                ManageBrakeLights(true);
             }
+        }
+    }
+
+    private void ManageBrakeLights(bool onOff)
+    {
+        if (onOff)
+        {
+            //Make the brake light red
+            brakeLights[0].gameObject.GetComponent<Renderer>().material.color = Color.red;
+            brakeLights[1].gameObject.GetComponent<Renderer>().material.color = Color.red;
+
+            //Turn on the lights
+            brakeLights[0].enabled = true;
+            brakeLights[1].enabled = true;
+        }
+        else
+        {
+            //Make the brake light grey
+            brakeLights[0].gameObject.GetComponent<Renderer>().material.color = Color.grey;
+            brakeLights[1].gameObject.GetComponent<Renderer>().material.color = Color.grey;
+
+            //Turn off the lights
+            brakeLights[0].enabled = false;
+            brakeLights[1].enabled = false;
         }
     }
 
