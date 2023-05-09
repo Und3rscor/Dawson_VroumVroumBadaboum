@@ -5206,11 +5206,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hatchback car Custom
       objectReference: {fileID: 0}
-    - target: {fileID: 1925981547900679601, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 2268018935610863250, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
         type: 3}
       propertyPath: ammoDisplay
