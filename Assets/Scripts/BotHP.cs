@@ -14,6 +14,7 @@ public class BotHP : MonoBehaviour
         if (health <= 0)
         {
             Instantiate(explosionParticleFX, transform.position, Quaternion.identity, null);
+            GameManager.Instance.Kill();
             Destroy(gameObject);
         }
     }

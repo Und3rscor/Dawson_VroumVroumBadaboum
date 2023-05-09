@@ -58,7 +58,7 @@ MonoBehaviour:
   timeBetweenShooting: 0.1
   ammoCount: 500
   bullet: {fileID: 100002, guid: c2f9c173dc9aaab45a4a4cc86e403ef6, type: 3}
-  shootForce: 500
+  shootForce: 400
   damage: 10
   damageRandomRange: 0
 --- !u!1 &100002

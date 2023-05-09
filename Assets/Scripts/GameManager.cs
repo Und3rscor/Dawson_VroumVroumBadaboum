@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
         scoreBonus += 100;
     }
 
-    private void Kill()
+    public void Kill()
     {
         alive--;
         scoreBonus += 1000;
