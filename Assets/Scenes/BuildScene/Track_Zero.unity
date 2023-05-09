@@ -5146,6 +5146,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1925981547570409997, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: m_ZDamping
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1925981547900679243, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
         type: 3}
       propertyPath: m_RootOrder
@@ -5211,6 +5216,11 @@ PrefabInstance:
       propertyPath: ammoDisplay
       value: 
       objectReference: {fileID: 1737036181}
+    - target: {fileID: 6432512260231627346, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
+        type: 3}
+      propertyPath: m_ZDamping
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3c3929ae8af3444eaacc02ab85eb5ef, type: 3}
 --- !u!1001 &1931160628
