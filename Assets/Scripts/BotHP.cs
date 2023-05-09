@@ -17,4 +17,9 @@ public class BotHP : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void DealDamage(int damage)
+    {
+        health -= damage;
+    }
 }
