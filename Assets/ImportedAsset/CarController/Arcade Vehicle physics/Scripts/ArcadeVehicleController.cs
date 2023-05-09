@@ -423,7 +423,7 @@ public class ArcadeVehicleController : MonoBehaviour
     // Check for collisions with other karts
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag == "Player")
+        if (collision.transform.tag == "Player" || collision.transform.tag == "Bot")
         {
             // Calculate the direction this car is going in compared to the collided car
             Vector3 dir = collision.transform.position - transform.position;
