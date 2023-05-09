@@ -62,6 +62,9 @@ public class GameManager : MonoBehaviour
         previousScore = (int)Time.time;
 
         FindUI();
+
+        //Debug
+        //Time.timeScale = 0.1f;
     }
 
     private void Awake()
