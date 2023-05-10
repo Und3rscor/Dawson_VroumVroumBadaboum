@@ -445,7 +445,7 @@ public class ArcadeVehicleController : MonoBehaviour
                 targetRigidbody.AddForce(-oppositeDir * bumpForce, ForceMode.Impulse);
 
                 // Apply upward force to the collided car
-                targetRigidbody.AddForce(Vector3.up * (bumpForce / 2), ForceMode.Impulse);
+                targetRigidbody.AddForce(Vector3.up * (bumpForce / 2.5f), ForceMode.Impulse);
             }
         }
 
