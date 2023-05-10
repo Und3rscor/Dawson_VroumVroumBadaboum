@@ -72,6 +72,7 @@ public class ArcadeVehicleController : MonoBehaviour
     [SerializeField] private float flipBoost;
     private GameObject model;
     private Animator modelAnimator;
+    public bool Flip { get { return flip; } }
     private bool flip = false;
 
     //Reverse stuff

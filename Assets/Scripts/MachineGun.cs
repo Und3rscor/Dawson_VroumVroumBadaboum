@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MachineGun : MonoBehaviour
@@ -17,6 +18,10 @@ public class MachineGun : MonoBehaviour
     private int currentAmmoCount;
     private bool shooting, readyToShoot;
 
+    //Relay stuff
+    private Rigidbody rb;
+    private ArcadeVehicleController carDaddy;
+
     //Bullet stuff
     [Header("Bullet stuff")]
     [SerializeField] private GameObject bullet;
@@ -29,6 +34,7 @@ public class MachineGun : MonoBehaviour
         readyToShoot = true;
         attackPoint = attackPoints[0];
         currentAmmoCount = maxAmmoCount;
+        carDaddy = GetComponentInParent<ArcadeVehicleController>();
     }
 
     private void Update()
@@ -45,9 +51,10 @@ public class MachineGun : MonoBehaviour
             ammoDisplay.SetText(currentAmmoCount.ToString());
         }
 
-        if (transform.rotation.x != 0.0f)
+        if (!carDaddy.Flip)
         {
-            transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+            Vector3 target = new Vector3(0f, carDaddy.transform.rotation.eulerAngles.y, 0f);
+            transform.rotation = Quaternion.Euler(target);
         }
     }
 
