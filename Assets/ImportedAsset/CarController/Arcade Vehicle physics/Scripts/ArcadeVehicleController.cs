@@ -74,6 +74,7 @@ public class ArcadeVehicleController : MonoBehaviour
     private Animator modelAnimator;
     public bool Flip { get { return flip; } }
     private bool flip = false;
+    private bool flipAvailable;
 
     //Reverse stuff
     private Light[] brakeLights;
@@ -143,6 +144,10 @@ public class ArcadeVehicleController : MonoBehaviour
         //Flip stuff
         FlipController();
         modelAnimator.SetBool("FrontFlip", flip);
+        if (grounded())
+        {
+            flipAvailable = true;
+        }
 
         //Spin stuff
         SpinController();
@@ -354,9 +359,10 @@ public class ArcadeVehicleController : MonoBehaviour
 
     private void FlipController()
     {
-        if (Input.GetKeyDown(flipKey) && !grounded() && !flip)
+        if (Input.GetKeyDown(flipKey) && !grounded() && !flip && flipAvailable)
         {
             flip = true;
+            flipAvailable = false;
         }
 
         if (Input.GetKeyUp(flipKey) && !grounded() && flip)
