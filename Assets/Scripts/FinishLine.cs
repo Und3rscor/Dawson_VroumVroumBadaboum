@@ -12,6 +12,11 @@ public class FinishLine : MonoBehaviour
             other.GetComponentInChildren<MachineGun>().RefillAmmo();
             other.GetComponentInParent<ArcadeVehicleController>().RefillNos();
             GameManager.Instance.lapAvailable = false;
+
+            if (GameManager.Instance.Alive <= 1)
+            {
+                GameManager.Instance.GameOverDelay();
+            }
         }
     }
 }
