@@ -2465,12 +2465,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 599187720}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &603506925 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3274400591295095062, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-    type: 3}
-  m_PrefabInstance: {fileID: 1887337056}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &621963639
 GameObject:
   m_ObjectHideFlags: 0
@@ -5570,11 +5564,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1925981547570409997, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-        type: 3}
-      propertyPath: m_ZDamping
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1925981547900679243, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
         type: 3}
       propertyPath: m_RootOrder
@@ -5630,51 +5619,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1925981547900679245, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-        type: 3}
-      propertyPath: bumpForce
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 1925981547900679601, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
         type: 3}
       propertyPath: m_Name
       value: Hatchback car Custom
       objectReference: {fileID: 0}
-    - target: {fileID: 1925981548005914503, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.5700002
-      objectReference: {fileID: 0}
-    - target: {fileID: 1925981548005914503, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.12761535
-      objectReference: {fileID: 0}
-    - target: {fileID: 2268018935610863250, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-        type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 603506925}
     - target: {fileID: 2268018935610863250, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
         type: 3}
       propertyPath: ammoDisplay
       value: 
       objectReference: {fileID: 1737036181}
-    - target: {fileID: 3274400591295095062, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.5700002
-      objectReference: {fileID: 0}
-    - target: {fileID: 3274400591295095062, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.12761535
-      objectReference: {fileID: 0}
-    - target: {fileID: 6432512260231627346, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-        type: 3}
-      propertyPath: m_ZDamping
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3c3929ae8af3444eaacc02ab85eb5ef, type: 3}
 --- !u!1001 &1931160628

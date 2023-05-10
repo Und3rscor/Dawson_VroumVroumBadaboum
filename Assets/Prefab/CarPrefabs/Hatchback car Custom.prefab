@@ -15468,7 +15468,7 @@ MonoBehaviour:
   m_FollowOffset: {x: 0, y: 1.57, z: -6}
   m_XDamping: 0
   m_YDamping: 0
-  m_ZDamping: 0.1
+  m_ZDamping: 0
   m_AngularDampingMode: 0
   m_PitchDamping: 2
   m_YawDamping: 1.5
@@ -20627,7 +20627,7 @@ MonoBehaviour:
   flipBoost: 100
   spinKey: 304
   spinSpeedDebuff: 0.9
-  bumpForce: 20
+  bumpForce: 10
   explosionParticleFX: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664,
     type: 3}
 --- !u!54 &1925981547900679246
@@ -21246,7 +21246,7 @@ MonoBehaviour:
   m_FollowOffset: {x: 0, y: 1.57, z: 6}
   m_XDamping: 0
   m_YDamping: 0
-  m_ZDamping: 0.1
+  m_ZDamping: 0
   m_AngularDampingMode: 0
   m_PitchDamping: 2
   m_YawDamping: 1.5

@@ -65,13 +65,24 @@ public class MachineGun : MonoBehaviour
 
         //Instantiate bullet
         Vector3 carVelocity = GetComponentInParent<Rigidbody>().velocity;
-        Vector3 newAttackpoint = attackPoint.position + (carVelocity / 75);
-        GameObject currentBullet = Instantiate(bullet, newAttackpoint, attackPoint.rotation);
-        Vector3 dir = attackPoint.rotation * Vector3.forward;
-        currentBullet.GetComponent<Rigidbody>().AddForce(dir.normalized * shootForce, ForceMode.Impulse);
-        currentBullet.GetComponent<Bullet>().damage = damage + Random.Range(-damageRandomRange, damageRandomRange);
-        currentBullet.transform.parent = null;
 
+        //Spawn bullet
+        if (!carDaddy.Flip)
+        {
+            Vector3 newAttackpoint = attackPoint.position + (carVelocity / 75);
+            GameObject currentBullet = Instantiate(bullet, newAttackpoint, attackPoint.rotation);
+            Vector3 dir = attackPoint.rotation * Vector3.forward;
+            currentBullet.GetComponent<Rigidbody>().AddForce(dir.normalized * shootForce, ForceMode.Impulse);
+            EditBullet(currentBullet);
+        }
+        else
+        {
+            GameObject currentBullet = Instantiate(bullet, attackPoint.position, attackPoint.rotation);
+            Vector3 dir = Quaternion.Inverse(attackPoint.rotation) * Vector3.forward;
+            currentBullet.GetComponent<Rigidbody>().AddForce(dir.normalized * shootForce, ForceMode.Impulse);
+            EditBullet(currentBullet);
+        }
+        
         //Instantiate muzzle flash
         if (muzzleFlash != null)
         {
@@ -79,6 +90,12 @@ public class MachineGun : MonoBehaviour
         }
 
         Invoke("ResetShot", timeBetweenShooting);
+    }
+
+    private void EditBullet(GameObject currentBullet)
+    {
+        currentBullet.GetComponent<Bullet>().damage = damage + Random.Range(-damageRandomRange, damageRandomRange);
+        currentBullet.transform.parent = null;
     }
 
     private void ResetShot()
