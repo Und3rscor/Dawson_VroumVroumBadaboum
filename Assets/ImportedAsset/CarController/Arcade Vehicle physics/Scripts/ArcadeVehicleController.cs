@@ -450,7 +450,7 @@ public class ArcadeVehicleController : MonoBehaviour
 
     }
 
-    private void BlowUp()
+    public void BlowUp()
     {
         Instantiate(explosionParticleFX, transform.position, Quaternion.identity, null);
         GameManager.Instance.GameOverDelay();

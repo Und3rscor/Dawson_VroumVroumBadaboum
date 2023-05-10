@@ -40,8 +40,6 @@ public class Countdown : MonoBehaviour
 
                 countdownText.text = Messages[Mathf.FloorToInt(elapsedTime)];
             }
-
-            Debug.Log("Remaining time: " + (countdownDuration - elapsedTime));
         }
 
         Time.timeScale = 1.0f;

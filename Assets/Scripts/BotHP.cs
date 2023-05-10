@@ -14,9 +14,7 @@ public class BotHP : MonoBehaviour
     {
         if (health <= 0)
         {
-            Instantiate(explosionParticleFX, transform.position, Quaternion.identity, null);
-            GameManager.Instance.Kill();
-            Destroy(gameObject);
+            Die();
         }
     }
 
@@ -24,5 +22,12 @@ public class BotHP : MonoBehaviour
     {
         health -= damage;
         shotSound.Play();
+    }
+
+    public void Die()
+    {
+        Instantiate(explosionParticleFX, transform.position, Quaternion.identity, null);
+        GameManager.Instance.Kill();
+        Destroy(gameObject);
     }
 }
