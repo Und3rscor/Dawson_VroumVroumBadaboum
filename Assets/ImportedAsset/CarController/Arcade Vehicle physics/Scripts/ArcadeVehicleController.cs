@@ -313,8 +313,7 @@ public class ArcadeVehicleController : MonoBehaviour
 
         if (Input.GetKeyUp(refillNosKey))
         {
-            currentNos = nosCapacity;
-            NosToGM();
+            RefillNos();
         }
     }
 
@@ -456,5 +455,11 @@ public class ArcadeVehicleController : MonoBehaviour
         Instantiate(explosionParticleFX, transform.position, Quaternion.identity, null);
         GameManager.Instance.GameOverDelay();
         Destroy(gameObject);
+    }
+
+    public void RefillNos()
+    {
+        currentNos = nosCapacity;
+        NosToGM();
     }
 }

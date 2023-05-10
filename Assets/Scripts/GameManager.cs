@@ -25,10 +25,11 @@ public class GameManager : MonoBehaviour
 
     public float SpeedometerGM { get { return speedometerGM; } set { speedometerGM = value; } }
 
-    //Laps variable
+    //Laps variables
+    public int Laps { get { return laps; } }
     private int laps;
 
-    public int Laps { get { return laps; } }
+    public bool lapAvailable = false;
 
     //Score variable
     private int score;
@@ -120,7 +121,7 @@ public class GameManager : MonoBehaviour
         score = (int)Time.time + scoreBonus - previousScore;
     }
 
-    private void Lap()
+    public void Lap()
     {
         laps++;
         scoreBonus += 100;

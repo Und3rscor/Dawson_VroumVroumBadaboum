@@ -13,7 +13,8 @@ public class MachineGun : MonoBehaviour
     [SerializeField] private GameObject muzzleFlash;
     [SerializeField] private TextMeshProUGUI ammoDisplay;
     [SerializeField] private float timeBetweenShooting;
-    [SerializeField] private int ammoCount = 100;
+    [SerializeField] private int maxAmmoCount = 100;
+    private int currentAmmoCount;
     private bool shooting, readyToShoot;
 
     //Bullet stuff
@@ -27,20 +28,21 @@ public class MachineGun : MonoBehaviour
     {
         readyToShoot = true;
         attackPoint = attackPoints[0];
+        currentAmmoCount = maxAmmoCount;
     }
 
     private void Update()
     {
         shooting = Input.GetKey(shootKey);
 
-        if (readyToShoot && shooting && ammoCount > 0)
+        if (readyToShoot && shooting && currentAmmoCount > 0)
         {
             Shoot();
         }
 
         if (ammoDisplay != null)
         {
-            ammoDisplay.SetText(ammoCount.ToString());
+            ammoDisplay.SetText(currentAmmoCount.ToString());
         }
 
         if (transform.rotation.x != 0.0f)
@@ -52,7 +54,7 @@ public class MachineGun : MonoBehaviour
     private void Shoot()
     {
         readyToShoot = false;
-        ammoCount--;
+        currentAmmoCount--;
 
         //Instantiate bullet
         Vector3 carVelocity = GetComponentInParent<Rigidbody>().velocity;
@@ -84,5 +86,10 @@ public class MachineGun : MonoBehaviour
         {
             attackPoint = attackPoints[0];
         }
+    }
+
+    public void RefillAmmo()
+    {
+        currentAmmoCount = maxAmmoCount;
     }
 }
