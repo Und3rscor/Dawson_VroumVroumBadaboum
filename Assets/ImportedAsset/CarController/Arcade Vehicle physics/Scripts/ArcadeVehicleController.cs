@@ -325,7 +325,7 @@ public class ArcadeVehicleController : MonoBehaviour
 
     private void NosController()
     {
-        if (Input.GetKeyDown(nosKey))
+        if (Input.GetKeyDown(nosKey) && !spin)
         {
             if (currentNos > 0)
             {
@@ -339,7 +339,7 @@ public class ArcadeVehicleController : MonoBehaviour
             
         }
 
-        if (Input.GetKey(nosKey) && currentNos > 0)
+        if (Input.GetKey(nosKey) && currentNos > 0 && !spin)
         {
             currentNos -= 10.0f * Time.deltaTime;
             NosToGM();

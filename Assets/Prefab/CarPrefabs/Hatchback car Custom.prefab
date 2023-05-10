@@ -20621,7 +20621,7 @@ MonoBehaviour:
   gameOverKey: 114
   refillNosKey: 110
   nosKey: 101
-  nosSpeedBoost: 1.1
+  nosSpeedBoost: 2.5
   nosCapacity: 100
   flipKey: 32
   flipBoost: 100
@@ -20950,7 +20950,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925981548005914508}
   m_LocalRotation: {x: 0.12761535, y: -0, z: -0, w: 0.99182373}
-  m_LocalPosition: {x: 0, y: 1.5700002, z: -6}
+  m_LocalPosition: {x: 0, y: 1.57, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -21105,7 +21105,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4878878110830888234}
   m_LocalRotation: {x: -0, y: 0.99182373, z: -0.12761535, w: 0}
-  m_LocalPosition: {x: 0, y: 1.5700002, z: 6}
+  m_LocalPosition: {x: 0, y: 1.57, z: 6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

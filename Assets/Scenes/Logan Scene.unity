@@ -2722,6 +2722,7 @@ MonoBehaviour:
   increaseLaps: 108
   kill: 107
   screenshotKey: 291
+  lapAvailable: 0
 --- !u!4 &1889452522
 Transform:
   m_ObjectHideFlags: 0
@@ -3029,11 +3030,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1925981546171214835, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1925981547900679243, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
         type: 3}
       propertyPath: m_RootOrder
@@ -3093,16 +3089,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hatchback car Custom
-      objectReference: {fileID: 0}
-    - target: {fileID: 1925981548005914503, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.57
-      objectReference: {fileID: 0}
-    - target: {fileID: 3274400591295095062, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.57
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3c3929ae8af3444eaacc02ab85eb5ef, type: 3}
