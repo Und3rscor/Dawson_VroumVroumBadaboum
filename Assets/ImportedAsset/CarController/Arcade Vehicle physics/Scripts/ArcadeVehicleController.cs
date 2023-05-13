@@ -83,6 +83,7 @@ public class ArcadeVehicleController : MonoBehaviour
     [Header("Spin Stuff")]
     [SerializeField] private KeyCode spinKey = KeyCode.LeftShift;
     [SerializeField] private float spinSpeedDebuff;
+    public bool Spin { get { return spin; } }
     private bool spin = false;
 
     //Bump stuff

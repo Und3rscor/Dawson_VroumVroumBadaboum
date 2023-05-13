@@ -51,7 +51,7 @@ public class MachineGun : MonoBehaviour
             ammoDisplay.SetText(currentAmmoCount.ToString());
         }
 
-        if (!carDaddy.Flip)
+        if (!carDaddy.Flip && !carDaddy.Spin)
         {
             Vector3 target = new Vector3(0f, carDaddy.transform.rotation.eulerAngles.y, 0f);
             transform.rotation = Quaternion.Euler(target);
