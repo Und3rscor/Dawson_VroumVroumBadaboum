@@ -37,6 +37,11 @@ public class Countdown : MonoBehaviour
                     countdownSound.Play();
                 }
 
+                if (countdownText.text == Messages[0])
+                {
+                    GameManager.Instance.Setup();
+                }
+
                 countdownText.text = Messages[Mathf.FloorToInt(elapsedTime)];
             }
         }

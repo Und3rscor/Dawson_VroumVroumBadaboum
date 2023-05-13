@@ -57,8 +57,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        totalAlive = GameObject.FindGameObjectsWithTag("MainPlayer").Length + GameObject.FindGameObjectsWithTag("MainBot").Length;
-        alive = totalAlive;
+        Setup();
 
         previousScore = (int)Time.time;
 
@@ -136,6 +135,7 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         previousScore += score;
+        laps = 0;
         gameOver = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -158,6 +158,12 @@ public class GameManager : MonoBehaviour
             FindUI();
             GameOver();
         }
+    }
+
+    public void Setup()
+    {
+        totalAlive = GameObject.FindGameObjectsWithTag("MainPlayer").Length + GameObject.FindGameObjectsWithTag("MainBot").Length;
+        alive = totalAlive;
     }
 
     private void FindUI()
