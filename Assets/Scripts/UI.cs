@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject gameUI, gameOverUI;
+    public GameObject gameUI, gameOverUI, pauseUI;
 
     //Speedometer variables
     private TextMeshProUGUI speedometerText;
@@ -52,6 +52,11 @@ public class UI : MonoBehaviour
         {
             gameOverUI.SetActive(false);
         }
+
+        if (pauseUI != null)
+        {
+            pauseUI.SetActive(false);
+        }
     }
 
     private void Update()
@@ -76,7 +81,7 @@ public class UI : MonoBehaviour
         }
     }
 
-    public void GameOverUIRedraw()
+    public void UIRedraw(GameObject active)
     {
         if (gameUI != null)
         {
@@ -85,7 +90,17 @@ public class UI : MonoBehaviour
 
         if (gameOverUI != null)
         {
-            gameOverUI.SetActive(true);
+            gameOverUI.SetActive(false);
+        }
+
+        if (pauseUI != null)
+        {
+            pauseUI.SetActive(false);
+        }
+
+        if (active != null)
+        {
+            active.SetActive(true);
         }
     }
 
@@ -97,5 +112,12 @@ public class UI : MonoBehaviour
     public void MainMenu()
     {
         GameManager.Instance.MainMenu();
+    }
+
+    public void Resume()
+    {
+        GameManager.Instance.Resume();
+
+        UIRedraw(gameUI);
     }
 }

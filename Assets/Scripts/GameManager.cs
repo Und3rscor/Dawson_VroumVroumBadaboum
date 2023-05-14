@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -17,7 +18,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private KeyCode increaseLaps;
     [SerializeField] private KeyCode kill;
 
-    //Screenshot Key
+    //Keybinds
+    [SerializeField] private KeyCode pauseKey = KeyCode.Escape;
     [SerializeField] private KeyCode screenshotKey = KeyCode.F10;
 
     //Speedometer variable
@@ -53,6 +55,7 @@ public class GameManager : MonoBehaviour
     private int scoreBonus;
     private int previousScore = 0;
     private bool gameOver = false;
+    private bool paused = false;
 
 
     private void Start()
@@ -62,9 +65,6 @@ public class GameManager : MonoBehaviour
         previousScore = (int)Time.time;
 
         FindUI();
-
-        //Debug
-        //Time.timeScale = 0.1f;
     }
 
     private void Awake()
@@ -91,6 +91,18 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(screenshotKey))
         {
             Screenshot();
+        }
+
+        if (Input.GetKeyDown(pauseKey))
+        {
+            if (paused)
+            {
+                Resume();
+            }
+            else
+            {
+                Pause();
+            }
         }
     }
 
@@ -151,12 +163,30 @@ public class GameManager : MonoBehaviour
 
         if (ui != null)
         {
-            ui.GameOverUIRedraw();
+            ui.UIRedraw(ui.gameOverUI);
         }
-        else
+    }
+
+    private void Pause()
+    {
+        InputSystem.DisableAllEnabledActions();
+
+        paused = true;
+
+        if (ui != null)
         {
-            FindUI();
-            GameOver();
+            ui.UIRedraw(ui.pauseUI);
+        }
+    }
+
+    public void Resume()
+    {
+        InputSystem.ResumeHaptics();
+        paused = false;
+
+        if (ui != null)
+        {
+            ui.UIRedraw(ui.gameUI);
         }
     }
 
@@ -166,7 +196,7 @@ public class GameManager : MonoBehaviour
         alive = totalAlive;
     }
 
-    private void FindUI()
+    public void FindUI()
     {
         ui = FindObjectOfType<UI>();
     }
