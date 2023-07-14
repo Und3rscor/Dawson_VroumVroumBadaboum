@@ -6,27 +6,24 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject mainMenu, settingsMenu;
+    [SerializeField] private GameObject[] menus;
     [Range(0f, 1f)] public float volumeLevel = 0.5f;
 
     private Slider volumeSlider;
 
     private void Start()
     {
-        RedrawMenu(mainMenu);
+        RedrawMenu(menus[0]);
         volumeSlider = transform.Find("SettingsMenu/Menu/Audio/AudioSlider").GetComponent<Slider>();
     }
 
     private void RedrawMenu(GameObject active)
     {
-        if (mainMenu != null)
+        foreach (var menu in menus)
         {
-            mainMenu.SetActive(false);
+            menu.SetActive(false);
         }
-        if (settingsMenu != null)
-        {
-            settingsMenu.SetActive(false);
-        }
+
         if (active != null)
         {
             active.SetActive(true);
@@ -41,13 +38,18 @@ public class MainMenu : MonoBehaviour
 
     public void Settings()
     {
-        RedrawMenu(settingsMenu);
+        RedrawMenu(menus[1]);
         volumeSlider.value = volumeLevel;
+    }
+
+    public void Garage()
+    {
+        RedrawMenu(menus[2]);
     }
 
     public void Back()
     {
-        RedrawMenu(mainMenu);
+        RedrawMenu(menus[0]);
     }
 
     public void QuitGame()
