@@ -8,10 +8,6 @@ using UnityEngine.Rendering;
 
 public class ArcadeVehicleController : MonoBehaviour
 {
-    public enum groundCheck { rayCast, sphereCaste };
-    public enum MovementMode { Velocity, AngularVelocity };
-    public MovementMode movementMode;
-    public groundCheck GroundCheck;
     public LayerMask drivableSurface;
 
     public float MaxSpeed, accelaration, turn, gravity = 7f;
@@ -102,10 +98,7 @@ public class ArcadeVehicleController : MonoBehaviour
     private void Start()
     {
         radius = rb.GetComponent<SphereCollider>().radius;
-        if (movementMode == MovementMode.AngularVelocity)
-        {
-            Physics.defaultMaxAngularSpeed = 100;
-        }
+        Physics.defaultMaxAngularSpeed = 100;
 
         //Input stuff
         playerInput = GetComponent<PlayerInput>();
@@ -216,19 +209,9 @@ public class ArcadeVehicleController : MonoBehaviour
 
             //accelaration logic
 
-            if (movementMode == MovementMode.AngularVelocity)
+            if (Mathf.Abs(verticalInput) > 0.1f)
             {
-                if (Mathf.Abs(verticalInput) > 0.1f)
-                {
-                    rb.angularVelocity = Vector3.Lerp(rb.angularVelocity, carBody.transform.right * verticalInput * MaxSpeed/radius, accelaration * Time.deltaTime);
-                }
-            }
-            else if (movementMode == MovementMode.Velocity)
-            {
-                if (Mathf.Abs(verticalInput) > 0.1f && Input.GetAxis("Jump")<0.1f)
-                {
-                    rb.velocity = Vector3.Lerp(rb.velocity, carBody.transform.forward * verticalInput * MaxSpeed, accelaration/10 * Time.deltaTime);
-                }
+                rb.angularVelocity = Vector3.Lerp(rb.angularVelocity, carBody.transform.right * verticalInput * MaxSpeed / radius, accelaration * Time.deltaTime);
             }
 
             //body tilt
@@ -276,31 +259,14 @@ public class ArcadeVehicleController : MonoBehaviour
         var direction = -transform.up;
         var maxdistance = rb.GetComponent<SphereCollider>().radius + 0.2f;
 
-        if (GroundCheck == groundCheck.rayCast)
+        if (Physics.Raycast(rb.position, Vector3.down, out hit, maxdistance, drivableSurface))
         {
-            if (Physics.Raycast(rb.position, Vector3.down, out hit, maxdistance, drivableSurface))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return true;
         }
-
-        else if(GroundCheck == groundCheck.sphereCaste)
+        else
         {
-            if (Physics.SphereCast(origin, radius + 0.1f, direction, out hit, maxdistance, drivableSurface))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return false;
         }
-
-        else { return false; }
     }
 
     private void OnDrawGizmos()
