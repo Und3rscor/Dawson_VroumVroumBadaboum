@@ -20472,10 +20472,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1925981547900679243}
   - component: {fileID: 1925981547900679244}
-  - component: {fileID: 1925981547900679245}
   - component: {fileID: 1925981547900679246}
   - component: {fileID: 1925981547900679247}
   - component: {fileID: 1925981547900679600}
+  - component: {fileID: 1925981547900679245}
+  - component: {fileID: 6863520850177656726}
   m_Layer: 7
   m_Name: Hatchback car Custom
   m_TagString: MainPlayer
@@ -20514,122 +20515,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.03, y: 1.6907365, z: 3.84}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1925981547900679245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1925981547900679601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2d69c44041501f4aab1c355410d67b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementMode: 0
-  GroundCheck: 0
-  drivableSurface:
-    serializedVersion: 2
-    m_Bits: 577
-  MaxSpeed: 100
-  accelaration: 20
-  turn: 4.4
-  gravity: 7
-  rb: {fileID: 1925981546679070716}
-  carBody: {fileID: 1925981547900679246}
-  frictionCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 4
-      outSlope: 4
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 5
-      inSlope: 4
-      outSlope: 4
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  turnCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 13.671466
-      outSlope: 13.671466
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.02106388
-    - serializedVersion: 3
-      time: 0.02176705
-      value: 0.2049678
-      inSlope: 4.515987
-      outSlope: 4.515987
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.080018945
-    - serializedVersion: 3
-      time: 0.5371922
-      value: 0.97256476
-      inSlope: -0.1730383
-      outSlope: -0.1730383
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.12504984
-      outWeight: 0.15276818
-    - serializedVersion: 3
-      time: 1
-      value: 0.49161643
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  frictionMaterial: {fileID: 13400000, guid: ce8f2e0169709cc4da4d8131aec6cef1, type: 2}
-  BodyMesh: {fileID: 1925981547152308079}
-  FrontWheels:
-  - {fileID: 1925981547151726681}
-  - {fileID: 1925981547222342517}
-  RearWheels:
-  - {fileID: 1925981546564243689}
-  - {fileID: 1925981547133420401}
-  carVelocity: {x: 0, y: 0, z: 0}
-  BodyTilt: 10
-  engineSound: {fileID: 1925981547900679247}
-  minPitch: 0.3
-  MaxPitch: 3
-  SkidSound: {fileID: 1925981547900679600}
-  skidWidth: 0.13985014
-  gameOverKey: 114
-  refillNosKey: 110
-  nosKey: 101
-  nosSpeedBoost: 2.5
-  nosCapacity: 100
-  flipKey: 32
-  flipBoost: 100
-  spinKey: 304
-  spinSpeedDebuff: 0.9
-  bumpForce: 10
-  explosionParticleFX: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664,
-    type: 3}
 --- !u!54 &1925981547900679246
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -20838,6 +20723,152 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1925981547900679245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925981547900679601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d69c44041501f4aab1c355410d67b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementMode: 0
+  GroundCheck: 0
+  drivableSurface:
+    serializedVersion: 2
+    m_Bits: 577
+  MaxSpeed: 100
+  accelaration: 20
+  turn: 4.4
+  gravity: 7
+  rb: {fileID: 1925981546679070716}
+  carBody: {fileID: 1925981547900679246}
+  frictionCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 4
+      outSlope: 4
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 5
+      inSlope: 4
+      outSlope: 4
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  turnCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 13.671466
+      outSlope: 13.671466
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.02106388
+    - serializedVersion: 3
+      time: 0.02176705
+      value: 0.2049678
+      inSlope: 4.515987
+      outSlope: 4.515987
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.080018945
+    - serializedVersion: 3
+      time: 0.5371922
+      value: 0.97256476
+      inSlope: -0.1730383
+      outSlope: -0.1730383
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.12504984
+      outWeight: 0.15276818
+    - serializedVersion: 3
+      time: 1
+      value: 0.49161643
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  frictionMaterial: {fileID: 13400000, guid: ce8f2e0169709cc4da4d8131aec6cef1, type: 2}
+  BodyMesh: {fileID: 1925981547152308079}
+  FrontWheels:
+  - {fileID: 1925981547151726681}
+  - {fileID: 1925981547222342517}
+  RearWheels:
+  - {fileID: 1925981546564243689}
+  - {fileID: 1925981547133420401}
+  carVelocity: {x: 0, y: 0, z: 0}
+  BodyTilt: 10
+  engineSound: {fileID: 1925981547900679247}
+  minPitch: 0.3
+  MaxPitch: 3
+  SkidSound: {fileID: 1925981547900679600}
+  skidWidth: 0.13985014
+  playerInput: {fileID: 6863520850177656726}
+  nosKey: 101
+  nosSpeedBoost: 2.5
+  nosCapacity: 100
+  flipKey: 32
+  flipBoost: 100
+  spinKey: 304
+  spinSpeedDebuff: 0.9
+  bumpForce: 10
+  explosionParticleFX: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664,
+    type: 3}
+--- !u!114 &6863520850177656726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925981547900679601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 4e152e81a09f94e4d8173e60ade08dde,
+    type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1925981547913712869
 GameObject:
   m_ObjectHideFlags: 0

@@ -2721,6 +2721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   increaseLaps: 108
   kill: 107
+  pauseKey: 27
   screenshotKey: 291
   lapAvailable: 0
 --- !u!4 &1889452522
@@ -2772,6 +2773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameUI: {fileID: 1377840633}
   gameOverUI: {fileID: 405588553}
+  pauseUI: {fileID: 0}
 --- !u!114 &1930575059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2908,6 +2910,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameUI: {fileID: 0}
   gameOverUI: {fileID: 0}
+  pauseUI: {fileID: 0}
 --- !u!1 &2120528290
 GameObject:
   m_ObjectHideFlags: 0

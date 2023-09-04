@@ -3,6 +3,7 @@ using PowerslideKartPhysics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
 public class ArcadeVehicleController : MonoBehaviour
@@ -42,7 +43,7 @@ public class ArcadeVehicleController : MonoBehaviour
     [HideInInspector]
     public float skidWidth;
 
-    private float radius, horizontalInput, verticalInput;
+    private float radius;
     private Vector3 origin;
 
     //Car info to relay to UI
@@ -52,10 +53,13 @@ public class ArcadeVehicleController : MonoBehaviour
     //Camera stuff
     private CameraExtras camExtras;
 
-    // Debug Stuff
-    [Header("Debug Stuff")]
-    [SerializeField] private KeyCode gameOverKey = KeyCode.R;
-    [SerializeField] private KeyCode refillNosKey = KeyCode.N;
+    //Input stuff
+    [Header("InputSystem")]
+    [SerializeField] private PlayerInput playerInput;
+    
+    private float horizontalInput, verticalInput; //Movement Input
+    private bool boostInput;
+
 
     //Nos stuff
     [Header("Nos Stuff")]
@@ -103,6 +107,9 @@ public class ArcadeVehicleController : MonoBehaviour
             Physics.defaultMaxAngularSpeed = 100;
         }
 
+        //Input stuff
+        playerInput = GetComponent<PlayerInput>();
+
         //Keeps value in mind for ease of return
         baseAccelaration = accelaration;
 
@@ -114,7 +121,6 @@ public class ArcadeVehicleController : MonoBehaviour
 
         //Reverse Stuff
         brakeLights = transform.GetComponentsInChildren<Light>();
-
         ManageBrakeLights(false);
 
         //Animation stuff
@@ -127,13 +133,10 @@ public class ArcadeVehicleController : MonoBehaviour
 
     private void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal"); //turning input
-        verticalInput = Input.GetAxis("Vertical");     //accelaration input
+        InputManager();
+
         Visuals();
         AudioManager();
-
-        //Debug stuff
-        DebugController();
 
         //Speedometer calculator
         speedometer = Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.z);
@@ -154,6 +157,14 @@ public class ArcadeVehicleController : MonoBehaviour
         SpinController();
         modelAnimator.SetBool("Spin", spin);
     }
+
+    private void InputManager()
+    {
+        //Move
+        horizontalInput = playerInput.actions["Move"].ReadValue<Vector2>().x;   //turning input
+        verticalInput = playerInput.actions["Move"].ReadValue<Vector2>().y;     //accelaration input
+    }
+
     public void AudioManager()
     {
         engineSound.pitch = Mathf.Lerp(minPitch, MaxPitch, Mathf.Abs(carVelocity.z) / MaxSpeed);
@@ -309,19 +320,6 @@ public class ArcadeVehicleController : MonoBehaviour
             
         }
 
-    }
-
-    private void DebugController()
-    {
-        if (Input.GetKeyDown(gameOverKey))
-        {
-            BlowUp();
-        }
-
-        if (Input.GetKeyUp(refillNosKey))
-        {
-            RefillNos();
-        }
     }
 
     private void NosController()
