@@ -4,6 +4,7 @@ using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using static UnityEngine.Rendering.DebugUI;
 
 public class GameManager : MonoBehaviour
 {
@@ -53,7 +54,7 @@ public class GameManager : MonoBehaviour
     public int NosCounterGM { get { return nosCounterGM; } set { nosCounterGM = value; } }
 
     //Camera layers
-    private int cameraLayer = 1;
+    private int playerID = 1;
 
     //private variables
     private int scoreBonus;
@@ -214,19 +215,25 @@ public class GameManager : MonoBehaviour
     public void CameraSetup(GameObject obj, Camera camBrain)
     {
         //Sets the camera LayerMask between "P1 Cam" to "P4 Cam" depending on the player ID
-        obj.layer = LayerMask.NameToLayer("P" + cameraLayer + " Cam");
+        obj.layer = LayerMask.NameToLayer("P" + playerID + " Cam");
 
         //Then sets the same layer for it's children
         foreach (Transform child in obj.transform)
         {
-            child.gameObject.layer = LayerMask.NameToLayer("P" + cameraLayer + " Cam");
+            child.gameObject.layer = LayerMask.NameToLayer("P" + playerID + " Cam");
         }
 
         //Sets the camera CullingMask to remove the other cameras
         ChangeCameraCulling(camBrain);
 
+        //Removes the audio listener from the other cars
+        if (playerID > 1)
+        {
+            obj.GetComponent<AudioListener>().enabled = false;
+        }
+
         //This is just so that there are no duplicate player IDs
-        cameraLayer++;
+        playerID++;
     }
 
     private void ChangeCameraCulling(Camera brain)
@@ -256,7 +263,7 @@ public class GameManager : MonoBehaviour
         //Removes all camera layers one by one except for the layer the object is on
         for (int i = 1; i <= 4; i++)
         {
-            if (cameraLayer != i)
+            if (playerID != i)
             {
                 cullings[index++] = LayerMask.NameToLayer("P" + i + " Cam");
             }

@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 928243678}
   - component: {fileID: 928243677}
-  - component: {fileID: 928243676}
   - component: {fileID: 928243679}
   - component: {fileID: 928243680}
   - component: {fileID: 8434977438828799583}
+  - component: {fileID: 637544364937137413}
   m_Layer: 0
   m_Name: Camera Brain
   m_TagString: MainCamera
@@ -81,14 +81,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &928243676
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 928243675}
-  m_Enabled: 1
 --- !u!114 &928243679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +164,14 @@ MonoBehaviour:
   reverseCam: {fileID: 2966609650869431192}
   turnCamKey: 306
   cameraTurnHold: 1
+--- !u!81 &637544364937137413
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 928243675}
+  m_Enabled: 1
 --- !u!1 &1925981545931584997
 GameObject:
   m_ObjectHideFlags: 0
