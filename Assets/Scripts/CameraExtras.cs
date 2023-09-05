@@ -17,9 +17,15 @@ public class CameraExtras : MonoBehaviour
     private bool cinematicCamTurn = false;
     public bool CinematicCamTurn { get { return cinematicCamTurn; } set { cinematicCamTurn = value; } }
 
+    private Camera camBrain;
+
     private void Start()
     {
         animator = mainCam.GetComponent<Animator>();
+        camBrain = GetComponent<Camera>();
+
+        //Asks the gamemange which layer mask is available for the cameras. Basically the player ID (player 1, 2...)
+        GameManager.Instance.CameraSetup(this.gameObject, camBrain);
     }
 
     private void Update()

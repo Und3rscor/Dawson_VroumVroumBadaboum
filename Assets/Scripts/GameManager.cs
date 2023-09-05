@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -50,6 +51,9 @@ public class GameManager : MonoBehaviour
     //Nos Counter Relay variable
     private int nosCounterGM;
     public int NosCounterGM { get { return nosCounterGM; } set { nosCounterGM = value; } }
+
+    //Camera layers
+    private int cameraLayer = 1;
 
     //private variables
     private int scoreBonus;
@@ -204,5 +208,51 @@ public class GameManager : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void CameraSetup(GameObject obj, Camera camBrain)
+    {
+        ChangeCameraLayer(obj, cameraLayer);
+
+        foreach (Transform child in obj.transform)
+        {
+            ChangeCameraLayer(child.gameObject, cameraLayer);
+        }
+
+        ChangeCameraCulling(camBrain, cameraLayer);
+
+        cameraLayer++;
+    }
+
+    private void ChangeCameraLayer(GameObject obj, int i)
+    {
+        obj.layer = LayerMask.NameToLayer("P" + i + " Cam");
+    }
+
+    private void ChangeCameraCulling(Camera brain, int currentPlayerID)
+    {
+        // Checks which layer to remove
+        int layerToRemove = CullingLayersToRemoveFromMask(currentPlayerID);
+
+        // Retrieve the current culling mask of the camera
+        int currentCullingMask = brain.cullingMask;
+
+        // Remove the layer from the culling mask using bitwise operations
+        int newCullingMask = currentCullingMask & ~(1 << layerToRemove);
+
+        // Set the Camera's culling mask to the modified mask
+        brain.cullingMask = newCullingMask;
+    }
+
+    private int CullingLayersToRemoveFromMask(int currentPlayerID)
+    {
+        if (currentPlayerID == 1)
+        {
+            return LayerMask.NameToLayer("P2 Cam");
+        }
+        else
+        {
+            return LayerMask.NameToLayer("P1 Cam");
+        }
     }
 }
