@@ -210,49 +210,58 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    //Asked by CameraExtras.cs to setup it's camera
     public void CameraSetup(GameObject obj, Camera camBrain)
     {
-        ChangeCameraLayer(obj, cameraLayer);
+        //Sets the camera LayerMask between "P1 Cam" to "P4 Cam" depending on the player ID
+        obj.layer = LayerMask.NameToLayer("P" + cameraLayer + " Cam");
 
+        //Then sets the same layer for it's children
         foreach (Transform child in obj.transform)
         {
-            ChangeCameraLayer(child.gameObject, cameraLayer);
+            child.gameObject.layer = LayerMask.NameToLayer("P" + cameraLayer + " Cam");
         }
 
-        ChangeCameraCulling(camBrain, cameraLayer);
+        //Sets the camera CullingMask to remove the other cameras
+        ChangeCameraCulling(camBrain);
 
+        //This is just so that there are no duplicate player IDs
         cameraLayer++;
     }
 
-    private void ChangeCameraLayer(GameObject obj, int i)
+    private void ChangeCameraCulling(Camera brain)
     {
-        obj.layer = LayerMask.NameToLayer("P" + i + " Cam");
-    }
-
-    private void ChangeCameraCulling(Camera brain, int currentPlayerID)
-    {
-        // Checks which layer to remove
-        int layerToRemove = CullingLayersToRemoveFromMask(currentPlayerID);
-
         // Retrieve the current culling mask of the camera
         int currentCullingMask = brain.cullingMask;
 
-        // Remove the layer from the culling mask using bitwise operations
-        int newCullingMask = currentCullingMask & ~(1 << layerToRemove);
+        // Checks which layers to remove
+        int[] layersToRemove = CullingLayersToRemoveFromMask();
+
+        // Remove the layers from the culling mask using bitwise operations
+        foreach (int layer in layersToRemove)
+        {
+            currentCullingMask &= ~(1 << layer);
+        }
+        int newCullingMask = currentCullingMask;
 
         // Set the Camera's culling mask to the modified mask
         brain.cullingMask = newCullingMask;
     }
 
-    private int CullingLayersToRemoveFromMask(int currentPlayerID)
+    private int[] CullingLayersToRemoveFromMask()
     {
-        if (currentPlayerID == 1)
+        int[] cullings = new int[3];
+        int index = 0;
+
+        //Removes all camera layers one by one except for the layer the object is on
+        for (int i = 1; i <= 4; i++)
         {
-            return LayerMask.NameToLayer("P2 Cam");
+            if (cameraLayer != i)
+            {
+                cullings[index++] = LayerMask.NameToLayer("P" + i + " Cam");
+            }
         }
-        else
-        {
-            return LayerMask.NameToLayer("P1 Cam");
-        }
+
+        return cullings;
     }
 }
