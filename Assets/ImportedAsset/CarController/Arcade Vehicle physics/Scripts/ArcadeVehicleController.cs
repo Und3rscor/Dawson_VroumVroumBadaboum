@@ -54,7 +54,6 @@ public class ArcadeVehicleController : MonoBehaviour
 
     //Nos stuff
     [Header("Nos Stuff")]
-    [SerializeField] private KeyCode nosKey = KeyCode.E;
     [SerializeField] private float nosSpeedBoost;
     [SerializeField] private int nosCapacity;
     private float currentNos;
@@ -285,27 +284,22 @@ public class ArcadeVehicleController : MonoBehaviour
 
     private void NosController()
     {
-        if (Input.GetKeyDown(nosKey) && !spin)
+        if (playerInput.actions["Boost"].WasPerformedThisFrame() && !spin)
         {
             if (currentNos > 0)
             {
                 accelaration = accelaration * nosSpeedBoost;
                 nosFX.SetActive(true);
             }
-            else
-            {
-                BlowUp();
-            }
-            
         }
 
-        if (Input.GetKey(nosKey) && currentNos > 0 && !spin)
+        if (playerInput.actions["Boost"].IsPressed() && currentNos > 0 && !spin)
         {
             currentNos -= 10.0f * Time.deltaTime;
             NosToUI();
         }
 
-        if (Input.GetKeyUp(nosKey) || accelaration != baseAccelaration && currentNos <= 0)
+        if (playerInput.actions["Boost"].WasReleasedThisFrame() || accelaration != baseAccelaration && currentNos <= 0)
         {
             accelaration = baseAccelaration;
             nosFX.SetActive(false);
