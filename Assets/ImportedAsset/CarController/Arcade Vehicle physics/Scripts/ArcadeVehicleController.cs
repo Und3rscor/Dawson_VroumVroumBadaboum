@@ -75,7 +75,6 @@ public class ArcadeVehicleController : MonoBehaviour
 
     //Spin stuff
     [Header("Spin Stuff")]
-    [SerializeField] private KeyCode spinKey = KeyCode.LeftShift;
     [SerializeField] private float spinSpeedDebuff;
     public bool Spin { get { return spin; } }
     private bool spin = false;
@@ -334,7 +333,7 @@ public class ArcadeVehicleController : MonoBehaviour
 
     private void SpinController()
     {
-        if (Input.GetKeyDown(spinKey) && !camExtras.CinematicCamTurn)
+        if (playerInput.actions["Spin"].WasPressedThisFrame() && !camExtras.CinematicCamTurn)
         {
             camExtras.CinematicCamTurn = true;
 

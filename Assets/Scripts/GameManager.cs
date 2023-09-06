@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.PlasticSCM.Editor.WebApi;
@@ -179,9 +180,6 @@ public class GameManager : MonoBehaviour
 
         //Sets the camera CullingMask to remove the other cameras
         ChangeCameraCulling(camBrain);
-
-        //Sets the correct live camera
-
 
         //Removes the audio listener from the other cars
         if (playerID > 1)
