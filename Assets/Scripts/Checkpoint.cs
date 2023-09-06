@@ -6,9 +6,12 @@ public class Checkpoint : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "MainPlayer")
+        if (other.transform.tag == "MainPlayer" && other.gameObject.GetComponentInChildren<UI>() != null)
         {
-            GameManager.Instance.lapAvailable = true;
+            UI ui = other.gameObject.GetComponentInChildren<UI>();
+
+            ui.lapAvailable = true;
+
         }
     }
 }

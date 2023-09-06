@@ -6,16 +6,21 @@ public class FinishLine : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "MainPlayer" && GameManager.Instance.lapAvailable)
+        if (other.transform.tag == "MainPlayer" && other.gameObject.GetComponentInChildren<UI>() != null)
         {
-            GameManager.Instance.Lap();
-            other.GetComponentInChildren<MachineGun>().RefillAmmo();
-            other.GetComponentInParent<ArcadeVehicleController>().RefillNos();
-            GameManager.Instance.lapAvailable = false;
+            UI ui = other.gameObject.GetComponentInChildren<UI>();
 
-            if (GameManager.Instance.Alive <= 1)
+            if (ui.lapAvailable)
             {
-                GameManager.Instance.GameOverDelay();
+                ui.Lap();
+                other.GetComponentInChildren<MachineGun>().RefillAmmo();
+                other.GetComponentInParent<ArcadeVehicleController>().RefillNos();
+                ui.lapAvailable = false;
+
+                if (GameManager.Instance.Alive <= 1)
+                {
+                    GameManager.Instance.GameOverDelay();
+                }
             }
         }
     }

@@ -42,10 +42,6 @@ public class ArcadeVehicleController : MonoBehaviour
     private float radius;
     private Vector3 origin;
 
-    //Car info to relay to UI
-    private float speedometer;
-    public float Speedometer { get { return speedometer; } }
-
     //Camera stuff
     private CameraExtras camExtras;
 
@@ -95,6 +91,9 @@ public class ArcadeVehicleController : MonoBehaviour
     [Header("Death Stuff")]
     [SerializeField] private GameObject explosionParticleFX;
 
+    //Ui stuff
+    private UI ui;
+
     private void Start()
     {
         radius = rb.GetComponent<SphereCollider>().radius;
@@ -121,6 +120,9 @@ public class ArcadeVehicleController : MonoBehaviour
 
         //Camera stuff
         camExtras = GetComponentInChildren<CameraExtras>();
+
+        //Fetches the ui
+        ui = GetComponentInChildren<UI>();
     }
 
     private void Update()
@@ -131,8 +133,7 @@ public class ArcadeVehicleController : MonoBehaviour
         AudioManager();
 
         //Speedometer calculator
-        speedometer = Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.z);
-        GameManager.Instance.SpeedometerGM = speedometer;
+        ui.speedometer = Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.z);
 
         //Nos stuff
         NosController();

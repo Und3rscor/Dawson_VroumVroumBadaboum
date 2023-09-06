@@ -10,11 +10,14 @@ public class UI : MonoBehaviour
     public GameObject gameUI, gameOverUI, pauseUI;
 
     //Speedometer variables
+    [HideInInspector] public float speedometer;
     private TextMeshProUGUI speedometerText;
     private Slider speedometerSlider;
 
     //Lap counter variable
-    private TextMeshProUGUI lapCounter;
+    [HideInInspector] public int lapCounter = 0;
+    [HideInInspector] public bool lapAvailable;
+    private TextMeshProUGUI lapCounterTMP;
 
     //Scoreboard variable
     private TextMeshProUGUI scoreboard;
@@ -36,16 +39,16 @@ public class UI : MonoBehaviour
             speedometerSlider = transform.Find("GameUI/Speedometer/Slider").GetComponent<Slider>();
 
             //Find lap counter component
-            lapCounter = transform.Find("GameUI/LapCounter/Text").GetComponent<TextMeshProUGUI>();
+            lapCounterTMP = transform.Find("GameUI/LapCounter/Text").GetComponent<TextMeshProUGUI>();
 
             //Find scoreboard component
             scoreboard = transform.Find("GameUI/Scoreboard/Text").GetComponent<TextMeshProUGUI>();
 
-            //Find Alive Counter component
-            aliveCounter = transform.Find("GameUI/AliveCounter/Text").GetComponent<TextMeshProUGUI>();
-
             //Find nos counter component
             nosCounter = transform.Find("GameUI/NosCounter/Slider").GetComponent<Slider>();
+
+            //Find Alive Counter component
+            aliveCounter = transform.Find("GameUI/AliveCounter/Text").GetComponent<TextMeshProUGUI>();
         }
 
         if (gameOverUI != null)
@@ -64,20 +67,20 @@ public class UI : MonoBehaviour
         if (gameUI != null)
         {
             //Modify speedometer values
-            speedometerText.text = "Speed: " + Mathf.Round(GameManager.Instance.SpeedometerGM) + " Km/h";
-            speedometerSlider.value = GameManager.Instance.SpeedometerGM;
+            speedometerText.text = "Speed: " + Mathf.Round(speedometer) + " Km/h";
+            speedometerSlider.value = speedometer;
 
             //Modify lap counter value
-            lapCounter.text = "Lap: " + GameManager.Instance.Laps;
+            lapCounterTMP.text = "Lap: " + lapCounter;
 
             //Modify scoreboard value
             scoreboard.text = "Score: " + GameManager.Instance.Score;
 
-            //Modify Alive Counter value
-            aliveCounter.text = "Alive: " + GameManager.Instance.Alive + " / " + GameManager.Instance.TotalAlive;
-
             //Modify Nos Counter value
             nosCounter.value = GameManager.Instance.NosCounterGM;
+
+            //Modify Alive Counter value
+            aliveCounter.text = "Alive: " + GameManager.Instance.Alive + " / " + GameManager.Instance.TotalAlive;
         }
     }
 
@@ -102,6 +105,11 @@ public class UI : MonoBehaviour
         {
             active.SetActive(true);
         }
+    }
+    public void Lap()
+    {
+        lapCounter++;
+        //score += 100;
     }
 
     public void Restart()
