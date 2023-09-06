@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get { return instance; } }
 
+    //Spawning stuff
+    [SerializeField] private GameObject[] spawnpoints;
+
     //Find the UI Manager
     private UI ui;
 
@@ -169,6 +172,8 @@ public class GameManager : MonoBehaviour
     //Asked by CameraExtras.cs to setup it's camera
     public void CameraSetup(GameObject obj, Camera camBrain)
     {
+        obj.GetComponentInParent<ArcadeVehicleController>().gameObject.transform.position = spawnpoints[playerID - 1].transform.position;
+
         //Sets the camera LayerMask between "P1 Cam" to "P4 Cam" depending on the player ID
         obj.layer = LayerMask.NameToLayer("P" + playerID + " Cam");
 
