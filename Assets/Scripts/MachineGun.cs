@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MachineGun : MonoBehaviour
 {
     //Gun stuff
     [Header("GunStuff")]
-    [SerializeField] private KeyCode shootKey = KeyCode.Mouse0;
     [SerializeField] private Transform[] attackPoints;
     private Transform attackPoint;
     [SerializeField] private GameObject muzzleFlash;
@@ -29,17 +29,21 @@ public class MachineGun : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private int damageRandomRange;
 
+    //Input system
+    private PlayerInput playerInput;
+
     private void Awake()
     {
         readyToShoot = true;
         attackPoint = attackPoints[0];
         currentAmmoCount = maxAmmoCount;
         carDaddy = GetComponentInParent<ArcadeVehicleController>();
+        playerInput = GetComponentInParent<PlayerInput>();
     }
 
     private void Update()
     {
-        shooting = Input.GetKey(shootKey);
+        shooting = playerInput.actions["Shoot"].IsPressed();
 
         if (readyToShoot && shooting && currentAmmoCount > 0)
         {
