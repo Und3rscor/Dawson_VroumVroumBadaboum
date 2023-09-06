@@ -17,17 +17,11 @@ public class GameManager : MonoBehaviour
     private UI ui;
 
     //Debug Keys
-    [SerializeField] private KeyCode increaseLaps;
     [SerializeField] private KeyCode kill;
 
     //Keybinds
     [SerializeField] private KeyCode pauseKey = KeyCode.Escape;
     [SerializeField] private KeyCode screenshotKey = KeyCode.F10;
-
-    //Score variable
-    private int score;
-
-    public int Score { get { return score; } }
 
     //Alive variable
     private int alive;
@@ -45,9 +39,8 @@ public class GameManager : MonoBehaviour
     //Camera layers
     private int playerID = 1;
 
-    //private variables
-    private int scoreBonus;
-    private int previousScore = 0;
+    //Private variables
+    public bool GameOverBool { get { return  gameOver; } }
     private bool gameOver = false;
     private bool paused = false;
 
@@ -55,8 +48,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Setup();
-
-        previousScore = (int)Time.time;
 
         FindUI();
     }
@@ -75,11 +66,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (!gameOver)
-        {
-            Scoreboard();
-        }
-
         QuickDebug();
 
         if (Input.GetKeyDown(screenshotKey))
@@ -115,20 +101,14 @@ public class GameManager : MonoBehaviour
         Debug.Log("A screenshot was taken!");
     }
 
-    private void Scoreboard()
-    {
-        score = (int)Time.time + scoreBonus - previousScore;
-    }
-
     public void Kill()
     {
         alive--;
-        scoreBonus += 1000;
+        //scoreBonus += 1000;
     }
 
     public void Restart()
     {
-        previousScore += score;
         //laps = 0;
         gameOver = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

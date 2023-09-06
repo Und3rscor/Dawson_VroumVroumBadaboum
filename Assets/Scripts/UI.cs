@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class UI : MonoBehaviour
@@ -20,6 +21,7 @@ public class UI : MonoBehaviour
     private TextMeshProUGUI lapCounterTMP;
 
     //Scoreboard variable
+    [HideInInspector] public int score = 0;
     private TextMeshProUGUI scoreboard;
 
     //Alive counter variable
@@ -43,6 +45,12 @@ public class UI : MonoBehaviour
 
             //Find scoreboard component
             scoreboard = transform.Find("GameUI/Scoreboard/Text").GetComponent<TextMeshProUGUI>();
+
+            //Starts the scoreboard
+            if (!GameManager.Instance.GameOverBool)
+            {
+                Scoreboard();
+            }
 
             //Find nos counter component
             nosCounter = transform.Find("GameUI/NosCounter/Slider").GetComponent<Slider>();
@@ -74,7 +82,7 @@ public class UI : MonoBehaviour
             lapCounterTMP.text = "Lap: " + lapCounter;
 
             //Modify scoreboard value
-            scoreboard.text = "Score: " + GameManager.Instance.Score;
+            scoreboard.text = "Score: " + score;
 
             //Modify Nos Counter value
             nosCounter.value = GameManager.Instance.NosCounterGM;
@@ -109,7 +117,14 @@ public class UI : MonoBehaviour
     public void Lap()
     {
         lapCounter++;
-        //score += 100;
+        score += 1000;
+    }
+
+    private void Scoreboard()
+    {
+        score += (int)speedometer;
+
+        Invoke("Scoreboard", 1.0f);
     }
 
     public void Restart()
