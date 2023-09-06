@@ -24,11 +24,12 @@ public class UI : MonoBehaviour
     [HideInInspector] public int score = 0;
     private TextMeshProUGUI scoreboard;
 
+    //Nos counter variable
+    [HideInInspector] public float nosCounter;
+    private Slider nosCounterSlider;
+
     //Alive counter variable
     private TextMeshProUGUI aliveCounter;
-
-    //Nos counter variable
-    private Slider nosCounter;
 
     private void Start()
     {
@@ -53,7 +54,7 @@ public class UI : MonoBehaviour
             }
 
             //Find nos counter component
-            nosCounter = transform.Find("GameUI/NosCounter/Slider").GetComponent<Slider>();
+            nosCounterSlider = transform.Find("GameUI/NosCounter/Slider").GetComponent<Slider>();
 
             //Find Alive Counter component
             aliveCounter = transform.Find("GameUI/AliveCounter/Text").GetComponent<TextMeshProUGUI>();
@@ -85,7 +86,7 @@ public class UI : MonoBehaviour
             scoreboard.text = "Score: " + score;
 
             //Modify Nos Counter value
-            nosCounter.value = GameManager.Instance.NosCounterGM;
+            nosCounterSlider.value = nosCounter;
 
             //Modify Alive Counter value
             aliveCounter.text = "Alive: " + GameManager.Instance.Alive + " / " + GameManager.Instance.TotalAlive;
@@ -117,12 +118,12 @@ public class UI : MonoBehaviour
     public void Lap()
     {
         lapCounter++;
-        score += 1000;
+        score += 100;
     }
 
     private void Scoreboard()
     {
-        score += (int)speedometer;
+        score += (int)speedometer / 10;
 
         Invoke("Scoreboard", 1.0f);
     }

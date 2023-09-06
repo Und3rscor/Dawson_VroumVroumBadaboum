@@ -97,8 +97,7 @@ public class ArcadeVehicleController : MonoBehaviour
     private void Start()
     {
         radius = rb.GetComponent<SphereCollider>().radius;
-
-        //Input stuff
+        ui = GetComponentInChildren<UI>();
         playerInput = GetComponent<PlayerInput>();
 
         //Keeps value in mind for ease of return
@@ -108,7 +107,7 @@ public class ArcadeVehicleController : MonoBehaviour
         nosFX = transform.Find("Mesh/Body/Hatchback/Exhaust/NOS").gameObject;
         nosFX.SetActive(false);
         currentNos = nosCapacity;
-        NosToGM();
+        NosToUI();
 
         //Reverse Stuff
         brakeLights = transform.GetComponentsInChildren<Light>();
@@ -120,9 +119,6 @@ public class ArcadeVehicleController : MonoBehaviour
 
         //Camera stuff
         camExtras = GetComponentInChildren<CameraExtras>();
-
-        //Fetches the ui
-        ui = GetComponentInChildren<UI>();
     }
 
     private void Update()
@@ -307,7 +303,7 @@ public class ArcadeVehicleController : MonoBehaviour
         if (Input.GetKey(nosKey) && currentNos > 0 && !spin)
         {
             currentNos -= 10.0f * Time.deltaTime;
-            NosToGM();
+            NosToUI();
         }
 
         if (Input.GetKeyUp(nosKey) || accelaration != baseAccelaration && currentNos <= 0)
@@ -317,9 +313,9 @@ public class ArcadeVehicleController : MonoBehaviour
         }
     }
 
-    private void NosToGM()
+    private void NosToUI()
     {
-        GameManager.Instance.NosCounterGM = Mathf.FloorToInt(currentNos);
+        ui.nosCounter = Mathf.FloorToInt(currentNos);
     }
 
     private void FlipController()
@@ -432,6 +428,6 @@ public class ArcadeVehicleController : MonoBehaviour
     public void RefillNos()
     {
         currentNos = nosCapacity;
-        NosToGM();
+        NosToUI();
     }
 }

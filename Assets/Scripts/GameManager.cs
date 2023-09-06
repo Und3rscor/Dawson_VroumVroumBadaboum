@@ -32,16 +32,13 @@ public class GameManager : MonoBehaviour
     private int totalAlive;
     public int TotalAlive { get { return totalAlive; } }
 
-    //Nos Counter Relay variable
-    private int nosCounterGM;
-    public int NosCounterGM { get { return nosCounterGM; } set { nosCounterGM = value; } }
-
     //Camera layers
     private int playerID = 1;
 
     //Private variables
     public bool GameOverBool { get { return  gameOver; } }
     private bool gameOver = false;
+
     private bool paused = false;
 
 
