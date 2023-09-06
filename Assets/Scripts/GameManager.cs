@@ -180,6 +180,9 @@ public class GameManager : MonoBehaviour
         //Sets the camera CullingMask to remove the other cameras
         ChangeCameraCulling(camBrain);
 
+        //Sets the correct live camera
+
+
         //Removes the audio listener from the other cars
         if (playerID > 1)
         {

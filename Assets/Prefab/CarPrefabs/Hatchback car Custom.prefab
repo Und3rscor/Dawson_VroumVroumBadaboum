@@ -616,7 +616,7 @@ RectTransform:
   m_GameObject: {fileID: 492329637}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1581472303}
@@ -787,7 +787,7 @@ RectTransform:
   m_GameObject: {fileID: 558131730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 405588554}
@@ -1418,8 +1418,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCam: {fileID: 1925981548005914501}
   reverseCam: {fileID: 2966609650869431192}
-  turnCamKey: 306
-  cameraTurnHold: 1
 --- !u!81 &637544364937137413
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1456,7 +1454,7 @@ RectTransform:
   m_GameObject: {fileID: 977286475}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1406811175}
@@ -2441,6 +2439,11 @@ MonoBehaviour:
   gameUI: {fileID: 1377840633}
   gameOverUI: {fileID: 405588553}
   pauseUI: {fileID: 0}
+  speedometer: 0
+  lapCounter: 0
+  lapAvailable: 0
+  score: 0
+  nosCounter: 0
 --- !u!1 &2115406343
 GameObject:
   m_ObjectHideFlags: 0
@@ -2495,6 +2498,11 @@ MonoBehaviour:
   gameUI: {fileID: 0}
   gameOverUI: {fileID: 0}
   pauseUI: {fileID: 0}
+  speedometer: 0
+  lapCounter: 0
+  lapAvailable: 0
+  score: 0
+  nosCounter: 0
 --- !u!1 &1925981545931584997
 GameObject:
   m_ObjectHideFlags: 0
@@ -23271,7 +23279,6 @@ MonoBehaviour:
   MaxPitch: 3
   SkidSound: {fileID: 1925981547900679600}
   skidWidth: 0.13985014
-  playerInput: {fileID: 6863520850177656726}
   nosKey: 101
   nosSpeedBoost: 2.5
   nosCapacity: 100

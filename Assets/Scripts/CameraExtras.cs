@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CameraExtras : MonoBehaviour
 {
@@ -9,8 +10,6 @@ public class CameraExtras : MonoBehaviour
     [Header("Camera controls")]
     [SerializeField] private CinemachineVirtualCamera mainCam;
     [SerializeField] private CinemachineVirtualCamera reverseCam;
-    [SerializeField] private KeyCode turnCamKey = KeyCode.LeftControl;
-    [SerializeField] private bool cameraTurnHold = true;
 
     private Animator animator;
     private bool cinematicCamTurned = false;
@@ -18,11 +17,13 @@ public class CameraExtras : MonoBehaviour
     public bool CinematicCamTurn { get { return cinematicCamTurn; } set { cinematicCamTurn = value; } }
 
     private Camera camBrain;
+    private PlayerInput playerInput;
 
     private void Start()
     {
         animator = mainCam.GetComponent<Animator>();
         camBrain = GetComponent<Camera>();
+        playerInput = GetComponentInParent<PlayerInput>();
 
         //Asks the gamemange which layer mask is available for the cameras. Basically the player ID (player 1, 2...)
         GameManager.Instance.CameraSetup(this.gameObject, camBrain);
@@ -44,25 +45,14 @@ public class CameraExtras : MonoBehaviour
 
     private void CameraControls()
     {
-        if (cameraTurnHold)
+        if (playerInput.actions["Back Cam"].WasPressedThisFrame())
         {
-            if (Input.GetKeyDown(turnCamKey))
-            {
-                turnCam();
-            }
-
-            if (Input.GetKeyUp(turnCamKey))
-            {
-                turnCam();
-            }
+            turnCam();
         }
 
-        else
+        if (playerInput.actions["Back Cam"].WasReleasedThisFrame())
         {
-            if (Input.GetKeyDown(turnCamKey))
-            {
-                turnCam();
-            }
+            turnCam();
         }
     }
 

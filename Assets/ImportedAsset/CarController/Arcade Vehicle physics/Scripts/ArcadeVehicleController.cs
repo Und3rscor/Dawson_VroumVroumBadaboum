@@ -46,8 +46,7 @@ public class ArcadeVehicleController : MonoBehaviour
     private CameraExtras camExtras;
 
     //Input stuff
-    [Header("InputSystem")]
-    [SerializeField] private PlayerInput playerInput;
+    private PlayerInput playerInput;
     
     private float horizontalInput, verticalInput; //Movement Input
     private bool boostInput;
