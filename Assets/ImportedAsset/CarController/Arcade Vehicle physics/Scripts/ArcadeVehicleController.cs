@@ -62,7 +62,6 @@ public class ArcadeVehicleController : MonoBehaviour
 
     //Flip stuff
     [Header("Front Flip Stuff")]
-    [SerializeField] private KeyCode flipKey = KeyCode.Space;
     [SerializeField] private float flipBoost;
     private GameObject model;
     private Animator modelAnimator;
@@ -311,14 +310,14 @@ public class ArcadeVehicleController : MonoBehaviour
     }
 
     private void FlipController()
-    {
-        if (Input.GetKeyDown(flipKey) && !grounded() && !flip && flipAvailable)
+    {        
+        if (playerInput.actions["Flip"].WasPressedThisFrame() && !grounded() && !flip && flipAvailable)
         {
             flip = true;
             flipAvailable = false;
         }
 
-        if (Input.GetKeyUp(flipKey) && !grounded() && flip)
+        if (playerInput.actions["Flip"].WasReleasedThisFrame() && !grounded() && flip)
         {
             flip = false;
 

@@ -22945,7 +22945,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925981547900679601}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.18, z: -184.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23279,12 +23279,9 @@ MonoBehaviour:
   MaxPitch: 3
   SkidSound: {fileID: 1925981547900679600}
   skidWidth: 0.13985014
-  nosKey: 101
   nosSpeedBoost: 2.5
   nosCapacity: 100
-  flipKey: 32
   flipBoost: 100
-  spinKey: 304
   spinSpeedDebuff: 0.9
   bumpForce: 10
   explosionParticleFX: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664,
