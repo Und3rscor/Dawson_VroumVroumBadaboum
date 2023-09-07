@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using UnityEngine.Rendering.PostProcessing;
+//using UnityEngine.Rendering.PostProcessing;
 using Cinemachine;
 
 public class KartController : MonoBehaviour
 {
-    private PostProcessVolume postVolume;
-    private PostProcessProfile postProfile;
+    //private PostProcessVolume postVolume;
+    //private PostProcessProfile postProfile;
 
     public Transform kartModel;
     public Transform kartNormal;
@@ -48,8 +48,8 @@ public class KartController : MonoBehaviour
 
     void Start()
     {
-        postVolume = Camera.main.GetComponent<PostProcessVolume>();
-        postProfile = postVolume.profile;
+        //postVolume = Camera.main.GetComponent<PostProcessVolume>();
+        //postProfile = postVolume.profile;
 
         for (int i = 0; i < wheelParticles.GetChild(0).childCount; i++)
         {
@@ -268,7 +268,7 @@ public class KartController : MonoBehaviour
 
     void ChromaticAmount(float x)
     {
-        postProfile.GetSetting<ChromaticAberration>().intensity.value = x;
+        //postProfile.GetSetting<ChromaticAberration>().intensity.value = x;
     }
 
     //private void OnDrawGizmos()
