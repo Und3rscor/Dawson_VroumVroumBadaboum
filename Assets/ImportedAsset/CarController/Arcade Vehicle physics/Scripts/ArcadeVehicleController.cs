@@ -49,7 +49,6 @@ public class ArcadeVehicleController : MonoBehaviour
     private PlayerInput playerInput;
     
     private float horizontalInput, verticalInput; //Movement Input
-    private bool boostInput;
 
 
     //Nos stuff
@@ -155,6 +154,9 @@ public class ArcadeVehicleController : MonoBehaviour
         {
             SpinAction(false);
         }
+
+        ///Nos input is handled in the NosController
+        ///Flip input is handles in the FlipController
     }
 
     public void AudioManager()
