@@ -136,11 +136,7 @@ public class ArcadeVehicleController : MonoBehaviour
         if (grounded())
         {
             flipAvailable = true;
-        }
-
-        //Spin stuff
-        SpinController();
-        modelAnimator.SetBool("Spin", spin);
+        }        
     }
 
     private void InputManager()
@@ -148,6 +144,17 @@ public class ArcadeVehicleController : MonoBehaviour
         //Move
         horizontalInput = playerInput.actions["Move"].ReadValue<Vector2>().x;   //turning input
         verticalInput = playerInput.actions["Move"].ReadValue<Vector2>().y;     //accelaration input
+
+        //Spin
+        if (playerInput.actions["Spin"].WasPressedThisFrame())
+        {
+            SpinAction(true);
+        }
+
+        if (playerInput.actions["Spin"].WasReleasedThisFrame())
+        {
+            SpinAction(false);
+        }
     }
 
     public void AudioManager()
@@ -330,33 +337,40 @@ public class ArcadeVehicleController : MonoBehaviour
         rb.AddForce(transform.forward * flipBoost, ForceMode.Impulse);
     }
 
-    private void SpinController()
+    //Controls the spin move
+    private void SpinAction(bool startSpinning)
     {
-        if (playerInput.actions["Spin"].WasPressedThisFrame() && !camExtras.CinematicCamTurn)
+        //Starts the first 180
+        if (startSpinning)
         {
-            camExtras.CinematicCamTurn = true;
+            //Sets spin bool for other controls
+            spin = true;
 
-            if (spin)
-            {
-                spin = false;
-                accelaration = baseAccelaration;
-
-                ManageBrakeLights(false);
-
-            }
-            else
-            {
-                spin = true;
-                accelaration = accelaration * spinSpeedDebuff;
-
-                ManageBrakeLights(true);
-            }
+            //Debuffs acceleration while reversing
+            accelaration = accelaration * spinSpeedDebuff;
         }
+
+        //Does the second 180 to finish the sequence
+        else 
+        {
+            //Sets spin bool for other controls
+            spin = false;
+
+            //Puts the acceleration back to normal
+            accelaration = baseAccelaration;
+        }
+
+        //Turns the car and the camera
+        modelAnimator.SetBool("Spin", spin);
+        camExtras.TurnCamCinematic(spin);
+
+        //Toggles the brake lights
+        ManageBrakeLights(startSpinning);
     }
 
-    private void ManageBrakeLights(bool onOff)
+    private void ManageBrakeLights(bool on)
     {
-        if (onOff)
+        if (on)
         {
             //Make the brake light red
             brakeLights[0].gameObject.GetComponent<Renderer>().material.color = Color.red;

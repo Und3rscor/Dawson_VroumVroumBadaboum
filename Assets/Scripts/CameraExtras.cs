@@ -12,10 +12,6 @@ public class CameraExtras : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera reverseCam;
 
     private Animator animator;
-    private bool cinematicCamTurned = false;
-    private bool cinematicCamTurn = false;
-    public bool CinematicCamTurn { get { return cinematicCamTurn; } set { cinematicCamTurn = value; } }
-
     private Camera camBrain;
     private PlayerInput playerInput;
 
@@ -29,20 +25,12 @@ public class CameraExtras : MonoBehaviour
         GameManager.Instance.CameraSetup(this.gameObject, camBrain);
     }
 
-    private void Update()
-    {
-        if (cinematicCamTurn)
-        {
-            turnCamCinematic();
-            animator.SetBool("Spin", cinematicCamTurned);
-        }
-    }
-
     private void LateUpdate()
     {
         CameraControls();
     }
 
+    //Checks for Back Cam Input and then calls the turn cam function if pressed
     private void CameraControls()
     {
         if (playerInput.actions["Back Cam"].WasPressedThisFrame())
@@ -56,6 +44,7 @@ public class CameraExtras : MonoBehaviour
         }
     }
 
+    //Changes the vcam priorities to quickly check behind you
     private void turnCam()
     {
         if (mainCam.Priority == 1)
@@ -70,17 +59,9 @@ public class CameraExtras : MonoBehaviour
         }
     }
 
-    private void turnCamCinematic()
+    //Spins the camera with the car
+    public void TurnCamCinematic(bool turned)
     {
-        if (cinematicCamTurned)
-        {
-            cinematicCamTurned = false;
-            cinematicCamTurn = false;
-        }
-        else
-        {
-            cinematicCamTurned = true;
-            cinematicCamTurn = false;
-        }
+        animator.SetBool("Spin", turned);
     }
 }
