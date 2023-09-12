@@ -12,25 +12,29 @@ public class UI : MonoBehaviour
 
     //Speedometer variables
     [HideInInspector] public float speedometer;
-    private TextMeshProUGUI speedometerText;
+    private TextMeshProUGUI speedometerDisplay;
     private Slider speedometerSlider;
 
-    //Lap counter variable
+    //Lap counter variables
     [HideInInspector] public int lapCounter = 0;
     [HideInInspector] public bool lapAvailable;
-    private TextMeshProUGUI lapCounterTMP;
+    private TextMeshProUGUI lapCounterDisplay;
 
-    //Scoreboard variable
+    //Scoreboard variables
     [HideInInspector] public int score = 0;
     private TextMeshProUGUI scoreboard;
 
-    //Nos counter variable
+    //Nos counter variables
     [HideInInspector] public float nosCounter;
     private Slider nosCounterSlider;
 
-    //Health counter variable
+    //Health counter variables
     [HideInInspector] public int healthCounter;
     private Slider healthCounterSlider;
+
+    //Lives counter variables
+    [HideInInspector] public int livesCounter;
+    private TextMeshProUGUI livesCounterDisplay;
 
     //Alive counter variable
     private TextMeshProUGUI aliveCounter;
@@ -42,14 +46,14 @@ public class UI : MonoBehaviour
             gameUI.SetActive(true);
 
             //Find speedometer components
-            speedometerText = transform.Find("GameUI/Speedometer/Text").GetComponent<TextMeshProUGUI>();
-            speedometerSlider = transform.Find("GameUI/Speedometer/Slider").GetComponent<Slider>();
+            speedometerDisplay = transform.Find("GameUI/Speedometer").GetComponentInChildren<TextMeshProUGUI>();
+            speedometerSlider = transform.Find("GameUI/Speedometer").GetComponentInChildren<Slider>();
 
             //Find lap counter component
-            lapCounterTMP = transform.Find("GameUI/LapCounter/Text").GetComponent<TextMeshProUGUI>();
+            lapCounterDisplay = transform.Find("GameUI/LapCounter").GetComponentInChildren<TextMeshProUGUI>();
 
             //Find scoreboard component
-            scoreboard = transform.Find("GameUI/Scoreboard/Text").GetComponent<TextMeshProUGUI>();
+            scoreboard = transform.Find("GameUI/Scoreboard").GetComponentInChildren<TextMeshProUGUI>();
 
             //Starts the scoreboard
             if (!GameManager.Instance.GameOverBool)
@@ -58,13 +62,16 @@ public class UI : MonoBehaviour
             }
 
             //Find nos counter component
-            nosCounterSlider = transform.Find("GameUI/NosCounter/Slider").GetComponent<Slider>();
+            nosCounterSlider = transform.Find("GameUI/NosCounter").GetComponentInChildren<Slider>();
 
             //Find health counter component
-            healthCounterSlider = transform.Find("GameUI/HealthCounter/Slider").GetComponent<Slider>();
+            healthCounterSlider = transform.Find("GameUI/HealthCounter").GetComponentInChildren<Slider>();
+
+            //Find lives counter component
+            livesCounterDisplay = transform.Find("GameUI/LivesCounter").GetComponentInChildren<TextMeshProUGUI>();
 
             //Find Alive Counter component
-            aliveCounter = transform.Find("GameUI/AliveCounter/Text").GetComponent<TextMeshProUGUI>();
+            aliveCounter = transform.Find("GameUI/AliveCounter").GetComponentInChildren<TextMeshProUGUI>();
         }
 
         if (gameOverUI != null)
@@ -83,11 +90,11 @@ public class UI : MonoBehaviour
         if (gameUI != null)
         {
             //Modify speedometer values
-            speedometerText.text = "Speed: " + Mathf.Round(speedometer) + " Km/h";
+            speedometerDisplay.text = "Speed: " + Mathf.Round(speedometer) + " Km/h";
             speedometerSlider.value = speedometer;
 
             //Modify lap counter value
-            lapCounterTMP.text = "Lap: " + lapCounter;
+            lapCounterDisplay.text = "Lap: " + lapCounter;
 
             //Modify scoreboard value
             scoreboard.text = "Score: " + score;
@@ -97,6 +104,9 @@ public class UI : MonoBehaviour
 
             //Modify Health Counter value
             healthCounterSlider.value = healthCounter;
+
+            //Modify Lives Counter value
+            livesCounterDisplay.text = livesCounter.ToString();
 
             //Modify Alive Counter value
             aliveCounter.text = "Alive: " + GameManager.Instance.Alive + " / " + GameManager.Instance.TotalAlive;

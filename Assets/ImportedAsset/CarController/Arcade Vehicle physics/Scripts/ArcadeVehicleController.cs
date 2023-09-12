@@ -10,6 +10,7 @@ public class ArcadeVehicleController : MonoBehaviour
 {
     //Car Stats
     [Header("Stats")]
+    [SerializeField] private int maxLives;
     [SerializeField] private int maxHealth;
     [SerializeField] private int nosCapacity;
     [SerializeField] private float nosSpeedBoost;
@@ -49,6 +50,7 @@ public class ArcadeVehicleController : MonoBehaviour
     private Vector3 origin;
     private float currentNos;
     private int currentHealth;
+    private int currentLives;
 
         //Flip variables
         public bool Flip { get { return flip; } }
@@ -67,6 +69,7 @@ public class ArcadeVehicleController : MonoBehaviour
     private Animator modelAnimator;
     private PlayerInput playerInput;
     private UI ui;
+    private RespawnManager respawnManager;
 
     //Inputs
     private float horizontalInput, verticalInput; //Movement Input
@@ -82,11 +85,13 @@ public class ArcadeVehicleController : MonoBehaviour
         model           = transform.Find("Mesh").gameObject;                            //model = gameobject the mesh of the car is attached to
         modelAnimator   = model.GetComponent<Animator>();                               //modelAnimator = animator of the car's body (used for flip and spin)
         camExtras       = GetComponentInChildren<CameraExtras>();                       //camExtras = CameraExtras script in cameraBrain
+        respawnManager  = GetComponent<RespawnManager>();                               //respawnManager = RespawnManager script
 
         //Variable setup
         baseAccelaration = accelaration;
         currentNos = nosCapacity;
         currentHealth = maxHealth;
+        currentLives = maxLives;
 
         //Extra Setup
         nosFX.SetActive(false);
@@ -95,6 +100,7 @@ public class ArcadeVehicleController : MonoBehaviour
         //UI Setup
         NosToUI();
         HealthToUI();
+        LivesToUI();
     }
 
     private void Update()
@@ -410,6 +416,12 @@ public class ArcadeVehicleController : MonoBehaviour
         }
     }
 
+    public void RefillHealth()
+    {
+        currentHealth = maxHealth;
+        HealthToUI();
+    }
+
     private void HealthToUI()
     {
         ui.healthCounter = currentHealth;
@@ -417,8 +429,60 @@ public class ArcadeVehicleController : MonoBehaviour
 
     public void BlowUp()
     {
+        //Does the explosionFX
         Instantiate(explosionParticleFX, transform.position, Quaternion.identity, null);
-        GameManager.Instance.GameOverDelay();
-        Destroy(gameObject);
+
+        if (currentLives > 1)
+        {
+            //Disables controls so the player can't move while they're dead
+            playerInput.enabled = false;
+
+            //Disables the rigidbodies so nothing can collide with it
+            rb.isKinematic = true;
+            carBody.isKinematic = true;
+
+            //Disables meshes so they car is invisible
+            model.SetActive(false);
+
+            //Remove 1 life
+            currentLives--;
+
+            //Relays to UI
+            LivesToUI();
+
+            //Spawns a dead car
+
+            //Tells the respawnManager to respawn the car after some time
+            respawnManager.Invoke("Respawn", respawnManager.respawnDelay);
+        }
+        else
+        {
+            //Deletes the player
+            Destroy(gameObject);
+        }
+        
+        //GameManager.Instance.GameOverDelay();
+    }
+
+    public void CarRespawn()
+    {
+        //Reenables controls so the player
+        playerInput.enabled = true;
+
+        //Reenables the rigidbodies
+        rb.isKinematic = false;
+        carBody.isKinematic = false;
+
+        //Reenables meshes
+        model.SetActive(true);
+
+        //Refill values
+        RefillHealth();
+        RefillNos();
+    }
+
+    private void LivesToUI()
+    {
+        ui.livesCounter = currentLives;
     }
 }

@@ -12,6 +12,7 @@ public class Checkpoint : MonoBehaviour
 
             ui.lapAvailable = true;
 
+            other.GetComponent<RespawnManager>().UpdateLastCheckpointPassed(this.transform.position);
         }
     }
 }
