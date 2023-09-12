@@ -14,30 +14,26 @@ public class ArcadeVehicleController : MonoBehaviour
     private float baseAccelaration;
     public Rigidbody rb, carBody;
     
-    [HideInInspector]
-    public RaycastHit hit;
+    [HideInInspector] public RaycastHit hit;
     public AnimationCurve frictionCurve;
     public AnimationCurve turnCurve;
     public PhysicMaterial frictionMaterial;
+
     [Header("Visuals")]
     public Transform BodyMesh;
     public Transform[] FrontWheels = new Transform[2];
     public Transform[] RearWheels = new Transform[2];
-    [HideInInspector]
-    public Vector3 carVelocity;
+    [HideInInspector] public Vector3 carVelocity;
     
-    [Range(0,10)]
-    public float BodyTilt;
+    [Range(0,10)] public float BodyTilt;
+
     [Header("Audio settings")]
     public AudioSource engineSound;
-    [Range(0, 1)]
-    public float minPitch;
-    [Range(1, 3)]
-    public float MaxPitch;
+    [Range(0, 1)] public float minPitch;
+    [Range(1, 3)] public float MaxPitch;
     public AudioSource SkidSound;
 
-    [HideInInspector]
-    public float skidWidth;
+    [HideInInspector] public float skidWidth;
 
     private float radius;
     private Vector3 origin;
