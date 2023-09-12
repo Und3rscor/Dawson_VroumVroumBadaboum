@@ -43,34 +43,31 @@ public class ArcadeVehicleController : MonoBehaviour
     public AudioSource SkidSound;
 
     //Car variables
-    [HideInInspector] public float skidWidth;
     private float baseAccelaration;
-    private float radius;
+    [HideInInspector] public float skidWidth;
     private Vector3 origin;
+    private float currentNos;
+
+        //Flip variables
+        public bool Flip { get { return flip; } }
+        private bool flip = false;
+        private bool flipAvailable;
+
+        //Spin variable
+        public bool Spin { get { return spin; } }
+        private bool spin = false;
 
     //Fetch Setup
+    private float radius;
     private CameraExtras camExtras;
+    private GameObject nosFX;
+    private GameObject model;
+    private Animator modelAnimator;
     private PlayerInput playerInput;
     private UI ui;
 
     //Inputs
     private float horizontalInput, verticalInput; //Movement Input
-
-    //Nos
-    private float currentNos;
-    public float CurrentNos { get { return currentNos; } }
-    private GameObject nosFX;
-
-    //Flip
-    private GameObject model;
-    private Animator modelAnimator;
-    public bool Flip { get { return flip; } }
-    private bool flip = false;
-    private bool flipAvailable;
-
-    //Flip
-    public bool Spin { get { return spin; } }
-    private bool spin = false;
 
     private void Start()
     {
@@ -81,21 +78,21 @@ public class ArcadeVehicleController : MonoBehaviour
         //Keeps value in mind for ease of return
         baseAccelaration = accelaration;
 
-        //Nos Stuff
+        //Nos fetch
         nosFX = transform.Find("Mesh/Body/Hatchback/Exhaust/NOS").gameObject;
         nosFX.SetActive(false);
         currentNos = nosCapacity;
         NosToUI();
 
-        //Reverse Stuff
+        //Reverse fetch
         brakeLights = transform.GetComponentsInChildren<Light>();
         ManageBrakeLights(false);
 
-        //Animation stuff
+        //Animation fetch
         model = transform.Find("Mesh").gameObject;
         modelAnimator = model.GetComponent<Animator>();
 
-        //Camera stuff
+        //Camera fetch
         camExtras = GetComponentInChildren<CameraExtras>();
     }
 
