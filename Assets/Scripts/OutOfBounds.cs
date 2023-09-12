@@ -8,7 +8,7 @@ public class OutOfBounds : MonoBehaviour
     {
         if (other.transform.tag == "MainPlayer")
         {
-            other.GetComponentInParent<ArcadeVehicleController>().BlowUp();
+            other.GetComponentInParent<ArcadeVehicleController>().BlowUp(null);
         }
 
         if (other.transform.tag == "MainBot" || other.transform.tag == "Bot")

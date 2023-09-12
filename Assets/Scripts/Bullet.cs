@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float lifespan;
     [HideInInspector] public int damage;
+    [HideInInspector] public ArcadeVehicleController source;
 
     private void Awake()
     {
@@ -25,7 +26,7 @@ public class Bullet : MonoBehaviour
 
         if (coll.transform.tag == "MainPlayer")
         {
-            coll.gameObject.GetComponentInParent<ArcadeVehicleController>().TakeDamage(damage);
+            coll.gameObject.GetComponentInParent<ArcadeVehicleController>().TakeDamage(damage, source);
         }
 
         Die();

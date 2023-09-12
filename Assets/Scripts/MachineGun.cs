@@ -99,7 +99,7 @@ public class MachineGun : MonoBehaviour
     private void EditBullet(GameObject currentBullet)
     {
         currentBullet.GetComponent<Bullet>().damage = damage + Random.Range(-damageRandomRange, damageRandomRange);
-        currentBullet.transform.parent = null;
+        currentBullet.GetComponent<Bullet>().source = GetComponentInParent<ArcadeVehicleController>();
     }
 
     private void ResetShot()

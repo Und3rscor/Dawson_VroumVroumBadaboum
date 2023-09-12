@@ -389,7 +389,7 @@ public class ArcadeVehicleController : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damageTaken)
+    public void TakeDamage(int damageTaken, ArcadeVehicleController damageSource)
     {
         if (currentNos >=  damageTaken)
         {
@@ -414,7 +414,7 @@ public class ArcadeVehicleController : MonoBehaviour
         //Kills the car if health is under 0
         if (currentHealth <= 0)
         {
-            BlowUp();
+            BlowUp(damageSource);
         }
     }
 
@@ -429,12 +429,25 @@ public class ArcadeVehicleController : MonoBehaviour
         ui.healthCounter = currentHealth;
     }
 
-    public void BlowUp()
+    public void BlowUp(ArcadeVehicleController damageSource)
     {
         if (deathAvailable)
         {
             //Disables further deaths until respawn
             deathAvailable = false;
+
+            //Gives credit where credit is due
+            if (damageSource != null)
+            {
+                //Gives a kill to the player that killed this player
+                damageSource.ui.Kill();
+
+                //Remove the audio listener from this player
+                GetComponentInChildren<AudioListener>().enabled = false;
+
+                //Gives the audio listener to the killer
+                damageSource.GetComponentInChildren<AudioListener>().enabled = true;
+            }
 
             //Does the explosionFX
             Instantiate(explosionParticleFX, transform.position, Quaternion.identity, null);
@@ -450,6 +463,9 @@ public class ArcadeVehicleController : MonoBehaviour
 
                 //Disables meshes so they car is invisible
                 model.SetActive(false);
+
+                //Disables engine sound
+                engineSound.enabled = false;
 
                 //Remove 1 life
                 currentLives--;
@@ -501,6 +517,9 @@ public class ArcadeVehicleController : MonoBehaviour
 
         //Reenables meshes
         model.SetActive(true);
+
+        //Reenables engine sound
+        engineSound.enabled = true;
 
         //Reenables death
         deathAvailable = true;

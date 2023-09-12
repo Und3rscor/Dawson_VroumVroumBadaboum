@@ -154,6 +154,11 @@ public class UI : MonoBehaviour
         score += 100;
     }
 
+    public void Kill()
+    {
+        score += 1000;
+    }
+
     private void Scoreboard()
     {
         score += (int)speedometer / 10;
