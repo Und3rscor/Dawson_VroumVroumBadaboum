@@ -24,8 +24,8 @@ public class ArcadeVehicleController : MonoBehaviour
     public Transform[] FrontWheels = new Transform[2];
     public Transform[] RearWheels = new Transform[2];
     [HideInInspector] public Vector3 carVelocity;
-    
-    [Range(0,10)] public float BodyTilt;
+    [Range(0, 10)] public float BodyTilt;
+    [SerializeField] private GameObject explosionParticleFX;
 
     [Header("Audio settings")]
     public AudioSource engineSound;
@@ -71,10 +71,6 @@ public class ArcadeVehicleController : MonoBehaviour
     [SerializeField] private float spinSpeedDebuff;
     public bool Spin { get { return spin; } }
     private bool spin = false;
-
-    //Death stuff
-    [Header("Death Stuff")]
-    [SerializeField] private GameObject explosionParticleFX;
 
     private void Start()
     {
