@@ -51,6 +51,7 @@ public class ArcadeVehicleController : MonoBehaviour
     private float currentNos;
     private int currentHealth;
     private int currentLives;
+    private bool deathAvailable;
 
         //Flip variables
         public bool Flip { get { return flip; } }
@@ -92,6 +93,7 @@ public class ArcadeVehicleController : MonoBehaviour
         currentNos = nosCapacity;
         currentHealth = maxHealth;
         currentLives = maxLives;
+        deathAvailable = true;
 
         //Extra Setup
         nosFX.SetActive(false);
@@ -429,43 +431,67 @@ public class ArcadeVehicleController : MonoBehaviour
 
     public void BlowUp()
     {
-        //Does the explosionFX
-        Instantiate(explosionParticleFX, transform.position, Quaternion.identity, null);
-
-        if (currentLives > 1)
+        if (deathAvailable)
         {
-            //Disables controls so the player can't move while they're dead
-            playerInput.enabled = false;
+            //Disables further deaths until respawn
+            deathAvailable = false;
 
-            //Disables the rigidbodies so nothing can collide with it
-            rb.isKinematic = true;
-            carBody.isKinematic = true;
+            //Does the explosionFX
+            Instantiate(explosionParticleFX, transform.position, Quaternion.identity, null);
 
-            //Disables meshes so they car is invisible
-            model.SetActive(false);
+            if (currentLives > 1)
+            {
+                //Disables controls so the player can't move while they're dead
+                playerInput.enabled = false;
 
-            //Remove 1 life
-            currentLives--;
+                //Disables the rigidbodies so nothing can collide with it
+                rb.isKinematic = true;
+                carBody.isKinematic = true;
 
-            //Relays to UI
-            LivesToUI();
+                //Disables meshes so they car is invisible
+                model.SetActive(false);
 
-            //Spawns a dead car
+                //Remove 1 life
+                currentLives--;
 
-            //Tells the respawnManager to respawn the car after some time
-            respawnManager.Invoke("Respawn", respawnManager.respawnDelay);
+                //Relays to UI
+                LivesToUI();
+
+                //Switch to GameOverUI
+                ui.UIRedraw(ui.gameOverUI);
+
+                //Spawns a dead car
+
+                //Starts countdown until respawn
+                StartCoroutine(RespawnCountdown(respawnManager.respawnDelay));
+            }
+            else
+            {
+                //Deletes the player
+                Destroy(gameObject);
+            }
+
+            //GameManager.Instance.GameOverDelay();
         }
-        else
+    }
+
+    IEnumerator RespawnCountdown(int seconds)
+    {
+        int counter = seconds;
+        while (counter > 0)
         {
-            //Deletes the player
-            Destroy(gameObject);
+            ui.respawnTimer = counter;
+            yield return new WaitForSeconds(1);
+            counter--;
         }
-        
-        //GameManager.Instance.GameOverDelay();
+        respawnManager.Respawn();
     }
 
     public void CarRespawn()
     {
+        //Switch to GameUI
+        ui.UIRedraw(ui.gameUI);
+
         //Reenables controls so the player
         playerInput.enabled = true;
 
@@ -475,6 +501,9 @@ public class ArcadeVehicleController : MonoBehaviour
 
         //Reenables meshes
         model.SetActive(true);
+
+        //Reenables death
+        deathAvailable = true;
 
         //Refill values
         RefillHealth();

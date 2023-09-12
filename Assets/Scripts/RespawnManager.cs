@@ -5,7 +5,7 @@ using UnityEngine;
 public class RespawnManager : MonoBehaviour
 {
     [Tooltip("How long does it take in seconds for the car to respawn")]
-    public float respawnDelay;
+    public int respawnDelay;
     private Vector3 lastCheckpointPassed;
 
     void Start()

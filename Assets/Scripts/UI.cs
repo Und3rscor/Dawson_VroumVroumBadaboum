@@ -39,6 +39,10 @@ public class UI : MonoBehaviour
     //Alive counter variable
     private TextMeshProUGUI aliveCounter;
 
+    //Respawn Timer variables
+    [HideInInspector] public int respawnTimer;
+    private TextMeshProUGUI respawnTimerDisplay;
+
     private void Start()
     {
         if (gameUI != null)
@@ -76,6 +80,9 @@ public class UI : MonoBehaviour
 
         if (gameOverUI != null)
         {
+            //Find Respawn Timer component
+            respawnTimerDisplay = transform.Find("GameOverUI/RespawnTimer").GetComponentInChildren<TextMeshProUGUI>();
+
             gameOverUI.SetActive(false);
         }
 
@@ -110,6 +117,12 @@ public class UI : MonoBehaviour
 
             //Modify Alive Counter value
             aliveCounter.text = "Alive: " + GameManager.Instance.Alive + " / " + GameManager.Instance.TotalAlive;
+        }
+
+        if (gameOverUI != null)
+        {
+            //Modify Respawn Timer value
+            respawnTimerDisplay.text = "Respawning in: " + respawnTimer + " seconds";
         }
     }
 
