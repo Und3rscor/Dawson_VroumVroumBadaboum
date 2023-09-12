@@ -433,8 +433,8 @@ public class ArcadeVehicleController : MonoBehaviour
     {
         if (deathAvailable)
         {
-            //Disables further deaths until respawn
-            deathAvailable = false;
+            //Toggles dead values
+            RespawnToggle(false);
 
             //Gives credit where credit is due
             if (damageSource != null)
@@ -454,19 +454,6 @@ public class ArcadeVehicleController : MonoBehaviour
 
             if (currentLives > 1)
             {
-                //Disables controls so the player can't move while they're dead
-                playerInput.enabled = false;
-
-                //Disables the rigidbodies so nothing can collide with it
-                rb.isKinematic = true;
-                carBody.isKinematic = true;
-
-                //Disables meshes so they car is invisible
-                model.SetActive(false);
-
-                //Disables engine sound
-                engineSound.enabled = false;
-
                 //Remove 1 life
                 currentLives--;
 
@@ -486,8 +473,6 @@ public class ArcadeVehicleController : MonoBehaviour
                 //Deletes the player
                 Destroy(gameObject);
             }
-
-            //GameManager.Instance.GameOverDelay();
         }
     }
 
@@ -508,25 +493,34 @@ public class ArcadeVehicleController : MonoBehaviour
         //Switch to GameUI
         ui.UIRedraw(ui.gameUI);
 
-        //Reenables controls so the player
-        playerInput.enabled = true;
-
-        //Reenables the rigidbodies
-        rb.isKinematic = false;
-        carBody.isKinematic = false;
-
-        //Reenables meshes
-        model.SetActive(true);
-
-        //Reenables engine sound
-        engineSound.enabled = true;
-
-        //Reenables death
-        deathAvailable = true;
+        //Toggles alive values
+        RespawnToggle(true);
 
         //Refill values
         RefillHealth();
         RefillNos();
+    }
+
+    private void RespawnToggle(bool toggle)
+    {
+        //Toggles further deaths until respawn
+        deathAvailable = toggle;
+
+        //Toggles controls so the player can't move while they're dead
+        playerInput.enabled = toggle;
+
+        //Toggles the rigidbody so the dead player doesn't just fall through the ground
+        carBody.isKinematic = !toggle;
+
+        //Toggles the collider so nothing can collide with it while dead
+        rb.GetComponent<SphereCollider>().enabled = toggle;
+        carBody.GetComponent<BoxCollider>().enabled = toggle;
+
+        //Toggles meshes so they car is invisible while dead
+        model.SetActive(toggle);
+
+        //Toggles engine sound so the car doesn't make sounds while dead
+        engineSound.enabled = toggle;
     }
 
     private void LivesToUI()

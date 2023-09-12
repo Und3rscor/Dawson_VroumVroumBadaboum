@@ -17,13 +17,6 @@ public class GameManager : MonoBehaviour
     //Find the UI Manager
     private UI ui;
 
-    //Debug Keys
-    [SerializeField] private KeyCode kill;
-
-    //Keybinds
-    [SerializeField] private KeyCode pauseKey = KeyCode.Escape;
-    [SerializeField] private KeyCode screenshotKey = KeyCode.F10;
-
     //Alive variable
     private int alive;
 
@@ -47,7 +40,7 @@ public class GameManager : MonoBehaviour
     {
         Setup();
 
-        FindUI();
+        //FindUI();
     }
 
     private void Awake()
@@ -62,49 +55,14 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Update()
-    {
-        QuickDebug();
-
-        if (Input.GetKeyDown(screenshotKey))
-        {
-            Screenshot();
-        }
-
-        if (Input.GetKeyDown(pauseKey))
-        {
-            if (paused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
-        }
-    }
-
-    private void QuickDebug()
-    {
-        //Simulates 1 kill
-        if (Input.GetKeyDown(kill))
-        {
-            Kill();
-        }
-    }
-
     private void Screenshot()
     {
         ScreenCapture.CaptureScreenshot("screenshot.png");
         Debug.Log("A screenshot was taken!");
     }
 
-    public void Kill()
-    {
-        alive--;
-        //scoreBonus += 1000;
-    }
-
+    //Removed stuff for alpha
+    /*
     public void Restart()
     {
         //laps = 0;
@@ -150,12 +108,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void Setup()
-    {
-        totalAlive = GameObject.FindGameObjectsWithTag("MainPlayer").Length + GameObject.FindGameObjectsWithTag("MainBot").Length;
-        alive = totalAlive;
-    }
-
     public void FindUI()
     {
         ui = FindObjectOfType<UI>();
@@ -164,6 +116,13 @@ public class GameManager : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene(0);
+    }
+    */
+
+    public void Setup()
+    {
+        totalAlive = GameObject.FindGameObjectsWithTag("MainPlayer").Length + GameObject.FindGameObjectsWithTag("MainBot").Length;
+        alive = totalAlive;
     }
 
     //Asked by CameraExtras.cs to setup it's camera

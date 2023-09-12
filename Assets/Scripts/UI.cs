@@ -174,6 +174,8 @@ public class UI : MonoBehaviour
         Invoke("Scoreboard", 1.0f);
     }
 
+    //Removed stuff for alpha
+    /*
     public void Restart()
     {
         GameManager.Instance.Restart();
@@ -190,4 +192,5 @@ public class UI : MonoBehaviour
 
         UIRedraw(gameUI);
     }
+    */
 }

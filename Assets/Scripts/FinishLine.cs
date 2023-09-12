@@ -19,7 +19,7 @@ public class FinishLine : MonoBehaviour
 
                 if (GameManager.Instance.Alive <= 1)
                 {
-                    GameManager.Instance.GameOverDelay();
+                    //GameManager.Instance.GameOverDelay();
                 }
             }
         }

@@ -40,7 +40,7 @@ public class Countdown : MonoBehaviour
                 if (countdownText.text == Messages[0])
                 {
                     GameManager.Instance.Setup();
-                    GameManager.Instance.FindUI();
+                    //GameManager.Instance.FindUI();
                 }
 
                 countdownText.text = Messages[Mathf.FloorToInt(elapsedTime)];

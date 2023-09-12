@@ -27,7 +27,7 @@ public class BotHP : MonoBehaviour
     public void Die()
     {
         Instantiate(explosionParticleFX, transform.position, Quaternion.identity, null);
-        GameManager.Instance.Kill();
+        //GameManager.Instance.Kill();
         Destroy(gameObject);
     }
 }
