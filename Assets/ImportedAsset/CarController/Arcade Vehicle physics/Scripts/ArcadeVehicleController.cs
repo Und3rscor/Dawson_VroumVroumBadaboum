@@ -8,6 +8,12 @@ using UnityEngine.Rendering;
 
 public class ArcadeVehicleController : MonoBehaviour
 {
+    //Car Stats
+    [Header("Stats")]
+    [SerializeField] private int nosCapacity;
+    [SerializeField] private float nosSpeedBoost;
+    [SerializeField] private float flipBoost;
+    [SerializeField] private float spinSpeedDebuff;
     public float MaxSpeed, accelaration, turn, gravity = 7f;
     
     //Editor Setup
@@ -50,27 +56,19 @@ public class ArcadeVehicleController : MonoBehaviour
     //Inputs
     private float horizontalInput, verticalInput; //Movement Input
 
-
-    //Nos stuff
-    [Header("Nos Stuff")]
-    [SerializeField] private float nosSpeedBoost;
-    [SerializeField] private int nosCapacity;
+    //Nos
     private float currentNos;
     public float CurrentNos { get { return currentNos; } }
     private GameObject nosFX;
 
-    //Flip stuff
-    [Header("Front Flip Stuff")]
-    [SerializeField] private float flipBoost;
+    //Flip
     private GameObject model;
     private Animator modelAnimator;
     public bool Flip { get { return flip; } }
     private bool flip = false;
     private bool flipAvailable;
 
-    //Spin stuff
-    [Header("Spin Stuff")]
-    [SerializeField] private float spinSpeedDebuff;
+    //Flip
     public bool Spin { get { return spin; } }
     private bool spin = false;
 
