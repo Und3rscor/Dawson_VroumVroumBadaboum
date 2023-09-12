@@ -11,14 +11,16 @@ public class ArcadeVehicleController : MonoBehaviour
     public LayerMask drivableSurface;
 
     public float MaxSpeed, accelaration, turn, gravity = 7f;
-    private float baseAccelaration;
-    public Rigidbody rb, carBody;
     
+    //Editor Setup
+    [Header("Setup")]
+    public Rigidbody rb, carBody;
     [HideInInspector] public RaycastHit hit;
     public AnimationCurve frictionCurve;
     public AnimationCurve turnCurve;
     public PhysicMaterial frictionMaterial;
 
+    //Visual Editor Setup
     [Header("Visuals")]
     public Transform BodyMesh;
     public Transform[] FrontWheels = new Transform[2];
@@ -28,6 +30,7 @@ public class ArcadeVehicleController : MonoBehaviour
     [SerializeField] private GameObject explosionParticleFX;
     private Light[] brakeLights;
 
+    //Audio Editor Setup
     [Header("Audio settings")]
     public AudioSource engineSound;
     [Range(0, 1)] public float minPitch;
@@ -36,6 +39,7 @@ public class ArcadeVehicleController : MonoBehaviour
 
     //Car variables
     [HideInInspector] public float skidWidth;
+    private float baseAccelaration;
     private float radius;
     private Vector3 origin;
 
