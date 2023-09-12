@@ -10,6 +10,7 @@ public class ArcadeVehicleController : MonoBehaviour
 {
     //Car Stats
     [Header("Stats")]
+    [SerializeField] private int maxHealth;
     [SerializeField] private int nosCapacity;
     [SerializeField] private float nosSpeedBoost;
     [SerializeField] private float flipBoost;
@@ -47,6 +48,7 @@ public class ArcadeVehicleController : MonoBehaviour
     [HideInInspector] public float skidWidth;
     private Vector3 origin;
     private float currentNos;
+    private int currentHealth;
 
         //Flip variables
         public bool Flip { get { return flip; } }
@@ -71,29 +73,28 @@ public class ArcadeVehicleController : MonoBehaviour
 
     private void Start()
     {
-        radius = rb.GetComponent<SphereCollider>().radius;
-        ui = GetComponentInChildren<UI>();
-        playerInput = GetComponent<PlayerInput>();
+        //Fetches
+        radius          = rb.GetComponent<SphereCollider>().radius;                     //radius = sphereRB's radius
+        ui              = GetComponentInChildren<UI>();                                 //ui = UI script in the canvas
+        playerInput     = GetComponent<PlayerInput>();                                  //playerInput = PlayerInput script
+        nosFX           = transform.Find("Mesh/Body/Hatchback/Exhaust/NOS").gameObject; //nosFX = Nos particle effect in the car's exhaust
+        brakeLights     = transform.GetComponentsInChildren<Light>();                   //brakeLights = Light component of the brake lights
+        model           = transform.Find("Mesh").gameObject;                            //model = gameobject the mesh of the car is attached to
+        modelAnimator   = model.GetComponent<Animator>();                               //modelAnimator = animator of the car's body (used for flip and spin)
+        camExtras       = GetComponentInChildren<CameraExtras>();                       //camExtras = CameraExtras script in cameraBrain
 
-        //Keeps value in mind for ease of return
+        //Variable setup
         baseAccelaration = accelaration;
-
-        //Nos fetch
-        nosFX = transform.Find("Mesh/Body/Hatchback/Exhaust/NOS").gameObject;
-        nosFX.SetActive(false);
         currentNos = nosCapacity;
-        NosToUI();
+        currentHealth = maxHealth;
 
-        //Reverse fetch
-        brakeLights = transform.GetComponentsInChildren<Light>();
+        //Extra Setup
+        nosFX.SetActive(false);
         ManageBrakeLights(false);
 
-        //Animation fetch
-        model = transform.Find("Mesh").gameObject;
-        modelAnimator = model.GetComponent<Animator>();
-
-        //Camera fetch
-        camExtras = GetComponentInChildren<CameraExtras>();
+        //UI Setup
+        NosToUI();
+        HealthToUI();
     }
 
     private void Update()
@@ -293,6 +294,12 @@ public class ArcadeVehicleController : MonoBehaviour
         }
     }
 
+    public void RefillNos()
+    {
+        currentNos = nosCapacity;
+        NosToUI();
+    }
+
     private void NosToUI()
     {
         ui.nosCounter = Mathf.FloorToInt(currentNos);
@@ -374,16 +381,32 @@ public class ArcadeVehicleController : MonoBehaviour
         }
     }
 
+    public void TakeDamage(int damageTaken)
+    {
+        //Take damage in current health
+        currentHealth -= damageTaken;
+
+        //Relay to ui
+        HealthToUI();
+
+        //Kills the car if health is under 0
+        if (currentHealth <= 0)
+        {
+            BlowUp();
+        }
+
+        //Go through nos first
+    }
+
+    private void HealthToUI()
+    {
+        ui.healthCounter = currentHealth;
+    }
+
     public void BlowUp()
     {
         Instantiate(explosionParticleFX, transform.position, Quaternion.identity, null);
         GameManager.Instance.GameOverDelay();
         Destroy(gameObject);
-    }
-
-    public void RefillNos()
-    {
-        currentNos = nosCapacity;
-        NosToUI();
     }
 }

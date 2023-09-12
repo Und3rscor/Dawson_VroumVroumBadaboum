@@ -28,6 +28,10 @@ public class UI : MonoBehaviour
     [HideInInspector] public float nosCounter;
     private Slider nosCounterSlider;
 
+    //Health counter variable
+    [HideInInspector] public int healthCounter;
+    private Slider healthCounterSlider;
+
     //Alive counter variable
     private TextMeshProUGUI aliveCounter;
 
@@ -55,6 +59,9 @@ public class UI : MonoBehaviour
 
             //Find nos counter component
             nosCounterSlider = transform.Find("GameUI/NosCounter/Slider").GetComponent<Slider>();
+
+            //Find health counter component
+            healthCounterSlider = transform.Find("GameUI/HealthCounter/Slider").GetComponent<Slider>();
 
             //Find Alive Counter component
             aliveCounter = transform.Find("GameUI/AliveCounter/Text").GetComponent<TextMeshProUGUI>();
@@ -87,6 +94,9 @@ public class UI : MonoBehaviour
 
             //Modify Nos Counter value
             nosCounterSlider.value = nosCounter;
+
+            //Modify Health Counter value
+            healthCounterSlider.value = healthCounter;
 
             //Modify Alive Counter value
             aliveCounter.text = "Alive: " + GameManager.Instance.Alive + " / " + GameManager.Instance.TotalAlive;

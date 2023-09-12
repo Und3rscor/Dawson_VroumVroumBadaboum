@@ -16,12 +16,16 @@ public class Bullet : MonoBehaviour
     {
         Destroy(gameObject);
     }
-
     private void OnTriggerEnter(Collider coll)
     {
         if (coll.transform.tag == "Bot")
         {
             coll.gameObject.GetComponentInParent<BotHP>().DealDamage(damage);
+        }
+
+        if (coll.transform.tag == "MainPlayer")
+        {
+            coll.gameObject.GetComponentInParent<ArcadeVehicleController>().TakeDamage(damage);
         }
 
         Die();
