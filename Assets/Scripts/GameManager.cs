@@ -9,6 +9,8 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private Transform[] spawnpoints;
+
     //Gamemanager Instance
     private static GameManager instance;
 
@@ -38,6 +40,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Pause();
+
         Setup();
 
         //FindUI();
@@ -119,6 +123,16 @@ public class GameManager : MonoBehaviour
     }
     */
 
+    private void Pause()
+    {
+        Time.timeScale = 0.0f;
+    }
+
+    private void Resume()
+    {
+        Time.timeScale = 1.0f;
+    }
+
     public void Setup()
     {
         totalAlive = GameObject.FindGameObjectsWithTag("MainPlayer").Length + GameObject.FindGameObjectsWithTag("MainBot").Length;
@@ -128,6 +142,14 @@ public class GameManager : MonoBehaviour
     //Asked by CameraExtras.cs to setup it's camera
     public void CameraSetup(GameObject obj, Camera camBrain)
     {
+        Resume();
+
+        if (spawnpoints != null)
+        {
+            //Changes the position of the player to their spawn point when they spawn
+            obj.GetComponentInParent<ArcadeVehicleController>().gameObject.transform.position = spawnpoints[playerID - 1].position;
+        }
+        
         //Sets the camera LayerMask between "P1 Cam" to "P4 Cam" depending on the player ID
         obj.layer = LayerMask.NameToLayer("P" + playerID + " Cam");
 
