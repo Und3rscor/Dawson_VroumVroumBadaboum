@@ -122,7 +122,15 @@ public class UI : MonoBehaviour
         if (gameOverUI != null)
         {
             //Modify Respawn Timer value
-            respawnTimerDisplay.text = "Respawning in: " + respawnTimer + " seconds";
+            if (respawnTimer > 1)
+            {
+                respawnTimerDisplay.text = "Respawning in: " + respawnTimer + " seconds";
+            }
+            else
+            {
+                respawnTimerDisplay.text = "Respawning in: " + respawnTimer + " second";
+            }
+            
         }
     }
 
