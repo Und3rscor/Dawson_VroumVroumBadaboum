@@ -42,12 +42,11 @@ public class ArcadeVehicleController : MonoBehaviour
     private float radius;
     private Vector3 origin;
 
-    //Camera stuff
+    //Fetch Setup
     private CameraExtras camExtras;
-
-    //Input stuff
     private PlayerInput playerInput;
-    
+    private UI ui;
+
     private float horizontalInput, verticalInput; //Movement Input
 
 
@@ -85,9 +84,6 @@ public class ArcadeVehicleController : MonoBehaviour
     //Death stuff
     [Header("Death Stuff")]
     [SerializeField] private GameObject explosionParticleFX;
-
-    //Ui stuff
-    private UI ui;
 
     private void Start()
     {
