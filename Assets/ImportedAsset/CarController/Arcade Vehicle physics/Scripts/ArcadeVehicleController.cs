@@ -76,11 +76,6 @@ public class ArcadeVehicleController : MonoBehaviour
     public bool Spin { get { return spin; } }
     private bool spin = false;
 
-    //Bump stuff
-    [Header("Bump Stuff")]
-    [SerializeField] private float bumpForce;
-    private bool bumped = false;
-
     //Death stuff
     [Header("Death Stuff")]
     [SerializeField] private GameObject explosionParticleFX;
@@ -388,37 +383,6 @@ public class ArcadeVehicleController : MonoBehaviour
             brakeLights[0].enabled = false;
             brakeLights[1].enabled = false;
         }
-    }
-
-    // Check for collisions with other karts
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.transform.tag == "Player" || collision.transform.tag == "Bot" || collision.transform.tag == "MainBot")
-        {
-            // Calculate the direction this car is going in compared to the collided car
-            Vector3 dir = collision.transform.position - transform.position;
-            dir.Normalize();
-
-            // Calculate the dot product of the direction and this car's forward vector
-            float dotProduct = Vector3.Dot(dir, transform.forward);
-
-            // Check if the dot product is positive, indicating this car is moving towards the collided car
-            if (dotProduct > 0f)
-            {
-                Rigidbody targetRigidbody = collision.transform.GetComponentInParent<Rigidbody>();
-
-                // Calculate the opposite direction from the this car to the collided car
-                Vector3 oppositeDir = transform.position - collision.transform.position;
-                oppositeDir.Normalize();
-
-                // Apply force in the opposite direction to the collided car
-                targetRigidbody.AddForce(-oppositeDir * bumpForce, ForceMode.Impulse);
-
-                // Apply upward force to the collided car
-                targetRigidbody.AddForce(Vector3.up * (bumpForce / 2.5f), ForceMode.Impulse);
-            }
-        }
-
     }
 
     public void BlowUp()
