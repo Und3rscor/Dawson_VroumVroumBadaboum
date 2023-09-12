@@ -331,7 +331,7 @@ GameObject:
   - component: {fileID: 180766066}
   - component: {fileID: 180766068}
   - component: {fileID: 180766067}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Finish Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1769,7 +1769,7 @@ GameObject:
   - component: {fileID: 1149680674}
   - component: {fileID: 1149680676}
   - component: {fileID: 1149680675}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Checkpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

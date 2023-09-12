@@ -17,7 +17,7 @@ public class FinishLine : MonoBehaviour
                 other.GetComponentInParent<ArcadeVehicleController>().RefillNos();
                 ui.lapAvailable = false;
 
-                other.GetComponent<RespawnManager>().UpdateLastCheckpointPassed(this.transform.position + Vector3.up * 5, this.transform.rotation);
+                other.GetComponent<RespawnManager>().UpdateLastCheckpointPassed(this.transform.position + Vector3.up, this.transform.rotation);
 
                 if (GameManager.Instance.Alive <= 1)
                 {
