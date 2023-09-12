@@ -26,6 +26,7 @@ public class ArcadeVehicleController : MonoBehaviour
     [HideInInspector] public Vector3 carVelocity;
     [Range(0, 10)] public float BodyTilt;
     [SerializeField] private GameObject explosionParticleFX;
+    private Light[] brakeLights;
 
     [Header("Audio settings")]
     public AudioSource engineSound;
@@ -33,8 +34,8 @@ public class ArcadeVehicleController : MonoBehaviour
     [Range(1, 3)] public float MaxPitch;
     public AudioSource SkidSound;
 
+    //Car variables
     [HideInInspector] public float skidWidth;
-
     private float radius;
     private Vector3 origin;
 
@@ -43,6 +44,7 @@ public class ArcadeVehicleController : MonoBehaviour
     private PlayerInput playerInput;
     private UI ui;
 
+    //Inputs
     private float horizontalInput, verticalInput; //Movement Input
 
 
@@ -62,9 +64,6 @@ public class ArcadeVehicleController : MonoBehaviour
     public bool Flip { get { return flip; } }
     private bool flip = false;
     private bool flipAvailable;
-
-    //Reverse stuff
-    private Light[] brakeLights;
 
     //Spin stuff
     [Header("Spin Stuff")]
