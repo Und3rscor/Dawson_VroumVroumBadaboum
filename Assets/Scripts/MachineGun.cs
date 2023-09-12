@@ -100,6 +100,7 @@ public class MachineGun : MonoBehaviour
     {
         currentBullet.GetComponent<Bullet>().damage = damage + Random.Range(-damageRandomRange, damageRandomRange);
         currentBullet.GetComponent<Bullet>().source = GetComponentInParent<ArcadeVehicleController>();
+        currentBullet.transform.parent = null;
     }
 
     private void ResetShot()

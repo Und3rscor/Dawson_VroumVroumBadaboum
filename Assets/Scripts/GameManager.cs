@@ -140,14 +140,23 @@ public class GameManager : MonoBehaviour
     }
 
     //Asked by CameraExtras.cs to setup it's camera
-    public void CameraSetup(GameObject obj, Camera camBrain)
+    public void PlayerSetup(GameObject obj, Camera camBrain)
     {
         Resume();
 
         if (spawnpoints != null)
         {
+            //Grabs the player's AVC
+            ArcadeVehicleController player = obj.GetComponentInParent<ArcadeVehicleController>();
+
+            //Sets the playerSpawnpoint to the spawnpoint it gets assigned
+            Transform playerSpawnPoint = spawnpoints[playerID - 1];
+
             //Changes the position of the player to their spawn point when they spawn
-            obj.GetComponentInParent<ArcadeVehicleController>().gameObject.transform.position = spawnpoints[playerID - 1].position;
+            player.transform.position = playerSpawnPoint.position;
+
+            //Changes the player's respawn position to their spawnpoint
+            player.respawnManager.UpdateLastCheckpointPassed(playerSpawnPoint.position, playerSpawnPoint.rotation);
         }
         
         //Sets the camera LayerMask between "P1 Cam" to "P4 Cam" depending on the player ID

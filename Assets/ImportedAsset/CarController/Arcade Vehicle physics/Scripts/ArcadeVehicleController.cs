@@ -70,7 +70,7 @@ public class ArcadeVehicleController : MonoBehaviour
     private Animator modelAnimator;
     private PlayerInput playerInput;
     private UI ui;
-    private RespawnManager respawnManager;
+    [HideInInspector] public RespawnManager respawnManager;
 
     //Inputs
     private float horizontalInput, verticalInput; //Movement Input

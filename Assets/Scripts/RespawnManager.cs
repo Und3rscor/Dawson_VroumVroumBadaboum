@@ -6,22 +6,25 @@ public class RespawnManager : MonoBehaviour
 {
     [Tooltip("How long does it take in seconds for the car to respawn")]
     public int respawnDelay;
-    private Vector3 lastCheckpointPassed;
+    private Vector3 lastCheckpointPassedPosition;
+    private Quaternion lastCheckpointPassedRotation;
 
     void Start()
     {
-        lastCheckpointPassed = transform.position;
+        lastCheckpointPassedPosition = transform.position;
     }
 
-    public void UpdateLastCheckpointPassed(Vector3 lastCheckpoint)
+    public void UpdateLastCheckpointPassed(Vector3 lastCheckpointPosition, Quaternion lastCheckpointRotation)
     {
-        lastCheckpointPassed = lastCheckpoint;
+        lastCheckpointPassedPosition = lastCheckpointPosition;
+        lastCheckpointPassedRotation = lastCheckpointRotation;
     }
 
     public void Respawn()
     {
         //Move the car to the lastCheckpointPassed
-        this.gameObject.transform.position = lastCheckpointPassed;
+        this.gameObject.transform.position = lastCheckpointPassedPosition;
+        this.gameObject.transform.rotation = lastCheckpointPassedRotation;
 
         //Tells the car to reenable itself
         GetComponent<ArcadeVehicleController>().CarRespawn();
