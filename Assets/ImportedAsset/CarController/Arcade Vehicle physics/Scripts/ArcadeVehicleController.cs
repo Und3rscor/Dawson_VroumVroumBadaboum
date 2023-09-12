@@ -8,12 +8,11 @@ using UnityEngine.Rendering;
 
 public class ArcadeVehicleController : MonoBehaviour
 {
-    public LayerMask drivableSurface;
-
     public float MaxSpeed, accelaration, turn, gravity = 7f;
     
     //Editor Setup
     [Header("Setup")]
+    public LayerMask drivableSurface;
     public Rigidbody rb, carBody;
     [HideInInspector] public RaycastHit hit;
     public AnimationCurve frictionCurve;
