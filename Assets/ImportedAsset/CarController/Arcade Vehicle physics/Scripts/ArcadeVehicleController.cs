@@ -383,19 +383,31 @@ public class ArcadeVehicleController : MonoBehaviour
 
     public void TakeDamage(int damageTaken)
     {
-        //Take damage in current health
-        currentHealth -= damageTaken;
+        if (currentNos >=  damageTaken)
+        {
+            currentNos -= damageTaken;
+        }
+        else if (currentNos < damageTaken && currentNos != 0)
+        {
+            int damageToTake;                                   //new value to keep track of how much damage to relay to hp
+            damageToTake = damageTaken - (int)currentNos;       //remove the currentNos value from the damageTaken to know how much hp to remove
+            currentNos = 0.0f;                                  //set the currentNos to 0
+            currentHealth -= damageToTake;                      //remove the rest of the damage to take from the currentHealth
+        }
+        else //if currentNos is 0, the damage can go straight to the currentHealth
+        {
+            currentHealth -= damageTaken;
+        }
 
         //Relay to ui
         HealthToUI();
+        NosToUI();
 
         //Kills the car if health is under 0
         if (currentHealth <= 0)
         {
             BlowUp();
         }
-
-        //Go through nos first
     }
 
     private void HealthToUI()
