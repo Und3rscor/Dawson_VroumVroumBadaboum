@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private float lifespan;
+    [HideInInspector] public float lifespan;
     [HideInInspector] public int damage;
     [HideInInspector] public ArcadeVehicleController source;
 

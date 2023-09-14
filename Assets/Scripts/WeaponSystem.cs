@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MachineGun : MonoBehaviour
+public class WeaponSystem : MonoBehaviour
 {
     //Stats
     [Header("Stats")]
@@ -21,9 +21,10 @@ public class MachineGun : MonoBehaviour
     //Setup stuff
     [Header("Setup")]
     [SerializeField] private GameObject bullet;
+    [SerializeField] private GameObject muzzleFlash;
+    [SerializeField] private AudioSource gunShot;
     [SerializeField] private Transform[] attackPoints;
     private Transform currentAttackPoint;
-    [SerializeField] private GameObject muzzleFlash;
     private bool shooting, readyToShoot;
 
     //Relay stuff
@@ -36,6 +37,7 @@ public class MachineGun : MonoBehaviour
         currentAttackPoint = attackPoints[0];
         carDaddy = GetComponentInParent<ArcadeVehicleController>();
         playerInput = GetComponentInParent<PlayerInput>();
+        gunShot = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -64,10 +66,19 @@ public class MachineGun : MonoBehaviour
         //Spawn bullet
         if (!carDaddy.Flip)
         {
+            //Move the bullet forward based on speed of the car so it doesnt trigger on the player
             Vector3 newAttackpoint = currentAttackPoint.position + (carVelocity / 75);
+
+            //Actually spawns the bullet
             GameObject currentBullet = Instantiate(bullet, newAttackpoint, currentAttackPoint.rotation);
+
+            //Sets the direction the bullet will go in
             Vector3 dir = currentAttackPoint.rotation * Vector3.forward;
+
+            //Adds force to the bullet so it flies in the direction provided
             currentBullet.GetComponent<Rigidbody>().AddForce(dir.normalized * shootForce, ForceMode.Impulse);
+
+            //More tweaks
             EditBullet(currentBullet);
         }
         else
@@ -76,6 +87,12 @@ public class MachineGun : MonoBehaviour
             Vector3 dir = Quaternion.Inverse(currentAttackPoint.rotation) * Vector3.forward;
             currentBullet.GetComponent<Rigidbody>().AddForce(dir.normalized * shootForce, ForceMode.Impulse);
             EditBullet(currentBullet);
+        }
+
+        //Do gunshot
+        if (gunShot != null)
+        {
+            gunShot.Play();
         }
         
         //Instantiate muzzle flash
