@@ -48,6 +48,12 @@ public class WeaponSystem : MonoBehaviour
         {
             Shoot();
         }
+
+        //If the car is on the ground, keep the x rotation at 0 to counter body tilt
+        if (carDaddy.grounded())
+        {
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
+        }
     }
 
     private void Shoot()

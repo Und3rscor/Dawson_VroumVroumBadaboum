@@ -54,7 +54,6 @@ public class ArcadeVehicleController : MonoBehaviour
     private bool deathAvailable;
 
         //Flip variables
-        public bool Flip { get { return flip; } }
         private bool flip = false;
         private bool flipAvailable;
 
@@ -70,7 +69,11 @@ public class ArcadeVehicleController : MonoBehaviour
     private Animator modelAnimator;
     private PlayerInput playerInput;
     private UI ui;
-    [HideInInspector] public RespawnManager respawnManager;
+    private RespawnManager respawnManager;
+
+    //Relay
+    public UI UI { get { return ui; } }
+    public RespawnManager RespawnManager {  get { return respawnManager; } }
 
     //Inputs
     private float horizontalInput, verticalInput; //Movement Input

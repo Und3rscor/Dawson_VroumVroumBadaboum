@@ -156,7 +156,7 @@ public class GameManager : MonoBehaviour
             player.transform.position = playerSpawnPoint.position;
 
             //Changes the player's respawn position to their spawnpoint
-            player.respawnManager.UpdateLastCheckpointPassed(playerSpawnPoint.position, playerSpawnPoint.rotation);
+            player.RespawnManager.UpdateLastCheckpointPassed(playerSpawnPoint.position, playerSpawnPoint.rotation);
         }
         
         //Sets the camera LayerMask between "P1 Cam" to "P4 Cam" depending on the player ID
