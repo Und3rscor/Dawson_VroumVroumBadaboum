@@ -13,7 +13,7 @@ public class FinishLine : MonoBehaviour
             if (ui.lapAvailable)
             {
                 ui.Lap();
-                other.GetComponentInChildren<MachineGun>().RefillAmmo();
+                //other.GetComponentInChildren<MachineGun>().RefillAmmo();
                 other.GetComponentInParent<ArcadeVehicleController>().RefillNos();
                 ui.lapAvailable = false;
 
