@@ -8,27 +8,51 @@ public class Projectile : MonoBehaviour
     [HideInInspector] public int damage;
     [HideInInspector] public ArcadeVehicleController source;
 
+    private AudioSource impactSound;
+
     private void Awake()
     {
-        Invoke("Die", lifespan);
+        Invoke("DestroyObj", lifespan);
+
+        impactSound = GetComponent<AudioSource>();
+    }
+
+    private void DestroyObj()
+    {
+        Destroy(gameObject);
     }
 
     private void Die()
     {
-        Destroy(gameObject);
+        impactSound.Play();
+
+        GetComponentInChildren<Collider>().enabled = false;
+
+        StartCoroutine(DieAfterSoundEffect());
     }
+
+    IEnumerator DieAfterSoundEffect()
+    {
+        yield return new WaitForSeconds(impactSound.clip.length);
+
+        DestroyObj();
+    }
+
     private void OnTriggerEnter(Collider coll)
     {
-        if (coll.transform.tag == "Bot")
-        {
-            coll.gameObject.GetComponentInParent<BotHP>().DealDamage(damage);
-        }
-
         if (coll.transform.tag == "MainPlayer")
         {
             coll.gameObject.GetComponentInParent<ArcadeVehicleController>().TakeDamage(damage, source);
+            Die();
         }
-
-        Die();
+        else if (coll.transform.tag == "Bot")
+        {
+            coll.gameObject.GetComponentInParent<BotHP>().DealDamage(damage);
+            Die();
+        }
+        else
+        {
+            DestroyObj();
+        }        
     }
 }

@@ -8,7 +8,6 @@ public class BotHP : MonoBehaviour
 {
     public int health;
     public GameObject explosionParticleFX;
-    public AudioSource shotSound;
 
     private void Update()
     {
@@ -21,7 +20,6 @@ public class BotHP : MonoBehaviour
     public void DealDamage(int damage)
     {
         health -= damage;
-        shotSound.Play();
     }
 
     public void Die()

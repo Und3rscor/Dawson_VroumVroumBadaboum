@@ -59,7 +59,7 @@ MonoBehaviour:
   shootDelay: 0.1
   projectile: {fileID: 100002, guid: c2f9c173dc9aaab45a4a4cc86e403ef6, type: 3}
   muzzleFlash: {fileID: 0}
-  shootSound: {fileID: 0}
+  shootSound: {fileID: 3559536643443937083}
   attackPoints:
   - {fileID: 400022}
   - {fileID: 400020}
