@@ -13,16 +13,16 @@ public class WeaponSystem : MonoBehaviour
     [SerializeField] private int damageRandomRange;
     [SerializeField] private float shootForce;
     [Tooltip("Serves as range, bullet will despawn after this time has elapsed")]
-    [SerializeField] private float bulletLifeTime;
+    [SerializeField] private float projectileLifespan;
     [SerializeField] private float spread;
     [SerializeField] private int heatPerShot;
     [SerializeField] private float shootDelay;
 
     //Setup stuff
     [Header("Setup")]
-    [SerializeField] private GameObject bullet;
+    [SerializeField] private GameObject projectile;
     [SerializeField] private GameObject muzzleFlash;
-    [SerializeField] private AudioSource gunShot;
+    [SerializeField] private AudioSource shootSound;
     [SerializeField] private Transform[] attackPoints;
     private Transform currentAttackPoint;
     private bool shooting, readyToShoot;
@@ -37,7 +37,7 @@ public class WeaponSystem : MonoBehaviour
         currentAttackPoint = attackPoints[0];
         carDaddy = GetComponentInParent<ArcadeVehicleController>();
         playerInput = GetComponentInParent<PlayerInput>();
-        gunShot = GetComponent<AudioSource>();
+        shootSound = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -48,51 +48,22 @@ public class WeaponSystem : MonoBehaviour
         {
             Shoot();
         }
-
-        if (!carDaddy.Flip && !carDaddy.Spin)
-        {
-            Vector3 target = new Vector3(0f, carDaddy.transform.rotation.eulerAngles.y, 0f);
-            transform.rotation = Quaternion.Euler(target);
-        }
     }
 
     private void Shoot()
     {
         readyToShoot = false;
 
-        //Grabs the car velocity to affect the speed of the bullet
-        Vector3 carVelocity = GetComponentInParent<Rigidbody>().velocity;
+        //Creates new attackPoint a little further ahead than the car so the projectile doesn't collide with the car
+        Vector3 attackPoint = currentAttackPoint.position + transform.TransformDirection(Vector3.forward) * 1.25f;
 
-        //Spawn bullet
-        if (!carDaddy.Flip)
-        {
-            //Move the bullet forward based on speed of the car so it doesnt trigger on the player
-            Vector3 newAttackpoint = currentAttackPoint.position + (carVelocity / 75);
-
-            //Actually spawns the bullet
-            GameObject currentBullet = Instantiate(bullet, newAttackpoint, currentAttackPoint.rotation);
-
-            //Sets the direction the bullet will go in
-            Vector3 dir = currentAttackPoint.rotation * Vector3.forward;
-
-            //Adds force to the bullet so it flies in the direction provided
-            currentBullet.GetComponent<Rigidbody>().AddForce(dir.normalized * shootForce, ForceMode.Impulse);
-
-            //More tweaks
-            EditBullet(currentBullet);
-        }
-        else
-        {
-            GameObject currentBullet = Instantiate(bullet, currentAttackPoint.position, currentAttackPoint.rotation);
-            Vector3 dir = Quaternion.Inverse(currentAttackPoint.rotation) * Vector3.forward;
-            currentBullet.GetComponent<Rigidbody>().AddForce(dir.normalized * shootForce, ForceMode.Impulse);
-            EditBullet(currentBullet);
-        }
+        //Spawns the projectile
+        SpawnProjectile(attackPoint, currentAttackPoint.rotation);
 
         //Do gunshot
-        if (gunShot != null)
+        if (shootSound != null)
         {
-            gunShot.Play();
+            shootSound.Play();
         }
         
         //Instantiate muzzle flash
@@ -104,11 +75,30 @@ public class WeaponSystem : MonoBehaviour
         Invoke("ResetShot", shootDelay);
     }
 
-    private void EditBullet(GameObject currentBullet)
+    private void SpawnProjectile(Vector3 attackPoint, Quaternion attackRotation)
     {
-        currentBullet.GetComponent<Bullet>().damage = damage + Random.Range(-damageRandomRange, damageRandomRange);
-        currentBullet.GetComponent<Bullet>().source = GetComponentInParent<ArcadeVehicleController>();
-        currentBullet.transform.parent = null;
+        //Instantiate bullet
+        GameObject currentProjectile = Instantiate(projectile, attackPoint, attackRotation);
+
+        //Grabs projectile script to apply stats
+        Projectile currentProjectileScript = currentProjectile.GetComponent<Projectile>();
+
+        //Apply Stats
+        currentProjectileScript.damage = damage + Random.Range(-damageRandomRange, damageRandomRange);  //Damage
+        currentProjectileScript.source = GetComponentInParent<ArcadeVehicleController>();               //Source
+        currentProjectileScript.lifespan = projectileLifespan;                                          //Lifespan
+
+            //Spread
+            float spreadX = Random.Range(-spread, spread);  //Random x spread
+            float spreadY = Random.Range(-spread, spread);  //Random y spread  
+            float spreadZ = Random.Range(-spread, spread);  //Random z spread
+            Vector3 currentSpread = new Vector3(spreadX, spreadY, spreadZ) / 100; //Creates the spread value divided by 100
+            
+        //Adds force to the bullet so it flies in the direction provided plus spread
+        currentProjectile.GetComponent<Rigidbody>().AddForce((transform.TransformDirection(Vector3.forward) + currentSpread) * shootForce, ForceMode.Impulse);
+
+        //Remove parent
+        currentProjectile.transform.parent = null;
     }
 
     //Reenables shooting and switches attackPoint

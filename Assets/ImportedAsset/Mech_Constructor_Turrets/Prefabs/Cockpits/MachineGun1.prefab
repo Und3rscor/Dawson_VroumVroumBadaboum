@@ -53,13 +53,13 @@ MonoBehaviour:
   damage: 10
   damageRandomRange: 0
   shootForce: 500
-  bulletLifeTime: 3
-  spread: 0
+  projectileLifespan: 3
+  spread: 1
   heatPerShot: 0
   shootDelay: 0.1
-  bullet: {fileID: 100002, guid: c2f9c173dc9aaab45a4a4cc86e403ef6, type: 3}
+  projectile: {fileID: 100002, guid: c2f9c173dc9aaab45a4a4cc86e403ef6, type: 3}
   muzzleFlash: {fileID: 0}
-  gunShot: {fileID: 0}
+  shootSound: {fileID: 0}
   attackPoints:
   - {fileID: 400022}
   - {fileID: 400020}

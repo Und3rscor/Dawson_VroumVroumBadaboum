@@ -233,7 +233,7 @@ public class ArcadeVehicleController : MonoBehaviour
         if(carVelocity.z > 1)
         {
             BodyMesh.localRotation = Quaternion.Slerp(BodyMesh.localRotation, Quaternion.Euler(Mathf.Lerp(0, -5, carVelocity.z / MaxSpeed),
-                               BodyMesh.localRotation.eulerAngles.y, BodyTilt * horizontalInput), 0.05f);
+                                        BodyMesh.localRotation.eulerAngles.y, BodyTilt * horizontalInput), 0.05f);
         }
         else
         {
