@@ -47,7 +47,7 @@ public class Projectile : MonoBehaviour
         }
         else if (coll.transform.tag == "Bot")
         {
-            coll.gameObject.GetComponentInParent<BotHP>().DealDamage(damage);
+            coll.gameObject.GetComponentInParent<BotHP>().TakeDamage(damage, source);
             Die();
         }
         else

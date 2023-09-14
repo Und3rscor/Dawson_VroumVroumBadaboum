@@ -9,23 +9,26 @@ public class BotHP : MonoBehaviour
     public int health;
     public GameObject explosionParticleFX;
 
-    private void Update()
+    public void TakeDamage(int damage, ArcadeVehicleController source)
     {
+        health -= damage;
+
         if (health <= 0)
         {
-            Die();
+            Die(source);
         }
     }
 
-    public void DealDamage(int damage)
-    {
-        health -= damage;
-    }
-
-    public void Die()
+    public void Die(ArcadeVehicleController source)
     {
         Instantiate(explosionParticleFX, transform.position, Quaternion.identity, null);
-        //GameManager.Instance.Kill();
+        GameManager.Instance.Alive--;
+
+        if (source != null)
+        {
+            source.UI.Kill();
+        }
+        
         Destroy(gameObject);
     }
 }

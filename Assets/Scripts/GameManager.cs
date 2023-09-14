@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     //Alive variable
     private int alive;
 
-    public int Alive { get { return alive; } }
+    public int Alive { get { return alive; } set { alive = value; } }
 
     //Total Alive variable
     private int totalAlive;
@@ -142,6 +142,10 @@ public class GameManager : MonoBehaviour
     public void PlayerSetup(GameObject obj, Camera camBrain)
     {
         Resume();
+
+        //Updates the alive counter
+        totalAlive++;
+        alive++;
 
         if (spawnpoints != null)
         {

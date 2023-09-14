@@ -463,8 +463,9 @@ public class ArcadeVehicleController : MonoBehaviour
             //Does the explosionFX
             Instantiate(explosionParticleFX, transform.position, Quaternion.identity, null);
 
-            if (currentLives > 1)
-            {
+            //COMMENTED FOR DEV TESTS PLZ REMOVE ON RELEASE
+            /*if (currentLives > 1)
+            {*/
                 //Remove 1 life
                 currentLives--;
 
@@ -478,12 +479,15 @@ public class ArcadeVehicleController : MonoBehaviour
 
                 //Starts countdown until respawn
                 StartCoroutine(RespawnCountdown(respawnManager.respawnDelay));
-            }
+            /*}
             else
             {
+                //Removes player from alive counter
+                GameManager.Instance.Alive--;
+
                 //Deletes the player
                 Destroy(gameObject);
-            }
+            }*/
         }
     }
 
