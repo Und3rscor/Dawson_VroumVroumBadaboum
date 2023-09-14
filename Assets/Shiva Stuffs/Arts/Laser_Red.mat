@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Material 1
+  m_Name: Laser_Red
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ValidKeywords:
   - _EMISSION
@@ -107,12 +107,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 0.68235296, b: 0.28627452, a: 1}
-    - _Color: {r: 1, g: 0.68235296, b: 0.2862745, a: 1}
-    - _EmissionColor: {r: 1.9999998, g: 0.8481675, b: 0.13612564, a: 1}
+    - _BaseColor: {r: 1, g: 0.26837602, b: 0, a: 1}
+    - _Color: {r: 1, g: 0.268376, b: 0, a: 1}
+    - _EmissionColor: {r: 8.442752, g: 1.0693699, b: 0.97246355, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &8360499054881295999
+--- !u!114 &5649338139366174284
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
