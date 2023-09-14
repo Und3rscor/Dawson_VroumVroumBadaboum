@@ -10,12 +10,12 @@ public class FinishLine : MonoBehaviour
         {
             UI ui = other.gameObject.GetComponentInChildren<UI>();
 
-            if (ui.lapAvailable)
+            if (ui.LapAvailable)
             {
                 ui.Lap();
                 //other.GetComponentInChildren<MachineGun>().RefillAmmo();
                 other.GetComponentInParent<ArcadeVehicleController>().RefillNos();
-                ui.lapAvailable = false;
+                ui.LapAvailable = false;
 
                 other.GetComponent<RespawnManager>().UpdateLastCheckpointPassed(this.transform.position + Vector3.up, this.transform.rotation);
 

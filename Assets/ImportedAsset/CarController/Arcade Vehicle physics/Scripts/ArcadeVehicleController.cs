@@ -14,6 +14,7 @@ public class ArcadeVehicleController : MonoBehaviour
     [SerializeField] private int maxHealth;
     [SerializeField] private int nosCapacity;
     [SerializeField] private float nosSpeedBoost;
+    [SerializeField] private float coolingMultiplier;
     [SerializeField] private float flipBoost;
     [SerializeField] private float spinSpeedDebuff;
     public float MaxSpeed, accelaration, turn, gravity = 7f;
@@ -45,6 +46,7 @@ public class ArcadeVehicleController : MonoBehaviour
     public AudioSource SkidSound;
 
     //Car variables
+    private int speedometer;
     private float baseAccelaration;
     [HideInInspector] public float skidWidth;
     private Vector3 origin;
@@ -52,6 +54,7 @@ public class ArcadeVehicleController : MonoBehaviour
     private int currentHealth;
     private int currentLives;
     private bool deathAvailable;
+    private float heat;
 
         //Flip variables
         private bool flip = false;
@@ -74,6 +77,8 @@ public class ArcadeVehicleController : MonoBehaviour
     //Relay
     public UI UI { get { return ui; } }
     public RespawnManager RespawnManager {  get { return respawnManager; } }
+
+    public float Heat { get { return heat; } set { heat = value; } }
 
     //Inputs
     private float horizontalInput, verticalInput; //Movement Input
@@ -116,7 +121,8 @@ public class ArcadeVehicleController : MonoBehaviour
         AudioManager();
 
         //Speedometer calculator
-        ui.speedometer = Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.z);
+        speedometer = (int)Mathf.Round(Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.z));
+        ui.Speedometer = speedometer;
 
         //Nos stuff
         NosController();
@@ -127,7 +133,10 @@ public class ArcadeVehicleController : MonoBehaviour
         if (grounded())
         {
             flipAvailable = true;
-        }        
+        }
+
+        //Cooling stuff
+        CoolingManager();
     }
 
     private void InputManager()
@@ -313,7 +322,7 @@ public class ArcadeVehicleController : MonoBehaviour
 
     private void NosToUI()
     {
-        ui.nosCounter = Mathf.FloorToInt(currentNos);
+        ui.NosCounter = Mathf.FloorToInt(currentNos);
     }
 
     private void FlipController()
@@ -429,7 +438,7 @@ public class ArcadeVehicleController : MonoBehaviour
 
     private void HealthToUI()
     {
-        ui.healthCounter = currentHealth;
+        ui.HealthCounter = currentHealth;
     }
 
     public void BlowUp(ArcadeVehicleController damageSource)
@@ -496,7 +505,7 @@ public class ArcadeVehicleController : MonoBehaviour
         int counter = seconds;
         while (counter > 0)
         {
-            ui.respawnTimer = counter;
+            ui.RespawnTimer = counter;
             yield return new WaitForSeconds(1);
             counter--;
         }
@@ -540,6 +549,18 @@ public class ArcadeVehicleController : MonoBehaviour
 
     private void LivesToUI()
     {
-        ui.livesCounter = currentLives;
+        ui.LivesCounter = currentLives;
+    }
+
+    private void CoolingManager()
+    {
+        //Removes heat at the rate of the car's speed multiplied by the cooling multiplier which is divided by 100 for ease of use
+        heat -= speedometer * (coolingMultiplier / 100);
+        HeatToUI();
+    }
+
+    private void HeatToUI()
+    {
+        ui.HeatCounter = (int)Mathf.Round(heat);
     }
 }

@@ -30,6 +30,7 @@ public class WeaponSystem : MonoBehaviour
     //Relay stuff
     private ArcadeVehicleController carDaddy;
     private PlayerInput playerInput;
+    private UI ui;
 
     private void Awake()
     {
@@ -38,13 +39,14 @@ public class WeaponSystem : MonoBehaviour
         carDaddy = GetComponentInParent<ArcadeVehicleController>();
         playerInput = GetComponentInParent<PlayerInput>();
         shootSound = GetComponent<AudioSource>();
+        ui = carDaddy.UI;
     }
 
     private void Update()
     {
         shooting = playerInput.actions["Shoot"].IsPressed();
 
-        if (readyToShoot && shooting)
+        if (readyToShoot && shooting && heatPerShot <= (100 - carDaddy.Heat))
         {
             Shoot();
         }
@@ -77,6 +79,9 @@ public class WeaponSystem : MonoBehaviour
         {
             Instantiate(muzzleFlash, currentAttackPoint.position, Quaternion.identity);
         }
+
+        //Add shot heat to the car's heat
+        carDaddy.Heat += heatPerShot;
 
         Invoke("ResetShot", shootDelay);
     }

@@ -10,7 +10,7 @@ public class Checkpoint : MonoBehaviour
         {
             UI ui = other.gameObject.GetComponentInChildren<UI>();
 
-            ui.lapAvailable = true;
+            ui.LapAvailable = true;
 
             other.GetComponent<RespawnManager>().UpdateLastCheckpointPassed(this.transform.position + Vector3.up, this.transform.rotation);
         }

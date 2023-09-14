@@ -11,37 +11,59 @@ public class UI : MonoBehaviour
     public GameObject gameUI, gameOverUI, pauseUI;
 
     //Speedometer variables
-    [HideInInspector] public float speedometer;
+    public int Speedometer { get { return speedometer; } set { speedometer = value; } }
+    private int speedometer;
+    
     private TextMeshProUGUI speedometerDisplay;
     private Slider speedometerSlider;
 
     //Lap counter variables
-    [HideInInspector] public int lapCounter = 0;
-    [HideInInspector] public bool lapAvailable;
+    public int LapCounter { get { return lapCounter; } set { lapCounter = value; } }
+    private int lapCounter = 0;
+
+    public bool LapAvailable { get { return lapAvailable; } set { lapAvailable = value; } }
+    private bool lapAvailable;
+    
     private TextMeshProUGUI lapCounterDisplay;
 
     //Scoreboard variables
-    [HideInInspector] public int score = 0;
+    public int Score { get { return score; } set { score = value; } }
+    private int score = 0;
+
     private TextMeshProUGUI scoreboard;
 
     //Nos counter variables
-    [HideInInspector] public float nosCounter;
+    public float NosCounter { get { return nosCounter; } set { nosCounter = value; } }
+    private float nosCounter;
+
     private Slider nosCounterSlider;
 
+    //Heat counter variables
+    public float HeatCounter { get { return heatCounter; } set { heatCounter = value; } }
+    private float heatCounter;
+
+    private Slider heatCounterSlider;
+
     //Health counter variables
-    [HideInInspector] public int healthCounter;
+    public int HealthCounter { get { return healthCounter; } set { healthCounter = value; } }
+    private int healthCounter;
+
     private Slider healthCounterSlider;
 
     //Lives counter variables
-    [HideInInspector] public int livesCounter;
+    public int LivesCounter { get { return livesCounter; } set { livesCounter = value; } }
+    private int livesCounter;
+
     private TextMeshProUGUI livesCounterDisplay;
+
+    //Respawn Timer variables
+    public int RespawnTimer { get { return respawnTimer; } set { respawnTimer = value; } }
+    private int respawnTimer;
+
+    private TextMeshProUGUI respawnTimerDisplay;
 
     //Alive counter variable
     private TextMeshProUGUI aliveCounter;
-
-    //Respawn Timer variables
-    [HideInInspector] public int respawnTimer;
-    private TextMeshProUGUI respawnTimerDisplay;
 
     private void Start()
     {
@@ -49,33 +71,22 @@ public class UI : MonoBehaviour
         {
             gameUI.SetActive(true);
 
-            //Find speedometer components
-            speedometerDisplay = transform.Find("GameUI/Speedometer").GetComponentInChildren<TextMeshProUGUI>();
-            speedometerSlider = transform.Find("GameUI/Speedometer").GetComponentInChildren<Slider>();
-
-            //Find lap counter component
-            lapCounterDisplay = transform.Find("GameUI/LapCounter").GetComponentInChildren<TextMeshProUGUI>();
-
-            //Find scoreboard component
-            scoreboard = transform.Find("GameUI/Scoreboard").GetComponentInChildren<TextMeshProUGUI>();
+            //Find components
+            speedometerDisplay = transform.Find("GameUI/Speedometer").GetComponentInChildren<TextMeshProUGUI>();    //Speedometer Km/h
+            speedometerSlider = transform.Find("GameUI/Speedometer").GetComponentInChildren<Slider>();              //Speedometer Slider
+            lapCounterDisplay = transform.Find("GameUI/LapCounter").GetComponentInChildren<TextMeshProUGUI>();      //Lap counter
+            scoreboard = transform.Find("GameUI/Scoreboard").GetComponentInChildren<TextMeshProUGUI>();             //Score display
+            nosCounterSlider = transform.Find("GameUI/NosCounter").GetComponentInChildren<Slider>();                //Nos Slider
+            heatCounterSlider = transform.Find("GameUI/HeatCounter").GetComponentInChildren<Slider>();              //Heat Slider
+            healthCounterSlider = transform.Find("GameUI/HealthCounter").GetComponentInChildren<Slider>();          //Health Slider
+            livesCounterDisplay = transform.Find("GameUI/LivesCounter").GetComponentInChildren<TextMeshProUGUI>();  //Lives counter
+            aliveCounter = transform.Find("GameUI/AliveCounter").GetComponentInChildren<TextMeshProUGUI>();         //Alive counter
 
             //Starts the scoreboard
             if (!GameManager.Instance.GameOverBool)
             {
                 Scoreboard();
             }
-
-            //Find nos counter component
-            nosCounterSlider = transform.Find("GameUI/NosCounter").GetComponentInChildren<Slider>();
-
-            //Find health counter component
-            healthCounterSlider = transform.Find("GameUI/HealthCounter").GetComponentInChildren<Slider>();
-
-            //Find lives counter component
-            livesCounterDisplay = transform.Find("GameUI/LivesCounter").GetComponentInChildren<TextMeshProUGUI>();
-
-            //Find Alive Counter component
-            aliveCounter = transform.Find("GameUI/AliveCounter").GetComponentInChildren<TextMeshProUGUI>();
         }
 
         if (gameOverUI != null)
@@ -96,27 +107,16 @@ public class UI : MonoBehaviour
     {
         if (gameUI != null)
         {
-            //Modify speedometer values
-            speedometerDisplay.text = "Speed: " + Mathf.Round(speedometer) + " Km/h";
-            speedometerSlider.value = speedometer;
-
-            //Modify lap counter value
-            lapCounterDisplay.text = "Lap: " + lapCounter;
-
-            //Modify scoreboard value
-            scoreboard.text = "Score: " + score;
-
-            //Modify Nos Counter value
-            nosCounterSlider.value = nosCounter;
-
-            //Modify Health Counter value
-            healthCounterSlider.value = healthCounter;
-
-            //Modify Lives Counter value
-            livesCounterDisplay.text = livesCounter.ToString();
-
-            //Modify Alive Counter value
-            aliveCounter.text = "Alive: " + GameManager.Instance.Alive + " / " + GameManager.Instance.TotalAlive;
+            //Modify values
+            speedometerDisplay.text = "Speed: " + speedometer + " Km/h";                               //Speedometer Km/h
+            speedometerSlider.value = speedometer;                                                                  //Speedometer Slider value
+            lapCounterDisplay.text = "Lap: " + lapCounter;                                                          //Lap counter
+            scoreboard.text = "Score: " + score;                                                                    //Score counter
+            nosCounterSlider.value = nosCounter;                                                                    //Nos Slider value
+            heatCounterSlider.value = heatCounter;                                                                  //Heat Slider value
+            healthCounterSlider.value = healthCounter;                                                              //Health Slider value
+            livesCounterDisplay.text = livesCounter.ToString();                                                     //Lives counter
+            aliveCounter.text = "Alive: " + GameManager.Instance.Alive + " / " + GameManager.Instance.TotalAlive;   //Alive counter
         }
 
         if (gameOverUI != null)
