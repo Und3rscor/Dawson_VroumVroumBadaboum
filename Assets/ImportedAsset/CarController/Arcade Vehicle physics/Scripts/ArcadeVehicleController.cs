@@ -436,17 +436,25 @@ public class ArcadeVehicleController : MonoBehaviour
             //Toggles dead values
             RespawnToggle(false);
 
+            //Deactivates playerInput
+            playerInput.DeactivateInput();
+
             //Gives credit where credit is due
             if (damageSource != null)
             {
                 //Gives a kill to the player that killed this player
                 damageSource.ui.Kill();
 
-                //Remove the audio listener from this player
-                GetComponentInChildren<AudioListener>().enabled = false;
+                //If you died with the audio listener, give it to the player that killed you
+                AudioListener myListener = GetComponentInChildren<AudioListener>();
+                if (myListener.enabled)
+                {
+                    //Remove the audio listener from this player
+                    GetComponentInChildren<AudioListener>().enabled = false;
 
-                //Gives the audio listener to the killer
-                damageSource.GetComponentInChildren<AudioListener>().enabled = true;
+                    //Gives the audio listener to the killer
+                    damageSource.GetComponentInChildren<AudioListener>().enabled = true;
+                }
             }
 
             //Does the explosionFX
@@ -496,6 +504,9 @@ public class ArcadeVehicleController : MonoBehaviour
         //Toggles alive values
         RespawnToggle(true);
 
+        //Reactivates playerInput
+        playerInput.ActivateInput();
+
         //Refill values
         RefillHealth();
         RefillNos();
@@ -504,10 +515,7 @@ public class ArcadeVehicleController : MonoBehaviour
     private void RespawnToggle(bool toggle)
     {
         //Toggles further deaths until respawn
-        deathAvailable = toggle;
-
-        //Toggles controls so the player can't move while they're dead
-        playerInput.enabled = toggle;
+        deathAvailable = toggle;        
 
         //Toggles the rigidbody so the dead player doesn't just fall through the ground
         carBody.isKinematic = !toggle;
