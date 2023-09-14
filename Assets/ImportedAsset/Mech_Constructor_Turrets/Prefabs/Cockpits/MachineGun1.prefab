@@ -49,18 +49,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343c58f0f7e3a3d458a427bf96abd7db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootKey: 323
+  damage: 10
+  damageRandomRange: 0
+  shootForce: 200
+  bulletLifeTime: 0
+  spread: 0
   attackPoints:
   - {fileID: 400022}
   - {fileID: 400020}
   muzzleFlash: {fileID: 0}
   ammoDisplay: {fileID: 0}
   timeBetweenShooting: 0.1
-  ammoCount: 500
+  maxAmmoCount: 100
   bullet: {fileID: 100002, guid: c2f9c173dc9aaab45a4a4cc86e403ef6, type: 3}
-  shootForce: 400
-  damage: 10
-  damageRandomRange: 0
 --- !u!1 &100002
 GameObject:
   m_ObjectHideFlags: 0

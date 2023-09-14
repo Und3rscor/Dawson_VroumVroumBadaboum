@@ -22870,6 +22870,7 @@ MonoBehaviour:
   MaxPitch: 3
   SkidSound: {fileID: 1925981547900679600}
   skidWidth: 0.13985014
+  respawnManager: {fileID: 0}
 --- !u!114 &3425080455145710082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24148,11 +24149,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: ea40dc474268951418d739fe5430e8ab, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5746889010981880303, guid: ea40dc474268951418d739fe5430e8ab,
-        type: 3}
-      propertyPath: shootForce
-      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea40dc474268951418d739fe5430e8ab, type: 3}
