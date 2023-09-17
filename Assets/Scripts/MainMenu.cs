@@ -9,12 +9,14 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject[] menus;
     [Range(0f, 1f)] public float volumeLevel = 0.5f;
 
+    public GameObject masterAudio;
     private Slider volumeSlider;
 
     private void Start()
     {
         RedrawMenu(menus[0]);
-        volumeSlider = transform.Find("SettingsMenu/Menu/Audio/AudioSlider").GetComponent<Slider>();
+        volumeSlider = masterAudio.GetComponent<Slider>();
+        //volumeSlider = transform.Find("SettingsMenu/Menu/Audio/AudioSlider").GetComponent<Slider>();
     }
 
     private void RedrawMenu(GameObject active)
@@ -36,21 +38,62 @@ public class MainMenu : MonoBehaviour
         AudioListener.volume = volumeLevel;
     }
 
-    public void Settings()
+    #region Menus
+    public void LandingScreen()
     {
-        RedrawMenu(menus[1]);
+        RedrawMenu(menus[0]);
         volumeSlider.value = volumeLevel;
     }
 
-    public void Garage()
+    public void HomeScreen()
+    {
+        RedrawMenu(menus[1]);
+    }
+
+    public void AssemblyScreen()
     {
         RedrawMenu(menus[2]);
     }
 
-    public void Back()
+    public void SettingsGraphicScreen()
     {
-        RedrawMenu(menus[0]);
+        RedrawMenu(menus[3]);
+        volumeSlider.value = volumeLevel;
     }
+
+    public void SettingsControlsScreen()
+    {
+        RedrawMenu(menus[4]);
+        volumeSlider.value = volumeLevel;
+    }
+
+    public void SettingsAudioScreen()
+    {
+        RedrawMenu(menus[5]);
+        volumeSlider.value = volumeLevel;
+    } 
+    
+    public void SettingsCreditsScreen()
+    {
+        RedrawMenu(menus[6]);
+        volumeSlider.value = volumeLevel;
+    }
+
+    public void ExtrasScreen()
+    {
+        RedrawMenu(menus[7]);
+        volumeSlider.value = volumeLevel;
+    }
+
+    public void LocalPlayScreen()
+    {
+        RedrawMenu(menus[8]);
+        volumeSlider.value = volumeLevel;
+    }
+
+    #endregion
+
+
 
     public void QuitGame()
     {
