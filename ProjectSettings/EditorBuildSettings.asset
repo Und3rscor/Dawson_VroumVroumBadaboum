@@ -8,9 +8,12 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BuildScene/Main Menu.unity
     guid: 983e1067e13bc3e42b27cceaedff228b
+  - enabled: 1
+    path: Assets/Scenes/BuildScene/Main Menu v2.unity
+    guid: 9915583eb22860343909cc5586438ca0
   - enabled: 1
     path: Assets/Scenes/BuildScene/Track_Zero.unity
     guid: 2ab0598a88c13be4887b0607fe6e515b
