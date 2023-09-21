@@ -22768,7 +22768,7 @@ MonoBehaviour:
   maxHealth: 100
   nosCapacity: 100
   nosSpeedBoost: 2.5
-  coolingMultiplier: 2.5
+  coolingMultiplier: 2
   flipBoost: 100
   spinSpeedDebuff: 0.9
   MaxSpeed: 100

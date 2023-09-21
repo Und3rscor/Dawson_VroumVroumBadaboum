@@ -555,7 +555,8 @@ public class ArcadeVehicleController : MonoBehaviour
     private void CoolingManager()
     {
         //Removes heat at the rate of the car's speed multiplied by the cooling multiplier which is divided by 100 for ease of use
-        heat -= speedometer * (coolingMultiplier / 100);
+        heat -= speedometer * coolingMultiplier * Time.deltaTime;
+        heat = Mathf.Clamp(heat, 0.0f, 100.0f);
         HeatToUI();
     }
 
