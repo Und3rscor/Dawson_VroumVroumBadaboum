@@ -12,6 +12,9 @@ public class MainMenu : MonoBehaviour
     public GameObject masterAudio;
     private Slider volumeSlider;
 
+    // for the CTA
+    public GameObject canevas2;
+
     // for play local menu
     //public GameObject localPlayButton; // start button
     //private int activePlayers = 0;
@@ -21,7 +24,8 @@ public class MainMenu : MonoBehaviour
     {
         RedrawMenu(menus[0]);
         volumeSlider = masterAudio.GetComponent<Slider>();
-        //volumeSlider = transform.Find("SettingsMenu/Menu/Audio/AudioSlider").GetComponent<Slider>();
+        canevas2.SetActive(false);
+        
     }
 
     private void RedrawMenu(GameObject active)
@@ -48,52 +52,61 @@ public class MainMenu : MonoBehaviour
     {
         RedrawMenu(menus[0]);
         volumeSlider.value = volumeLevel;
+        canevas2.SetActive(false);
     }
 
     public void HomeScreen()
     {
         RedrawMenu(menus[1]);
+        canevas2.SetActive(true);
     }
 
     public void AssemblyScreen()
     {
         RedrawMenu(menus[2]);
+        canevas2.SetActive(false);
     }
 
     public void SettingsGraphicScreen()
     {
         RedrawMenu(menus[3]);
         volumeSlider.value = volumeLevel;
+        canevas2.SetActive(false);
     }
 
     public void SettingsControlsScreen()
     {
         RedrawMenu(menus[4]);
         volumeSlider.value = volumeLevel;
+        canevas2.SetActive(false);
     }
 
     public void SettingsAudioScreen()
     {
         RedrawMenu(menus[5]);
         volumeSlider.value = volumeLevel;
+        canevas2.SetActive(false);
     } 
     
     public void SettingsCreditsScreen()
     {
         RedrawMenu(menus[6]);
         volumeSlider.value = volumeLevel;
+        canevas2.SetActive(false);
     }
 
     public void ExtrasScreen()
     {
         RedrawMenu(menus[7]);
         volumeSlider.value = volumeLevel;
+        canevas2.SetActive(false);
     }
 
     public void LocalPlayScreen()
     {
         RedrawMenu(menus[8]);
         volumeSlider.value = volumeLevel;
+        canevas2.SetActive(false);
     }
 
     #endregion
