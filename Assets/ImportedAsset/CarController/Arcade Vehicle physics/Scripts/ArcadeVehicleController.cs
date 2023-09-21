@@ -1,10 +1,7 @@
-using Newtonsoft.Json.Bson;
-using PowerslideKartPhysics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 
 public class ArcadeVehicleController : MonoBehaviour
 {
@@ -18,7 +15,7 @@ public class ArcadeVehicleController : MonoBehaviour
     [SerializeField] private float flipBoost;
     [SerializeField] private float spinSpeedDebuff;
     public float MaxSpeed, accelaration, turn, gravity = 7f;
-    
+
     //Editor Setup
     [Header("Setup")]
     public LayerMask drivableSurface;
@@ -56,13 +53,13 @@ public class ArcadeVehicleController : MonoBehaviour
     private bool deathAvailable;
     private float heat;
 
-        //Flip variables
-        private bool flip = false;
-        private bool flipAvailable;
+    //Flip variables
+    private bool flip = false;
+    private bool flipAvailable;
 
-        //Spin variable
-        public bool Spin { get { return spin; } }
-        private bool spin = false;
+    //Spin variable
+    public bool Spin { get { return spin; } }
+    private bool spin = false;
 
     //Fetch Setup
     private float radius;
@@ -73,10 +70,12 @@ public class ArcadeVehicleController : MonoBehaviour
     private PlayerInput playerInput;
     private UI ui;
     private RespawnManager respawnManager;
+    private List<MeshRenderer> meshRendererList;
+    private List<SkinnedMeshRenderer> skinnedMeshRendererList;
 
     //Relay
     public UI UI { get { return ui; } }
-    public RespawnManager RespawnManager {  get { return respawnManager; } }
+    public RespawnManager RespawnManager { get { return respawnManager; } }
 
     public float Heat { get { return heat; } set { heat = value; } }
 
@@ -86,15 +85,18 @@ public class ArcadeVehicleController : MonoBehaviour
     private void Start()
     {
         //Fetches
-        radius          = rb.GetComponent<SphereCollider>().radius;                     //radius = sphereRB's radius
-        ui              = GetComponentInChildren<UI>();                                 //ui = UI script in the canvas
-        playerInput     = GetComponent<PlayerInput>();                                  //playerInput = PlayerInput script
-        nosFX           = transform.Find("Mesh/Body/Hatchback/Exhaust/NOS").gameObject; //nosFX = Nos particle effect in the car's exhaust
-        brakeLights     = transform.GetComponentsInChildren<Light>();                   //brakeLights = Light component of the brake lights
-        model           = transform.Find("Mesh").gameObject;                            //model = gameobject the mesh of the car is attached to
-        modelAnimator   = model.GetComponent<Animator>();                               //modelAnimator = animator of the car's body (used for flip and spin)
-        camExtras       = GetComponentInChildren<CameraExtras>();                       //camExtras = CameraExtras script in cameraBrain
-        respawnManager  = GetComponent<RespawnManager>();                               //respawnManager = RespawnManager script
+        radius = rb.GetComponent<SphereCollider>().radius;                      //radius = sphereRB's radius
+        ui = GetComponentInChildren<UI>();                                      //ui = UI script in the canvas
+        playerInput = GetComponent<PlayerInput>();                              //playerInput = PlayerInput script
+        nosFX = transform.Find("Mesh/Body/Hatchback/Exhaust/NOS").gameObject;   //nosFX = Nos particle effect in the car's exhaust
+        brakeLights = transform.GetComponentsInChildren<Light>();               //brakeLights = Light component of the brake lights
+        model = transform.Find("Mesh").gameObject;                              //model = gameobject the mesh of the car is attached to
+        modelAnimator = model.GetComponent<Animator>();                         //modelAnimator = animator of the car's body (used for flip and spin)
+        camExtras = GetComponentInChildren<CameraExtras>();                     //camExtras = CameraExtras script in cameraBrain
+        respawnManager = GetComponent<RespawnManager>();                        //respawnManager = RespawnManager script
+        meshRendererList = new List<MeshRenderer>();                            //Initialize meshRendererList to store the meshRenderers found in the function below
+        skinnedMeshRendererList = new List<SkinnedMeshRenderer>();              //Initialize skinnedMeshRendererList to store the skinnedMeshRenderers found in the function below
+        FindMeshRenderers(model.transform);                                     //Finds all meshRendrers to toggle on and off during death sequences
 
         //Variable setup
         baseAccelaration = accelaration;
@@ -111,6 +113,31 @@ public class ArcadeVehicleController : MonoBehaviour
         NosToUI();
         HealthToUI();
         LivesToUI();
+    }
+
+    // This function will recursively find all MeshRenderers in the children of the specified transform
+    private void FindMeshRenderers(Transform parentTransform)
+    {
+        // Loop through each child of the parentTransform
+        foreach (Transform child in parentTransform)
+        {
+            // Check if the child has a MeshRenderer component
+            MeshRenderer meshRenderer = child.GetComponent<MeshRenderer>();
+            SkinnedMeshRenderer skinnedMeshRenderer = child.GetComponent<SkinnedMeshRenderer>();
+
+            if (meshRenderer != null)
+            {
+                meshRendererList.Add(meshRenderer);
+            }
+
+            if (skinnedMeshRenderer != null)
+            {
+                skinnedMeshRendererList.Add(skinnedMeshRenderer);
+            }
+
+            // Recursively search the child's children
+            FindMeshRenderers(child);
+        }
     }
 
     private void Update()
@@ -177,26 +204,26 @@ public class ArcadeVehicleController : MonoBehaviour
     void FixedUpdate()
     {
         carVelocity = carBody.transform.InverseTransformDirection(carBody.velocity);
-        
+
         if (Mathf.Abs(carVelocity.x) > 0)
         {
             //changes friction according to sideways speed of car
-            frictionMaterial.dynamicFriction = frictionCurve.Evaluate(Mathf.Abs(carVelocity.x/100)); 
+            frictionMaterial.dynamicFriction = frictionCurve.Evaluate(Mathf.Abs(carVelocity.x / 100));
         }
-        
-        
+
+
         if (grounded())
         {
             //turnlogic
             float sign = Mathf.Sign(carVelocity.z);
-            float TurnMultiplyer = turnCurve.Evaluate(carVelocity.magnitude/ MaxSpeed);
-            if (verticalInput > 0.1f || carVelocity.z >1)
+            float TurnMultiplyer = turnCurve.Evaluate(carVelocity.magnitude / MaxSpeed);
+            if (verticalInput > 0.1f || carVelocity.z > 1)
             {
-                carBody.AddTorque(Vector3.up * horizontalInput * sign * turn*100* TurnMultiplyer);
+                carBody.AddTorque(Vector3.up * horizontalInput * sign * turn * 100 * TurnMultiplyer);
             }
             else if (verticalInput < -0.1f || carVelocity.z < -1)
             {
-                carBody.AddTorque(Vector3.up * horizontalInput * sign * turn*100* TurnMultiplyer);
+                carBody.AddTorque(Vector3.up * horizontalInput * sign * turn * 100 * TurnMultiplyer);
             }
 
             //brakelogic
@@ -225,7 +252,7 @@ public class ArcadeVehicleController : MonoBehaviour
         else
         {
             carBody.MoveRotation(Quaternion.Slerp(carBody.rotation, Quaternion.FromToRotation(carBody.transform.up, Vector3.up) * carBody.transform.rotation, 0.02f));
-            rb.velocity = Vector3.Lerp(rb.velocity, rb.velocity + Vector3.down* gravity, Time.deltaTime * gravity);
+            rb.velocity = Vector3.Lerp(rb.velocity, rb.velocity + Vector3.down * gravity, Time.deltaTime * gravity);
         }
 
     }
@@ -242,16 +269,16 @@ public class ArcadeVehicleController : MonoBehaviour
         RearWheels[1].localRotation = rb.transform.localRotation;
 
         //Body
-        if(carVelocity.z > 1)
+        if (carVelocity.z > 1)
         {
             BodyMesh.localRotation = Quaternion.Slerp(BodyMesh.localRotation, Quaternion.Euler(Mathf.Lerp(0, -5, carVelocity.z / MaxSpeed),
                                         BodyMesh.localRotation.eulerAngles.y, BodyTilt * horizontalInput), 0.05f);
         }
         else
         {
-            BodyMesh.localRotation = Quaternion.Slerp(BodyMesh.localRotation, Quaternion.Euler(0,0,0) , 0.05f);
+            BodyMesh.localRotation = Quaternion.Slerp(BodyMesh.localRotation, Quaternion.Euler(0, 0, 0), 0.05f);
         }
-        
+
 
     }
 
@@ -279,13 +306,13 @@ public class ArcadeVehicleController : MonoBehaviour
         if (!Application.isPlaying)
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireCube(rb.transform.position + ((radius + width) * Vector3.down), new Vector3(2 * radius, 2*width, 4 * radius));
+            Gizmos.DrawWireCube(rb.transform.position + ((radius + width) * Vector3.down), new Vector3(2 * radius, 2 * width, 4 * radius));
             if (GetComponent<BoxCollider>())
             {
                 Gizmos.color = Color.green;
                 Gizmos.DrawWireCube(transform.position, GetComponent<BoxCollider>().size);
             }
-            
+
         }
 
     }
@@ -326,7 +353,7 @@ public class ArcadeVehicleController : MonoBehaviour
     }
 
     private void FlipController()
-    {        
+    {
         if (playerInput.actions["Flip"].WasPressedThisFrame() && !grounded() && !flip && flipAvailable)
         {
             flip = true;
@@ -352,20 +379,16 @@ public class ArcadeVehicleController : MonoBehaviour
         //Starts the first 180
         if (startSpinning)
         {
-            //Sets spin bool for other controls
+            //Sets spin bool to true and debuffs acceleration while reversing
             spin = true;
-
-            //Debuffs acceleration while reversing
             accelaration = accelaration * spinSpeedDebuff;
         }
 
         //Does the second 180 to finish the sequence
-        else 
+        else
         {
-            //Sets spin bool for other controls
+            //Sets spin bool to false and puts the acceleration back to normal
             spin = false;
-
-            //Puts the acceleration back to normal
             accelaration = baseAccelaration;
         }
 
@@ -403,7 +426,7 @@ public class ArcadeVehicleController : MonoBehaviour
 
     public void TakeDamage(int damageTaken, ArcadeVehicleController damageSource)
     {
-        if (currentNos >=  damageTaken)
+        if (currentNos >= damageTaken)
         {
             currentNos -= damageTaken;
         }
@@ -445,11 +468,11 @@ public class ArcadeVehicleController : MonoBehaviour
     {
         if (deathAvailable)
         {
-            //Toggles dead values
-            RespawnToggle(false);
-
             //Deactivates playerInput
             playerInput.DeactivateInput();
+
+            //Toggles dead values
+            RespawnToggle(false);
 
             //Gives credit where credit is due
             if (damageSource != null)
@@ -469,12 +492,15 @@ public class ArcadeVehicleController : MonoBehaviour
                 }
             }
 
+            //Stops player animations
+            SpinAction(false);
+            flip = false;
+
             //Does the explosionFX
             Instantiate(explosionParticleFX, transform.position, Quaternion.identity, null);
 
-            //COMMENTED FOR DEV TESTS PLZ REMOVE ON RELEASE
-            /*if (currentLives > 1)
-            {*/
+            if (currentLives > 1)
+            {
                 //Remove 1 life
                 currentLives--;
 
@@ -488,8 +514,9 @@ public class ArcadeVehicleController : MonoBehaviour
 
                 //Starts countdown until respawn
                 StartCoroutine(RespawnCountdown(respawnManager.respawnDelay));
-            /*}
-            else
+            }
+            //COMMENTED FOR DEV TESTS PLZ REMOVE ON RELEASE
+            /*else
             {
                 //Removes player from alive counter
                 GameManager.Instance.Alive--;
@@ -517,11 +544,11 @@ public class ArcadeVehicleController : MonoBehaviour
         //Switch to GameUI
         ui.UIRedraw(ui.gameUI);
 
-        //Toggles alive values
-        RespawnToggle(true);
-
         //Reactivates playerInput
         playerInput.ActivateInput();
+
+        //Toggles alive values
+        RespawnToggle(true);
 
         //Refill values
         RefillHealth();
@@ -531,17 +558,26 @@ public class ArcadeVehicleController : MonoBehaviour
     private void RespawnToggle(bool toggle)
     {
         //Toggles further deaths until respawn
-        deathAvailable = toggle;        
+        deathAvailable = toggle;
 
-        //Toggles the rigidbody so the dead player doesn't just fall through the ground
-        carBody.isKinematic = !toggle;
+        //Toggles the rigidbodies gravities so the dead player doesn't just fall through the ground
+        carBody.useGravity = toggle;
+        rb.useGravity = toggle;
 
         //Toggles the collider so nothing can collide with it while dead
         rb.GetComponent<SphereCollider>().enabled = toggle;
         carBody.GetComponent<BoxCollider>().enabled = toggle;
 
         //Toggles meshes so they car is invisible while dead
-        model.SetActive(toggle);
+        foreach (MeshRenderer meshRenderers in meshRendererList)
+        {
+            meshRenderers.enabled = toggle;
+        }
+
+        foreach (SkinnedMeshRenderer skinnedMeshRenderers in skinnedMeshRendererList)
+        {
+            skinnedMeshRenderers.enabled = toggle;
+        }
 
         //Toggles engine sound so the car doesn't make sounds while dead
         engineSound.enabled = toggle;
