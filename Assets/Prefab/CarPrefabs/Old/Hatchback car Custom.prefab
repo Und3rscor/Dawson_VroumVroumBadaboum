@@ -22766,13 +22766,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxLives: 3
   maxHealth: 100
-  nosCapacity: 100
-  nosSpeedBoost: 2.5
-  coolingMultiplier: 2
+  nosCapacity: 75
+  nosSpeedBoost: 3
+  coolingMultiplier: 1.5
   flipBoost: 100
   spinSpeedDebuff: 0.9
-  MaxSpeed: 100
-  accelaration: 20
+  MaxSpeed: 150
+  accelaration: 15
   turn: 4.4
   gravity: 7
   drivableSurface:
@@ -24458,6 +24458,16 @@ PrefabInstance:
     - target: {fileID: 400000, guid: ea40dc474268951418d739fe5430e8ab, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746889010981880303, guid: ea40dc474268951418d739fe5430e8ab,
+        type: 3}
+      propertyPath: shootForce
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746889010981880303, guid: ea40dc474268951418d739fe5430e8ab,
+        type: 3}
+      propertyPath: heatPerShot
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea40dc474268951418d739fe5430e8ab, type: 3}
