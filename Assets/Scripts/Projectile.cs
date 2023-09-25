@@ -40,19 +40,22 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider coll)
     {
-        if (coll.transform.tag == "MainPlayer")
+        if (coll.gameObject.GetComponentInParent<ArcadeVehicleController>() != source)
         {
-            coll.gameObject.GetComponentInParent<ArcadeVehicleController>().TakeDamage(damage, source);
-            Die();
-        }
-        else if (coll.transform.tag == "Bot")
-        {
-            coll.gameObject.GetComponentInParent<BotHP>().TakeDamage(damage, source);
-            Die();
-        }
-        else
-        {
-            DestroyObj();
-        }        
+            if (coll.transform.tag == "MainPlayer")
+            {
+                coll.gameObject.GetComponentInParent<ArcadeVehicleController>().TakeDamage(damage, source);
+                Die();
+            }
+            else if (coll.transform.tag == "Bot")
+            {
+                coll.gameObject.GetComponentInParent<BotHP>().TakeDamage(damage, source);
+                Die();
+            }
+            else
+            {
+                DestroyObj();
+            }
+        }   
     }
 }
