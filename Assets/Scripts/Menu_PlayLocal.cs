@@ -41,13 +41,18 @@ public class Menu_PlayLocal : MonoBehaviour
         // Toggle the car selection menu's visibility
         if (Input.GetKeyDown(KeyCode.A))
         {            
-            carSelectionMenu.SetActive(true);
-            carDisplay.SetActive(true);
-            buttonADisplay.SetActive(false);
-            colorSelectionMenu.SetActive(true);
-
-            ActivatePlayer();
+            
         }
+    }
+
+    public void ActivatePlayerScreen()
+    {
+        carSelectionMenu.SetActive(true);
+        carDisplay.SetActive(true);
+        buttonADisplay.SetActive(false);
+        colorSelectionMenu.SetActive(true);
+
+        ActivatePlayer();
     }
 
     private void RedrawMenu(GameObject active)
