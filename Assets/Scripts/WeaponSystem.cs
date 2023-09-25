@@ -50,6 +50,28 @@ public class WeaponSystem : MonoBehaviour
         {
             Shoot();
         }
+        
+        if (carDaddy.grounded())
+        {
+            // Get the current rotation
+            Vector3 currentRotation = transform.eulerAngles;
+
+            // Set the X rotation to 0
+            currentRotation.x = 0f;
+
+            // Apply the new rotations
+            transform.eulerAngles = currentRotation;
+
+            if (transform.localEulerAngles.y > 1.0f || transform.localEulerAngles.y < -1.0f)
+            {
+                Vector3 currentLocalRotation = transform.localEulerAngles;
+
+                currentLocalRotation.y = 0f;
+                currentLocalRotation.z = 0f;
+
+                transform.localEulerAngles = currentLocalRotation;
+            }
+        }
     }
 
     private void Shoot()
