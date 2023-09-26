@@ -84,10 +84,10 @@ public class WeaponSystem : MonoBehaviour
         readyToShoot = false;
 
         //Creates new attackPoint a little further ahead than the car so the projectile doesn't collide with the car
-        Vector3 attackPoint = currentAttackPoint.position + transform.TransformDirection(Vector3.forward) * 1.25f;
+        Vector3 attackPoint = currentAttackPoint.position + -transform.up * 1.25f;
 
         //Spawns the projectile
-        SpawnProjectile(attackPoint, currentAttackPoint.localRotation);
+        SpawnProjectile(attackPoint, Quaternion.Euler(Vector3.zero));
 
         //Do gunshot
         if (shootSound != null)
@@ -125,9 +125,12 @@ public class WeaponSystem : MonoBehaviour
             float spreadY = Random.Range(-spread, spread);  //Random y spread  
             float spreadZ = Random.Range(-spread, spread);  //Random z spread
             Vector3 currentSpread = new Vector3(spreadX, spreadY, spreadZ) / 100; //Creates the spread value divided by 100
-            
-        //Adds force to the bullet so it flies in the direction provided plus spread
-        currentProjectile.GetComponent<Rigidbody>().AddForce((transform.TransformDirection(Vector3.forward) + currentSpread) * shootForce, ForceMode.Impulse);
+
+        //Sets the target force direction
+        Vector3 targetDirection = -transform.up + currentSpread;
+
+        //Applies force to the bullet so it flies in the direction provided plus spread
+        currentProjectile.GetComponent<Rigidbody>().AddForce(targetDirection * shootForce, ForceMode.Impulse);
 
         //Remove parent
         currentProjectile.transform.parent = null;

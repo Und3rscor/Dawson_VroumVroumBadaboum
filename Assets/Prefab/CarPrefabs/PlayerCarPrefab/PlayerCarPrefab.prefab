@@ -5311,7 +5311,7 @@ MonoBehaviour:
   shootForce: 700
   projectileLifespan: 3
   spread: 1
-  heatPerShot: 25
+  heatPerShot: 0
   shootDelay: 0.1
   projectile: {fileID: 100002, guid: c2f9c173dc9aaab45a4a4cc86e403ef6, type: 3}
   muzzleFlash: {fileID: 0}
