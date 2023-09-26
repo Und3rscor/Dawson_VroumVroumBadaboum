@@ -53,24 +53,29 @@ public class WeaponSystem : MonoBehaviour
         
         if (carDaddy.grounded())
         {
-            // Get the current rotation
-            Vector3 currentRotation = transform.eulerAngles;
+            //AdjustRotation();
+        }
+    }
 
-            // Set the X rotation to 0
-            currentRotation.x = 0f;
+    private void AdjustRotation()
+    {
+        // Get the current rotation
+        Vector3 currentRotation = transform.eulerAngles;
 
-            // Apply the new rotations
-            transform.eulerAngles = currentRotation;
+        // Set the X rotation to 0
+        currentRotation.x = 0f;
 
-            if (transform.localEulerAngles.y > 1.0f || transform.localEulerAngles.y < -1.0f)
-            {
-                Vector3 currentLocalRotation = transform.localEulerAngles;
+        // Apply the new rotations
+        transform.eulerAngles = currentRotation;
 
-                currentLocalRotation.y = 0f;
-                currentLocalRotation.z = 0f;
+        if (transform.localEulerAngles.y > 1.0f || transform.localEulerAngles.y < -1.0f)
+        {
+            Vector3 currentLocalRotation = transform.localEulerAngles;
 
-                transform.localEulerAngles = currentLocalRotation;
-            }
+            currentLocalRotation.y = 0f;
+            currentLocalRotation.z = 0f;
+
+            transform.localEulerAngles = currentLocalRotation;
         }
     }
 
@@ -82,7 +87,7 @@ public class WeaponSystem : MonoBehaviour
         Vector3 attackPoint = currentAttackPoint.position + transform.TransformDirection(Vector3.forward) * 1.25f;
 
         //Spawns the projectile
-        SpawnProjectile(attackPoint, currentAttackPoint.rotation);
+        SpawnProjectile(attackPoint, currentAttackPoint.localRotation);
 
         //Do gunshot
         if (shootSound != null)

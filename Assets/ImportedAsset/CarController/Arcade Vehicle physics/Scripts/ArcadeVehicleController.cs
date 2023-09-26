@@ -33,7 +33,8 @@ public class ArcadeVehicleController : MonoBehaviour
     [HideInInspector] public Vector3 carVelocity;
     [Range(0, 10)] public float BodyTilt;
     [SerializeField] private GameObject explosionParticleFX;
-    private Light[] brakeLights;
+    [SerializeField] private GameObject[] brakeLights;
+    [SerializeField] private GameObject nosFX;
 
     //Audio Editor Setup
     [Header("Audio settings")]
@@ -52,6 +53,7 @@ public class ArcadeVehicleController : MonoBehaviour
     private int currentLives;
     private bool deathAvailable;
     private float heat;
+    private Color ogBreakColor;
 
     //Flip variables
     private bool flip = false;
@@ -64,7 +66,6 @@ public class ArcadeVehicleController : MonoBehaviour
     //Fetch Setup
     private float radius;
     private CameraExtras camExtras;
-    private GameObject nosFX;
     private GameObject model;
     private Animator modelAnimator;
     private PlayerInput playerInput;
@@ -88,14 +89,11 @@ public class ArcadeVehicleController : MonoBehaviour
         radius = rb.GetComponent<SphereCollider>().radius;                      //radius = sphereRB's radius
         ui = GetComponentInChildren<UI>();                                      //ui = UI script in the canvas
         playerInput = GetComponent<PlayerInput>();                              //playerInput = PlayerInput script
-        nosFX = transform.Find("Mesh/Body/Hatchback/Exhaust/NOS").gameObject;   //nosFX = Nos particle effect in the car's exhaust
-        brakeLights = transform.GetComponentsInChildren<Light>();               //brakeLights = Light component of the brake lights
-        model = transform.Find("Mesh").gameObject;                              //model = gameobject the mesh of the car is attached to
+        model = transform.Find("Model").gameObject;                             //model = gameobject the mesh of the car is attached to
         modelAnimator = model.GetComponent<Animator>();                         //modelAnimator = animator of the car's body (used for flip and spin)
         camExtras = GetComponentInChildren<CameraExtras>();                     //camExtras = CameraExtras script in cameraBrain
         respawnManager = GetComponent<RespawnManager>();                        //respawnManager = RespawnManager script
         meshRendererList = new List<MeshRenderer>();                            //Initialize meshRendererList to store the meshRenderers found in the function below
-        skinnedMeshRendererList = new List<SkinnedMeshRenderer>();              //Initialize skinnedMeshRendererList to store the skinnedMeshRenderers found in the function below
         FindMeshRenderers(model.transform);                                     //Finds all meshRendrers to toggle on and off during death sequences
 
         //Variable setup
@@ -108,6 +106,7 @@ public class ArcadeVehicleController : MonoBehaviour
         //Extra Setup
         nosFX.SetActive(false);
         ManageBrakeLights(false);
+        ogBreakColor = brakeLights[0].GetComponent<Renderer>().materials[2].color;
 
         //UI Setup
         NosToUI();
@@ -123,16 +122,10 @@ public class ArcadeVehicleController : MonoBehaviour
         {
             // Check if the child has a MeshRenderer component
             MeshRenderer meshRenderer = child.GetComponent<MeshRenderer>();
-            SkinnedMeshRenderer skinnedMeshRenderer = child.GetComponent<SkinnedMeshRenderer>();
 
             if (meshRenderer != null)
             {
                 meshRendererList.Add(meshRenderer);
-            }
-
-            if (skinnedMeshRenderer != null)
-            {
-                skinnedMeshRendererList.Add(skinnedMeshRenderer);
             }
 
             // Recursively search the child's children
@@ -259,14 +252,18 @@ public class ArcadeVehicleController : MonoBehaviour
     public void Visuals()
     {
         //tires
-        foreach (Transform FW in FrontWheels)
+        if (FrontWheels.Length > 0 || RearWheels.Length > 0)
         {
-            FW.localRotation = Quaternion.Slerp(FW.localRotation, Quaternion.Euler(FW.localRotation.eulerAngles.x,
-                               30 * horizontalInput, FW.localRotation.eulerAngles.z), 0.1f);
-            FW.GetChild(0).localRotation = rb.transform.localRotation;
+            
+            foreach (Transform FW in FrontWheels)
+            {
+                FW.localRotation = Quaternion.Slerp(FW.localRotation, Quaternion.Euler(FW.localRotation.eulerAngles.x,
+                                   30 * horizontalInput, FW.localRotation.eulerAngles.z), 0.1f);
+                FW.GetChild(0).localRotation = rb.transform.localRotation;
+            }
+            RearWheels[0].localRotation = rb.transform.localRotation;
+            RearWheels[1].localRotation = rb.transform.localRotation;
         }
-        RearWheels[0].localRotation = rb.transform.localRotation;
-        RearWheels[1].localRotation = rb.transform.localRotation;
 
         //Body
         if (carVelocity.z > 1)
@@ -405,22 +402,14 @@ public class ArcadeVehicleController : MonoBehaviour
         if (on)
         {
             //Make the brake light red
-            brakeLights[0].gameObject.GetComponent<Renderer>().material.color = Color.red;
-            brakeLights[1].gameObject.GetComponent<Renderer>().material.color = Color.red;
-
-            //Turn on the lights
-            brakeLights[0].enabled = true;
-            brakeLights[1].enabled = true;
+            brakeLights[0].GetComponent<Renderer>().materials[2].color = Color.red;
+            brakeLights[1].GetComponent<Renderer>().materials[2].color = Color.red;
         }
         else
         {
             //Make the brake light grey
-            brakeLights[0].gameObject.GetComponent<Renderer>().material.color = Color.grey;
-            brakeLights[1].gameObject.GetComponent<Renderer>().material.color = Color.grey;
-
-            //Turn off the lights
-            brakeLights[0].enabled = false;
-            brakeLights[1].enabled = false;
+            brakeLights[0].GetComponent<Renderer>().materials[2].color = Color.grey;
+            brakeLights[1].GetComponent<Renderer>().materials[2].color = Color.grey;
         }
     }
 

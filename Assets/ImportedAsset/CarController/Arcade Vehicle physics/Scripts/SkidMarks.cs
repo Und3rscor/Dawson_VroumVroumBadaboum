@@ -12,9 +12,9 @@ public class SkidMarks : MonoBehaviour
     {
         smoke = GetComponent<ParticleSystem>();
         skidMark = GetComponent<TrailRenderer>();
+        carController = GetComponentInParent<ArcadeVehicleController>();
 	    skidMark.emitting = false;
         skidMark.startWidth = carController.skidWidth;
-
     }
     
     

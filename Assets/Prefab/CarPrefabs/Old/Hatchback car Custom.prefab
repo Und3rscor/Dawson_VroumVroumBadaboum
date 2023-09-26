@@ -22858,6 +22858,8 @@ MonoBehaviour:
   BodyTilt: 10
   explosionParticleFX: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664,
     type: 3}
+  brakeLights: []
+  nosFX: {fileID: 0}
   engineSound: {fileID: 1925981547900679247}
   minPitch: 0.3
   MaxPitch: 3
