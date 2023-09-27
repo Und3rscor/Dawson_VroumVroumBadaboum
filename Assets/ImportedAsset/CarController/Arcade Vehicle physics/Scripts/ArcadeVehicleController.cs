@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.VFX;
 
 public class ArcadeVehicleController : MonoBehaviour
 {
-    public Material newMat;
-    public Material newNeonMat; //Both don't work
-
     //Car Stats
     [Header("Stats")]
     [SerializeField] private int maxLives;
@@ -38,6 +37,9 @@ public class ArcadeVehicleController : MonoBehaviour
     [SerializeField] private GameObject explosionParticleFX;
     [SerializeField] private GameObject[] brakeLights;
     [SerializeField] private GameObject nosFX;
+    [SerializeField] private Color primaryColor;
+    [SerializeField] private Color secondaryColor;
+    [SerializeField] private GameObject VFX;
 
     //Audio Editor Setup
     [Header("Audio settings")]
@@ -75,7 +77,7 @@ public class ArcadeVehicleController : MonoBehaviour
     private UI ui;
     private RespawnManager respawnManager;
     private List<MeshRenderer> meshRendererList;
-    private List<SkinnedMeshRenderer> skinnedMeshRendererList;
+    private List<VisualEffect> vfxList;
 
     //Relay
     public UI UI { get { return ui; } }
@@ -89,15 +91,17 @@ public class ArcadeVehicleController : MonoBehaviour
     private void Start()
     {
         //Fetches
-        radius = rb.GetComponent<SphereCollider>().radius;                      //radius = sphereRB's radius
-        ui = GetComponentInChildren<UI>();                                      //ui = UI script in the canvas
-        playerInput = GetComponent<PlayerInput>();                              //playerInput = PlayerInput script
-        model = transform.Find("Model").gameObject;                             //model = gameobject the mesh of the car is attached to
-        modelAnimator = model.GetComponent<Animator>();                         //modelAnimator = animator of the car's body (used for flip and spin)
-        camExtras = GetComponentInChildren<CameraExtras>();                     //camExtras = CameraExtras script in cameraBrain
-        respawnManager = GetComponent<RespawnManager>();                        //respawnManager = RespawnManager script
-        meshRendererList = new List<MeshRenderer>();                            //Initialize meshRendererList to store the meshRenderers found in the function below
-        FindMeshRenderers(model.transform);                                     //Finds all meshRendrers to toggle on and off during death sequences
+        radius = rb.GetComponent<SphereCollider>().radius;      //radius = sphereRB's radius
+        ui = GetComponentInChildren<UI>();                      //ui = UI script in the canvas
+        playerInput = GetComponent<PlayerInput>();              //playerInput = PlayerInput script
+        model = transform.Find("Model").gameObject;             //model = gameobject the mesh of the car is attached to
+        modelAnimator = model.GetComponent<Animator>();         //modelAnimator = animator of the car's body (used for flip and spin)
+        camExtras = GetComponentInChildren<CameraExtras>();     //camExtras = CameraExtras script in cameraBrain
+        respawnManager = GetComponent<RespawnManager>();        //respawnManager = RespawnManager script
+        meshRendererList = new List<MeshRenderer>();            //Initialize meshRendererList to store the meshRenderers found in the function below
+        vfxList = new List<VisualEffect>();                     //Initialize Visual Effect list
+        FindMeshRenderers(this.gameObject.transform);           //Finds all meshRendrers to toggle on and off during death sequences
+        FindVFX(VFX.transform);                                 //Finds all Visual Effects in the vfx object
 
         //Variable setup
         baseAccelaration = accelaration;
@@ -135,10 +139,31 @@ public class ArcadeVehicleController : MonoBehaviour
             FindMeshRenderers(child);
         }
 
-        SetupColor(newMat, newNeonMat);
+        //SetupColor(primaryColor, secondaryColor);
     }
 
-    public void SetupColor(Material newBaseMat, Material newNeonMat)
+    private void FindVFX(Transform parentTransform)
+    {
+        // Loop through each child of the parentTransform
+        foreach (Transform child in parentTransform)
+        {
+            // Check if the child has a Visual Effect component
+            VisualEffect vfx = child.GetComponent<VisualEffect>();
+
+            if (vfx != null)
+            {
+                vfxList.Add(vfx);
+            }
+
+            // Recursively search the child's children
+            FindVFX(child);
+        }
+
+        //SetupVFXColor(primaryColor, secondaryColor);
+    }
+
+    //Sets the static color of the car
+    public void SetupColor(Color _primaryColor, Color _secondaryColor)
     {
         foreach (MeshRenderer meshRenderer in meshRendererList)
         {
@@ -151,13 +176,13 @@ public class ArcadeVehicleController : MonoBehaviour
                 // Changes all the base mat of the car to the chosen mat
                 if (mat.name == "Synthwave_base (Instance)")
                 {
-                    materials[i] = newBaseMat; // Modify the material in the array
+                    materials[i].color = _primaryColor; // Modify the material in the array
                 }
 
                 // Changes all the base neon mat of the car to the chosen neon mat
                 else if (mat.name == "Synthwave_neon_base (Instance)")
                 {
-                    materials[i] = newNeonMat; // Modify the material in the array
+                    materials[i].color = _secondaryColor; // Modify the material in the array
                 }
 
                 else
@@ -168,6 +193,16 @@ public class ArcadeVehicleController : MonoBehaviour
 
             // Assign the modified materials array back to the meshRenderer
             meshRenderer.materials = materials;
+        }
+    }
+
+    //Sets the color gradient of the trail vfx
+    private void SetupVFXColor(Color _primaryColor, Color _secondaryColor)
+    {
+        foreach (VisualEffect vfx in vfxList)
+        {
+            //Sets the color gradient
+            //vfx.
         }
     }
 
@@ -195,6 +230,8 @@ public class ArcadeVehicleController : MonoBehaviour
 
         //Cooling stuff
         CoolingManager();
+
+        SetupColor(primaryColor, secondaryColor);
     }
 
     private void InputManager()
@@ -292,7 +329,7 @@ public class ArcadeVehicleController : MonoBehaviour
         //tires
         if (FrontWheels.Length > 0 || RearWheels.Length > 0)
         {
-            
+
             foreach (Transform FW in FrontWheels)
             {
                 FW.localRotation = Quaternion.Slerp(FW.localRotation, Quaternion.Euler(FW.localRotation.eulerAngles.x,
@@ -599,11 +636,6 @@ public class ArcadeVehicleController : MonoBehaviour
         foreach (MeshRenderer meshRenderers in meshRendererList)
         {
             meshRenderers.enabled = toggle;
-        }
-
-        foreach (SkinnedMeshRenderer skinnedMeshRenderers in skinnedMeshRendererList)
-        {
-            skinnedMeshRenderers.enabled = toggle;
         }
 
         //Toggles engine sound so the car doesn't make sounds while dead
