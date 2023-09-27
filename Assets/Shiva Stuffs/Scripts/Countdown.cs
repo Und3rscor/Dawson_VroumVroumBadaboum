@@ -39,7 +39,7 @@ public class Countdown : MonoBehaviour
 
                 if (countdownText.text == Messages[0])
                 {
-                    GameManager.Instance.Setup();
+                    RaceManager.Instance.Setup();
                     //GameManager.Instance.FindUI();
                 }
 

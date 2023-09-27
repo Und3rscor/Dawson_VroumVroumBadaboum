@@ -21,9 +21,6 @@ public class UI : MonoBehaviour
     public int LapCounter { get { return lapCounter; } set { lapCounter = value; } }
     private int lapCounter = 0;
 
-    public bool LapAvailable { get { return lapAvailable; } set { lapAvailable = value; } }
-    private bool lapAvailable;
-    
     private TextMeshProUGUI lapCounterDisplay;
 
     //Scoreboard variables
@@ -83,7 +80,7 @@ public class UI : MonoBehaviour
             aliveCounter = transform.Find("GameUI/AliveCounter").GetComponentInChildren<TextMeshProUGUI>();         //Alive counter
 
             //Starts the scoreboard
-            if (!GameManager.Instance.GameOverBool)
+            if (!RaceManager.Instance.GameOverBool)
             {
                 Scoreboard();
             }
@@ -116,7 +113,7 @@ public class UI : MonoBehaviour
             heatCounterSlider.value = heatCounter;                                                                  //Heat Slider value
             healthCounterSlider.value = healthCounter;                                                              //Health Slider value
             livesCounterDisplay.text = livesCounter.ToString();                                                     //Lives counter
-            aliveCounter.text = "Alive: " + GameManager.Instance.Alive + " / " + GameManager.Instance.TotalAlive;   //Alive counter
+            aliveCounter.text = "Alive: " + RaceManager.Instance.Alive + " / " + RaceManager.Instance.TotalAlive;   //Alive counter
         }
 
         if (gameOverUI != null)

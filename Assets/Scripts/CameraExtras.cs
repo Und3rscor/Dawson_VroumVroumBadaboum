@@ -22,7 +22,7 @@ public class CameraExtras : MonoBehaviour
         playerInput = GetComponentInParent<PlayerInput>();
 
         //Asks the gamemange which layer mask is available for the cameras. Basically the player ID (player 1, 2...)
-        GameManager.Instance.PlayerSetup(this.gameObject, camBrain);
+        RaceManager.Instance.PlayerSetup(this.gameObject, camBrain);
     }
 
     private void LateUpdate()

@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 public class ArcadeVehicleController : MonoBehaviour
 {
+    public Material newMat;
+    public Material newNeonMat; //Both don't work
+
     //Car Stats
     [Header("Stats")]
     [SerializeField] private int maxLives;
@@ -34,6 +37,7 @@ public class ArcadeVehicleController : MonoBehaviour
     [Range(0, 10)] public float BodyTilt;
     [SerializeField] private GameObject explosionParticleFX;
     [SerializeField] private GameObject[] brakeLights;
+    [SerializeField] private Material litBrakeLightMat; //Doesn't work
     [SerializeField] private GameObject nosFX;
 
     //Audio Editor Setup
@@ -53,7 +57,7 @@ public class ArcadeVehicleController : MonoBehaviour
     private int currentLives;
     private bool deathAvailable;
     private float heat;
-    private Color ogBreakColor;
+    private Material ogBreakMat;
 
     //Flip variables
     private bool flip = false;
@@ -106,7 +110,7 @@ public class ArcadeVehicleController : MonoBehaviour
         //Extra Setup
         nosFX.SetActive(false);
         ManageBrakeLights(false);
-        ogBreakColor = brakeLights[0].GetComponent<Renderer>().materials[2].color;
+        ogBreakMat = brakeLights[0].GetComponent<Renderer>().materials[2];
 
         //UI Setup
         NosToUI();
@@ -130,6 +134,41 @@ public class ArcadeVehicleController : MonoBehaviour
 
             // Recursively search the child's children
             FindMeshRenderers(child);
+        }
+
+        SetupColor(newMat, newNeonMat);
+    }
+
+    public void SetupColor(Material newBaseMat, Material newNeonMat)
+    {
+        foreach (MeshRenderer meshRenderer in meshRendererList)
+        {
+            Material[] materials = meshRenderer.materials; // Get a reference to the materials array
+
+            for (int i = 0; i < materials.Length; i++)
+            {
+                Material mat = materials[i]; // Get a reference to the current material
+
+                // Changes all the base mat of the car to the chosen mat
+                if (mat.name == "Synthwave_base (Instance)")
+                {
+                    materials[i] = newBaseMat; // Modify the material in the array
+                }
+
+                // Changes all the base neon mat of the car to the chosen neon mat
+                else if (mat.name == "Synthwave_neon_base (Instance)")
+                {
+                    materials[i] = newNeonMat; // Modify the material in the array
+                }
+
+                else
+                {
+                    //Change nothing
+                }
+            }
+
+            // Assign the modified materials array back to the meshRenderer
+            meshRenderer.materials = materials;
         }
     }
 
@@ -401,15 +440,15 @@ public class ArcadeVehicleController : MonoBehaviour
     {
         if (on)
         {
-            //Make the brake light red
-            brakeLights[0].GetComponent<Renderer>().materials[2].color = Color.red;
-            brakeLights[1].GetComponent<Renderer>().materials[2].color = Color.red;
+            //Make the brake light the lit mat
+            brakeLights[0].GetComponent<Renderer>().materials[2] = litBrakeLightMat;
+            brakeLights[1].GetComponent<Renderer>().materials[2] = litBrakeLightMat;
         }
         else
         {
-            //Make the brake light grey
-            brakeLights[0].GetComponent<Renderer>().materials[2].color = Color.grey;
-            brakeLights[1].GetComponent<Renderer>().materials[2].color = Color.grey;
+            //Make the brake light the mat it used to be
+            brakeLights[0].GetComponent<Renderer>().materials[2] = ogBreakMat;
+            brakeLights[1].GetComponent<Renderer>().materials[2] = ogBreakMat;
         }
     }
 
