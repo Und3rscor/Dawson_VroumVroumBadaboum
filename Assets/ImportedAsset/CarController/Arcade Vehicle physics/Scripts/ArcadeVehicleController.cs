@@ -32,9 +32,12 @@ public class ArcadeVehicleController : MonoBehaviour
     public Transform[] RearWheels = new Transform[2];
     [HideInInspector] public Vector3 carVelocity;
     [Range(0, 10)] public float BodyTilt;
+    [SerializeField] private GameObject colorChangingParts;
     [SerializeField] private GameObject explosionParticleFX;
     [SerializeField] private GameObject[] brakeLights;
     [SerializeField] private GameObject nosFX;
+    public Color Color { get ; set; }
+    private Color color;
 
     //Audio Editor Setup
     [Header("Audio settings")]
