@@ -36,8 +36,8 @@ public class ArcadeVehicleController : MonoBehaviour
     [SerializeField] private GameObject explosionParticleFX;
     [SerializeField] private GameObject[] brakeLights;
     [SerializeField] private GameObject nosFX;
-    public Color Color { get ; set; }
-    private Color color;
+    //public Color Color { get ; set; }
+    [SerializeField] private Color color; //Unserialize when linked with main menu
 
     //Audio Editor Setup
     [Header("Audio settings")]
@@ -115,6 +115,12 @@ public class ArcadeVehicleController : MonoBehaviour
         NosToUI();
         HealthToUI();
         LivesToUI();
+
+        //Sets the color of the car
+        foreach (GameObject obj in colorChangingParts)
+        {
+            obj.GetComponent<MeshRenderer>().material.color = color;
+        }
     }
 
     // This function will recursively find all MeshRenderers in the children of the specified transform
