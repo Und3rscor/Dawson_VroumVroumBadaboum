@@ -37,7 +37,6 @@ public class ArcadeVehicleController : MonoBehaviour
     [Range(0, 10)] public float BodyTilt;
     [SerializeField] private GameObject explosionParticleFX;
     [SerializeField] private GameObject[] brakeLights;
-    [SerializeField] private Material litBrakeLightMat; //Doesn't work
     [SerializeField] private GameObject nosFX;
 
     //Audio Editor Setup
@@ -57,7 +56,7 @@ public class ArcadeVehicleController : MonoBehaviour
     private int currentLives;
     private bool deathAvailable;
     private float heat;
-    private Material ogBreakMat;
+    private Color ogBrakeColor;
 
     //Flip variables
     private bool flip = false;
@@ -110,7 +109,7 @@ public class ArcadeVehicleController : MonoBehaviour
         //Extra Setup
         nosFX.SetActive(false);
         ManageBrakeLights(false);
-        ogBreakMat = brakeLights[0].GetComponent<Renderer>().materials[2];
+        ogBrakeColor = brakeLights[0].GetComponent<Renderer>().materials[2].color;
 
         //UI Setup
         NosToUI();
@@ -441,14 +440,14 @@ public class ArcadeVehicleController : MonoBehaviour
         if (on)
         {
             //Make the brake light the lit mat
-            brakeLights[0].GetComponent<Renderer>().materials[2] = litBrakeLightMat;
-            brakeLights[1].GetComponent<Renderer>().materials[2] = litBrakeLightMat;
+            brakeLights[0].GetComponent<Renderer>().materials[2].color = Color.red;
+            brakeLights[1].GetComponent<Renderer>().materials[2].color = Color.red;
         }
         else
         {
             //Make the brake light the mat it used to be
-            brakeLights[0].GetComponent<Renderer>().materials[2] = ogBreakMat;
-            brakeLights[1].GetComponent<Renderer>().materials[2] = ogBreakMat;
+            brakeLights[0].GetComponent<Renderer>().materials[2].color = ogBrakeColor;
+            brakeLights[1].GetComponent<Renderer>().materials[2].color = ogBrakeColor;
         }
     }
 

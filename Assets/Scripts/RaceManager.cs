@@ -9,6 +9,8 @@ using static UnityEngine.Rendering.DebugUI;
 public class RaceManager : MonoBehaviour
 {
     [SerializeField] private Transform[] spawnpoints;
+
+    [Tooltip("Put the finish line at 0 and all other checkpoints in the order the players will encounter them")]
     [SerializeField] private GameObject[] checkpoints;
 
     //Gamemanager Instance
@@ -36,9 +38,6 @@ public class RaceManager : MonoBehaviour
     private bool gameOver = false;
 
     private bool paused = false;
-    
-    
-
 
     private void Start()
     {
