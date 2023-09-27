@@ -9,13 +9,14 @@ using static UnityEngine.Rendering.DebugUI;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Transform[] spawnpoints;
+    [SerializeField] private GameObject[] checkpoints;
 
     //Gamemanager Instance
     private static GameManager instance;
 
     public static GameManager Instance { get { return instance; } }
 
-    //Find the UI Manager
+    //Fetches
     private UI ui;
 
     //Alive variable
@@ -35,6 +36,8 @@ public class GameManager : MonoBehaviour
     private bool gameOver = false;
 
     private bool paused = false;
+    
+    
 
 
     private void Start()
@@ -48,6 +51,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        //Instance stuff
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
@@ -158,8 +162,8 @@ public class GameManager : MonoBehaviour
             //Changes the position of the player to their spawn point when they spawn
             player.transform.position = playerSpawnPoint.position;
 
-            //Changes the player's respawn position to their spawnpoint
-            player.RespawnManager.UpdateLastCheckpointPassed(playerSpawnPoint.position, playerSpawnPoint.rotation);
+            //Changes the player's checkpoint list to the list provided
+            player.RespawnManager.UpdateCheckpointList(checkpoints);
         }
         
         //Sets the camera LayerMask between "P1 Cam" to "P4 Cam" depending on the player ID

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,25 +7,41 @@ public class RespawnManager : MonoBehaviour
 {
     [Tooltip("How long does it take in seconds for the car to respawn")]
     public int respawnDelay;
-    private Vector3 lastCheckpointPassedPosition;
-    private Quaternion lastCheckpointPassedRotation;
 
-    void Start()
+    //Checkpoints
+    private GameObject[] checkpoints;
+
+    public int NextCheckpoint { get { return nextCheckpoint; } set { nextCheckpoint = value; } }
+    private int nextCheckpoint;
+
+    public int CurrentCheckpoint { get { return currentCheckpoint; } set { currentCheckpoint = value; } }
+    private int currentCheckpoint;
+
+    private void Start()
     {
-        lastCheckpointPassedPosition = transform.position;
+        nextCheckpoint = 1;
+        currentCheckpoint = 0;
     }
 
-    public void UpdateLastCheckpointPassed(Vector3 lastCheckpointPosition, Quaternion lastCheckpointRotation)
+    public void UpdateCheckpointList(GameObject[] managerCheckpoints)
     {
-        lastCheckpointPassedPosition = lastCheckpointPosition;
-        lastCheckpointPassedRotation = lastCheckpointRotation;
+        checkpoints = managerCheckpoints;
+    }
+
+    public void UpdateLastCheckpointPassed()
+    {
+        //Updates the current checkpoint
+        currentCheckpoint = nextCheckpoint;
+
+        //Updates the next checkpoint
+        nextCheckpoint = (nextCheckpoint + 1) % checkpoints.Length;
     }
 
     public void Respawn()
     {
         //Move the car to the lastCheckpointPassed
-        this.gameObject.transform.position = lastCheckpointPassedPosition;
-        this.gameObject.transform.rotation = lastCheckpointPassedRotation;
+        this.gameObject.transform.position = checkpoints[currentCheckpoint].gameObject.transform.position;
+        this.gameObject.transform.rotation = checkpoints[currentCheckpoint].gameObject.transform.rotation;
 
         //Tells the car to reenable itself
         GetComponent<ArcadeVehicleController>().CarRespawn();

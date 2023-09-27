@@ -21,9 +21,6 @@ public class UI : MonoBehaviour
     public int LapCounter { get { return lapCounter; } set { lapCounter = value; } }
     private int lapCounter = 0;
 
-    public bool LapAvailable { get { return lapAvailable; } set { lapAvailable = value; } }
-    private bool lapAvailable;
-    
     private TextMeshProUGUI lapCounterDisplay;
 
     //Scoreboard variables
