@@ -1113,7 +1113,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 928243675}
   m_LocalRotation: {x: 0.12761535, y: -0, z: -0, w: 0.99182373}
-  m_LocalPosition: {x: 0, y: 1.57, z: -6}
+  m_LocalPosition: {x: 0, y: 1.9625001, z: -7.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2695,7 +2695,7 @@ Transform:
   m_GameObject: {fileID: 1925981547900679601}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1925981546679070713}
@@ -2947,9 +2947,9 @@ MonoBehaviour:
   coolingMultiplier: 1.5
   flipBoost: 100
   spinSpeedDebuff: 0.9
-  MaxSpeed: 150
+  MaxSpeed: 175
   accelaration: 15
-  turn: 10
+  turn: 7.75
   gravity: 7
   drivableSurface:
     serializedVersion: 2
@@ -4158,7 +4158,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4878878110830888234}
   m_LocalRotation: {x: -0, y: 0.9674287, z: -0.25314385, w: 0}
-  m_LocalPosition: {x: 0, y: 3.0377262, z: 11.609144}
+  m_LocalPosition: {x: 0, y: 3.7971578, z: 14.51143}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
