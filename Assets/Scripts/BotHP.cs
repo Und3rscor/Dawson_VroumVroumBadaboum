@@ -22,7 +22,7 @@ public class BotHP : MonoBehaviour
     public void Die(ArcadeVehicleController source)
     {
         Instantiate(explosionParticleFX, transform.position, Quaternion.identity, null);
-        GameManager.Instance.Alive--;
+        RaceManager.Instance.Alive--;
 
         if (source != null)
         {

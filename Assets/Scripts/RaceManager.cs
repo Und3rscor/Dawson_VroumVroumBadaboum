@@ -6,15 +6,15 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static UnityEngine.Rendering.DebugUI;
 
-public class GameManager : MonoBehaviour
+public class RaceManager : MonoBehaviour
 {
     [SerializeField] private Transform[] spawnpoints;
     [SerializeField] private GameObject[] checkpoints;
 
     //Gamemanager Instance
-    private static GameManager instance;
+    private static RaceManager instance;
 
-    public static GameManager Instance { get { return instance; } }
+    public static RaceManager Instance { get { return instance; } }
 
     //Fetches
     private UI ui;

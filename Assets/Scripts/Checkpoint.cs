@@ -33,7 +33,7 @@ public class Checkpoint : MonoBehaviour
                     other.GetComponentInParent<ArcadeVehicleController>().RefillNos();
 
                     //If last one standing, end the game
-                    if (GameManager.Instance.Alive <= 1)
+                    if (RaceManager.Instance.Alive <= 1)
                     {
                         //Launch Scoreboard
                         //GameManager.Instance.GameOverDelay();
