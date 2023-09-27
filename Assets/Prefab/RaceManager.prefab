@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7880690509100429330}
   - component: {fileID: 7880690509100429329}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: RaceManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnpoints: []
+  checkpoints: []

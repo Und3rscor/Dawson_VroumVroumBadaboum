@@ -123,12 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &57697365 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3767473611950403095, guid: 902cb1459c15fec4b85e67b209668879,
-    type: 3}
-  m_PrefabInstance: {fileID: 5019254073291354660}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &60553187
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,12 +172,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &85510525 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3314136516592504527, guid: 685fb8c911a5c034cacb405b746bff51,
-    type: 3}
-  m_PrefabInstance: {fileID: 1585441436}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &95303789
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,12 +205,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &97148750 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3314136516592504527, guid: 685fb8c911a5c034cacb405b746bff51,
-    type: 3}
-  m_PrefabInstance: {fileID: 7442765615573930929}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &129258670 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b5b7ca449a178814a82acfdb7750a187,
@@ -350,12 +332,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 17aa86ef29c7b2541adefc9902c0033d,
     type: 3}
   m_PrefabInstance: {fileID: 1774948174}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &568021942 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8376465076156939662, guid: 4b6ebfd73e5da6c42a02f782579b85de,
-    type: 3}
-  m_PrefabInstance: {fileID: 8376465075250057574}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &696408635
 GameObject:
@@ -811,12 +787,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!4 &1283532617 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3767473612685137398, guid: 902cb1459c15fec4b85e67b209668879,
-    type: 3}
-  m_PrefabInstance: {fileID: 5019254073291354660}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1315749102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,18 +1115,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5339188481666194259, guid: 17aa86ef29c7b2541adefc9902c0033d, type: 3}
---- !u!4 &1776923540 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3767473613835604954, guid: 902cb1459c15fec4b85e67b209668879,
-    type: 3}
-  m_PrefabInstance: {fileID: 5019254073291354660}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1983849759 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3767473614010037016, guid: 902cb1459c15fec4b85e67b209668879,
-    type: 3}
-  m_PrefabInstance: {fileID: 5019254073291354660}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2042574250 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b5b7ca449a178814a82acfdb7750a187,
@@ -1405,58 +1363,8 @@ PrefabInstance:
     - target: {fileID: 7880690509100429328, guid: 73b7a26471d0bdd4d9c1ba30d87fbb48,
         type: 3}
       propertyPath: m_Name
-      value: GameManager
+      value: RaceManager
       objectReference: {fileID: 0}
-    - target: {fileID: 7880690509100429329, guid: 73b7a26471d0bdd4d9c1ba30d87fbb48,
-        type: 3}
-      propertyPath: checkpointsCount
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7880690509100429329, guid: 73b7a26471d0bdd4d9c1ba30d87fbb48,
-        type: 3}
-      propertyPath: checkpoints.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7880690509100429329, guid: 73b7a26471d0bdd4d9c1ba30d87fbb48,
-        type: 3}
-      propertyPath: spawnpoints.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7880690509100429329, guid: 73b7a26471d0bdd4d9c1ba30d87fbb48,
-        type: 3}
-      propertyPath: checkpoints.Array.data[0]
-      value: 
-      objectReference: {fileID: 568021942}
-    - target: {fileID: 7880690509100429329, guid: 73b7a26471d0bdd4d9c1ba30d87fbb48,
-        type: 3}
-      propertyPath: checkpoints.Array.data[1]
-      value: 
-      objectReference: {fileID: 97148750}
-    - target: {fileID: 7880690509100429329, guid: 73b7a26471d0bdd4d9c1ba30d87fbb48,
-        type: 3}
-      propertyPath: checkpoints.Array.data[2]
-      value: 
-      objectReference: {fileID: 85510525}
-    - target: {fileID: 7880690509100429329, guid: 73b7a26471d0bdd4d9c1ba30d87fbb48,
-        type: 3}
-      propertyPath: spawnpoints.Array.data[0]
-      value: 
-      objectReference: {fileID: 1283532617}
-    - target: {fileID: 7880690509100429329, guid: 73b7a26471d0bdd4d9c1ba30d87fbb48,
-        type: 3}
-      propertyPath: spawnpoints.Array.data[1]
-      value: 
-      objectReference: {fileID: 57697365}
-    - target: {fileID: 7880690509100429329, guid: 73b7a26471d0bdd4d9c1ba30d87fbb48,
-        type: 3}
-      propertyPath: spawnpoints.Array.data[2]
-      value: 
-      objectReference: {fileID: 1776923540}
-    - target: {fileID: 7880690509100429329, guid: 73b7a26471d0bdd4d9c1ba30d87fbb48,
-        type: 3}
-      propertyPath: spawnpoints.Array.data[3]
-      value: 
-      objectReference: {fileID: 1983849759}
     - target: {fileID: 7880690509100429330, guid: 73b7a26471d0bdd4d9c1ba30d87fbb48,
         type: 3}
       propertyPath: m_RootOrder
