@@ -159,7 +159,7 @@ public class ArcadeVehicleController : MonoBehaviour
             FindVFX(child);
         }
 
-        //SetupVFXColor(primaryColor, secondaryColor);
+        SetupVFXColor(primaryColor, secondaryColor);
     }
 
     //Sets the static color of the car
@@ -199,10 +199,25 @@ public class ArcadeVehicleController : MonoBehaviour
     //Sets the color gradient of the trail vfx
     private void SetupVFXColor(Color _primaryColor, Color _secondaryColor)
     {
+        //Creates a new gradient for the vfx
+        var gradient = new Gradient();
+
+        // Blend color from red at 0% to blue at 100%
+        var colors = new GradientColorKey[2];
+        colors[0] = new GradientColorKey(_primaryColor, 1.0f);
+        colors[1] = new GradientColorKey(_secondaryColor, 0.0f);
+
+        // Blend alpha from opaque at 0% to transparent at 100%
+        var alphas = new GradientAlphaKey[2];
+        alphas[0] = new GradientAlphaKey(1.0f, 0.0f);
+        alphas[1] = new GradientAlphaKey(0.0f, 1.0f);
+
+        gradient.SetKeys(colors, alphas);
+
         foreach (VisualEffect vfx in vfxList)
         {
-            //Sets the color gradient
-            //vfx.
+            //Sets the value of the gradient created above
+            vfx.SetGradient("SparksGradient", gradient);
         }
     }
 
@@ -231,7 +246,7 @@ public class ArcadeVehicleController : MonoBehaviour
         //Cooling stuff
         CoolingManager();
 
-        SetupColor(primaryColor, secondaryColor);
+        SetupVFXColor(primaryColor, secondaryColor);
     }
 
     private void InputManager()
