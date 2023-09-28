@@ -160,6 +160,12 @@ public class UI : MonoBehaviour
             active.SetActive(true);
         }
     }
+
+    public void Checkpoint()
+    {
+        score += 50;
+    }
+
     public void Lap()
     {
         lapCounter++;

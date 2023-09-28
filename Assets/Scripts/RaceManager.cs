@@ -59,71 +59,6 @@ public class RaceManager : MonoBehaviour
 
         instance = this;
     }
-
-    private void Screenshot()
-    {
-        ScreenCapture.CaptureScreenshot("screenshot.png");
-        Debug.Log("A screenshot was taken!");
-    }
-
-    //Removed stuff for alpha
-    /*
-    public void Restart()
-    {
-        //laps = 0;
-        gameOver = false;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void GameOverDelay()
-    {
-        Invoke("GameOver", 0.5f);
-    }
-
-    private void GameOver()
-    {
-        gameOver = true;
-
-        if (ui != null)
-        {
-            ui.UIRedraw(ui.gameOverUI);
-        }
-    }
-
-    private void Pause()
-    {
-        InputSystem.DisableAllEnabledActions();
-
-        paused = true;
-
-        if (ui != null)
-        {
-            ui.UIRedraw(ui.pauseUI);
-        }
-    }
-
-    public void Resume()
-    {
-        InputSystem.ResumeHaptics();
-        paused = false;
-
-        if (ui != null)
-        {
-            ui.UIRedraw(ui.gameUI);
-        }
-    }
-
-    public void FindUI()
-    {
-        ui = FindObjectOfType<UI>();
-    }
-
-    public void MainMenu()
-    {
-        SceneManager.LoadScene(0);
-    }
-    */
-
     private void Pause()
     {
         Time.timeScale = 0.0f;
@@ -132,6 +67,11 @@ public class RaceManager : MonoBehaviour
     private void Resume()
     {
         Time.timeScale = 1.0f;
+    }
+
+    public void FinishScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Setup()
@@ -157,8 +97,9 @@ public class RaceManager : MonoBehaviour
             //Sets the playerSpawnpoint to the spawnpoint it gets assigned
             Transform playerSpawnPoint = spawnpoints[playerID - 1];
 
-            //Changes the position of the player to their spawn point when they spawn
+            //Changes the position and rotation of the player to their spawn point when they spawn
             player.transform.position = playerSpawnPoint.position;
+            player.transform.rotation = playerSpawnPoint.rotation;
 
             //Changes the player's checkpoint list to the list provided
             player.RespawnManager.UpdateCheckpointList(checkpoints);

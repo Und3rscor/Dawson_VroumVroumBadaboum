@@ -17,10 +17,14 @@ public class RespawnManager : MonoBehaviour
     public int CurrentCheckpoint { get { return currentCheckpoint; } set { currentCheckpoint = value; } }
     private int currentCheckpoint;
 
+    private UI ui;
+
     private void Start()
     {
         nextCheckpoint = 1;
         currentCheckpoint = 0;
+
+        ui = GetComponentInChildren<UI>();
     }
 
     public void UpdateCheckpointList(GameObject[] managerCheckpoints)
@@ -35,6 +39,8 @@ public class RespawnManager : MonoBehaviour
 
         //Updates the next checkpoint
         nextCheckpoint = (nextCheckpoint + 1) % checkpoints.Length;
+
+        ui.Checkpoint();
     }
 
     public void Respawn()

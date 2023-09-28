@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e376c49307ff5674dbd247b12892d7cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkpointID: 0
 --- !u!1001 &5286039378011203162
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -161,17 +162,17 @@ PrefabInstance:
     - target: {fileID: 4423913989866073164, guid: 62b899cfccb7adb4bbeff3ba38a6c708,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4423913989866073164, guid: 62b899cfccb7adb4bbeff3ba38a6c708,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4423913989866073164, guid: 62b899cfccb7adb4bbeff3ba38a6c708,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4423913989866073164, guid: 62b899cfccb7adb4bbeff3ba38a6c708,
         type: 3}

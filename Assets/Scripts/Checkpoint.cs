@@ -36,7 +36,7 @@ public class Checkpoint : MonoBehaviour
                     if (RaceManager.Instance.Alive <= 1)
                     {
                         //Launch Scoreboard
-                        //GameManager.Instance.GameOverDelay();
+                        RaceManager.Instance.FinishScene();
                     }
                 }
             }
