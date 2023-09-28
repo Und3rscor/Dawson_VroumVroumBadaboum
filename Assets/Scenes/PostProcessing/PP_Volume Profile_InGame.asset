@@ -56,19 +56,19 @@ MonoBehaviour:
   active: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1.65
   intensity:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: 175
   scatter:
     m_OverrideState: 1
-    m_Value: 0.585
+    m_Value: 0.6
   clamp:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 10
   tint:
     m_OverrideState: 1
-    m_Value: {r: 0.14509805, g: 0.050980397, b: 0.427451, a: 1}
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
   highQualityFiltering:
     m_OverrideState: 1
     m_Value: 1
@@ -94,10 +94,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c23e3b12dc18c42a140437e53d3951, type: 3}
   m_Name: Tonemapping
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   mode:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 2
 --- !u!114 &-2481585639774956993
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899c54efeace73346a0a16faa3afe726, type: 3}
   m_Name: Vignette
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   color:
     m_OverrideState: 1
     m_Value: {r: 0.121568635, g: 0.10588236, b: 0.30980393, a: 1}
@@ -159,7 +159,7 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.209
+    m_Value: 0.471
   smoothness:
     m_OverrideState: 1
     m_Value: 0.197
@@ -242,14 +242,15 @@ MonoBehaviour:
   m_Name: PP_Volume Profile_InGame
   m_EditorClassIdentifier: 
   components:
-  - {fileID: -2440252868981698325}
+  - {fileID: -3754160186794659709}
+  - {fileID: 5989404978262048631}
   - {fileID: -5234620088752041906}
+  - {fileID: -2440252868981698325}
   - {fileID: -2481585639774956993}
   - {fileID: -30133869213411329}
   - {fileID: 9126908058551772276}
   - {fileID: 7458055443630913576}
   - {fileID: 6142789237193245862}
-  - {fileID: 5989404978262048631}
   - {fileID: 5952228907104340834}
   - {fileID: 7366644942201669700}
   - {fileID: -1310905341792872965}
@@ -257,7 +258,6 @@ MonoBehaviour:
   - {fileID: -8169293163464750427}
   - {fileID: 5497743284537811014}
   - {fileID: -6528849130509786566}
-  - {fileID: -3754160186794659709}
   - {fileID: -406831219964306647}
 --- !u!114 &5497743284537811014
 MonoBehaviour:
@@ -351,14 +351,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e021b4c809a781e468c2988c016ebbea, type: 3}
   m_Name: ColorLookup
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   texture:
     m_OverrideState: 1
-    m_Value: {fileID: 0}
+    m_Value: {fileID: 2800000, guid: 441d682ccfb4d7849826d1b167048c7d, type: 3}
     dimension: 1
   contribution:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.5
 --- !u!114 &6142789237193245862
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -632,7 +632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66f335fb1ffd8684294ad653bf1c7564, type: 3}
   m_Name: ColorAdjustments
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   postExposure:
     m_OverrideState: 1
     m_Value: 0.1
