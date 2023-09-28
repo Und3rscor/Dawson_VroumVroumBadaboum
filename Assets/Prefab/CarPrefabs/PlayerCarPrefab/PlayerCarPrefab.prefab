@@ -1113,7 +1113,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 928243675}
   m_LocalRotation: {x: 0.12761535, y: -0, z: -0, w: 0.99182373}
-  m_LocalPosition: {x: 0, y: 1.9625001, z: -7.5}
+  m_LocalPosition: {x: 0, y: 10.587501, z: -7.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3165,7 +3165,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925981548005914508}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -8.344072, z: 2.1833656}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4158,7 +4158,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4878878110830888234}
   m_LocalRotation: {x: -0, y: 0.9674287, z: -0.25314385, w: 0}
-  m_LocalPosition: {x: 0, y: 3.7971578, z: 14.51143}
+  m_LocalPosition: {x: 0, y: -4.546914, z: 16.694796}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4537,7 +4537,7 @@ VisualEffect:
       m_Array:
       - m_Value:
           serializedVersion: 2
-          key0: {r: 2.5922403, g: 0.25290105, b: 11.169811, a: 0}
+          key0: {r: 0.3529412, g: 0.039215688, b: 1.4980392, a: 0}
           key1: {r: 0.026241222, g: 0.76052475, b: 0.79129815, a: 1}
           key2: {r: 0, g: 5.329364, b: 6.4905663, a: 0.9577465}
           key3: {r: 0, g: 0.48570028, b: 0.81960785, a: 0}
@@ -5574,7 +5574,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8058790382377842065}
   m_LocalRotation: {x: -0, y: 0.7064697, z: -0, w: 0.70774335}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5616,8 +5616,8 @@ VisualEffect:
       m_Array:
       - m_Value:
           serializedVersion: 2
-          key0: {r: 0.63073605, g: 0.25229442, b: 2.0078433, a: 0}
-          key1: {r: 0.006862745, g: 0.19019608, b: 0.19803922, a: 1}
+          key0: {r: 0.47058824, g: 0.1882353, b: 1.4980392, a: 0}
+          key1: {r: 0.015686275, g: 0.3764706, b: 0.39215687, a: 1}
           key2: {r: 0, g: 5.329364, b: 6.4905663, a: 0.9577465}
           key3: {r: 0, g: 0.48570028, b: 0.81960785, a: 0}
           key4: {r: 0, g: 0, b: 0, a: 0}
@@ -6248,7 +6248,7 @@ VisualEffect:
       m_Array:
       - m_Value:
           serializedVersion: 2
-          key0: {r: 2.5922403, g: 0.25290105, b: 11.169811, a: 0}
+          key0: {r: 0.3529412, g: 0.039215688, b: 1.4980392, a: 0}
           key1: {r: 0.026241222, g: 0.76052475, b: 0.79129815, a: 1}
           key2: {r: 6.4905663, g: 0.55254155, b: 0, a: 0.9577465}
           key3: {r: 0.8201664, g: 0.06870504, b: 0, a: 0}

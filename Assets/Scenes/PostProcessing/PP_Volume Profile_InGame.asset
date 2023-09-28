@@ -354,7 +354,7 @@ MonoBehaviour:
   active: 1
   texture:
     m_OverrideState: 1
-    m_Value: {fileID: 2800000, guid: 441d682ccfb4d7849826d1b167048c7d, type: 3}
+    m_Value: {fileID: 2800000, guid: ba71c959b59290f40b8873caa6ebfc85, type: 3}
     dimension: 1
   contribution:
     m_OverrideState: 1
