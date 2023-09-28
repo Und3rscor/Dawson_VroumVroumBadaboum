@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SocialPlatforms.Impl;
@@ -118,16 +119,22 @@ public class UI : MonoBehaviour
 
         if (gameOverUI != null)
         {
-            //Modify Respawn Timer value
-            if (respawnTimer > 1)
+            if (livesCounter >= 0)
             {
-                respawnTimerDisplay.text = "Respawning in: " + respawnTimer + " seconds";
+                //Modify Respawn Timer value
+                if (respawnTimer > 1)
+                {
+                    respawnTimerDisplay.text = "Respawning in: " + respawnTimer + " seconds";
+                }
+                else
+                {
+                    respawnTimerDisplay.text = "Respawning in: " + respawnTimer + " second";
+                }
             }
             else
             {
-                respawnTimerDisplay.text = "Respawning in: " + respawnTimer + " second";
+                respawnTimerDisplay.text = "GAME OVER";
             }
-            
         }
     }
 

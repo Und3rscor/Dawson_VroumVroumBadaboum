@@ -246,7 +246,10 @@ public class ArcadeVehicleController : MonoBehaviour
         //Cooling stuff
         CoolingManager();
 
-        SetupVFXColor(primaryColor, secondaryColor);
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            BlowUp(null);
+        }
     }
 
     private void InputManager()
@@ -578,31 +581,30 @@ public class ArcadeVehicleController : MonoBehaviour
             //Does the explosionFX
             Instantiate(explosionParticleFX, transform.position, Quaternion.identity, null);
 
-            if (currentLives > 1)
+            //Spawns a dead car
+
+            //Removes velocity
+            rb.velocity = Vector3.zero;
+
+            //Remove 1 life
+            currentLives--;
+
+            //Relays to UI
+            LivesToUI();
+
+            if (currentLives >= 0)
             {
-                //Remove 1 life
-                currentLives--;
-
-                //Relays to UI
-                LivesToUI();
-
-                //Switch to GameOverUI
-                ui.UIRedraw(ui.gameOverUI);
-
-                //Spawns a dead car
-
                 //Starts countdown until respawn
                 StartCoroutine(RespawnCountdown(respawnManager.respawnDelay));
             }
-            //COMMENTED FOR DEV TESTS PLZ REMOVE ON RELEASE
-            /*else
+            else
             {
                 //Removes player from alive counter
-                GameManager.Instance.Alive--;
+                RaceManager.Instance.Alive--;
+            }
 
-                //Deletes the player
-                Destroy(gameObject);
-            }*/
+            //Switch to GameOverUI
+            ui.UIRedraw(ui.gameOverUI);
         }
     }
 

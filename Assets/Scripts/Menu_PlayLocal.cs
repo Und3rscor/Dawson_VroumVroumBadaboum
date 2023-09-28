@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Menu_PlayLocal : MonoBehaviour
 {
@@ -41,7 +42,7 @@ public class Menu_PlayLocal : MonoBehaviour
         // Toggle the car selection menu's visibility
         if (Input.GetKeyDown(KeyCode.A))
         {            
-            
+
         }
     }
 
