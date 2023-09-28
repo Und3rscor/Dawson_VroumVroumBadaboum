@@ -36,6 +36,7 @@ public class ArcadeVehicleController : MonoBehaviour
     [Range(0, 10)] public float BodyTilt;
     [SerializeField] private GameObject explosionParticleFX;
     [SerializeField] private GameObject[] brakeLights;
+    [SerializeField] private Material brakeLightMat;
     [SerializeField] private GameObject nosFX;
     [SerializeField] private Color primaryColor;
     [SerializeField] private Color secondaryColor;
@@ -58,7 +59,7 @@ public class ArcadeVehicleController : MonoBehaviour
     private int currentLives;
     private bool deathAvailable;
     private float heat;
-    private Color ogBrakeColor;
+    private Material ogBrakeMat;
 
     //Flip variables
     private bool flip = false;
@@ -113,7 +114,7 @@ public class ArcadeVehicleController : MonoBehaviour
         //Extra Setup
         nosFX.SetActive(false);
         ManageBrakeLights(false);
-        ogBrakeColor = brakeLights[0].GetComponent<Renderer>().materials[2].color;
+        ogBrakeMat = brakeLights[0].GetComponent<Renderer>().materials[2];
 
         //UI Setup
         NosToUI();
@@ -139,7 +140,7 @@ public class ArcadeVehicleController : MonoBehaviour
             FindMeshRenderers(child);
         }
 
-        //SetupColor(primaryColor, secondaryColor);
+        SetupColor(primaryColor, secondaryColor);
     }
 
     private void FindVFX(Transform parentTransform)
@@ -180,14 +181,9 @@ public class ArcadeVehicleController : MonoBehaviour
                 }
 
                 // Changes all the base neon mat of the car to the chosen neon mat
-                else if (mat.name == "Synthwave_neon_base (Instance)")
+                if (mat.name == "Synthwave_neon_base (Instance)")
                 {
                     materials[i].color = _secondaryColor; // Modify the material in the array
-                }
-
-                else
-                {
-                    //Change nothing
                 }
             }
 
@@ -492,19 +488,27 @@ public class ArcadeVehicleController : MonoBehaviour
 
     private void ManageBrakeLights(bool on)
     {
+        Material[] brakeLightMaterials0 = brakeLights[0].GetComponent<Renderer>().materials;
+        Material[] brakeLightMaterials1 = brakeLights[1].GetComponent<Renderer>().materials;
+
         if (on)
         {
-            //Make the brake light the lit mat
-            brakeLights[0].GetComponent<Renderer>().materials[2].color = Color.red;
-            brakeLights[1].GetComponent<Renderer>().materials[2].color = Color.red;
+            // Make the second material of both brake lights the lit mat
+            brakeLightMaterials0[2] = brakeLightMat;
+            brakeLightMaterials1[2] = brakeLightMat;
         }
         else
         {
-            //Make the brake light the mat it used to be
-            brakeLights[0].GetComponent<Renderer>().materials[2].color = ogBrakeColor;
-            brakeLights[1].GetComponent<Renderer>().materials[2].color = ogBrakeColor;
+            // Make the second material of both brake lights the mat it used to be
+            brakeLightMaterials0[2] = ogBrakeMat;
+            brakeLightMaterials1[2] = ogBrakeMat;
         }
+
+        // Assign the modified materials arrays back to the Renderers
+        brakeLights[0].GetComponent<Renderer>().materials = brakeLightMaterials0;
+        brakeLights[1].GetComponent<Renderer>().materials = brakeLightMaterials1;
     }
+
 
     public void TakeDamage(int damageTaken, ArcadeVehicleController damageSource)
     {

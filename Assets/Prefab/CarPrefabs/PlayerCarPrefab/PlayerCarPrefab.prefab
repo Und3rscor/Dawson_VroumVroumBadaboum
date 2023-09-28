@@ -2193,14 +2193,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 746246607567745799}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: -0.96}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.9600005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2694004639094525554}
   m_Father: {fileID: 1925981547917128440}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &791549306465544728
 GameObject:
@@ -3031,9 +3031,10 @@ MonoBehaviour:
   brakeLights:
   - {fileID: 1920849819573947518}
   - {fileID: 367454050909663711}
+  brakeLightMat: {fileID: 2100000, guid: 7494c73eb2406874486700e503f78330, type: 2}
   nosFX: {fileID: 8046189567934495814}
-  primaryColor: {r: 0.011764706, g: 1, b: 0, a: 0}
-  secondaryColor: {r: 0.007843138, g: 0, b: 1, a: 0}
+  primaryColor: {r: 1, g: 0, b: 0, a: 1}
+  secondaryColor: {r: 0.023529412, g: 1, b: 0, a: 1}
   VFX: {fileID: 5084440743900039458}
   engineSound: {fileID: 1925981547900679247}
   minPitch: 0.3
@@ -3113,9 +3114,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8802295971099592225}
   - {fileID: 397750503894938440}
   - {fileID: 388816666154598891}
+  - {fileID: 8802295971099592225}
   m_Father: {fileID: 1925981547900679243}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -4228,14 +4229,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5084440743900039458}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.38, z: -1.04}
-  m_LocalScale: {x: 50, y: 50.000004, z: 50.000004}
+  m_LocalPosition: {x: 0, y: 0.38000035, z: -0.9000006}
+  m_LocalScale: {x: 50, y: 50, z: 50}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4442690421811070505}
   - {fileID: 2131608604807381507}
   m_Father: {fileID: 1925981547917128440}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &5528528513534131282
 GameObject:
@@ -4537,9 +4538,9 @@ VisualEffect:
       m_Array:
       - m_Value:
           serializedVersion: 2
-          key0: {r: 2.5922403, g: 0.25290105, b: 11.169811, a: 0}
+          key0: {r: 14.912573, g: 14.912573, b: 14.912573, a: 0}
           key1: {r: 0.026241222, g: 0.76052475, b: 0.79129815, a: 1}
-          key2: {r: 0, g: 5.329364, b: 6.4905663, a: 0.9577465}
+          key2: {r: 0.026241302, g: 0.76052475, b: 0.7912979, a: 0.9577465}
           key3: {r: 0, g: 0.48570028, b: 0.81960785, a: 0}
           key4: {r: 0, g: 0, b: 0, a: 0}
           key5: {r: 0, g: 0.13326883, b: 1, a: 0}
@@ -4547,7 +4548,7 @@ VisualEffect:
           key7: {r: 0.4765174, g: 0.754717, b: 0, a: 0}
           ctime0: 6357
           ctime1: 42991
-          ctime2: 19082
+          ctime2: 44140
           ctime3: 40285
           ctime4: 56861
           ctime5: 40285
@@ -4562,7 +4563,7 @@ VisualEffect:
           atime6: 0
           atime7: 0
           m_Mode: 0
-          m_NumColorKeys: 2
+          m_NumColorKeys: 3
           m_NumAlphaKeys: 4
         m_Name: SparksGradient
         m_Overridden: 1
@@ -5616,8 +5617,8 @@ VisualEffect:
       m_Array:
       - m_Value:
           serializedVersion: 2
-          key0: {r: 0.63073605, g: 0.25229442, b: 2.0078433, a: 0}
-          key1: {r: 0.006862745, g: 0.19019608, b: 0.19803922, a: 1}
+          key0: {r: 2.6806285, g: 2.6806285, b: 2.6806285, a: 0}
+          key1: {r: 1, g: 1, b: 1, a: 1}
           key2: {r: 0, g: 5.329364, b: 6.4905663, a: 0.9577465}
           key3: {r: 0, g: 0.48570028, b: 0.81960785, a: 0}
           key4: {r: 0, g: 0, b: 0, a: 0}
@@ -5808,7 +5809,7 @@ Transform:
   - {fileID: 7388933166778695668}
   - {fileID: 6046336968880902911}
   m_Father: {fileID: 1925981547917128440}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5586664871135627652
 MeshFilter:
@@ -6248,8 +6249,8 @@ VisualEffect:
       m_Array:
       - m_Value:
           serializedVersion: 2
-          key0: {r: 2.5922403, g: 0.25290105, b: 11.169811, a: 0}
-          key1: {r: 0.026241222, g: 0.76052475, b: 0.79129815, a: 1}
+          key0: {r: 14.912573, g: 14.912573, b: 14.912573, a: 0}
+          key1: {r: 1, g: 1, b: 1, a: 1}
           key2: {r: 6.4905663, g: 0.55254155, b: 0, a: 0.9577465}
           key3: {r: 0.8201664, g: 0.06870504, b: 0, a: 0}
           key4: {r: 0, g: 0, b: 0, a: 0}
