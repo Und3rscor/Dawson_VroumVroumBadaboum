@@ -69,7 +69,7 @@ public class RaceManager : MonoBehaviour
 
     private void Update()
     {
-        if (alive <= 0)
+        if (alive <= 0 && totalAlive >= 1)
         {
             FinishScene();
         }

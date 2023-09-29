@@ -133,6 +133,7 @@ public class UI : MonoBehaviour
             else
             {
                 respawnTimerDisplay.text = "GAME OVER";
+                GetComponentInParent<ArcadeVehicleController>().RiBy.isKinematic = true;
             }
         }
     }
