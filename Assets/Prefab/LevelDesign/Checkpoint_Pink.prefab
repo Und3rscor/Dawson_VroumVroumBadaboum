@@ -32,6 +32,7 @@ Transform:
   - {fileID: 6971777392748395685}
   - {fileID: 6971777393112357033}
   - {fileID: 3314136516592504524}
+  - {fileID: 8628042469877109593}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -317,6 +318,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TRACK_Checkpoint_dynamic_outside_neon_v1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: eab10968927561b419511bab7f940809,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eab10968927561b419511bab7f940809, type: 3}
 --- !u!4 &6971777392748395685 stripped
@@ -324,4 +330,94 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: eab10968927561b419511bab7f940809,
     type: 3}
   m_PrefabInstance: {fileID: 7442765615147817806}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8085737681331369138
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7442765615633392170}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 2899deca330ea0149a03ff89b42f3a0f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2899deca330ea0149a03ff89b42f3a0f,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2899deca330ea0149a03ff89b42f3a0f,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2899deca330ea0149a03ff89b42f3a0f,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2899deca330ea0149a03ff89b42f3a0f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2899deca330ea0149a03ff89b42f3a0f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2899deca330ea0149a03ff89b42f3a0f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2899deca330ea0149a03ff89b42f3a0f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2899deca330ea0149a03ff89b42f3a0f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000021855694
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2899deca330ea0149a03ff89b42f3a0f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2899deca330ea0149a03ff89b42f3a0f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2899deca330ea0149a03ff89b42f3a0f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2899deca330ea0149a03ff89b42f3a0f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2899deca330ea0149a03ff89b42f3a0f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2899deca330ea0149a03ff89b42f3a0f,
+        type: 3}
+      propertyPath: m_Name
+      value: TRACK_Checkpoint_dynamic_neon_v2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2899deca330ea0149a03ff89b42f3a0f, type: 3}
+--- !u!4 &8628042469877109593 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2899deca330ea0149a03ff89b42f3a0f,
+    type: 3}
+  m_PrefabInstance: {fileID: 8085737681331369138}
   m_PrefabAsset: {fileID: 0}
