@@ -2939,7 +2939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLives: 1
-  maxHealth: 100
+  maxHealth: 75
   nosCapacity: 50
   nosSpeedBoost: 3
   coolingMultiplier: 2
@@ -5318,7 +5318,7 @@ MonoBehaviour:
   spread: 1
   heatPerShot: 10
   shootDelay: 0.1
-  projectile: {fileID: 100002, guid: c2f9c173dc9aaab45a4a4cc86e403ef6, type: 3}
+  projectile: {fileID: 100002, guid: ad5b0fca46d3e1a42b424b034790acb5, type: 3}
   muzzleFlash: {fileID: 0}
   shootSound: {fileID: 8954514795026982769}
   attackPoints:
