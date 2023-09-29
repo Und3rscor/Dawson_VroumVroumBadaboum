@@ -45,9 +45,13 @@ public class RespawnManager : MonoBehaviour
 
     public void Respawn()
     {
+        //Creates a new checkpoint rotation based on the local rotation of the respawn point. Makes it easier to use them
+        Quaternion spawnRotation = Quaternion.Euler(checkpoints[currentCheckpoint].gameObject.transform.localRotation.eulerAngles);
+
         //Move the car to the lastCheckpointPassed
         this.gameObject.transform.position = checkpoints[currentCheckpoint].gameObject.transform.position;
-        this.gameObject.transform.rotation = checkpoints[currentCheckpoint].gameObject.transform.rotation;
+        this.gameObject.transform.rotation = spawnRotation;
+        Debug.Log(checkpoints[currentCheckpoint].gameObject.transform.localRotation.eulerAngles);
 
         //Tells the car to reenable itself
         GetComponent<ArcadeVehicleController>().CarRespawn();
