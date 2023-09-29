@@ -2938,11 +2938,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2d69c44041501f4aab1c355410d67b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLives: 3
+  maxLives: 1
   maxHealth: 100
-  nosCapacity: 75
+  nosCapacity: 50
   nosSpeedBoost: 3
-  coolingMultiplier: 1.5
+  coolingMultiplier: 2
   flipBoost: 100
   spinSpeedDebuff: 0.9
   MaxSpeed: 175
@@ -5315,7 +5315,7 @@ MonoBehaviour:
   shootForce: 700
   projectileLifespan: 3
   spread: 1
-  heatPerShot: 25
+  heatPerShot: 10
   shootDelay: 0.1
   projectile: {fileID: 100002, guid: c2f9c173dc9aaab45a4a4cc86e403ef6, type: 3}
   muzzleFlash: {fileID: 0}
