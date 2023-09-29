@@ -232,7 +232,6 @@ public class ArcadeVehicleController : MonoBehaviour
         NosController();
 
         //Flip stuff
-        FlipController();
         modelAnimator.SetBool("FrontFlip", flip);
         if (grounded())
         {
@@ -260,13 +259,21 @@ public class ArcadeVehicleController : MonoBehaviour
             SpinAction(true);
         }
 
+        //Spin return
         if (playerInput.actions["Spin"].WasReleasedThisFrame())
         {
             SpinAction(false);
         }
 
+        //Flip
+        if (playerInput.actions["Flip"].WasPressedThisFrame() && !grounded() && !flip && flipAvailable)
+        {
+            flip = true;
+            flipAvailable = false;
+            Invoke("FlipBoost", 0.3f);
+        }
+
         ///Nos input is handled in the NosController
-        ///Flip input is handles in the FlipController
     }
 
     public void AudioManager()
@@ -438,25 +445,10 @@ public class ArcadeVehicleController : MonoBehaviour
         ui.NosCounter = Mathf.FloorToInt(currentNos);
     }
 
-    private void FlipController()
-    {
-        if (playerInput.actions["Flip"].WasPressedThisFrame() && !grounded() && !flip && flipAvailable)
-        {
-            flip = true;
-            flipAvailable = false;
-        }
-
-        if (playerInput.actions["Flip"].WasReleasedThisFrame() && !grounded() && flip)
-        {
-            flip = false;
-
-            Invoke("FlipBoost", 0.3f);
-        }
-    }
-
     private void FlipBoost()
     {
         rb.AddForce(transform.forward * flipBoost, ForceMode.Impulse);
+        flip = false;
     }
 
     //Controls the spin move
