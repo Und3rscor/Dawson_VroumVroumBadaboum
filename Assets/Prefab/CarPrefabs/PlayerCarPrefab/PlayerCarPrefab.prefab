@@ -5310,7 +5310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343c58f0f7e3a3d458a427bf96abd7db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 25
   damageRandomRange: 0
   shootForce: 700
   projectileLifespan: 3
