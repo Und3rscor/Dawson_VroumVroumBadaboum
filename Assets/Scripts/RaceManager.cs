@@ -66,6 +66,14 @@ public class RaceManager : MonoBehaviour
 
         instance = this;
     }
+
+    private void Update()
+    {
+        if (alive <= 0)
+        {
+            FinishScene();
+        }
+    }
     private void Pause()
     {
         Time.timeScale = 0.0f;
