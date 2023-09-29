@@ -62,6 +62,7 @@ public class ArcadeVehicleController : MonoBehaviour
     private Material ogBrakeMat;
 
     //Flip variables
+    public bool Flip { get; }
     private bool flip = false;
     private bool flipAvailable;
 
