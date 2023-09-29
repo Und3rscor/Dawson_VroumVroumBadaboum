@@ -13,6 +13,12 @@ public class RaceManager : MonoBehaviour
     [Tooltip("Put the finish line at 0 and all other checkpoints in the order the players will encounter them")]
     [SerializeField] private GameObject[] checkpoints;
 
+    //Bump
+    public float BumpForce { get { return bumpForce; } }
+    public float BumpTorque { get { return bumpTorque; } }
+    [SerializeField] private float bumpForce;
+    [SerializeField] private float bumpTorque;
+
     //Gamemanager Instance
     private static RaceManager instance;
 

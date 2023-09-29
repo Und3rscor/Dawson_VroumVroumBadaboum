@@ -1647,6 +1647,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7880690509100429329, guid: 73b7a26471d0bdd4d9c1ba30d87fbb48,
         type: 3}
+      propertyPath: bumpForce
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7880690509100429329, guid: 73b7a26471d0bdd4d9c1ba30d87fbb48,
+        type: 3}
+      propertyPath: bumpTorque
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7880690509100429329, guid: 73b7a26471d0bdd4d9c1ba30d87fbb48,
+        type: 3}
       propertyPath: checkpoints.Array.size
       value: 3
       objectReference: {fileID: 0}

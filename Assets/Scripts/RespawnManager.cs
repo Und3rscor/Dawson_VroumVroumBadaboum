@@ -51,7 +51,6 @@ public class RespawnManager : MonoBehaviour
         //Move the car to the lastCheckpointPassed
         this.gameObject.transform.position = checkpoints[currentCheckpoint].gameObject.transform.position;
         this.gameObject.transform.rotation = spawnRotation;
-        Debug.Log(checkpoints[currentCheckpoint].gameObject.transform.localRotation.eulerAngles);
 
         //Tells the car to reenable itself
         GetComponent<ArcadeVehicleController>().CarRespawn();

@@ -60,6 +60,7 @@ public class ArcadeVehicleController : MonoBehaviour
     private bool deathAvailable;
     private float heat;
     private Material ogBrakeMat;
+    public Rigidbody RiBy { get { return rb; } }
 
     //Flip variables
     public bool Flip { get; }
