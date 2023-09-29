@@ -3027,7 +3027,7 @@ MonoBehaviour:
   RearWheels: []
   carVelocity: {x: 0, y: 0, z: 0}
   BodyTilt: 10
-  explosionParticleFX: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664,
+  explosionParticleFX: {fileID: 431774196263593362, guid: bcc490ce2c01a40418685b18387d7e00,
     type: 3}
   brakeLights:
   - {fileID: 1920849819573947518}
