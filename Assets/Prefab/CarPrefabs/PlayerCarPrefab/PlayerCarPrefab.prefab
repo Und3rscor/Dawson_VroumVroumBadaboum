@@ -3035,6 +3035,7 @@ MonoBehaviour:
   nosFX: {fileID: 8046189567934495814}
   primaryColor: {r: 1, g: 0, b: 0, a: 1}
   secondaryColor: {r: 0.023529412, g: 1, b: 0, a: 1}
+  randomColors: 1
   VFX: {fileID: 5084440743900039458}
   engineSound: {fileID: 1925981547900679247}
   minPitch: 0.3

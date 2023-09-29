@@ -1,4 +1,5 @@
 using Cinemachine;
+using Michsky.UI.ModernUIPack;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -109,6 +110,12 @@ public class RaceManager : MonoBehaviour
 
             //Changes the player's checkpoint list to the list provided
             player.RespawnManager.UpdateCheckpointList(checkpoints);
+
+            //Gives the player car a random color
+            if (player.RandomColor)
+            {
+                player.SetupColor(RandomColor(), RandomColor());
+            }
         }
         
         //Sets the camera LayerMask between "P1 Cam" to "P4 Cam" depending on the player ID
@@ -131,6 +138,14 @@ public class RaceManager : MonoBehaviour
 
         //This is just so that there are no duplicate player IDs
         playerID++;
+    }
+
+    private Color RandomColor()
+    {
+        Color[] colors = { Color.black, Color.blue, Color.cyan, Color.gray, Color.green, Color.magenta, Color.red, Color.white, Color.yellow };
+        int randomIndex = Random.Range(0, colors.Length);
+
+        return colors[randomIndex];
     }
 
     private void ChangeCameraCulling(Camera brain)

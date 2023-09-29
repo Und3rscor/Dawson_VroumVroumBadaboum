@@ -40,6 +40,7 @@ public class ArcadeVehicleController : MonoBehaviour
     [SerializeField] private GameObject nosFX;
     [SerializeField] private Color primaryColor;
     [SerializeField] private Color secondaryColor;
+    [SerializeField] private bool randomColors;
     [SerializeField] private GameObject VFX;
 
     //Audio Editor Setup
@@ -60,7 +61,6 @@ public class ArcadeVehicleController : MonoBehaviour
     private bool deathAvailable;
     private float heat;
     private Material ogBrakeMat;
-    public Rigidbody RiBy { get { return rb; } }
 
     //Flip variables
     public bool Flip { get; }
@@ -85,7 +85,8 @@ public class ArcadeVehicleController : MonoBehaviour
     //Relay
     public UI UI { get { return ui; } }
     public RespawnManager RespawnManager { get { return respawnManager; } }
-
+    public Rigidbody RiBy { get { return rb; } }
+    public bool RandomColor { get { return randomColors; } }
     public float Heat { get { return heat; } set { heat = value; } }
 
     //Inputs
@@ -142,7 +143,7 @@ public class ArcadeVehicleController : MonoBehaviour
             FindMeshRenderers(child);
         }
 
-        SetupColor(primaryColor, secondaryColor);
+        //SetupColor(primaryColor, secondaryColor);
     }
 
     private void FindVFX(Transform parentTransform)
@@ -162,10 +163,10 @@ public class ArcadeVehicleController : MonoBehaviour
             FindVFX(child);
         }
 
-        SetupVFXColor(primaryColor, secondaryColor);
+        //SetupVFXColor(primaryColor, secondaryColor);
     }
 
-    //Sets the static color of the car
+    //Sets the color of the car body and the gradient of the trail vfx
     public void SetupColor(Color _primaryColor, Color _secondaryColor)
     {
         foreach (MeshRenderer meshRenderer in meshRendererList)
@@ -192,11 +193,7 @@ public class ArcadeVehicleController : MonoBehaviour
             // Assign the modified materials array back to the meshRenderer
             meshRenderer.materials = materials;
         }
-    }
 
-    //Sets the color gradient of the trail vfx
-    private void SetupVFXColor(Color _primaryColor, Color _secondaryColor)
-    {
         //Creates a new gradient for the vfx
         var gradient = new Gradient();
 
@@ -216,6 +213,12 @@ public class ArcadeVehicleController : MonoBehaviour
         {
             //Sets the value of the gradient created above
             vfx.SetGradient("SparksGradient", gradient);
+        }
+
+        if (randomColors)
+        {
+            primaryColor = _primaryColor;
+            secondaryColor = _secondaryColor;
         }
     }
 
