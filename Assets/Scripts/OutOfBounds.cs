@@ -10,10 +10,5 @@ public class OutOfBounds : MonoBehaviour
         {
             other.GetComponentInParent<ArcadeVehicleController>().BlowUp(null);
         }
-
-        if (other.transform.tag == "Bot")
-        {
-            other.GetComponentInParent<BotHP>().Die(null);
-        }
     }
 }

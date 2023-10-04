@@ -47,11 +47,6 @@ public class Projectile : MonoBehaviour
                 coll.gameObject.GetComponentInParent<ArcadeVehicleController>().TakeDamage(damage, source);
                 Die();
             }
-            else if (coll.transform.tag == "Bot")
-            {
-                coll.gameObject.GetComponentInParent<BotHP>().TakeDamage(damage, source);
-                Die();
-            }
             else
             {
                 DestroyObj();
