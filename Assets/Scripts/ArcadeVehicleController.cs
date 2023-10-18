@@ -233,9 +233,6 @@ public class ArcadeVehicleController : MonoBehaviour
         speedometer = (int)Mathf.Round(Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.z));
         ui.Speedometer = speedometer;
 
-        //Nos stuff
-        NosController();
-
         //Flip stuff
         modelAnimator.SetBool("FrontFlip", flip);
         if (grounded())
@@ -278,7 +275,11 @@ public class ArcadeVehicleController : MonoBehaviour
             Invoke("FlipBoost", 0.3f);
         }
 
-        ///Nos input is handled in the NosController
+        //Nos
+        if (horizontalInput != 0 || verticalInput != 0)
+        {
+            NosController();
+        }
     }
 
     public void AudioManager()
@@ -417,17 +418,17 @@ public class ArcadeVehicleController : MonoBehaviour
 
     private void NosController()
     {
-        if (playerInput.actions["Boost"].WasPerformedThisFrame() && !spin)
+        //Activates boost when the boost is pressed while you have enough nos in the capacity, you're not spinning and going forward
+        if (playerInput.actions["Boost"].IsPressed() && currentNos > 0 && !spin && verticalInput > 0)
         {
-            if (currentNos > 0)
+            //Activates the nos
+            if (!nosFX.activeInHierarchy)
             {
                 accelaration = accelaration * nosSpeedBoost;
                 nosFX.SetActive(true);
+                Debug.Log("Activated");
             }
-        }
 
-        if (playerInput.actions["Boost"].IsPressed() && currentNos > 0 && !spin)
-        {
             currentNos -= 10.0f * Time.deltaTime;
             NosToUI();
         }
