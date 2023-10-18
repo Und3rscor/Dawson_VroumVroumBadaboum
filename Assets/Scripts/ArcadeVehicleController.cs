@@ -42,6 +42,7 @@ public class ArcadeVehicleController : MonoBehaviour
     [SerializeField] private Color secondaryColor;
     [SerializeField] private bool randomColors;
     [SerializeField] private GameObject VFX;
+    [SerializeField] private GameObject playerPositionArrow;
 
     //Audio Editor Setup
     [Header("Audio settings")]
@@ -581,7 +582,8 @@ public class ArcadeVehicleController : MonoBehaviour
             flip = false;
 
             //Does the explosionFX
-            Instantiate(explosionParticleFX, transform.position, Quaternion.identity, null);
+            GameObject explosion = Instantiate(explosionParticleFX, transform.position, Quaternion.identity, null);
+            Destroy(explosion, 5.0f);
 
             //Spawns a dead car
 
@@ -656,6 +658,15 @@ public class ArcadeVehicleController : MonoBehaviour
         {
             meshRenderers.enabled = toggle;
         }
+
+        //Toggles visual effects
+        foreach (VisualEffect visualEffect in vfxList)
+        {
+            visualEffect.enabled = toggle;
+        }
+
+        //Toggles PlayerPositionArrow
+        playerPositionArrow.SetActive(toggle);
 
         //Toggles engine sound so the car doesn't make sounds while dead
         engineSound.enabled = toggle;
