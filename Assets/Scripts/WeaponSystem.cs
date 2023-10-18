@@ -87,7 +87,7 @@ public class WeaponSystem : MonoBehaviour
         Vector3 attackPoint = currentAttackPoint.position + -transform.up * 1.25f;
 
         //Spawns the projectile
-        SpawnProjectile(attackPoint, Quaternion.Euler(Vector3.zero));
+        SpawnProjectile(attackPoint, Quaternion.LookRotation(-transform.up));
 
         //Do gunshot
         if (shootSound != null)
@@ -115,16 +115,18 @@ public class WeaponSystem : MonoBehaviour
         //Grabs projectile script to apply stats
         Projectile currentProjectileScript = currentProjectile.GetComponent<Projectile>();
 
-        //Apply Stats
-        currentProjectileScript.damage = damage + Random.Range(-damageRandomRange, damageRandomRange);  //Damage
-        currentProjectileScript.source = GetComponentInParent<ArcadeVehicleController>();               //Source
-        currentProjectileScript.lifespan = projectileLifespan;                                          //Lifespan
+        //Sets up projectile stats
+        int damageWithRandomValues = damage + Random.Range(-damageRandomRange, damageRandomRange);  //Damage
+        ArcadeVehicleController source = GetComponentInParent<ArcadeVehicleController>();           //Source
 
-            //Spread
-            float spreadX = Random.Range(-spread, spread);  //Random x spread
-            float spreadY = Random.Range(-spread, spread);  //Random y spread  
-            float spreadZ = Random.Range(-spread, spread);  //Random z spread
-            Vector3 currentSpread = new Vector3(spreadX, spreadY, spreadZ) / 100; //Creates the spread value divided by 100
+        //Applies stats
+        currentProjectileScript.Setup(projectileLifespan, damageWithRandomValues, source);
+
+        //Spread
+        float spreadX = Random.Range(-spread, spread);  //Random x spread
+        float spreadY = Random.Range(-spread, spread);  //Random y spread  
+        float spreadZ = Random.Range(-spread, spread);  //Random z spread
+        Vector3 currentSpread = new Vector3(spreadX, spreadY, spreadZ) / 100; //Creates the spread value divided by 100 for ease of manipulation with the inspector
 
         //Sets the target force direction
         Vector3 targetDirection = -transform.up + currentSpread;

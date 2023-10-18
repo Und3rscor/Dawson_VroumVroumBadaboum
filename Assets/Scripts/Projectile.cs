@@ -4,24 +4,26 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [HideInInspector] public float lifespan;
-    [HideInInspector] public int damage;
-    [HideInInspector] public ArcadeVehicleController source;
-
     private AudioSource impactSound;
+    private float lifespan;
+    private int damage;
+    private ArcadeVehicleController source;
 
-    private void Awake()
+    public void Setup(float newLifespan, int newDamage, ArcadeVehicleController newSource)
     {
-        Invoke("DestroyObj", lifespan);
+        //Sets the new stats
+        lifespan = newLifespan;
+        damage = newDamage;
+        source = newSource;
 
+        //Starts the lifespan death timer
+        Invoke("DestroyObj", lifespan);
+        
+        //Grabs the variables for if it collides with an enemy
         impactSound = GetComponent<AudioSource>();
     }
 
-    private void DestroyObj()
-    {
-        Destroy(gameObject);
-    }
-
+    //Plays the sfx before destroying
     private void Die()
     {
         impactSound.Play();
@@ -31,6 +33,7 @@ public class Projectile : MonoBehaviour
         StartCoroutine(DieAfterSoundEffect());
     }
 
+    //Destroys the projectile after sfx
     IEnumerator DieAfterSoundEffect()
     {
         yield return new WaitForSeconds(impactSound.clip.length);
@@ -38,19 +41,31 @@ public class Projectile : MonoBehaviour
         DestroyObj();
     }
 
+    //Destroys the projectile
+    private void DestroyObj()
+    {
+        Destroy(gameObject);
+    }
+
     private void OnTriggerEnter(Collider coll)
     {
+        //Makes sure the collision isn't with the shooter
         if (coll.gameObject.GetComponentInParent<ArcadeVehicleController>() != source)
         {
+            //If the projectile collides with a player
             if (coll.transform.tag == "MainPlayer")
             {
+                //Deals damage
                 coll.gameObject.GetComponentInParent<ArcadeVehicleController>().TakeDamage(damage, source);
+
+                //Plays the sfx before destroying the projectile
                 Die();
             }
+            //If the projectile collides with the environment
             else
             {
                 DestroyObj();
             }
-        }   
+        } 
     }
 }
