@@ -234,13 +234,6 @@ public class ArcadeVehicleController : MonoBehaviour
         speedometer = (int)Mathf.Round(Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.z));
         ui.Speedometer = speedometer;
 
-        //Flip stuff
-        modelAnimator.SetBool("FrontFlip", flip);
-        if (grounded())
-        {
-            flipAvailable = true;
-        }
-
         //Cooling stuff
         CoolingManager();
 
@@ -257,23 +250,30 @@ public class ArcadeVehicleController : MonoBehaviour
         verticalInput = playerInput.actions["Move"].ReadValue<Vector2>().y;     //accelaration input
 
         //Spin
-        if (playerInput.actions["Spin"].WasPressedThisFrame())
+        if (playerInput.actions["Spin"].WasPressedThisFrame() && grounded())
         {
             SpinAction(true);
         }
 
         //Spin return
-        if (playerInput.actions["Spin"].WasReleasedThisFrame())
+        if (playerInput.actions["Spin"].WasReleasedThisFrame() && grounded())
         {
             SpinAction(false);
         }
 
         //Flip
-        if (playerInput.actions["Flip"].WasPressedThisFrame() && !grounded() && !flip && flipAvailable)
+        if (playerInput.actions["Spin"].WasPressedThisFrame() && !grounded() && !flip && flipAvailable)
         {
             flip = true;
             flipAvailable = false;
             Invoke("FlipBoost", 0.3f);
+        }
+
+        modelAnimator.SetBool("FrontFlip", flip);
+
+        if (grounded())
+        {
+            flipAvailable = true;
         }
 
         //Nos
@@ -477,8 +477,10 @@ public class ArcadeVehicleController : MonoBehaviour
             accelaration = baseAccelaration;
         }
 
-        //Turns the car and the camera
+        //Turns the car
         modelAnimator.SetBool("Spin", spin);
+
+        //Turns the camera
         camExtras.TurnCamCinematic(spin);
 
         //Toggles the brake lights
