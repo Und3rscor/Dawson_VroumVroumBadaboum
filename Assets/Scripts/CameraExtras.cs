@@ -11,13 +11,11 @@ public class CameraExtras : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera mainCam;
     [SerializeField] private CinemachineVirtualCamera reverseCam;
 
-    private Animator animator;
     private Camera camBrain;
     private PlayerInput playerInput;
 
     private void Start()
     {
-        animator = mainCam.GetComponent<Animator>();
         camBrain = GetComponent<Camera>();
         playerInput = GetComponentInParent<PlayerInput>();
 
@@ -35,33 +33,27 @@ public class CameraExtras : MonoBehaviour
     {
         if (playerInput.actions["Back Cam"].WasPressedThisFrame())
         {
-            turnCam();
+            SwitchCam();
         }
 
         if (playerInput.actions["Back Cam"].WasReleasedThisFrame())
         {
-            turnCam();
+            SwitchCam();
         }
     }
 
     //Changes the vcam priorities to quickly check behind you
-    private void turnCam()
+    public void SwitchCam()
     {
-        if (mainCam.Priority == 1)
-        {
-            mainCam.Priority = 2;
-            reverseCam.Priority = 1;
-        }
-        else
+        if (mainCam.Priority != 1)
         {
             mainCam.Priority = 1;
             reverseCam.Priority = 2;
         }
-    }
-
-    //Spins the camera with the car
-    public void TurnCamCinematic(bool turned)
-    {
-        animator.SetBool("Spin", turned);
+        else
+        {
+            mainCam.Priority = 2;
+            reverseCam.Priority = 1;
+        }
     }
 }

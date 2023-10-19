@@ -62,6 +62,8 @@ public class ArcadeVehicleController : MonoBehaviour
     private bool deathAvailable;
     private float heat;
     private Material ogBrakeMat;
+    private float spinPressTime = 0.0f;
+    private bool currentReverseCamPrio = false;
 
     //Flip variables
     public bool Flip { get; }
@@ -256,13 +258,16 @@ public class ArcadeVehicleController : MonoBehaviour
         }
 
         //Spin return
-        if (playerInput.actions["Spin"].WasReleasedThisFrame() && grounded())
+        if (playerInput.actions["Spin"].WasReleasedThisFrame())
         {
             SpinAction(false);
         }
 
+        //Spin held
+        ReverseController();
+
         //Flip
-        if (playerInput.actions["Spin"].WasPressedThisFrame() && !grounded() && !flip && flipAvailable)
+        if (playerInput.actions["Spin"].WasPressedThisFrame() && !grounded() && !flip && flipAvailable && !spin)
         {
             flip = true;
             flipAvailable = false;
@@ -480,11 +485,48 @@ public class ArcadeVehicleController : MonoBehaviour
         //Turns the car
         modelAnimator.SetBool("Spin", spin);
 
-        //Turns the camera
-        camExtras.TurnCamCinematic(spin);
-
         //Toggles the brake lights
         ManageBrakeLights(startSpinning);
+    }
+
+    private void ReverseController()
+    {
+        //Rotates the camera if the spin action is pressed for more than 1 second.
+        if (playerInput.actions["Spin"].IsPressed())
+        {
+            if (grounded())
+            {
+                // Increment the time the "Spin" action has been pressed.
+                spinPressTime += Time.deltaTime;
+
+                // Check if the action has been pressed for the desired duration.
+                if (spinPressTime >= 1.0f)
+                {
+                    //Turns the camera
+                    TurnCamera();
+
+                    // Reset the timer to prevent repeated actions.
+                    spinPressTime = 0f;
+                }
+            }
+        }
+        else
+        {
+            // Reset the timer if the "Spin" action is released.
+            spinPressTime = 0f;
+
+            //Reset the camera too
+            TurnCamera();
+        }
+    }
+
+    private void TurnCamera()
+    {
+        if (currentReverseCamPrio != spin)
+        {
+            camExtras.SwitchCam();
+            currentReverseCamPrio = spin;
+        }
     }
 
     private void ManageBrakeLights(bool on)
