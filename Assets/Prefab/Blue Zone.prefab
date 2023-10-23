@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2958328747831276182}
   - component: {fileID: 2958328747831276177}
   - component: {fileID: 5267755078764327790}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Blue Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,4 +110,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 716760ac90839134297d0b27fd8e20fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dps: 0
+  dps: 1

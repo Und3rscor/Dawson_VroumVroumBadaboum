@@ -14,6 +14,10 @@ public class RaceManager : MonoBehaviour
     [Tooltip("Put the starting line at 0 then all other checkpoints in the order the players will encounter them and the finishline last")]
     [SerializeField] private GameObject[] checkpoints;
 
+    //BlueZone
+    [SerializeField] private int blueZoneDps;
+    public int BlueZoneDps { get { return blueZoneDps;} }
+
     //Bump
     public float BumpForce { get { return bumpForce; } }
     public float BumpTorque { get { return bumpTorque; } }
@@ -36,6 +40,8 @@ public class RaceManager : MonoBehaviour
 
     public bool GameOverBool { get { return gameOver; } }
     private bool gameOver = false;
+
+    public GameObject FirstPlacePlayer { get { return firstPlacePlayer; } }
 
     //Camera layers
     private int playerID = 1;
@@ -97,7 +103,6 @@ public class RaceManager : MonoBehaviour
         {
             firstPlacePlayer = player;
             firstPlacePlayerDistanceToFinish = distance;
-            Debug.Log(player.transform.name);
         }
     }
 

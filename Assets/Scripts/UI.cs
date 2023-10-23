@@ -59,6 +59,9 @@ public class UI : MonoBehaviour
 
     private TextMeshProUGUI respawnTimerDisplay;
 
+    //Blue Zone Damage Visuals variable
+    private GameObject blueZoneDamageVisualsImg;
+
     //Alive counter variable
     private TextMeshProUGUI aliveCounter;
 
@@ -78,6 +81,8 @@ public class UI : MonoBehaviour
             healthCounterSlider = transform.Find("GameUI/HealthCounter").GetComponentInChildren<Slider>();          //Health Slider
             livesCounterDisplay = transform.Find("GameUI/LivesCounter").GetComponentInChildren<TextMeshProUGUI>();  //Lives counter
             aliveCounter = transform.Find("GameUI/AliveCounter").GetComponentInChildren<TextMeshProUGUI>();         //Alive counter
+            blueZoneDamageVisualsImg = transform.Find("GameUI/BlueZoneDamageVisuals").gameObject;                   //BlueZone Damage Visual Image
+            blueZoneDamageVisualsImg.SetActive(false);                                                              //Disables the BlueZoneDVI on start
 
             //Starts the scoreboard
             if (!RaceManager.Instance.GameOverBool)
@@ -105,7 +110,7 @@ public class UI : MonoBehaviour
         if (gameUI != null)
         {
             //Modify values
-            speedometerDisplay.text = "Speed: " + speedometer + " Km/h";                               //Speedometer Km/h
+            speedometerDisplay.text = "Speed: " + speedometer + " Km/h";                                            //Speedometer Km/h
             speedometerSlider.value = speedometer;                                                                  //Speedometer Slider value
             lapCounterDisplay.text = "Lap: " + lapCounter;                                                          //Lap counter
             scoreboard.text = "Score: " + score;                                                                    //Score counter
@@ -181,6 +186,14 @@ public class UI : MonoBehaviour
         score += (int)speedometer / 10;
 
         Invoke("Scoreboard", 1.0f);
+    }
+
+    public void BlueZoneDamageVisualsToggle(bool active)
+    {
+        if (blueZoneDamageVisualsImg != null)
+        {
+            blueZoneDamageVisualsImg.SetActive(active);
+        }
     }
 
     //Removed stuff for alpha

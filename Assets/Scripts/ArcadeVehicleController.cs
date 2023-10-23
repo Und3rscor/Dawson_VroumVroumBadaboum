@@ -64,6 +64,7 @@ public class ArcadeVehicleController : MonoBehaviour
     private Material ogBrakeMat;
     private float spinPressTime = 0.0f;
     private bool currentReverseCamPrio = false;
+    private bool insideBlueZone = true;
 
     //Flip variables
     public bool Flip { get; }
@@ -121,6 +122,7 @@ public class ArcadeVehicleController : MonoBehaviour
         nosFX.SetActive(false);
         ManageBrakeLights(false);
         ogBrakeMat = brakeLights[0].GetComponent<Renderer>().materials[2];
+        EnterBlueZone();
 
         //UI Setup
         NosToUI();
@@ -230,6 +232,7 @@ public class ArcadeVehicleController : MonoBehaviour
         InputManager();
 
         Visuals();
+
         AudioManager();
 
         //Speedometer calculator
@@ -239,6 +242,7 @@ public class ArcadeVehicleController : MonoBehaviour
         //Cooling stuff
         CoolingManager();
 
+        //Blow Up Override
         if (Input.GetKeyDown(KeyCode.H))
         {
             BlowUp(null);
@@ -383,8 +387,6 @@ public class ArcadeVehicleController : MonoBehaviour
         {
             BodyMesh.localRotation = Quaternion.Slerp(BodyMesh.localRotation, Quaternion.Euler(0, 0, 0), 0.05f);
         }
-
-
     }
 
     public bool grounded() //checks for if vehicle is grounded or not
@@ -432,7 +434,6 @@ public class ArcadeVehicleController : MonoBehaviour
             {
                 accelaration = accelaration * nosSpeedBoost;
                 nosFX.SetActive(true);
-                Debug.Log("Activated");
             }
 
             currentNos -= 10.0f * Time.deltaTime;
@@ -552,33 +553,79 @@ public class ArcadeVehicleController : MonoBehaviour
         brakeLights[1].GetComponent<Renderer>().materials = brakeLightMaterials1;
     }
 
-
     public void TakeDamage(int damageTaken, ArcadeVehicleController damageSource)
     {
         if (currentNos >= damageTaken)
         {
             currentNos -= damageTaken;
         }
-        else if (currentNos < damageTaken && currentNos != 0)
+        else if (currentNos < damageTaken)
         {
-            int damageToTake;                                   //new value to keep track of how much damage to relay to hp
-            damageToTake = damageTaken - (int)currentNos;       //remove the currentNos value from the damageTaken to know how much hp to remove
-            currentNos = 0.0f;                                  //set the currentNos to 0
-            currentHealth -= damageToTake;                      //remove the rest of the damage to take from the currentHealth
-        }
-        else //if currentNos is 0, the damage can go straight to the currentHealth
-        {
-            currentHealth -= damageTaken;
+            int damageToTake = damageTaken;   //new value to keep track of how much damage to relay to hp
+
+            if (currentNos != 0)
+            {                                                
+                damageToTake = damageTaken - (int)currentNos;       //remove the currentNos value from the damageTaken to know how much hp to remove
+                currentNos = 0.0f;                                  //set the currentNos to 0
+            }            
+            
+            TakeHealthDamage(damageToTake, damageSource);       //remove the rest of the damage to take from the currentHealth                      
         }
 
         //Relay to ui
-        HealthToUI();
         NosToUI();
+    }
+
+    //Damage directly at the health pool
+    private void TakeHealthDamage(int damageTaken, ArcadeVehicleController damageSource)
+    {
+        //Removes hp = to the damage taken
+        currentHealth -= damageTaken;
+
+        //Relay to ui
+        HealthToUI();
 
         //Kills the car if health is under 0
         if (currentHealth <= 0)
         {
             BlowUp(damageSource);
+        }
+    }
+
+    // Start the coroutine when leaving the blue zone
+    public void LeaveBlueZone()
+    {
+        if (insideBlueZone)
+        {
+            insideBlueZone = false;
+
+            //Activates the ui Blue Zone Damage Visuals
+            ui.BlueZoneDamageVisualsToggle(true);
+
+            StartCoroutine(BlueZoneDamager());
+        }
+    }
+
+    IEnumerator BlueZoneDamager()
+    {
+        while (!insideBlueZone)
+        {
+            yield return new WaitForSeconds(1f);
+            TakeHealthDamage(RaceManager.Instance.BlueZoneDps, null);
+        }
+    }
+
+    // Stop the coroutine when entering the blue zone
+    public void EnterBlueZone()
+    {
+        if (!insideBlueZone)
+        {
+            insideBlueZone = true;
+
+            //Deactivates the ui Blue Zone Damage Visuals
+            ui.BlueZoneDamageVisualsToggle(false);
+
+            StopCoroutine(BlueZoneDamager());
         }
     }
 

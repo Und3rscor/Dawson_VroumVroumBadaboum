@@ -46,6 +46,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnpoints:
   - {fileID: 0}
-  checkpoints: []
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  checkpoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  blueZoneDps: 10
   bumpForce: 0
   bumpTorque: 0
