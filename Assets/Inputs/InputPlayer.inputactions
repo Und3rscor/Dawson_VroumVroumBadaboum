@@ -209,7 +209,7 @@
                 {
                     "name": "",
                     "id": "3a89c4c4-68e2-4cd7-a2ac-30fec51b41a9",
-                    "path": "<Keyboard>/leftShift",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -220,7 +220,7 @@
                 {
                     "name": "",
                     "id": "f3143c9f-ac64-4115-9ccd-f1a38ad1795a",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",

@@ -2,16 +2,16 @@ using Cinemachine;
 using Michsky.UI.ModernUIPack;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using static UnityEngine.Rendering.DebugUI;
 
 public class RaceManager : MonoBehaviour
 {
     [SerializeField] private Transform[] spawnpoints;
 
-    [Tooltip("Put the finish line at 0 and all other checkpoints in the order the players will encounter them")]
+    [Tooltip("Put the starting line at 0 then all other checkpoints in the order the players will encounter them and the finishline last")]
     [SerializeField] private GameObject[] checkpoints;
 
     //Bump
@@ -25,32 +25,35 @@ public class RaceManager : MonoBehaviour
 
     public static RaceManager Instance { get { return instance; } }
 
-    //Fetches
+    //Relays
     private UI ui;
 
-    //Alive variable
+    public int Alive { get { return alive; } set { alive = value; } }
     private int alive;
 
-    public int Alive { get { return alive; } set { alive = value; } }
-
-    //Total Alive variable
-    private int totalAlive;
     public int TotalAlive { get { return totalAlive; } }
+    private int totalAlive;
+
+    public bool GameOverBool { get { return gameOver; } }
+    private bool gameOver = false;
 
     //Camera layers
     private int playerID = 1;
 
     //Private variables
-    public bool GameOverBool { get { return  gameOver; } }
-    private bool gameOver = false;
-
     private bool paused = false;
+    private List<GameObject> playerList;
+    private GameObject firstPlacePlayer = null;
+    private float firstPlacePlayerDistanceToFinish = float.MaxValue;
 
     private void Start()
     {
         Pause();
 
         Setup();
+
+        //Initialize playerList
+        playerList = new List<GameObject>();
 
         //FindUI();
     }
@@ -73,7 +76,31 @@ public class RaceManager : MonoBehaviour
         {
             FinishScene();
         }
+
+        // Find the player in first place
+        foreach (GameObject player in playerList)
+        {
+            CheckDistanceToFinishLine(player);
+        }
     }
+
+    //Checks the distance between a given player and the finishline
+    private void CheckDistanceToFinishLine(GameObject player)
+    {
+        //Calculates distance
+        float distance = Vector3.Distance(player.transform.position, checkpoints[checkpoints.Length - 1].transform.position);
+
+        //Then checks if the distance of the player is smaller than the distance of the player in first place
+        //If it is smaller, assigns that player as the new first place player
+        //If the player if the first place player, assigns it's current distance
+        if (distance < firstPlacePlayerDistanceToFinish || player == firstPlacePlayer)
+        {
+            firstPlacePlayer = player;
+            firstPlacePlayerDistanceToFinish = distance;
+            Debug.Log(player.transform.name);
+        }
+    }
+
     private void Pause()
     {
         Time.timeScale = 0.0f;
@@ -108,6 +135,15 @@ public class RaceManager : MonoBehaviour
         {
             //Grabs the player's AVC
             ArcadeVehicleController player = obj.GetComponentInParent<ArcadeVehicleController>();
+
+            //Grabs the player object
+            GameObject playerObj = player.gameObject;
+
+            //Changes the name of the player object for easier access in debugging
+            playerObj.name = "Player " + playerID;
+
+            //Adds the player to the list of players
+            playerList.Add(playerObj);
 
             //Sets the playerSpawnpoint to the spawnpoint it gets assigned
             Transform playerSpawnPoint = spawnpoints[playerID - 1];

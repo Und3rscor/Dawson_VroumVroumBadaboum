@@ -44,5 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6936390c383500a42b5a14cd26a8ca87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnpoints: []
+  spawnpoints:
+  - {fileID: 0}
   checkpoints: []
+  bumpForce: 0
+  bumpTorque: 0
