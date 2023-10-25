@@ -96,6 +96,9 @@ public class ArcadeVehicleController : MonoBehaviour
     //Inputs
     private float horizontalInput, verticalInput; //Movement Input
 
+    //Tests
+    private bool alive;
+
     private void Start()
     {
         //Fetches
@@ -123,6 +126,10 @@ public class ArcadeVehicleController : MonoBehaviour
         ManageBrakeLights(false);
         ogBrakeMat = brakeLights[0].GetComponent<Renderer>().materials[2];
         EnterBlueZone();
+        if (!RaceManager.Instance.test)
+        {
+            alive = true;
+        }
 
         //UI Setup
         NosToUI();
@@ -251,44 +258,87 @@ public class ArcadeVehicleController : MonoBehaviour
 
     private void InputManager()
     {
-        //Move
         horizontalInput = playerInput.actions["Move"].ReadValue<Vector2>().x;   //turning input
-        verticalInput = playerInput.actions["Move"].ReadValue<Vector2>().y;     //accelaration input
 
-        //Spin
-        if (playerInput.actions["Spin"].WasPressedThisFrame() && grounded())
+        if (RaceManager.Instance.test)
         {
-            SpinAction(true);
+            verticalInput = playerInput.actions["Move"].ReadValue<Vector2>().y;     //accelaration input
+
+            //Spin
+            if (playerInput.actions["Spin"].WasPressedThisFrame() && grounded())
+            {
+                SpinAction(true);
+            }
+
+            //Spin return
+            if (playerInput.actions["Spin"].WasReleasedThisFrame())
+            {
+                SpinAction(false);
+            }
+
+            //Spin held
+            ReverseController();
+
+            //Flip
+            if (playerInput.actions["Spin"].WasPressedThisFrame() && !grounded() && !flip && flipAvailable && !spin)
+            {
+                flip = true;
+                flipAvailable = false;
+                Invoke("FlipBoost", 0.3f);
+            }
+
+            modelAnimator.SetBool("FrontFlip", flip);
+
+            if (grounded())
+            {
+                flipAvailable = true;
+            }
+
+            //Nos
+            if (horizontalInput != 0 || verticalInput != 0)
+            {
+                NosController();
+            }
         }
-
-        //Spin return
-        if (playerInput.actions["Spin"].WasReleasedThisFrame())
+        else if (alive)
         {
-            SpinAction(false);
-        }
+            verticalInput = playerInput.actions["Move"].ReadValue<Vector2>().y;     //accelaration input
 
-        //Spin held
-        ReverseController();
+            //Spin
+            if (playerInput.actions["Spin"].WasPressedThisFrame() && grounded())
+            {
+                SpinAction(true);
+            }
 
-        //Flip
-        if (playerInput.actions["Spin"].WasPressedThisFrame() && !grounded() && !flip && flipAvailable && !spin)
-        {
-            flip = true;
-            flipAvailable = false;
-            Invoke("FlipBoost", 0.3f);
-        }
+            //Spin return
+            if (playerInput.actions["Spin"].WasReleasedThisFrame())
+            {
+                SpinAction(false);
+            }
 
-        modelAnimator.SetBool("FrontFlip", flip);
+            //Spin held
+            ReverseController();
 
-        if (grounded())
-        {
-            flipAvailable = true;
-        }
+            //Flip
+            if (playerInput.actions["Spin"].WasPressedThisFrame() && !grounded() && !flip && flipAvailable && !spin)
+            {
+                flip = true;
+                flipAvailable = false;
+                Invoke("FlipBoost", 0.3f);
+            }
 
-        //Nos
-        if (horizontalInput != 0 || verticalInput != 0)
-        {
-            NosController();
+            modelAnimator.SetBool("FrontFlip", flip);
+
+            if (grounded())
+            {
+                flipAvailable = true;
+            }
+
+            //Nos
+            if (horizontalInput != 0 || verticalInput != 0)
+            {
+                NosController();
+            }
         }
     }
 
@@ -644,9 +694,12 @@ public class ArcadeVehicleController : MonoBehaviour
     {
         if (deathAvailable)
         {
-            //Deactivates playerInput
-            playerInput.DeactivateInput();
-
+            if (RaceManager.Instance.test)
+            {
+                //Deactivates playerInput
+                playerInput.DeactivateInput();
+            }
+            
             //Toggles dead values
             RespawnToggle(false);
 
@@ -733,21 +786,58 @@ public class ArcadeVehicleController : MonoBehaviour
 
     private void RespawnToggle(bool toggle)
     {
+        alive = toggle;
+
         //Toggles further deaths until respawn
         deathAvailable = toggle;
 
-        //Toggles the rigidbodies gravities so the dead player doesn't just fall through the ground
-        carBody.useGravity = toggle;
-        rb.useGravity = toggle;
+        if (RaceManager.Instance.test)
+        {
+            //Toggles the rigidbodies gravities so the dead player doesn't just fall through the ground
+            carBody.useGravity = toggle;
+            rb.useGravity = toggle;
 
-        //Toggles the collider so nothing can collide with it while dead
-        rb.GetComponent<SphereCollider>().enabled = toggle;
-        carBody.GetComponent<BoxCollider>().enabled = toggle;
+            //Toggles the collider so nothing can collide with it while dead
+            rb.GetComponent<SphereCollider>().enabled = toggle;
+            carBody.GetComponent<BoxCollider>().enabled = toggle;
+        }
 
         //Toggles meshes so they car is invisible while dead
         foreach (MeshRenderer meshRenderers in meshRendererList)
         {
-            meshRenderers.enabled = toggle;
+            if (RaceManager.Instance.test)
+            {
+                meshRenderers.enabled = toggle;
+            }
+            else
+            {
+                if (toggle)
+                {
+                    //Toggles meshes so they car is invisible while dead
+                    foreach (MeshRenderer mR in meshRendererList)
+                    {
+                        foreach (Material mat in mR.materials)
+                        {
+                            Color matColor = mat.color;
+                            matColor.a = 255; // Set alpha to 0 (fully transparent)
+                            mat.color = matColor;
+                        }
+                    }
+                }
+                else
+                {
+                    //Toggles meshes so they car is invisible while dead
+                    foreach (MeshRenderer mR in meshRendererList)
+                    {
+                        foreach (Material mat in mR.materials)
+                        {
+                            Color matColor = mat.color;
+                            matColor.a = 100; // Set alpha to 0 (fully transparent)
+                            mat.color = matColor;
+                        }
+                    }
+                }
+            }
         }
 
         //Toggles visual effects

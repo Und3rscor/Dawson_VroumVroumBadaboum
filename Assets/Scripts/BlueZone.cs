@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class BlueZone : MonoBehaviour
 {
+    private void Start()
+    {
+        if (!RaceManager.Instance.test)
+        {
+            this.gameObject.SetActive(false);
+        }
+    }
+
     void Update()
     {
         //Move to the first place player's position
