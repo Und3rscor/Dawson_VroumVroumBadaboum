@@ -14,8 +14,6 @@ public class RaceManager : MonoBehaviour
     [Tooltip("Put the starting line at 0 then all other checkpoints in the order the players will encounter them and the finishline last")]
     [SerializeField] private GameObject[] checkpoints;
 
-    public bool test;
-
     //BlueZone
     [SerializeField] private int blueZoneDps;
     public int BlueZoneDps { get { return blueZoneDps;} }
