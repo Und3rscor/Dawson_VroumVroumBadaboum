@@ -52,6 +52,10 @@ MonoBehaviour:
   checkpoints:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  respawnPoint: {fileID: 0}
   blueZoneDps: 10
   bumpForce: 0
   bumpTorque: 0

@@ -14,6 +14,8 @@ public class RaceManager : MonoBehaviour
     [Tooltip("Put the starting line at 0 then all other checkpoints in the order the players will encounter them and the finishline last")]
     [SerializeField] private GameObject[] checkpoints;
 
+    [SerializeField] private GameObject respawnPoint;
+
     //BlueZone
     [SerializeField] private int blueZoneDps;
     public int BlueZoneDps { get { return blueZoneDps;} }
@@ -42,6 +44,7 @@ public class RaceManager : MonoBehaviour
     private bool gameOver = false;
 
     public GameObject FirstPlacePlayer { get { return firstPlacePlayer; } }
+    public GameObject RespawnPoint { get { return respawnPoint; } }
 
     //Camera layers
     private int playerID = 1;
