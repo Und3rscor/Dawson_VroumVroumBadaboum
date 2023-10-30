@@ -17,12 +17,6 @@ public class UI : MonoBehaviour
     private TextMeshProUGUI speedometerDisplay;
     private Slider speedometerSlider;
 
-    //Lap counter variables
-    public int LapCounter { get { return lapCounter; } set { lapCounter = value; } }
-    private int lapCounter = 0;
-
-    private TextMeshProUGUI lapCounterDisplay;
-
     //Scoreboard variables
     public int Score { get { return score; } set { score = value; } }
     private int score = 0;
@@ -47,12 +41,6 @@ public class UI : MonoBehaviour
 
     private Slider healthCounterSlider;
 
-    //Lives counter variables
-    public int LivesCounter { get { return livesCounter; } set { livesCounter = value; } }
-    private int livesCounter;
-
-    private TextMeshProUGUI livesCounterDisplay;
-
     //Respawn Timer variables
     public int RespawnTimer { get { return respawnTimer; } set { respawnTimer = value; } }
     private int respawnTimer;
@@ -61,9 +49,6 @@ public class UI : MonoBehaviour
 
     //Blue Zone Damage Visuals variable
     private GameObject blueZoneDamageVisualsImg;
-
-    //Alive counter variable
-    private TextMeshProUGUI aliveCounter;
 
     private void Start()
     {
@@ -74,13 +59,10 @@ public class UI : MonoBehaviour
             //Find components
             speedometerDisplay = transform.Find("GameUI/Speedometer").GetComponentInChildren<TextMeshProUGUI>();    //Speedometer Km/h
             speedometerSlider = transform.Find("GameUI/Speedometer").GetComponentInChildren<Slider>();              //Speedometer Slider
-            lapCounterDisplay = transform.Find("GameUI/LapCounter").GetComponentInChildren<TextMeshProUGUI>();      //Lap counter
             scoreboard = transform.Find("GameUI/Scoreboard").GetComponentInChildren<TextMeshProUGUI>();             //Score display
             nosCounterSlider = transform.Find("GameUI/NosCounter").GetComponentInChildren<Slider>();                //Nos Slider
             heatCounterSlider = transform.Find("GameUI/HeatCounter").GetComponentInChildren<Slider>();              //Heat Slider
             healthCounterSlider = transform.Find("GameUI/HealthCounter").GetComponentInChildren<Slider>();          //Health Slider
-            livesCounterDisplay = transform.Find("GameUI/LivesCounter").GetComponentInChildren<TextMeshProUGUI>();  //Lives counter
-            aliveCounter = transform.Find("GameUI/AliveCounter").GetComponentInChildren<TextMeshProUGUI>();         //Alive counter
             blueZoneDamageVisualsImg = transform.Find("GameUI/BlueZoneDamageVisuals").gameObject;                   //BlueZone Damage Visual Image
             blueZoneDamageVisualsImg.SetActive(false);                                                              //Disables the BlueZoneDVI on start
 
@@ -112,32 +94,22 @@ public class UI : MonoBehaviour
             //Modify values
             speedometerDisplay.text = "Speed: " + speedometer + " Km/h";                                            //Speedometer Km/h
             speedometerSlider.value = speedometer;                                                                  //Speedometer Slider value
-            lapCounterDisplay.text = "Lap: " + lapCounter;                                                          //Lap counter
             scoreboard.text = "Score: " + score;                                                                    //Score counter
             nosCounterSlider.value = nosCounter;                                                                    //Nos Slider value
             heatCounterSlider.value = heatCounter;                                                                  //Heat Slider value
             healthCounterSlider.value = healthCounter;                                                              //Health Slider value
-            livesCounterDisplay.text = livesCounter.ToString();                                                     //Lives counter
-            aliveCounter.text = "Alive: " + RaceManager.Instance.Alive + " / " + RaceManager.Instance.TotalAlive;   //Alive counter
         }
 
         if (gameOverUI != null)
         {
-            if (livesCounter >= 0)
+            //Modify Respawn Timer value
+            if (respawnTimer > 1)
             {
-                //Modify Respawn Timer value
-                if (respawnTimer > 1)
-                {
-                    respawnTimerDisplay.text = "Respawning in: " + respawnTimer + " seconds";
-                }
-                else
-                {
-                    respawnTimerDisplay.text = "Respawning in: " + respawnTimer + " second";
-                }
+                respawnTimerDisplay.text = "Respawning in: " + respawnTimer + " seconds";
             }
             else
             {
-                respawnTimerDisplay.text = "GAME OVER";
+                respawnTimerDisplay.text = "Respawning in: " + respawnTimer + " second";
             }
         }
     }
@@ -168,12 +140,6 @@ public class UI : MonoBehaviour
     public void Checkpoint()
     {
         score += 50;
-    }
-
-    public void Lap()
-    {
-        lapCounter++;
-        score += 100;
     }
 
     public void Kill()

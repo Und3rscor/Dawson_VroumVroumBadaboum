@@ -9,10 +9,14 @@ public class BlueZone : MonoBehaviour
         //Move to the first place player's position
         if (RaceManager.Instance != null && RaceManager.Instance.FirstPlacePlayer != null)
         {
+            //Follows first place player
             transform.position = RaceManager.Instance.FirstPlacePlayer.transform.position;
-        }
 
-        //Flags the players outside of it to take damage
+            //Sets the rotation accordingly
+            Quaternion newRotation = transform.rotation; // Get the current rotation
+            newRotation.eulerAngles = new Vector3(newRotation.eulerAngles.x, RaceManager.Instance.FirstPlacePlayer.transform.rotation.eulerAngles.y, newRotation.eulerAngles.z);
+            transform.rotation = newRotation;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

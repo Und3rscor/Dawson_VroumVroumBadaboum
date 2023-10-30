@@ -34,16 +34,10 @@ public class RaceManager : MonoBehaviour
     //Relays
     private UI ui;
 
-    public int Alive { get { return alive; } set { alive = value; } }
-    private int alive;
-
-    public int TotalAlive { get { return totalAlive; } }
-    private int totalAlive;
-
     public bool GameOverBool { get { return gameOver; } }
     private bool gameOver = false;
 
-    public GameObject FirstPlacePlayer { get { return firstPlacePlayer; } }
+    public RespawnManager FirstPlacePlayer { get { return firstPlacePlayer; } }
     public GameObject RespawnPoint { get { return respawnPoint; } }
 
     //Camera layers
@@ -51,18 +45,17 @@ public class RaceManager : MonoBehaviour
 
     //Private variables
     private bool paused = false;
-    private List<GameObject> playerList;
-    private GameObject firstPlacePlayer = null;
+    private List<RespawnManager> playerList;
+    private RespawnManager firstPlacePlayer = null;
     private float firstPlacePlayerDistanceToFinish = float.MaxValue;
+    private int firstPlacePlayerNextCheckpoint = 0;
 
     private void Start()
     {
         Pause();
 
-        Setup();
-
         //Initialize playerList
-        playerList = new List<GameObject>();
+        playerList = new List<RespawnManager>();
 
         //FindUI();
     }
@@ -81,31 +74,31 @@ public class RaceManager : MonoBehaviour
 
     private void Update()
     {
-        if (alive <= 0 && totalAlive >= 1)
-        {
-            FinishScene();
-        }
-
         // Find the player in first place
-        foreach (GameObject player in playerList)
+        foreach (RespawnManager player in playerList)
         {
             CheckDistanceToFinishLine(player);
         }
     }
 
     //Checks the distance between a given player and the finishline
-    private void CheckDistanceToFinishLine(GameObject player)
+    private void CheckDistanceToFinishLine(RespawnManager player)
     {
-        //Calculates distance
-        float distance = Vector3.Distance(player.transform.position, checkpoints[checkpoints.Length - 1].transform.position);
-
-        //Then checks if the distance of the player is smaller than the distance of the player in first place
-        //If it is smaller, assigns that player as the new first place player
-        //If the player if the first place player, assigns it's current distance
-        if (distance < firstPlacePlayerDistanceToFinish || player == firstPlacePlayer)
+        //Checks if the player is competing for the same checkpoint as the first player
+        if (player.NextCheckpoint >= firstPlacePlayerNextCheckpoint)
         {
-            firstPlacePlayer = player;
-            firstPlacePlayerDistanceToFinish = distance;
+            //Calculates distance to said checkpoint
+            float distance = Vector3.Distance(player.transform.position, checkpoints[player.NextCheckpoint].transform.position);
+
+            //Then checks if the distance of the player is smaller than the distance of the player in first place
+            //If it is smaller, assigns that player as the new first place player
+            //If the player if the first place player, assigns it's current distance
+            if (distance < firstPlacePlayerDistanceToFinish || player == firstPlacePlayer)
+            {
+                firstPlacePlayer = player;
+                firstPlacePlayerDistanceToFinish = distance;
+                firstPlacePlayerNextCheckpoint = player.NextCheckpoint;
+            }
         }
     }
 
@@ -124,20 +117,10 @@ public class RaceManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    public void Setup()
-    {
-        totalAlive = GameObject.FindGameObjectsWithTag("MainPlayer").Length + GameObject.FindGameObjectsWithTag("MainBot").Length;
-        alive = totalAlive;
-    }
-
     //Asked by CameraExtras.cs to setup it's camera
     public void PlayerSetup(GameObject obj, Camera camBrain)
     {
         Resume();
-
-        //Updates the alive counter
-        totalAlive++;
-        alive++;
 
         if (spawnpoints != null)
         {
@@ -147,11 +130,14 @@ public class RaceManager : MonoBehaviour
             //Grabs the player object
             GameObject playerObj = player.gameObject;
 
+            //Grabs the respawnManager
+            RespawnManager rm = playerObj.GetComponent<RespawnManager>();
+
             //Changes the name of the player object for easier access in debugging
             playerObj.name = "Player " + playerID;
 
             //Adds the player to the list of players
-            playerList.Add(playerObj);
+            playerList.Add(rm);
 
             //Sets the playerSpawnpoint to the spawnpoint it gets assigned
             Transform playerSpawnPoint = spawnpoints[playerID - 1];

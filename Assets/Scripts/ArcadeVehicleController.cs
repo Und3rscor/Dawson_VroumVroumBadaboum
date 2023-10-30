@@ -9,7 +9,6 @@ public class ArcadeVehicleController : MonoBehaviour
 {
     //Car Stats
     [Header("Stats")]
-    [SerializeField] private int maxLives;
     [SerializeField] private int maxHealth;
     [SerializeField] private int nosCapacity;
     [SerializeField] private float nosSpeedBoost;
@@ -43,6 +42,7 @@ public class ArcadeVehicleController : MonoBehaviour
     [SerializeField] private bool randomColors;
     [SerializeField] private GameObject VFX;
     [SerializeField] private GameObject playerPositionArrow;
+    private GameObject crown;
 
     //Audio Editor Setup
     [Header("Audio settings")]
@@ -58,7 +58,6 @@ public class ArcadeVehicleController : MonoBehaviour
     private Vector3 origin;
     private float currentNos;
     private int currentHealth;
-    private int currentLives;
     private bool deathAvailable;
     private float heat;
     private Material ogBrakeMat;
@@ -110,12 +109,12 @@ public class ArcadeVehicleController : MonoBehaviour
         vfxList = new List<VisualEffect>();                     //Initialize Visual Effect list
         FindMeshRenderers(this.gameObject.transform);           //Finds all meshRendrers to toggle on and off during death sequences
         FindVFX(VFX.transform);                                 //Finds all Visual Effects in the vfx object
+        crown = model.transform.Find("Crown").gameObject;       //Finds the firstPlacePlayer crown object
 
         //Variable setup
         baseAccelaration = accelaration;
         currentNos = nosCapacity;
         currentHealth = maxHealth;
-        currentLives = maxLives;
         deathAvailable = true;
 
         //Extra Setup
@@ -127,7 +126,6 @@ public class ArcadeVehicleController : MonoBehaviour
         //UI Setup
         NosToUI();
         HealthToUI();
-        LivesToUI();
     }
 
     // This function will recursively find all MeshRenderers in the children of the specified transform
@@ -386,6 +384,16 @@ public class ArcadeVehicleController : MonoBehaviour
         else
         {
             BodyMesh.localRotation = Quaternion.Slerp(BodyMesh.localRotation, Quaternion.Euler(0, 0, 0), 0.05f);
+        }
+
+        //Crown
+        if (RaceManager.Instance.FirstPlacePlayer == respawnManager)
+        {
+            crown.SetActive(true);
+        }
+        else
+        {
+            crown.SetActive(false);
         }
     }
 
@@ -680,22 +688,8 @@ public class ArcadeVehicleController : MonoBehaviour
             //Removes velocity
             rb.velocity = Vector3.zero;
 
-            //Remove 1 life
-            currentLives--;
-
-            //Relays to UI
-            LivesToUI();
-
-            if (currentLives >= 0)
-            {
-                //Starts countdown until respawn
-                StartCoroutine(RespawnCountdown(respawnManager.respawnDelay));
-            }
-            else
-            {
-                //Removes player from alive counter
-                RaceManager.Instance.Alive--;
-            }
+            //Starts countdown until respawn
+            StartCoroutine(RespawnCountdown(respawnManager.respawnDelay));
 
             //Switch to GameOverUI
             ui.UIRedraw(ui.gameOverUI);
@@ -728,6 +722,9 @@ public class ArcadeVehicleController : MonoBehaviour
         //Refill values
         RefillHealth();
         RefillNos();
+
+        //Sets the nextCheckpoint to the same as the first player
+        respawnManager.NextCheckpoint = RaceManager.Instance.FirstPlacePlayer.NextCheckpoint;
     }
 
     private void RespawnToggle(bool toggle)
@@ -760,11 +757,6 @@ public class ArcadeVehicleController : MonoBehaviour
 
         //Toggles engine sound so the car doesn't make sounds while dead
         engineSound.enabled = toggle;
-    }
-
-    private void LivesToUI()
-    {
-        ui.LivesCounter = currentLives;
     }
 
     private void CoolingManager()

@@ -14,15 +14,11 @@ public class RespawnManager : MonoBehaviour
     public int NextCheckpoint { get { return nextCheckpoint; } set { nextCheckpoint = value; } }
     private int nextCheckpoint;
 
-    public int CurrentCheckpoint { get { return currentCheckpoint; } set { currentCheckpoint = value; } }
-    private int currentCheckpoint;
-
     private UI ui;
 
     private void Start()
     {
-        nextCheckpoint = 1;
-        currentCheckpoint = 0;
+        nextCheckpoint = 0;
 
         ui = GetComponentInChildren<UI>();
     }
@@ -32,13 +28,10 @@ public class RespawnManager : MonoBehaviour
         checkpoints = managerCheckpoints;
     }
 
-    public void UpdateLastCheckpointPassed()
+    public void UpdateNextCheckpoint()
     {
-        //Updates the current checkpoint
-        currentCheckpoint = nextCheckpoint;
-
         //Updates the next checkpoint
-        nextCheckpoint = (nextCheckpoint + 1) % checkpoints.Length;
+        nextCheckpoint++;
 
         ui.Checkpoint();
     }

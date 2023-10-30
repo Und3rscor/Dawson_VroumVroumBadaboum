@@ -37,12 +37,6 @@ public class Countdown : MonoBehaviour
                     countdownSound.Play();
                 }
 
-                if (countdownText.text == Messages[0])
-                {
-                    RaceManager.Instance.Setup();
-                    //GameManager.Instance.FindUI();
-                }
-
                 countdownText.text = Messages[Mathf.FloorToInt(elapsedTime)];
             }
         }

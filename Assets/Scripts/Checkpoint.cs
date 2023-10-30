@@ -18,7 +18,10 @@ public class Checkpoint : MonoBehaviour
             if (rm.NextCheckpoint == checkpointID)
             {
                 //Updates the respawn manager to know what is it's next target checkpoint
-                other.GetComponent<RespawnManager>().UpdateLastCheckpointPassed();
+                other.GetComponent<RespawnManager>().UpdateNextCheckpoint();
+
+                //Refills the car's nos
+                other.GetComponentInParent<ArcadeVehicleController>().RefillNos();
 
                 Debug.Log("Checkpoint Passed");
 
@@ -26,18 +29,8 @@ public class Checkpoint : MonoBehaviour
                 {
                     UI ui = other.gameObject.GetComponentInChildren<UI>();
 
-                    //Adds a lap to the lap counter
-                    ui.Lap();
-
-                    //Refills the car's nos
-                    other.GetComponentInParent<ArcadeVehicleController>().RefillNos();
-
-                    //If last one standing, end the game
-                    if (RaceManager.Instance.Alive <= 1)
-                    {
-                        //Launch Scoreboard
-                        RaceManager.Instance.FinishScene();
-                    }
+                    //Launch Scoreboard
+                    RaceManager.Instance.FinishScene();
                 }
             }
         }
