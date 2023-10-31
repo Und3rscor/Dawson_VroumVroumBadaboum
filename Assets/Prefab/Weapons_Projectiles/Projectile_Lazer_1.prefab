@@ -269,8 +269,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.7490196, g: 0.019607838, b: 0.019607838, a: 1}
-      key1: {r: 1, g: 0, b: 0.0575552, a: 0.9577465}
+      key0: {r: 0.05266463, g: 0.7490196, b: 0.019607838, a: 1}
+      key1: {r: 0.060738564, g: 1, b: 0, a: 0.9577465}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -391,7 +391,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ae22792fd50e22d42942efbf8572d701, type: 2}
+      objectReference: {fileID: 2100000, guid: f723b31650dab8c4cb2131880d87e415, type: 2}
     - target: {fileID: 919132149155446097, guid: 5add653f1b52f8a43a67559d406bedc9,
         type: 3}
       propertyPath: m_Name
