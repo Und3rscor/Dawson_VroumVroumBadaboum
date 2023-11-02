@@ -7378,6 +7378,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7880690509100429329, guid: 73b7a26471d0bdd4d9c1ba30d87fbb48,
         type: 3}
+      propertyPath: blueZoneDps
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7880690509100429329, guid: 73b7a26471d0bdd4d9c1ba30d87fbb48,
+        type: 3}
       propertyPath: respawnPoint
       value: 
       objectReference: {fileID: 1753986459}
