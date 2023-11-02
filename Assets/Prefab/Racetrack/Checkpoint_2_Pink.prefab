@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 6025952486145135355}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.10870003, z: -340.9}
-  m_LocalScale: {x: 1000, y: 1000, z: 384.6154}
+  m_LocalScale: {x: 150, y: 150, z: 100}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6064873869529776607}
@@ -234,7 +234,12 @@ PrefabInstance:
     - target: {fileID: 7857966781602440659, guid: 194ac841f80f52f4293eac7c9b4b12ff,
         type: 3}
       propertyPath: checkpointID
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7857966781602440660, guid: 194ac841f80f52f4293eac7c9b4b12ff,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 194ac841f80f52f4293eac7c9b4b12ff, type: 3}
