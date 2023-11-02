@@ -42,9 +42,9 @@ public class RespawnManager : MonoBehaviour
         GameObject respawnPoint = RaceManager.Instance.RespawnPoint;
 
         //Creates a new checkpoint rotation based on the local rotation of the respawn point. Makes it easier to use them
-        Quaternion spawnRotation = Quaternion.Euler(respawnPoint.transform.localRotation.eulerAngles);
+        Quaternion spawnRotation = Quaternion.Euler(respawnPoint.transform.rotation.eulerAngles);
 
-        //Move the car to the nextCheckpoint
+        //Move the car to the respawnPoint
         this.gameObject.transform.position = respawnPoint.transform.position;
         this.gameObject.transform.rotation = spawnRotation;
 
