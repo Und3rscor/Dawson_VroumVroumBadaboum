@@ -26,6 +26,10 @@ public class RaceManager : MonoBehaviour
     [SerializeField] private float bumpForce;
     [SerializeField] private float bumpTorque;
 
+    //BoostPads
+    public float BoostForce { get { return boostForce; } }
+    [SerializeField] private float boostForce;
+
     //Gamemanager Instance
     private static RaceManager instance;
 
@@ -39,6 +43,7 @@ public class RaceManager : MonoBehaviour
 
     public RespawnManager FirstPlacePlayer { get { return firstPlacePlayer; } }
     public GameObject RespawnPoint { get { return respawnPoint; } }
+    public GameObject[] Checkpoints { get { return checkpoints; } }
 
     //Camera layers
     private int playerID = 1;

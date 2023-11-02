@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6025952486145135348}
-  - component: {fileID: 6025952486145135349}
   m_Layer: 0
   m_Name: Checkpoint_2_Pink
   m_TagString: Untagged
@@ -24,36 +23,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6025952486145135355}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.10870003, z: -340.9}
-  m_LocalScale: {x: 1300, y: 1300, z: 500}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1000, y: 1000, z: 384.6154}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6064873869529776607}
   - {fileID: 1815922614217679724}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &6025952486145135349
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6025952486145135355}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 950c06fb9f2f24a4da1bb3646f5312d7, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &6025952485278115380
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -154,6 +133,32 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6025952485278115380}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6872794341080783717 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f178771696f47d346ada505d5824a5a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 6025952485278115380}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &544220515043394551
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6872794341080783717}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 950c06fb9f2f24a4da1bb3646f5312d7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &8376247636196361918
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -161,6 +166,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6025952486145135348}
     m_Modifications:
+    - target: {fileID: 2302925855363043734, guid: 194ac841f80f52f4293eac7c9b4b12ff,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0005
+      objectReference: {fileID: 0}
     - target: {fileID: 7857966781602440657, guid: 194ac841f80f52f4293eac7c9b4b12ff,
         type: 3}
       propertyPath: m_Name
@@ -221,25 +231,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7857966781602440660, guid: 194ac841f80f52f4293eac7c9b4b12ff,
+    - target: {fileID: 7857966781602440659, guid: 194ac841f80f52f4293eac7c9b4b12ff,
         type: 3}
-      propertyPath: m_Size.x
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7857966781602440660, guid: 194ac841f80f52f4293eac7c9b4b12ff,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7857966781602440660, guid: 194ac841f80f52f4293eac7c9b4b12ff,
-        type: 3}
-      propertyPath: m_Size.z
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7857966781602440660, guid: 194ac841f80f52f4293eac7c9b4b12ff,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 0
+      propertyPath: checkpointID
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 194ac841f80f52f4293eac7c9b4b12ff, type: 3}
