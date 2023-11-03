@@ -7498,6 +7498,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7880690509100429329, guid: 73b7a26471d0bdd4d9c1ba30d87fbb48,
         type: 3}
+      propertyPath: blueZoneDps
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7880690509100429329, guid: 73b7a26471d0bdd4d9c1ba30d87fbb48,
+        type: 3}
       propertyPath: respawnPoint
       value: 
       objectReference: {fileID: 1753986459}
@@ -25708,6 +25713,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2246956173609073389, guid: d1ac4b3d31796604c99f735e0ea4a97e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2246956173609073389, guid: d1ac4b3d31796604c99f735e0ea4a97e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2958328747831276176, guid: d1ac4b3d31796604c99f735e0ea4a97e,
         type: 3}
       propertyPath: m_Name
