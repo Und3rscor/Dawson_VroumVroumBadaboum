@@ -509,7 +509,7 @@ public class ArcadeVehicleController : MonoBehaviour
                 spinPressTime += Time.deltaTime;
 
                 // Check if the action has been pressed for the desired duration.
-                if (spinPressTime >= 1.0f)
+                if (spinPressTime >= 0.28f)
                 {
                     //Turns the camera
                     TurnCamera();
