@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class RespawnManager : MonoBehaviour
@@ -64,8 +65,17 @@ public class RespawnManager : MonoBehaviour
     {
         if (overrideRespawnPoint)
         {
-            //Sets the respawn point to the previous checkpoint
-            return checkpoints[nextCheckpoint - 1];
+            if (nextCheckpoint == 0)
+            {
+                //Sets the respawn point to the current checkpoint if it's the starting line
+                return checkpoints[nextCheckpoint];
+            }
+            else
+            {
+                //Sets the respawn point to the previous checkpoint
+                return checkpoints[nextCheckpoint - 1];
+            }
+            
         }
         else
         {
