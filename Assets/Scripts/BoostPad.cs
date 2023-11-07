@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Unity.Burst.Intrinsics.X86;
 
 public class BoostPad : MonoBehaviour
 {
@@ -59,6 +60,20 @@ public class BoostPad : MonoBehaviour
             //Grabs the AVC
             ArcadeVehicleController avc = other.GetComponent<ArcadeVehicleController>();
 
+            //Boosts the player
+            if (boostPadID == 0)
+            {
+                avc.RiBy.AddForce(this.gameObject.transform.forward * RaceManager.Instance.BoostForce / 2, ForceMode.Impulse);
+            }
+            else if (boostPadLevel == 1)
+            {
+                avc.RiBy.AddForce(this.gameObject.transform.forward * RaceManager.Instance.BoostForce, ForceMode.Impulse);
+            }
+            else if (boostPadLevel == 2)
+            {
+                avc.carBody.AddTorque(this.gameObject.transform.forward * RaceManager.Instance.BoostForce * 2, ForceMode.Impulse);
+            }
+
             //If it's the first player, upgrade boostpad
             if (avc.gameObject.GetComponent<RespawnManager>() == RaceManager.Instance.FirstPlacePlayer)
             {
@@ -70,20 +85,7 @@ public class BoostPad : MonoBehaviour
                 {
                     UpgradeBoostPad(RaceManager.Instance.BoostPads[boostPadID - 1].GetComponentInChildren<BoostPad>());
                 }
-            }
-
-            //Otherwise, boost player
-            else
-            {
-                if (boostPadLevel == 1)
-                {
-                    avc.RiBy.AddForce(this.gameObject.transform.forward * RaceManager.Instance.BoostForce, ForceMode.Impulse);
-                }
-                else if (boostPadLevel == 2)
-                {
-                    avc.carBody.AddTorque(Vector3.up * RaceManager.Instance.BoostForce * 2, ForceMode.Impulse);
-                }
-            }
+            }            
         }
     }
 }
