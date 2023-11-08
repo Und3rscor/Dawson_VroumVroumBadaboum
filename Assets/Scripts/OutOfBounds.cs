@@ -8,7 +8,15 @@ public class OutOfBounds : MonoBehaviour
     {
         if (other.transform.tag == "MainPlayer")
         {
-            other.GetComponentInParent<ArcadeVehicleController>().BlowUp(null);
+            ArcadeVehicleController player = other.gameObject.GetComponent<ArcadeVehicleController>();
+
+            if (player != RaceManager.Instance.FirstPlacePlayer)
+            {
+                //Move respawn point
+                player.gameObject.GetComponent<RespawnManager>().OverrideRespawnPoint = true;
+            }
+            //Blows the player up
+            player.BlowUp(null);
         }
     }
 }

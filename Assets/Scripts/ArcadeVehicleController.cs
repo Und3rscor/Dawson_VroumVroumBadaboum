@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.VFX;
 
 public class ArcadeVehicleController : MonoBehaviour
@@ -15,6 +14,8 @@ public class ArcadeVehicleController : MonoBehaviour
     [SerializeField] private float coolingMultiplier;
     [SerializeField] private float flipBoost;
     [SerializeField] private float spinSpeedDebuff;
+    [SerializeField] private int spinDamage;
+    [SerializeField] private float spinBump;
     public float MaxSpeed, accelaration, turn, gravity = 7f;
 
     //Editor Setup
@@ -25,6 +26,7 @@ public class ArcadeVehicleController : MonoBehaviour
     public AnimationCurve frictionCurve;
     public AnimationCurve turnCurve;
     public PhysicMaterial frictionMaterial;
+    [SerializeField] private bool flipUsed;
 
     //Visual Editor Setup
     [Header("Visuals")]
@@ -73,6 +75,7 @@ public class ArcadeVehicleController : MonoBehaviour
     //Spin variable
     public bool Spin { get { return spin; } }
     private bool spin = false;
+    private bool spinning = false;
 
     //Fetch Setup
     private float radius;
@@ -245,6 +248,16 @@ public class ArcadeVehicleController : MonoBehaviour
         {
             BlowUp(null);
         }
+
+        //Spin bump checker
+        if (model.transform.localRotation.y != 0)
+        {
+            spinning = true;
+        }
+        else
+        {
+            spinning = false;
+        }
     }
 
     private void InputManager()
@@ -269,18 +282,21 @@ public class ArcadeVehicleController : MonoBehaviour
         ReverseController();
 
         //Flip
-        if (playerInput.actions["Spin"].WasPressedThisFrame() && !grounded() && !flip && flipAvailable && !spin)
+        if (flipUsed)
         {
-            flip = true;
-            flipAvailable = false;
-            Invoke("FlipBoost", 0.3f);
-        }
+            if (playerInput.actions["Flip"].WasPressedThisFrame() && !grounded() && !flip && flipAvailable && !spin)
+            {
+                flip = true;
+                flipAvailable = false;
+                Invoke("FlipBoost", 0.3f);
+            }
 
-        modelAnimator.SetBool("FrontFlip", flip);
+            modelAnimator.SetBool("FrontFlip", flip);
 
-        if (grounded())
-        {
-            flipAvailable = true;
+            if (grounded())
+            {
+                flipAvailable = true;
+            }
         }
 
         //Nos
@@ -770,5 +786,31 @@ public class ArcadeVehicleController : MonoBehaviour
     private void HeatToUI()
     {
         ui.HeatCounter = (int)Mathf.Round(heat);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (spinning)
+        {
+            //Makes sure the trigger isn't with the spinner
+            if (other.gameObject.GetComponentInParent<ArcadeVehicleController>() != this)
+            {
+                //If the projectile collides with a player
+                if (other.transform.tag == "MainPlayer")
+                {
+                    //Deals damage
+                    other.gameObject.GetComponentInParent<ArcadeVehicleController>().TakeDamage(spinDamage, this);
+
+                    //Pushes the enemy
+                    Rigidbody riby = other.gameObject.GetComponent<ArcadeVehicleController>().RiBy;
+
+                    // Calculate the direction from the player to the enemy
+                    Vector3 pushDirection = other.transform.position - transform.position;
+
+                    // Apply a force in the direction away from the player
+                    riby.AddForce(pushDirection.normalized * spinBump, ForceMode.Impulse);
+                }
+            }
+        }
     }
 }

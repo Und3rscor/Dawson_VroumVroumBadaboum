@@ -30005,18 +30005,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8376465076156939658, guid: 4b6ebfd73e5da6c42a02f782579b85de,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.6138328
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376465076156939658, guid: 4b6ebfd73e5da6c42a02f782579b85de,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 102.54197
       objectReference: {fileID: 0}
     - target: {fileID: 8376465076156939658, guid: 4b6ebfd73e5da6c42a02f782579b85de,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.9908524
+      value: -1.6
       objectReference: {fileID: 0}
     - target: {fileID: 8376465076156939658, guid: 4b6ebfd73e5da6c42a02f782579b85de,
         type: 3}
@@ -30062,11 +30057,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Checkpoint_StartingLine
-      objectReference: {fileID: 0}
-    - target: {fileID: 8376465076156939662, guid: 4b6ebfd73e5da6c42a02f782579b85de,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b6ebfd73e5da6c42a02f782579b85de, type: 3}
