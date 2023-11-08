@@ -30,8 +30,12 @@ public class RaceManager : MonoBehaviour
     [SerializeField] private float bumpTorque;
 
     //BoostPads
-    public float BoostForce { get { return boostForce; } }
-    [SerializeField] private float boostForce;
+    public float Lvl0boostForce { get { return lvl0boostForce; } }
+    [SerializeField] private float lvl0boostForce;
+    public float Lvl1boostForce { get { return lvl1boostForce; } }
+    [SerializeField] private float lvl1boostForce;
+    public float Lvl2boostForce { get { return lvl2boostForce; } }
+    [SerializeField] private float lvl2boostForce;
 
     //Gamemanager Instance
     private static RaceManager instance;
