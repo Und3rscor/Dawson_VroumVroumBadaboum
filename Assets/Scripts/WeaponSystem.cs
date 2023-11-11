@@ -4,9 +4,12 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using MoreMountains.Feedbacks;
+using UnityEngine.Events;
 
 public class WeaponSystem : MonoBehaviour
 {
+    #region Fields
     //Stats
     [Header("Stats")]
     [SerializeField] private int damage;
@@ -31,6 +34,12 @@ public class WeaponSystem : MonoBehaviour
     private ArcadeVehicleController carDaddy;
     private PlayerInput playerInput;
     private UI ui;
+
+    //Feedback Systems ------------
+    [Header("Feedbacks")]
+    public MMF_Player ShootFeedback;
+
+    #endregion
 
     private void Awake()
     {
@@ -98,13 +107,18 @@ public class WeaponSystem : MonoBehaviour
         //Instantiate muzzle flash
         if (muzzleFlash != null)
         {
-            Instantiate(muzzleFlash, currentAttackPoint.position, Quaternion.identity);
+            //Instantiate(muzzleFlash, currentAttackPoint.position, Quaternion.identity);   // Desactivated Flash handdle with MMF_Player.ShootFeedback
         }
 
         //Add shot heat to the car's heat
         carDaddy.Heat += heatPerShot;
 
         Invoke("ResetShot", shootDelay);
+
+        
+        
+        ShootFeedback?.PlayFeedbacks();  // Call Feedback System
+
     }
 
     private void SpawnProjectile(Vector3 attackPoint, Quaternion attackRotation)

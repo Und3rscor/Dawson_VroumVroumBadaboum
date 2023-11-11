@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
+using MoreMountains.Feedbacks;
+using UnityEngine.Events;
+
 
 public class ArcadeVehicleController : MonoBehaviour
 {
+    #region Fields
     //Car Stats
     [Header("Stats")]
     [SerializeField] private int maxHealth;
@@ -98,6 +102,14 @@ public class ArcadeVehicleController : MonoBehaviour
     //Inputs
     private float horizontalInput, verticalInput; //Movement Input
 
+
+    //Feedback Systems ------------
+    [Header("Feedbacks")]
+    public MMF_Player WheelsFeedback_Left;
+
+
+    #endregion
+
     private void Start()
     {
         //Fetches
@@ -131,6 +143,8 @@ public class ArcadeVehicleController : MonoBehaviour
         HealthToUI();
     }
 
+
+
     // This function will recursively find all MeshRenderers in the children of the specified transform
     private void FindMeshRenderers(Transform parentTransform)
     {
@@ -152,6 +166,8 @@ public class ArcadeVehicleController : MonoBehaviour
         //SetupColor(primaryColor, secondaryColor);
     }
 
+
+
     private void FindVFX(Transform parentTransform)
     {
         // Loop through each child of the parentTransform
@@ -171,6 +187,8 @@ public class ArcadeVehicleController : MonoBehaviour
 
         //SetupVFXColor(primaryColor, secondaryColor);
     }
+
+
 
     //Sets the color of the car body and the gradient of the trail vfx
     public void SetupColor(Color _primaryColor, Color _secondaryColor)
@@ -228,6 +246,8 @@ public class ArcadeVehicleController : MonoBehaviour
         }
     }
 
+
+
     private void Update()
     {
         InputManager();
@@ -259,6 +279,8 @@ public class ArcadeVehicleController : MonoBehaviour
             spinning = false;
         }
     }
+
+
 
     private void InputManager()
     {
@@ -306,6 +328,8 @@ public class ArcadeVehicleController : MonoBehaviour
         }
     }
 
+    
+    
     public void AudioManager()
     {
         engineSound.pitch = Mathf.Lerp(minPitch, MaxPitch, Mathf.Abs(carVelocity.z) / MaxSpeed);
@@ -375,6 +399,7 @@ public class ArcadeVehicleController : MonoBehaviour
         }
 
     }
+
     public void Visuals()
     {
         //tires
@@ -448,6 +473,8 @@ public class ArcadeVehicleController : MonoBehaviour
 
     }
 
+    #region NOS
+
     private void NosController()
     {
         //Activates boost when the boost is pressed while you have enough nos in the capacity, you're not spinning and going forward
@@ -481,6 +508,8 @@ public class ArcadeVehicleController : MonoBehaviour
     {
         ui.NosCounter = Mathf.FloorToInt(currentNos);
     }
+
+    #endregion
 
     private void FlipBoost()
     {
@@ -616,6 +645,8 @@ public class ArcadeVehicleController : MonoBehaviour
         }
     }
 
+    #region BlueZone
+
     // Start the coroutine when leaving the blue zone
     public void LeaveBlueZone()
     {
@@ -653,12 +684,14 @@ public class ArcadeVehicleController : MonoBehaviour
         }
     }
 
+    #endregion
+
     public void RefillHealth()
     {
         currentHealth = maxHealth;
         HealthToUI();
     }
-
+    
     private void HealthToUI()
     {
         ui.HealthCounter = currentHealth;
