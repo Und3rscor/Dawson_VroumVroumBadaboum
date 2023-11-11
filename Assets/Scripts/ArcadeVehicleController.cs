@@ -106,6 +106,7 @@ public class ArcadeVehicleController : MonoBehaviour
     //Feedback Systems ------------
     [Header("Feedbacks")]
     public MMF_Player WheelsFeedback_Left;
+    public MMF_Player WheelsFeedback_Right;
 
 
     #endregion
