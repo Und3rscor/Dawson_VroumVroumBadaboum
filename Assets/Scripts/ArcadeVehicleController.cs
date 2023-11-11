@@ -107,6 +107,8 @@ public class ArcadeVehicleController : MonoBehaviour
     [Header("Feedbacks")]
     public MMF_Player WheelsFeedback_Left;
     public MMF_Player WheelsFeedback_Right;
+    public MMF_Player NosFeedback;
+    public MMF_Player LifeFeedback;
 
 
     #endregion
@@ -490,6 +492,8 @@ public class ArcadeVehicleController : MonoBehaviour
 
             currentNos -= 10.0f * Time.deltaTime;
             NosToUI();
+
+            NosFeedback?.PlayFeedbacks();  // Call Feedback System
         }
 
         if (playerInput.actions["Boost"].WasReleasedThisFrame() || accelaration != baseAccelaration && currentNos <= 0)
@@ -512,6 +516,8 @@ public class ArcadeVehicleController : MonoBehaviour
 
     #endregion
 
+    
+    
     private void FlipBoost()
     {
         rb.AddForce(transform.forward * flipBoost, ForceMode.Impulse);
@@ -644,6 +650,8 @@ public class ArcadeVehicleController : MonoBehaviour
         {
             BlowUp(damageSource);
         }
+
+        LifeFeedback?.PlayFeedbacks();
     }
 
     #region BlueZone

@@ -38,6 +38,7 @@ public class WeaponSystem : MonoBehaviour
     //Feedback Systems ------------
     [Header("Feedbacks")]
     public MMF_Player ShootFeedback;
+    public MMF_Player HeatBarFeedback;
 
     #endregion
 
@@ -115,9 +116,10 @@ public class WeaponSystem : MonoBehaviour
 
         Invoke("ResetShot", shootDelay);
 
-        
-        
-        ShootFeedback?.PlayFeedbacks();  // Call Feedback System
+
+        // Call Feedback System
+        ShootFeedback?.PlayFeedbacks();  
+        HeatBarFeedback?.PlayFeedbacks();
 
     }
 
