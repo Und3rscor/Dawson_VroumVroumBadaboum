@@ -439,6 +439,17 @@ public class ArcadeVehicleController : MonoBehaviour
         {
             crown.SetActive(false);
         }
+
+        //Wheels
+        if (horizontalInput > 0) //If the player inputs right, it calls the right feedback
+        {
+            WheelsFeedback_Right?.PlayFeedbacks();
+        }
+        
+        if (horizontalInput < 0) //If the player inputs left, it calls the left feedback
+        {
+            WheelsFeedback_Left?.PlayFeedbacks();
+        }
     }
 
     public bool grounded() //checks for if vehicle is grounded or not
