@@ -6,6 +6,16 @@ public class Checkpoint : MonoBehaviour
 {
     [Tooltip("If it's the starting line, leave at 0, otherwise, increment them in order that the player would reach them")]
     [SerializeField] private int checkpointID;
+    [SerializeField] private bool isIngameCheckpoint;
+
+    private void Start()
+    {
+        //If it's not an ingame checkpoint, turn off the renderer
+        if (!isIngameCheckpoint)
+        {
+            this.transform.parent.gameObject.GetComponentInChildren<Animator>().gameObject.SetActive(false);
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -23,9 +33,12 @@ public class Checkpoint : MonoBehaviour
                 //Updates the respawn manager to know what is it's next target checkpoint
                 other.GetComponent<RespawnManager>().UpdateNextCheckpoint();
 
-                //Refills the car's nos
-                other.GetComponentInParent<ArcadeVehicleController>().RefillNos();
-
+                //Refills the car's nos only if it's an ingame checkpoint and not a manager checkpoint
+                if (isIngameCheckpoint)
+                {
+                    other.GetComponentInParent<ArcadeVehicleController>().RefillNos();
+                }
+                
                 if (this.gameObject.tag == "Finishline")
                 {
                     UI ui = other.gameObject.GetComponentInChildren<UI>();

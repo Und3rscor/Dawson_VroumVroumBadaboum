@@ -200,6 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpointID: 0
+  isCheckpoint: 1
 --- !u!4 &8376465077230668310 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4423913989866073164, guid: 62b899cfccb7adb4bbeff3ba38a6c708,
