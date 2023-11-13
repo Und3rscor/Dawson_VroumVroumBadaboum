@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2958328747831276176}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 500, y: 500, z: 500}
+  m_LocalScale: {x: 300, y: 300, z: 300}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2246956173609073389}
@@ -121,7 +121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2246956173609073389}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Respawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 5369155027560849992}
   - component: {fileID: 7215345217774681150}
   - component: {fileID: 7999689162510852962}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PP_Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
