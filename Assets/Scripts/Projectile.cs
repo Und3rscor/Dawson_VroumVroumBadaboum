@@ -1,3 +1,4 @@
+using MoreMountains.Tools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -64,6 +65,7 @@ public class Projectile : MonoBehaviour
             //If the projectile collides with the environment
             else
             {
+                Debug.Log(coll.gameObject.layer);
                 DestroyObj();
             }
         } 
