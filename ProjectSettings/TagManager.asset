@@ -9,6 +9,7 @@ TagManager:
   - MainBot
   - Finishline
   - StartingLine
+  - Volume
   layers:
   - Default
   - TransparentFX

@@ -62,10 +62,14 @@ public class Projectile : MonoBehaviour
                 //Plays the sfx before destroying the projectile
                 Die();
             }
+            //If the colliding object is the PP volume, don't collide with it. Lol
+            else if (coll.transform.tag == "Volume")
+            {
+                //Do Nothing
+            }
             //If the projectile collides with the environment
             else
             {
-                Debug.Log(coll.gameObject.layer);
                 DestroyObj();
             }
         } 
