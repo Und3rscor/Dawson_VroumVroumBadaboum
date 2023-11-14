@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class MainMenu : MonoBehaviour
 {
@@ -15,7 +16,8 @@ public class MainMenu : MonoBehaviour
     // for the CTA
     public GameObject canevas2;
 
-        
+    [Header("First Selected Options")]
+    [SerializeField] private GameObject homeScreenFirst;
 
     private void Start()
     {
@@ -56,6 +58,8 @@ public class MainMenu : MonoBehaviour
     {
         RedrawMenu(menus[1]);
         canevas2.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(homeScreenFirst);
     }
 
     public void AssemblyScreen()
