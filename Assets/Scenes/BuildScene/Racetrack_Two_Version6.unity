@@ -32964,10 +32964,20 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7999689162510852962, guid: d1ac4b3d31796604c99f735e0ea4a97e,
+        type: 3}
+      propertyPath: priority
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8826476712292841685, guid: d1ac4b3d31796604c99f735e0ea4a97e,
         type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8826476712292841685, guid: d1ac4b3d31796604c99f735e0ea4a97e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Volume
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1ac4b3d31796604c99f735e0ea4a97e, type: 3}
@@ -32991,7 +33001,7 @@ GameObject:
   - component: {fileID: 1754027917}
   m_Layer: 0
   m_Name: PP_Volume
-  m_TagString: Untagged
+  m_TagString: Volume
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33064,7 +33074,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IsGlobal: 1
-  priority: 0
+  priority: 1
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 9e72aebb4d680eb45a94ce4b33f50dab, type: 2}
