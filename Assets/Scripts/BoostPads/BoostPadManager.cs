@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BoostPadManager : MonoBehaviour
 {
+    [Tooltip("Set the array amount to the max value of boostPadID used plus 1")]
     [SerializeField] private BoostPad[] boostPads;
 
     //BoostPad force per level

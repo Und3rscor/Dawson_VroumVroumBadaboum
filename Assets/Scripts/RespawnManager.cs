@@ -10,7 +10,7 @@ public class RespawnManager : MonoBehaviour
     public int respawnDelay;
 
     //Checkpoints
-    private GameObject[] checkpoints;
+    private Checkpoint[] checkpoints;
 
     public int NextCheckpoint { get { return nextCheckpoint; } set { nextCheckpoint = value; } }
     private int nextCheckpoint;
@@ -27,7 +27,7 @@ public class RespawnManager : MonoBehaviour
         ui = GetComponentInChildren<UI>();
     }
 
-    public void UpdateCheckpointList(GameObject[] managerCheckpoints)
+    public void UpdateCheckpointList(Checkpoint[] managerCheckpoints)
     {
         checkpoints = managerCheckpoints;
     }
@@ -68,12 +68,12 @@ public class RespawnManager : MonoBehaviour
             if (nextCheckpoint == 0)
             {
                 //Sets the respawn point to the current checkpoint if it's the starting line
-                return checkpoints[nextCheckpoint];
+                return checkpoints[nextCheckpoint].gameObject;
             }
             else
             {
                 //Sets the respawn point to the previous checkpoint
-                return checkpoints[nextCheckpoint - 1];
+                return checkpoints[nextCheckpoint - 1].gameObject;
             }
             
         }

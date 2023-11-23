@@ -8,6 +8,8 @@ public class Checkpoint : MonoBehaviour
     [SerializeField] private int checkpointID;
     [SerializeField] private bool isIngameCheckpoint;
 
+    public int CheckpointID { get { return checkpointID; } }
+
     private void Start()
     {
         //If it's not an ingame checkpoint, turn off the renderer
