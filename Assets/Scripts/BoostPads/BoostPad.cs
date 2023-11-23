@@ -13,8 +13,14 @@ public class BoostPad : MonoBehaviour
 
     private List<MeshRenderer> boostPadRendererList;
 
+    private BoostPadManager bPM;
+    private float boostForce;
+    public int BoostPadID { get { return boostPadID; } }
+
     private void Start()
     {
+        bPM = GetComponentInParent<BoostPadManager>();
+
         boostPadRendererList = new List<MeshRenderer>();
 
         FindMeshRenderers(this.transform);
@@ -78,19 +84,22 @@ public class BoostPad : MonoBehaviour
 
     private void BoostPlayer(Rigidbody rb)
     {
-        //Boosts the player
+        //Sets the boost force
         if (boostPadID == 0)
         {
-            rb.AddForce(rb.transform.up * RaceManager.Instance.Lvl0boostForce, ForceMode.Impulse);
+            boostForce = bPM.Lvl0boostForce;
         }
         else if (boostPadLevel == 1)
         {
-            rb.AddForce(rb.transform.up * RaceManager.Instance.Lvl1boostForce, ForceMode.Impulse);
+            boostForce = bPM.Lvl1boostForce;
         }
         else if (boostPadLevel == 2)
         {
-            rb.AddForce(rb.transform.up * RaceManager.Instance.Lvl2boostForce, ForceMode.Impulse);
+            boostForce = bPM.Lvl2boostForce;
         }
+
+        //Boosts player
+        rb.AddForce(-transform.forward * boostForce, ForceMode.Impulse);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -112,7 +121,7 @@ public class BoostPad : MonoBehaviour
                 if (boostPadID >= 1)
                 {
                     //Sets the first previous
-                    SetBoostPadLevel(RaceManager.Instance.BoostPads[boostPadID - 1].GetComponentInChildren<BoostPad>(), 2);
+                    SetBoostPadLevel(bPM.BoostPads[boostPadID - 1].GetComponentInChildren<BoostPad>(), 2);
                 }
             }            
         }
