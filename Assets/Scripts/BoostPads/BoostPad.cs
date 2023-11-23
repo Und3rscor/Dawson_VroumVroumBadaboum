@@ -33,6 +33,11 @@ public class BoostPad : MonoBehaviour
 
     private void FindMeshRenderers(Transform parentTransform)
     {
+        if (parentTransform.GetComponent<MeshRenderer>() != null)
+        {
+            boostPadRendererList.Add(parentTransform.GetComponent<MeshRenderer>());
+        }
+
         // Loop through each child of the parentTransform
         foreach (Transform child in parentTransform)
         {
@@ -126,6 +131,4 @@ public class BoostPad : MonoBehaviour
             }            
         }
     }
-
-    
 }
