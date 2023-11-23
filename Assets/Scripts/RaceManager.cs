@@ -11,13 +11,9 @@ public class RaceManager : MonoBehaviour
 {
     [SerializeField] private Transform[] spawnpoints;
 
-    [Tooltip("Put the starting line at 0 then all other checkpoints in the order the players will encounter them and the finishline last")]
-    [SerializeField] private GameObject[] checkpoints;
-
-    [Tooltip("Put them in the order the players will encounter them")]
-    [SerializeField] private GameObject[] boostPads;
-
     [SerializeField] private GameObject respawnPoint;
+
+    private CheckpointManager checkpointManager;
 
     //BlueZone
     [SerializeField] private int blueZoneDps;
@@ -28,14 +24,6 @@ public class RaceManager : MonoBehaviour
     public float BumpTorque { get { return bumpTorque; } }
     [SerializeField] private float bumpForce;
     [SerializeField] private float bumpTorque;
-
-    //BoostPads
-    public float Lvl0boostForce { get { return lvl0boostForce; } }
-    [SerializeField] private float lvl0boostForce;
-    public float Lvl1boostForce { get { return lvl1boostForce; } }
-    [SerializeField] private float lvl1boostForce;
-    public float Lvl2boostForce { get { return lvl2boostForce; } }
-    [SerializeField] private float lvl2boostForce;
 
     //Gamemanager Instance
     private static RaceManager instance;
@@ -50,8 +38,6 @@ public class RaceManager : MonoBehaviour
 
     public RespawnManager FirstPlacePlayer { get { return firstPlacePlayer; } }
     public GameObject RespawnPoint { get { return respawnPoint; } }
-    public GameObject[] Checkpoints { get { return checkpoints; } }
-    public GameObject[] BoostPads { get { return boostPads; } }
 
     //Camera layers
     private int playerID = 1;
@@ -66,6 +52,8 @@ public class RaceManager : MonoBehaviour
     private void Start()
     {
         Pause();
+
+        checkpointManager = FindObjectOfType<CheckpointManager>();
 
         //Initialize playerList
         playerList = new List<RespawnManager>();
@@ -101,7 +89,7 @@ public class RaceManager : MonoBehaviour
         if (player.NextCheckpoint >= firstPlacePlayerNextCheckpoint)
         {
             //Calculates distance to said checkpoint
-            float distance = Vector3.Distance(player.transform.position, checkpoints[player.NextCheckpoint].transform.position);
+            float distance = Vector3.Distance(player.transform.position, checkpointManager.Checkpoints[player.NextCheckpoint].transform.position);
 
             //Then checks if the distance of the player is smaller than the distance of the player in first place
             //If it is smaller, assigns that player as the new first place player
@@ -160,7 +148,7 @@ public class RaceManager : MonoBehaviour
             player.transform.rotation = playerSpawnPoint.rotation;
 
             //Changes the player's checkpoint list to the list provided
-            player.RespawnManager.UpdateCheckpointList(checkpoints);
+            player.RespawnManager.UpdateCheckpointList(checkpointManager.Checkpoints);
 
             //Gives the player car a random color
             if (player.RandomColor)

@@ -8,6 +8,8 @@ public class Checkpoint : MonoBehaviour
     [SerializeField] private int checkpointID;
     [SerializeField] private bool isIngameCheckpoint;
 
+    public int CheckpointID { get { return checkpointID; } }
+
     private void Start()
     {
         //If it's not an ingame checkpoint, turn off the renderer
@@ -31,12 +33,13 @@ public class Checkpoint : MonoBehaviour
             if (rm.NextCheckpoint == checkpointID)
             {
                 //Updates the respawn manager to know what is it's next target checkpoint
-                other.GetComponent<RespawnManager>().UpdateNextCheckpoint();
+                //If it's an ingame checkpoint, it will give score otherwise, it won't
+                rm.UpdateNextCheckpoint(isIngameCheckpoint);
 
                 //Refills the car's nos only if it's an ingame checkpoint and not a manager checkpoint
                 if (isIngameCheckpoint)
                 {
-                    other.GetComponentInParent<ArcadeVehicleController>().RefillNos();
+                    avc.RefillNos();
                 }
                 
                 if (this.gameObject.tag == "Finishline")
