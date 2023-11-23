@@ -32,12 +32,15 @@ public class RespawnManager : MonoBehaviour
         checkpoints = managerCheckpoints;
     }
 
-    public void UpdateNextCheckpoint()
+    public void UpdateNextCheckpoint(bool giveScore)
     {
         //Updates the next checkpoint
         nextCheckpoint++;
 
-        ui.Checkpoint();
+        if (giveScore)
+        {
+            ui.Checkpoint();
+        }
     }
 
     public void Respawn()
