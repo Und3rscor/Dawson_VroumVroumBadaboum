@@ -109,6 +109,7 @@ public class ArcadeVehicleController : MonoBehaviour
     public MMF_Player WheelsFeedback_Right;
     public MMF_Player NosFeedback;
     public MMF_Player LifeFeedback;
+    public MMF_Player BoostFeedback;
 
 
     #endregion
@@ -504,7 +505,8 @@ public class ArcadeVehicleController : MonoBehaviour
             currentNos -= 10.0f * Time.deltaTime;
             NosToUI();
 
-            NosFeedback?.PlayFeedbacks();  // Call Feedback System
+            NosFeedback?.PlayFeedbacks();  // Call UI Feedback System
+            BoostFeedback?.PlayFeedbacks(); // call boost feedback
         }
 
         if (playerInput.actions["Boost"].WasReleasedThisFrame() || accelaration != baseAccelaration && currentNos <= 0)
