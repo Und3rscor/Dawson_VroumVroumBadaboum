@@ -1542,7 +1542,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4776800488413303594
 Transform:
   m_ObjectHideFlags: 0
@@ -10617,6 +10617,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5540225799822316756, guid: 90388aa3ea7da5943822ea54be446c46,
         type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5540225799822316756, guid: 90388aa3ea7da5943822ea54be446c46,
+        type: 3}
       propertyPath: ShapeModule.type
       value: 4
       objectReference: {fileID: 0}
@@ -11770,6 +11775,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5540225799822316756, guid: 90388aa3ea7da5943822ea54be446c46,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5540225799822316756, guid: 90388aa3ea7da5943822ea54be446c46,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5540225799822316757, guid: 90388aa3ea7da5943822ea54be446c46,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -11956,6 +11971,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5540225799822316756, guid: 90388aa3ea7da5943822ea54be446c46,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5540225799822316756, guid: 90388aa3ea7da5943822ea54be446c46,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5540225799822316757, guid: 90388aa3ea7da5943822ea54be446c46,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -12061,6 +12086,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5540225799822316756, guid: 90388aa3ea7da5943822ea54be446c46,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5540225799822316756, guid: 90388aa3ea7da5943822ea54be446c46,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5540225799822316757, guid: 90388aa3ea7da5943822ea54be446c46,
         type: 3}
@@ -12286,17 +12321,22 @@ PrefabInstance:
     - target: {fileID: 1620367031715394238, guid: a4a756f0668ff30458c323f170715593,
         type: 3}
       propertyPath: looping
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1620367031715394238, guid: a4a756f0668ff30458c323f170715593,
         type: 3}
       propertyPath: prewarm
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1620367031715394238, guid: a4a756f0668ff30458c323f170715593,
         type: 3}
       propertyPath: lengthInSec
-      value: 0.1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620367031715394238, guid: a4a756f0668ff30458c323f170715593,
+        type: 3}
+      propertyPath: startDelay.scalar
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1620367031715394238, guid: a4a756f0668ff30458c323f170715593,
         type: 3}
