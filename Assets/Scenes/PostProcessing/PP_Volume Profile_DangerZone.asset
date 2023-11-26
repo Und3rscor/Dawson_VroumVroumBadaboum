@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 221518ef91623a7438a71fef23660601, type: 3}
   m_Name: WhiteBalance
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   temperature:
     m_OverrideState: 1
     m_Value: -10
@@ -221,7 +221,7 @@ MonoBehaviour:
     m_Value: 1.65
   intensity:
     m_OverrideState: 1
-    m_Value: 175
+    m_Value: 135
   scatter:
     m_OverrideState: 1
     m_Value: 0.6
@@ -379,7 +379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 558a8e2b6826cf840aae193990ba9f2e, type: 3}
   m_Name: ShadowsMidtonesHighlights
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   shadows:
     m_OverrideState: 1
     m_Value: {x: 0.89630115, y: 0.91228485, z: 1, w: 0.01852833}
