@@ -23797,6 +23797,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: TripleBoostPad (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8020715284271333592, guid: 64aa11a2b187e33439287eea58f6eb0f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -13.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8020715284650210730, guid: 64aa11a2b187e33439287eea58f6eb0f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8020715284650210730, guid: 64aa11a2b187e33439287eea58f6eb0f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64aa11a2b187e33439287eea58f6eb0f, type: 3}
 --- !u!1 &480704470
@@ -27043,6 +27058,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TripleBoostPad
+      objectReference: {fileID: 0}
+    - target: {fileID: 8020715284271333592, guid: 64aa11a2b187e33439287eea58f6eb0f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -13.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 8020715284271333592, guid: 64aa11a2b187e33439287eea58f6eb0f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 8020715284650210730, guid: 64aa11a2b187e33439287eea58f6eb0f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 8020715284650210730, guid: 64aa11a2b187e33439287eea58f6eb0f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.03
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64aa11a2b187e33439287eea58f6eb0f, type: 3}
@@ -71225,6 +71260,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5614703578486854980, guid: f47bc4d1da180ee439aec2ca7e126ca0,
+        type: 3}
+      propertyPath: lvl0boostForce
+      value: 375
+      objectReference: {fileID: 0}
+    - target: {fileID: 5614703578486854980, guid: f47bc4d1da180ee439aec2ca7e126ca0,
+        type: 3}
+      propertyPath: lvl1boostForce
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 5614703578486854980, guid: f47bc4d1da180ee439aec2ca7e126ca0,
+        type: 3}
+      propertyPath: lvl2boostForce
+      value: 400
+      objectReference: {fileID: 0}
     - target: {fileID: 5614703578486854980, guid: f47bc4d1da180ee439aec2ca7e126ca0,
         type: 3}
       propertyPath: boostPads.Array.size
