@@ -20,7 +20,7 @@ public class MenuInputManager : MonoBehaviour
             instance = this;
         }
 
-        playerInput = GetComponent<PlayerInput>();
+        playerInput = FindObjectOfType<PlayerInput>();
 
         mainMenu = FindObjectOfType<MainMenu>();
     }

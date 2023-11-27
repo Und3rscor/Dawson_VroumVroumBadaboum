@@ -77689,6 +77689,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2320599799581454166, guid: c7b180c22eab86a49a18849fccf7ac38,
+        type: 3}
+      propertyPath: m_AllowJoining
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2320599799581454167, guid: c7b180c22eab86a49a18849fccf7ac38,
         type: 3}
       propertyPath: m_Name
@@ -92566,7 +92571,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &1754027918
 MeshRenderer:
   m_ObjectHideFlags: 0

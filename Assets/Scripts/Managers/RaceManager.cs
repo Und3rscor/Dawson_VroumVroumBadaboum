@@ -25,7 +25,7 @@ public class RaceManager : MonoBehaviour
     [SerializeField] private float bumpForce;
     [SerializeField] private float bumpTorque;
 
-    //Gamemanager Instance
+    //Racemanager Instance
     private static RaceManager instance;
 
     public static RaceManager Instance { get { return instance; } }
@@ -131,6 +131,9 @@ public class RaceManager : MonoBehaviour
             //Grabs the player object
             GameObject playerObj = player.gameObject;
 
+            //Grabs the player coloring script
+            PlayerColorSetup playerColor = player.GetComponentInChildren<PlayerColorSetup>();
+
             //Grabs the respawnManager
             RespawnManager rm = playerObj.GetComponent<RespawnManager>();
 
@@ -151,10 +154,13 @@ public class RaceManager : MonoBehaviour
             player.RespawnManager.UpdateCheckpointList(checkpointManager.Checkpoints);
 
             //Gives the player car a random color
-            if (player.RandomColor)
+            //Feature removed for the time being
+            /*
+            if (playerColor.RandomColor)
             {
-                player.SetupColor(RandomColor(), RandomColor());
+                playerColor.SetupColor(RandomColor(), RandomColor());
             }
+            */
         }
         
         //Sets the camera LayerMask between "P1 Cam" to "P4 Cam" depending on the player ID

@@ -10,6 +10,8 @@ TagManager:
   - Finishline
   - StartingLine
   - Volume
+  - MainMenu
+  - PlayerSelection
   layers:
   - Default
   - TransparentFX

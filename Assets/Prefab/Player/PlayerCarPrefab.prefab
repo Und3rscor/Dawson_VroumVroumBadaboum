@@ -4404,10 +4404,6 @@ MonoBehaviour:
   - {fileID: 367454050909663711}
   brakeLightMat: {fileID: 2100000, guid: 7494c73eb2406874486700e503f78330, type: 2}
   nosFX: {fileID: 8046189567934495814}
-  primaryColor: {r: 1, g: 0, b: 0, a: 1}
-  secondaryColor: {r: 0.023529412, g: 1, b: 0, a: 1}
-  randomColors: 1
-  VFX: {fileID: 5084440743900039458}
   playerPositionArrow: {fileID: 7459446026132214751}
   engineSound: {fileID: 1925981547900679247}
   minPitch: 0.3
@@ -4474,6 +4470,7 @@ GameObject:
   - component: {fileID: 1925981547917128440}
   - component: {fileID: 1925981547917128439}
   - component: {fileID: 4274135754395209935}
+  - component: {fileID: 4887142773297066595}
   m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
@@ -4540,6 +4537,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4, y: 6, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4887142773297066595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925981547917128441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d6acb250d7c3d419a082e733c29993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomColors: 0
+  primaryColor: {r: 0, g: 0, b: 0, a: 0}
+  secondaryColor: {r: 0, g: 0, b: 0, a: 0}
+  VFX: {fileID: 5084440743900039458}
+  mainMat: {fileID: 2100000, guid: 890c58d16fd1c6b49b089759f02bf0e9, type: 2}
+  secondaryMat: {fileID: 2100000, guid: 3ee933aa0d539c64c9c904ba6db52330, type: 2}
 --- !u!1 &1925981548005914508
 GameObject:
   m_ObjectHideFlags: 0

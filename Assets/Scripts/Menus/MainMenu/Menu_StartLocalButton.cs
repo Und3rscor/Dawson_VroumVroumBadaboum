@@ -49,9 +49,4 @@ public class Menu_StartLocalButton : MonoBehaviour
        
     }
 
-    public void AssignPlayer()
-    {
-        playerSelectionScreens[activatedPlayers].GetComponent<Menu_PlayLocal>().ActivatePlayerScreen();
-    }
-
 }

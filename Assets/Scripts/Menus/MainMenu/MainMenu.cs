@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEditor;
+using UnityEngine.Windows;
+using MoreMountains.Tools;
 
 public class MainMenu : MonoBehaviour
 {
@@ -13,22 +17,28 @@ public class MainMenu : MonoBehaviour
     public GameObject masterAudio;
     private Slider volumeSlider;
 
-    // for the CTA
-    public GameObject canevas2;
+    private PlayerConfigManager pcm;
+    private PlayerInputManager pim;
 
-    [Header("First Selected Options")]
-    [SerializeField] private GameObject homeScreenFirst;
+    public GameObject[] pressAs;
 
     private void Start()
     {
+        pcm = PlayerConfigManager.Instance;
+        pim = pcm.gameObject.GetComponent<PlayerInputManager>();
+
         RedrawMenu(menus[0]);
         volumeSlider = masterAudio.GetComponent<Slider>();
-        canevas2.SetActive(false);
-        
+
+        GetComponent<Canvas>().worldCamera = FindObjectOfType<Camera>();
+
+        PlayerConfigManager.Instance.pressAs = pressAs;
     }
 
     private void RedrawMenu(GameObject active)
     {
+        pim.DisableJoining();
+
         foreach (var menu in menus)
         {
             menu.SetActive(false);
@@ -47,68 +57,58 @@ public class MainMenu : MonoBehaviour
     }
 
     #region Menus
-    public void LandingScreen()
-    {
-        RedrawMenu(menus[0]);
-        volumeSlider.value = volumeLevel;
-        canevas2.SetActive(false);
-    }
 
     public void HomeScreen()
     {
-        RedrawMenu(menus[1]);
-        canevas2.SetActive(true);
-
-        EventSystem.current.SetSelectedGameObject(homeScreenFirst);
+        RedrawMenu(menus[0]);
     }
 
     public void AssemblyScreen()
     {
-        RedrawMenu(menus[2]);
-        canevas2.SetActive(false);
+        RedrawMenu(menus[1]);
     }
 
     public void SettingsGraphicScreen()
     {
-        RedrawMenu(menus[3]);
+        RedrawMenu(menus[2]);
         volumeSlider.value = volumeLevel;
-        canevas2.SetActive(false);
     }
 
     public void SettingsControlsScreen()
     {
-        RedrawMenu(menus[4]);
+        RedrawMenu(menus[3]);
         volumeSlider.value = volumeLevel;
-        canevas2.SetActive(false);
     }
 
     public void SettingsAudioScreen()
     {
-        RedrawMenu(menus[5]);
+        RedrawMenu(menus[4]);
         volumeSlider.value = volumeLevel;
-        canevas2.SetActive(false);
     } 
     
     public void SettingsCreditsScreen()
     {
-        RedrawMenu(menus[6]);
+        RedrawMenu(menus[5]);
         volumeSlider.value = volumeLevel;
-        canevas2.SetActive(false);
     }
 
     public void ExtrasScreen()
     {
-        RedrawMenu(menus[7]);
+        RedrawMenu(menus[6]);
         volumeSlider.value = volumeLevel;
-        canevas2.SetActive(false);
     }
 
     public void LocalPlayScreen()
     {
-        RedrawMenu(menus[8]);
+        RedrawMenu(menus[7]);
         volumeSlider.value = volumeLevel;
-        canevas2.SetActive(false);
+
+        GetComponentInChildren<PlayerSetupMenuController>().SetPlayerIndex(0);
+        pim.EnableJoining();
     }
+
+
+
 
     #endregion
 
