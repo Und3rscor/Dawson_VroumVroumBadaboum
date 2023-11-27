@@ -9,8 +9,6 @@ using UnityEngine.SceneManagement;
 
 public class RaceManager : MonoBehaviour
 {
-    [SerializeField] private Transform[] spawnpoints;
-
     [SerializeField] private GameObject respawnPoint;
 
     private CheckpointManager checkpointManager;
@@ -32,6 +30,7 @@ public class RaceManager : MonoBehaviour
 
     //Relays
     private UI ui;
+    private PlayerConfig playerConfig;
 
     public bool GameOverBool { get { return gameOver; } }
     private bool gameOver = false;
@@ -119,50 +118,48 @@ public class RaceManager : MonoBehaviour
     }
 
     //Asked by CameraExtras.cs to setup it's camera
-    public void PlayerSetup(GameObject obj, Camera camBrain)
+    public void PlayerSetup(GameObject obj, Camera camBrain, PlayerConfig pc)
     {
         Resume();
 
-        if (spawnpoints != null)
+        //Grabs the player's AVC
+        ArcadeVehicleController player = obj.GetComponentInParent<ArcadeVehicleController>();
+        Debug.Log("Avc");
+
+        //Grabs the player object
+        GameObject playerObj = player.gameObject;
+        Debug.Log("obj");
+
+        //Grabs the playerConfigs
+        playerConfig = pc;
+        Debug.Log("pc");
+
+        //Changes the car color
+        player.PlayerColor.SetupColor(pc.color, Color.black);
+        Debug.Log("clr");
+
+        //Grabs the respawnManager
+        RespawnManager rm = playerObj.GetComponent<RespawnManager>();
+        Debug.Log("rm");
+
+        //Changes the name of the player object for easier access in debugging
+        playerObj.name = "Player " + playerID;
+
+        //Adds the player to the list of players
+        playerList.Add(rm);
+
+        //Changes the player's checkpoint list to the list provided
+        player.RespawnManager.UpdateCheckpointList(checkpointManager.Checkpoints);
+
+        //Gives the player car a random color
+        //Feature removed for the time being
+        /*
+        if (playerColor.RandomColor)
         {
-            //Grabs the player's AVC
-            ArcadeVehicleController player = obj.GetComponentInParent<ArcadeVehicleController>();
-
-            //Grabs the player object
-            GameObject playerObj = player.gameObject;
-
-            //Grabs the player coloring script
-            PlayerColorSetup playerColor = player.GetComponentInChildren<PlayerColorSetup>();
-
-            //Grabs the respawnManager
-            RespawnManager rm = playerObj.GetComponent<RespawnManager>();
-
-            //Changes the name of the player object for easier access in debugging
-            playerObj.name = "Player " + playerID;
-
-            //Adds the player to the list of players
-            playerList.Add(rm);
-
-            //Sets the playerSpawnpoint to the spawnpoint it gets assigned
-            Transform playerSpawnPoint = spawnpoints[playerID - 1];
-
-            //Changes the position and rotation of the player to their spawn point when they spawn
-            player.transform.position = playerSpawnPoint.position;
-            player.transform.rotation = playerSpawnPoint.rotation;
-
-            //Changes the player's checkpoint list to the list provided
-            player.RespawnManager.UpdateCheckpointList(checkpointManager.Checkpoints);
-
-            //Gives the player car a random color
-            //Feature removed for the time being
-            /*
-            if (playerColor.RandomColor)
-            {
-                playerColor.SetupColor(RandomColor(), RandomColor());
-            }
-            */
+            playerColor.SetupColor(RandomColor(), RandomColor());
         }
-        
+        */
+
         //Sets the camera LayerMask between "P1 Cam" to "P4 Cam" depending on the player ID
         obj.layer = LayerMask.NameToLayer("P" + playerID + " Cam");
 

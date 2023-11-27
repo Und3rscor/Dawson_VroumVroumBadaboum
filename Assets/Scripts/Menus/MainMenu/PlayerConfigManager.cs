@@ -40,6 +40,11 @@ public class PlayerConfigManager : MonoBehaviour
 
     }
 
+    public List<PlayerConfig> GetPlayerConfigs()
+    {
+        return playerConfigs;
+    }
+
     public void SetPlayerColor(int index, Material color)
     {
         playerConfigs[index].color = color;

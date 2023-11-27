@@ -12,7 +12,6 @@ public class PlayerSetupMenuController : MonoBehaviour
     [SerializeField] private Button readyButton;
     [SerializeField] private GameObject carModel;
     private PlayerColorSetup playerColor;
-    private Material setMaterial;
 
     private void Awake()
     {
@@ -33,14 +32,13 @@ public class PlayerSetupMenuController : MonoBehaviour
     public void SetColor(Material color)
     {
         playerColor.SetupColor(color, Color.black);
-        setMaterial = color;
+        PlayerConfigManager.Instance.SetPlayerColor(playerIndex, color);
 
         readyButton.Select();
     }
 
     public void ReadyPlayer()
     {
-        PlayerConfigManager.Instance.SetPlayerColor(playerIndex, setMaterial);
         PlayerConfigManager.Instance.ReadyPlayer(playerIndex);
 
         Debug.Log("Player " + playerIndex + " is ready!");

@@ -92,6 +92,7 @@ public class ArcadeVehicleController : MonoBehaviour
     public RespawnManager RespawnManager { get { return respawnManager; } }
     public Rigidbody RiBy { get { return rb; } }
     public float Heat { get { return heat; } set { heat = value; } }
+    public PlayerColorSetup PlayerColor { get { return playerColor; } }
 
     //Inputs
     private float horizontalInput, verticalInput; //Movement Input

@@ -92,6 +92,8 @@ public class PlayerColorSetup : MonoBehaviour
             meshRenderer.materials = materials;
         }
 
+        Debug.Log("ForE");
+
         //Creates a new gradient for the vfx
         var gradient = new Gradient();
 
