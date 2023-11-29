@@ -16,7 +16,7 @@ public class InitializeLevel : MonoBehaviour
         {
             var player = Instantiate(playerPrefab, playerSpawns[i].position, playerSpawns[i].rotation, gameObject.transform);
 
-            player.GetComponentInChildren<CameraExtras>().InitializePlayer(playerConfigs[i]);
+            RaceManager.Instance.PlayerSetup(player, playerConfigs[i]);
         }
     }
 }

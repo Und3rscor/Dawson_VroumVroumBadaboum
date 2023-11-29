@@ -118,7 +118,7 @@ public class RaceManager : MonoBehaviour
     }
 
     //Asked by CameraExtras.cs to setup it's camera
-    public void PlayerSetup(GameObject obj, Camera camBrain, PlayerConfig pc)
+    public void PlayerSetup(GameObject obj, PlayerConfig pc)
     {
         Resume();
 
@@ -168,6 +168,8 @@ public class RaceManager : MonoBehaviour
         {
             child.gameObject.layer = LayerMask.NameToLayer("P" + playerID + " Cam");
         }
+
+        Camera camBrain = obj.GetComponentInChildren<CameraExtras>().GetComponent<Camera>();
 
         //Sets the camera CullingMask to remove the other cameras
         ChangeCameraCulling(camBrain);
