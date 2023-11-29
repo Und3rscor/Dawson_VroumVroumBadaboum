@@ -130,12 +130,15 @@ public class RaceManager : MonoBehaviour
         GameObject playerObj = player.gameObject;
         Debug.Log("obj");
 
+        //Grabs the colorer
+        PlayerColorSetup colorer = obj.GetComponentInChildren<PlayerColorSetup>();
+
         //Grabs the playerConfigs
         playerConfig = pc;
         Debug.Log("pc");
 
         //Changes the car color
-        player.PlayerColor.SetupColor(pc.color, Color.black);
+        colorer.SetupColor(pc.Mat, Color.black);
         Debug.Log("clr");
 
         //Grabs the respawnManager

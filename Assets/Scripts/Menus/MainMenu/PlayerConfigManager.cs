@@ -45,15 +45,15 @@ public class PlayerConfigManager : MonoBehaviour
         return playerConfigs;
     }
 
-    public void SetPlayerColor(int index, Material color)
+    public void SetPlayerColor(int index, Material mat)
     {
-        playerConfigs[index].color = color;
+        playerConfigs[index].Mat = mat;
     }
 
     public void ReadyPlayer(int index)
     {
-        playerConfigs[index].isReady = true;
-        if (playerConfigs.All(p => p.isReady == true))
+        playerConfigs[index].IsReady = true;
+        if (playerConfigs.All(p => p.IsReady == true))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
