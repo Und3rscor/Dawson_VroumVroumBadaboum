@@ -71384,7 +71384,7 @@ PrefabInstance:
     - target: {fileID: 5614703578486854980, guid: f47bc4d1da180ee439aec2ca7e126ca0,
         type: 3}
       propertyPath: lvl0boostForce
-      value: 375
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5614703578486854980, guid: f47bc4d1da180ee439aec2ca7e126ca0,
         type: 3}
