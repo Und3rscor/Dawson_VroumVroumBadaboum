@@ -124,26 +124,21 @@ public class RaceManager : MonoBehaviour
 
         //Grabs the player's AVC
         ArcadeVehicleController player = obj.GetComponentInParent<ArcadeVehicleController>();
-        Debug.Log("Avc");
 
         //Grabs the player object
         GameObject playerObj = player.gameObject;
-        Debug.Log("obj");
 
         //Grabs the colorer
         PlayerColorSetup colorer = obj.GetComponentInChildren<PlayerColorSetup>();
 
         //Grabs the playerConfigs
         playerConfig = pc;
-        Debug.Log("pc");
 
         //Changes the car color
         colorer.SetupColor(pc.Mat, Color.black);
-        Debug.Log("clr");
 
         //Grabs the respawnManager
         RespawnManager rm = playerObj.GetComponent<RespawnManager>();
-        Debug.Log("rm");
 
         //Changes the name of the player object for easier access in debugging
         playerObj.name = "Player " + playerID;
@@ -152,7 +147,7 @@ public class RaceManager : MonoBehaviour
         playerList.Add(rm);
 
         //Changes the player's checkpoint list to the list provided
-        player.RespawnManager.UpdateCheckpointList(checkpointManager.Checkpoints);
+        //player.RespawnManager.UpdateCheckpointList(checkpointManager.Checkpoints);
 
         //Gives the player car a random color
         //Feature removed for the time being

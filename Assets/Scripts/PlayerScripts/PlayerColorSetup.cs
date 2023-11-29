@@ -11,7 +11,7 @@ public class PlayerColorSetup : MonoBehaviour
     private List<MeshRenderer> meshRendererList;
     private List<VisualEffect> vfxList;
 
-    private void Start()
+    private void Awake()
     {
         meshRendererList = new List<MeshRenderer>();            //Initialize meshRendererList to store the meshRenderers found in the function below
         vfxList = new List<VisualEffect>();                     //Initialize Visual Effect list
@@ -92,8 +92,6 @@ public class PlayerColorSetup : MonoBehaviour
             // Assign the modified materials array back to the meshRenderer
             meshRenderer.materials = materials;
         }
-
-        Debug.Log("ForE");
 
         //Creates a new gradient for the vfx
         var gradient = new Gradient();
