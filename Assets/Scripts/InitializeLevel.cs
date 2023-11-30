@@ -11,10 +11,21 @@ public class InitializeLevel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var playerConfigs = PlayerConfigManager.Instance.GetPlayerConfigs().ToArray();
+        PlayerConfigManager pcm = PlayerConfigManager.Instance;
 
-        //PlayerConfigManager.Instance.GetComponent<PlayerInputManager>().splitScreen = true;
+        PlayerInputManager pim = pcm.GetComponent<PlayerInputManager>();
 
+        var playerConfigs = pcm.GetPlayerConfigs().ToArray();
+
+        pim.DisableJoining();
+
+        InitializePlayers(playerConfigs);
+
+        pim.splitScreen = true;
+    }
+
+    private void InitializePlayers(PlayerConfig[] playerConfigs)
+    {
         for (int i = 0; i < playerConfigs.Length; i++)
         {
             var player = Instantiate(playerPrefab, playerSpawns[i].position, playerSpawns[i].rotation, gameObject.transform);

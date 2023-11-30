@@ -55,6 +55,7 @@ public class PlayerConfigManager : MonoBehaviour
         playerConfigs[index].IsReady = true;
         if (playerConfigs.All(p => p.IsReady == true))
         {
+            spawningEnabled = false;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }

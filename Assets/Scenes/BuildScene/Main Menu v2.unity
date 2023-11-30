@@ -1715,7 +1715,7 @@ PrefabInstance:
     - target: {fileID: 3405763138864832210, guid: e9474d52f5aa54945996e6ecf4f74f06,
         type: 3}
       propertyPath: m_SplitScreen
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3405763138864832210, guid: e9474d52f5aa54945996e6ecf4f74f06,
         type: 3}
@@ -1726,6 +1726,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_JoinBehavior
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3405763138864832210, guid: e9474d52f5aa54945996e6ecf4f74f06,
+        type: 3}
+      propertyPath: m_MaxPlayerCount
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3405763138864832210, guid: e9474d52f5aa54945996e6ecf4f74f06,
         type: 3}
