@@ -93,6 +93,7 @@ public class ArcadeVehicleController : MonoBehaviour
     public Rigidbody RiBy { get { return rb; } }
     public float Heat { get { return heat; } set { heat = value; } }
     public PlayerColorSetup PlayerColor { get { return playerColor; } }
+    public PlayerInput PlayerInputToRelay { get { return playerInput; } }
 
     //Inputs
     private float horizontalInput, verticalInput; //Movement Input
@@ -115,13 +116,13 @@ public class ArcadeVehicleController : MonoBehaviour
         //Fetches
         radius = rb.GetComponent<SphereCollider>().radius;      //radius = sphereRB's radius
         ui = GetComponentInChildren<UI>();                      //ui = UI script in the canvas
-        playerInput = GetComponent<PlayerInput>();              //playerInput = PlayerInput script
         model = transform.Find("Model").gameObject;             //model = gameobject the mesh of the car is attached to
         modelAnimator = model.GetComponent<Animator>();         //modelAnimator = animator of the car's body (used for flip and spin)
         camExtras = GetComponentInChildren<CameraExtras>();     //camExtras = CameraExtras script in cameraBrain
         respawnManager = GetComponent<RespawnManager>();        //respawnManager = RespawnManager script
         crown = model.transform.Find("Crown").gameObject;       //Finds the firstPlacePlayer crown object
         playerColor = GetComponentInChildren<PlayerColorSetup>(); //Grabs the color setup script
+        playerInput = GetComponent<PlayerControllerRelay>().CarInput; //Grabs the input
 
         //Variable setup
         baseAccelaration = accelaration;
@@ -173,7 +174,6 @@ public class ArcadeVehicleController : MonoBehaviour
     }
 
 
-
     private void InputManager()
     {
         horizontalInput = playerInput.actions["Move"].ReadValue<Vector2>().x;   //turning input
@@ -181,7 +181,7 @@ public class ArcadeVehicleController : MonoBehaviour
         verticalInput = playerInput.actions["Move"].ReadValue<Vector2>().y;     //accelaration input
 
         //Spin
-        if (playerInput.actions["Spin"].WasPressedThisFrame() && grounded())
+        if (playerInput.actions["Spin"].WasPressedThisFrame())
         {
             SpinAction(true);
         }
@@ -430,7 +430,7 @@ public class ArcadeVehicleController : MonoBehaviour
     private void SpinAction(bool startSpinning)
     {
         //Starts the first 180
-        if (startSpinning)
+        if (startSpinning && !spin)
         {
             //Sets spin bool to true and debuffs acceleration while reversing
             spin = true;
@@ -699,7 +699,7 @@ public class ArcadeVehicleController : MonoBehaviour
 
         //Toggles the collider so nothing can collide with it while dead
         rb.GetComponent<SphereCollider>().enabled = toggle;
-        carBody.GetComponent<BoxCollider>().enabled = toggle;
+        carBody.GetComponent<CapsuleCollider>().enabled = toggle;
 
         //Toggles visuals
         playerColor.RespawnToggle(toggle);
@@ -734,11 +734,14 @@ public class ArcadeVehicleController : MonoBehaviour
                 //If the projectile collides with a player
                 if (other.transform.tag == "MainPlayer")
                 {
+                    //Grabs the ArcadeVehicleController from collider
+                    ArcadeVehicleController aVC = other.gameObject.GetComponentInParent<ArcadeVehicleController>();
+
                     //Deals damage
-                    other.gameObject.GetComponentInParent<ArcadeVehicleController>().TakeDamage(spinDamage, this);
+                    aVC.TakeDamage(spinDamage, this);
 
                     //Pushes the enemy
-                    Rigidbody riby = other.gameObject.GetComponent<ArcadeVehicleController>().RiBy;
+                    Rigidbody riby = aVC.RiBy;
 
                     // Calculate the direction from the player to the enemy
                     Vector3 pushDirection = other.transform.position - transform.position;

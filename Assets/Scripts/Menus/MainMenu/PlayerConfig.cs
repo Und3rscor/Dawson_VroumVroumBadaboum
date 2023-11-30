@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerConfig : MonoBehaviour
+public class PlayerConfig
 {
     public PlayerConfig(PlayerInput input)
     {

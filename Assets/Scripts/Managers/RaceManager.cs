@@ -14,6 +14,8 @@ public class RaceManager : MonoBehaviour
 
     private CheckpointManager checkpointManager;
 
+    private int playerID;
+
     //BlueZone
     [SerializeField] private int blueZoneDps;
     public int BlueZoneDps { get { return blueZoneDps;} }
@@ -38,9 +40,6 @@ public class RaceManager : MonoBehaviour
 
     public RespawnManager FirstPlacePlayer { get { return firstPlacePlayer; } }
     public GameObject RespawnPoint { get { return respawnPoint; } }
-
-    //Camera layers
-    private int playerID = 1;
 
     //Private variables
     private bool paused = false;
@@ -123,14 +122,23 @@ public class RaceManager : MonoBehaviour
     {
         Resume();
 
+        //Grabs the ArcadeVehicleController
+        PlayerControllerRelay pCR = obj.GetComponent<PlayerControllerRelay>();
+
         //Grabs the colorer
         PlayerColorSetup colorer = obj.GetComponentInChildren<PlayerColorSetup>();
 
         //Grabs the playerInput
         PlayerInput input = pc.Input;
 
+        //Sets the input
+        pCR.SetPlayerInput(input);
+
         //Changes the default map
-        input.defaultActionMap = "Player";
+        input.SwitchCurrentActionMap("Player");
+
+        //Player ID thing
+        playerID = pc.PlayerIndex + 1;
 
         //Grabs the playerConfigs
         playerConfig = pc;
@@ -159,18 +167,18 @@ public class RaceManager : MonoBehaviour
         }
         */
 
-        //Sets the camera LayerMask between "P1 Cam" to "P4 Cam" depending on the player ID
-        obj.layer = LayerMask.NameToLayer("P" + playerID + " Cam");
-
-        //Then sets the same layer for it's children
-        foreach (Transform child in obj.transform)
-        {
-            child.gameObject.layer = LayerMask.NameToLayer("P" + playerID + " Cam");
-        }
-
         //Sets the camera CullingMask to remove the other cameras
         Camera camBrain = obj.GetComponentInChildren<CameraExtras>().GetComponent<Camera>();
         ChangeCameraCulling(camBrain);
+
+        //Sets the camera LayerMask between "P1 Cam" to "P4 Cam" depending on the player ID
+        camBrain.gameObject.layer = LayerMask.NameToLayer("P" + playerID + " Cam");
+
+        //Then sets the same layer for it's children
+        foreach (Transform child in camBrain.transform)
+        {
+            child.gameObject.layer = LayerMask.NameToLayer("P" + playerID + " Cam");
+        }
 
         //Adds the camera to the player input
         input.camera = camBrain;
@@ -180,9 +188,6 @@ public class RaceManager : MonoBehaviour
         {
             obj.GetComponentInChildren<AudioListener>().enabled = false;
         }
-
-        //This is just so that there are no duplicate player IDs
-        playerID++;
     }
 
     private Color RandomColor()

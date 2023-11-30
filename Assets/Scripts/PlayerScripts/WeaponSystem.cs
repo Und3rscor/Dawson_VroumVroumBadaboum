@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using MoreMountains.Feedbacks;
 using UnityEngine.Events;
+using MoreMountains.Tools;
 
 public class WeaponSystem : MonoBehaviour
 {
@@ -46,10 +47,15 @@ public class WeaponSystem : MonoBehaviour
     {
         readyToShoot = true;
         currentAttackPoint = attackPoints[0];
-        carDaddy = GetComponentInParent<ArcadeVehicleController>();
-        playerInput = GetComponentInParent<PlayerInput>();
+
         shootSound = GetComponent<AudioSource>();
+    }
+
+    private void Start()
+    {
+        carDaddy = GetComponentInParent<ArcadeVehicleController>();
         ui = carDaddy.UI;
+        playerInput = carDaddy.GetComponent<PlayerControllerRelay>().CarInput;
     }
 
     private void Update()

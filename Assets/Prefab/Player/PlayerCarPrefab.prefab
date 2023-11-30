@@ -9351,7 +9351,7 @@ GameObject:
   - component: {fileID: 1925981547900679600}
   - component: {fileID: 1925981547900679245}
   - component: {fileID: 3425080455145710082}
-  - component: {fileID: 6863520850177656726}
+  - component: {fileID: 8216733570589521838}
   m_Layer: 7
   m_Name: PlayerCarPrefab
   m_TagString: MainPlayer
@@ -9736,7 +9736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawnDelay: 3
---- !u!114 &6863520850177656726
+--- !u!114 &8216733570589521838
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9745,28 +9745,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1925981547900679601}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Script: {fileID: 11500000, guid: 36c8f83f3ece5e94ea2cdfd83d9c0ac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 4e152e81a09f94e4d8173e60ade08dde,
-    type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 8402940538234344439}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 928243677}
 --- !u!1 &1925981547917128441
 GameObject:
   m_ObjectHideFlags: 0
@@ -9857,12 +9838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17d6acb250d7c3d419a082e733c29993, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomColors: 0
-  primaryColor: {r: 0, g: 0, b: 0, a: 0}
-  secondaryColor: {r: 0, g: 0, b: 0, a: 0}
   VFX: {fileID: 5084440743900039458}
-  mainMat: {fileID: 2100000, guid: 890c58d16fd1c6b49b089759f02bf0e9, type: 2}
-  secondaryMat: {fileID: 2100000, guid: 3ee933aa0d539c64c9c904ba6db52330, type: 2}
 --- !u!1 &1925981548005914508
 GameObject:
   m_ObjectHideFlags: 0

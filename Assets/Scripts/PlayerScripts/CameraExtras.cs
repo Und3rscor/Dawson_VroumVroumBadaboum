@@ -17,7 +17,7 @@ public class CameraExtras : MonoBehaviour
     private void Start()
     {
         camBrain = GetComponent<Camera>();
-        playerInput = GetComponentInParent<PlayerInput>();        
+        playerInput = GetComponentInParent<PlayerControllerRelay>().CarInput; //Grabs the input;        
     }
 
     private void LateUpdate()
