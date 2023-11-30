@@ -114,6 +114,9 @@ public class BoostPad : MonoBehaviour
             //Grabs the AVC
             ArcadeVehicleController avc = other.GetComponent<ArcadeVehicleController>();
 
+            //Plays feedback
+            avc.PlayBoostFeedback();
+
             BoostPlayer(avc.RiBy);
 
             //If it's the first player, upgrade boostpad

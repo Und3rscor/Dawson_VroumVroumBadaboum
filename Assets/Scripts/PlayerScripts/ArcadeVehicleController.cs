@@ -405,6 +405,11 @@ public class ArcadeVehicleController : MonoBehaviour
         }
     }
 
+    public void PlayBoostFeedback()
+    {
+        BoostFeedback?.PlayFeedbacks(); // call boost feedback
+    }
+
     public void RefillNos()
     {
         currentNos = nosCapacity;
