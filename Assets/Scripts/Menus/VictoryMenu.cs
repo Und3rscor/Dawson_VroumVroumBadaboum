@@ -7,6 +7,8 @@ public class VictoryMenu : MonoBehaviour
 {
     public void ReturnToMainMenu()
     {
+        PlayerConfigManager.Instance.NukeAllDDOL();
+
         SceneManager.LoadScene(0);
     }
 }

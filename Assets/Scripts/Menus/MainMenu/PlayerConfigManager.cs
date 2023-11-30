@@ -71,4 +71,12 @@ public class PlayerConfigManager : MonoBehaviour
             playerConfigs.Add(new PlayerConfig(input));
         }
     }
+
+    /// <summary>
+    /// Destroy all don't destroy on load objects (must be set individually)
+    /// </summary>
+    public void NukeAllDDOL()
+    {
+        Destroy(this.gameObject);
+    }
 }

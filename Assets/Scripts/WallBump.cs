@@ -8,7 +8,7 @@ public class WallBump : MonoBehaviour
     {
         if (collision.transform.tag == "MainPlayer")
         {
-            Rigidbody riby = collision.gameObject.GetComponent<ArcadeVehicleController>().RiBy;
+            Rigidbody riby = collision.gameObject.GetComponentInParent<ArcadeVehicleController>().RiBy;
 
             // Get the normal vector of the wall's surface (assuming the wall has a Collider)
             Vector3 wallNormal = collision.contacts[0].normal;
