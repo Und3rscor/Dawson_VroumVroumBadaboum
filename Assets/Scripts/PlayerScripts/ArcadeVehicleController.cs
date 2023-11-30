@@ -105,6 +105,7 @@ public class ArcadeVehicleController : MonoBehaviour
     public MMF_Player NosFeedback;
     public MMF_Player LifeFeedback;
     public MMF_Player BoostFeedback;
+    public MMF_Player SpinFeedback;
 
 
     #endregion
@@ -202,6 +203,7 @@ public class ArcadeVehicleController : MonoBehaviour
                 flip = true;
                 flipAvailable = false;
                 Invoke("FlipBoost", 0.3f);
+                
             }
 
             modelAnimator.SetBool("FrontFlip", flip);
@@ -433,6 +435,7 @@ public class ArcadeVehicleController : MonoBehaviour
             //Sets spin bool to true and debuffs acceleration while reversing
             spin = true;
             accelaration = accelaration * spinSpeedDebuff;
+            SpinFeedback?.PlayFeedbacks();
         }
 
         //Does the second 180 to finish the sequence

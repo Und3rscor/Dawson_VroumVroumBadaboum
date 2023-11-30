@@ -44,8 +44,6 @@ public class Checkpoint : MonoBehaviour
                 
                 if (this.gameObject.tag == "Finishline")
                 {
-                    UI ui = other.gameObject.GetComponentInChildren<UI>();
-
                     //Launch Scoreboard
                     RaceManager.Instance.FinishScene();
                 }

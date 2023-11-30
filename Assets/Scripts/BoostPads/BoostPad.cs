@@ -90,7 +90,7 @@ public class BoostPad : MonoBehaviour
     private void BoostPlayer(Rigidbody rb)
     {
         //Sets the boost force
-        if (boostPadID == 0)
+        if (boostPadLevel == 0)
         {
             boostForce = bPM.Lvl0boostForce;
         }
