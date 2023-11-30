@@ -1,5 +1,6 @@
 using Cinemachine;
 using Michsky.UI.ModernUIPack;
+using MoreMountains.Tools;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -125,6 +126,12 @@ public class RaceManager : MonoBehaviour
         //Grabs the colorer
         PlayerColorSetup colorer = obj.GetComponentInChildren<PlayerColorSetup>();
 
+        //Grabs the playerInput
+        PlayerInput input = pc.Input;
+
+        //Changes the default map
+        input.defaultActionMap = "Player";
+
         //Grabs the playerConfigs
         playerConfig = pc;
 
@@ -161,15 +168,17 @@ public class RaceManager : MonoBehaviour
             child.gameObject.layer = LayerMask.NameToLayer("P" + playerID + " Cam");
         }
 
-        Camera camBrain = obj.GetComponentInChildren<CameraExtras>().GetComponent<Camera>();
-
         //Sets the camera CullingMask to remove the other cameras
+        Camera camBrain = obj.GetComponentInChildren<CameraExtras>().GetComponent<Camera>();
         ChangeCameraCulling(camBrain);
 
+        //Adds the camera to the player input
+        input.camera = camBrain;
+
         //Removes the audio listener from the other cars
-        if (playerID > 1)
+        if (pc.PlayerIndex >= 1)
         {
-            obj.GetComponent<AudioListener>().enabled = false;
+            obj.GetComponentInChildren<AudioListener>().enabled = false;
         }
 
         //This is just so that there are no duplicate player IDs

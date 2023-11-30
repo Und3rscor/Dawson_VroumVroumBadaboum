@@ -1714,6 +1714,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3405763138864832210, guid: e9474d52f5aa54945996e6ecf4f74f06,
         type: 3}
+      propertyPath: m_SplitScreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3405763138864832210, guid: e9474d52f5aa54945996e6ecf4f74f06,
+        type: 3}
       propertyPath: m_AllowJoining
       value: 1
       objectReference: {fileID: 0}

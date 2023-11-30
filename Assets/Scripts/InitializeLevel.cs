@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InitializeLevel : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class InitializeLevel : MonoBehaviour
     void Start()
     {
         var playerConfigs = PlayerConfigManager.Instance.GetPlayerConfigs().ToArray();
+
+        //PlayerConfigManager.Instance.GetComponent<PlayerInputManager>().splitScreen = true;
 
         for (int i = 0; i < playerConfigs.Length; i++)
         {
