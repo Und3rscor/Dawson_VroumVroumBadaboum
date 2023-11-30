@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.VFX;
 
 public class PlayerColorSetup : MonoBehaviour
@@ -76,7 +77,7 @@ public class PlayerColorSetup : MonoBehaviour
                 Material mat = materials[i]; // Get a reference to the current material
 
                 // Changes all the base mat of the car to the chosen mat
-                if (mat.name == "Synthwave_base (Instance)")
+                if (_primaryColor != null && mat.name == "Synthwave_base (Instance)")
                 {
                     materials[i] = _primaryColor; // Modify the material in the array
                 }
@@ -95,9 +96,19 @@ public class PlayerColorSetup : MonoBehaviour
         //Creates a new gradient for the vfx
         var gradient = new Gradient();
 
+        Color gradientColor;
+        if (_primaryColor == null)
+        {
+            gradientColor = Color.white;
+        }
+        else
+        {
+            gradientColor = _primaryColor.color;
+        }
+
         // Blend color from red at 0% to blue at 100%
         var colors = new GradientColorKey[2];
-        colors[0] = new GradientColorKey(_primaryColor.color, 1.0f);
+        colors[0] = new GradientColorKey(gradientColor, 1.0f);
         colors[1] = new GradientColorKey(_secondaryColor, 0.0f);
 
         // Blend alpha from opaque at 0% to transparent at 100%

@@ -7,12 +7,15 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Windows;
 
 public class RaceManager : MonoBehaviour
 {
     [SerializeField] private GameObject respawnPoint;
 
     private CheckpointManager checkpointManager;
+
+    private List<PlayerInput> playerInputs;
 
     private int playerID;
 
@@ -42,7 +45,6 @@ public class RaceManager : MonoBehaviour
     public GameObject RespawnPoint { get { return respawnPoint; } }
 
     //Private variables
-    private bool paused = false;
     private List<RespawnManager> playerList;
     private RespawnManager firstPlacePlayer = null;
     private float firstPlacePlayerDistanceToFinish = float.MaxValue;
@@ -50,8 +52,6 @@ public class RaceManager : MonoBehaviour
 
     private void Start()
     {
-        Pause();
-
         checkpointManager = FindObjectOfType<CheckpointManager>();
 
         //Initialize playerList
@@ -70,6 +70,8 @@ public class RaceManager : MonoBehaviour
         }
 
         instance = this;
+
+        playerInputs = new List<PlayerInput>();
     }
 
     private void Update()
@@ -102,14 +104,18 @@ public class RaceManager : MonoBehaviour
         }
     }
 
-    private void Pause()
+    public void Pause()
     {
         Time.timeScale = 0.0f;
+
+        InputToggle(false);
     }
 
-    private void Resume()
+    public void Resume()
     {
         Time.timeScale = 1.0f;
+
+        InputToggle(true);
     }
 
     public void FinishScene()
@@ -120,8 +126,6 @@ public class RaceManager : MonoBehaviour
     //Asked by CameraExtras.cs to setup it's camera
     public void PlayerSetup(GameObject obj, PlayerConfig pc)
     {
-        Resume();
-
         //Grabs the ArcadeVehicleController
         PlayerControllerRelay pCR = obj.GetComponent<PlayerControllerRelay>();
 
@@ -130,6 +134,9 @@ public class RaceManager : MonoBehaviour
 
         //Grabs the playerInput
         PlayerInput input = pc.Input;
+
+        //Adds the input to the list of inputs
+        playerInputs.Add(input);
 
         //Sets the input
         pCR.SetPlayerInput(input);
@@ -232,5 +239,20 @@ public class RaceManager : MonoBehaviour
         }
 
         return cullings;
+    }
+
+    private void InputToggle(bool toggle)
+    {
+        foreach (PlayerInput input in playerInputs)
+        {
+            if (!toggle)
+            {
+                input.DeactivateInput();
+            }
+            else
+            {
+                input.ActivateInput();
+            }
+        }
     }
 }

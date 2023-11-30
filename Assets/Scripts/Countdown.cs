@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
+using DG.Tweening;
 
 public class Countdown : MonoBehaviour
 {
@@ -15,9 +16,9 @@ public class Countdown : MonoBehaviour
 
     private void Start()
     {
-        countdownText = GetComponent<TextMeshProUGUI>();
+        countdownText = GetComponentInChildren<TextMeshProUGUI>();
         StartCoroutine(CountdownCoroutine());
-        Time.timeScale = 0.0f;
+        RaceManager.Instance.Pause();
     }
 
     public IEnumerator CountdownCoroutine()
@@ -41,16 +42,14 @@ public class Countdown : MonoBehaviour
             }
         }
 
-        Time.timeScale = 1.0f;
+        RaceManager.Instance.Resume();
 
         countdownSound.pitch = 1.5f;
         countdownSound.volume = 0.3f;
         countdownSound.Play();
-
-        countdownText.text = null;
     }
 
-    private void StartCountdown()
+    public void StartCountdown()
     {
         if (!isCountdownRunning)
         {
