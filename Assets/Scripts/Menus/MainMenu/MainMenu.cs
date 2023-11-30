@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 using UnityEditor;
 using UnityEngine.Windows;
 using MoreMountains.Tools;
+using UnityEngine.InputSystem.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -19,8 +20,14 @@ public class MainMenu : MonoBehaviour
 
     private PlayerConfigManager pcm;
     private PlayerInputManager pim;
+    private MultiplayerEventSystem mEventSystem;
 
     public GameObject[] pressAs;
+
+    private void Awake()
+    {
+        mEventSystem = GetComponentInChildren<MultiplayerEventSystem>();
+    }
 
     private void Start()
     {
@@ -35,7 +42,7 @@ public class MainMenu : MonoBehaviour
         PlayerConfigManager.Instance.pressAs = pressAs;
     }
 
-    private void RedrawMenu(GameObject active)
+    public void RedrawMenu(GameObject active)
     {
         pim.DisableJoining();
 
@@ -47,6 +54,8 @@ public class MainMenu : MonoBehaviour
         if (active != null)
         {
             active.SetActive(true);
+
+            GrabButton(active);
         }
     }
 
@@ -56,46 +65,9 @@ public class MainMenu : MonoBehaviour
         AudioListener.volume = volumeLevel;
     }
 
-    #region Menus
-
     public void HomeScreen()
     {
         RedrawMenu(menus[0]);
-    }
-
-    public void AssemblyScreen()
-    {
-        RedrawMenu(menus[1]);
-    }
-
-    public void SettingsGraphicScreen()
-    {
-        RedrawMenu(menus[2]);
-        volumeSlider.value = volumeLevel;
-    }
-
-    public void SettingsControlsScreen()
-    {
-        RedrawMenu(menus[3]);
-        volumeSlider.value = volumeLevel;
-    }
-
-    public void SettingsAudioScreen()
-    {
-        RedrawMenu(menus[4]);
-        volumeSlider.value = volumeLevel;
-    } 
-    
-    public void SettingsCreditsScreen()
-    {
-        RedrawMenu(menus[5]);
-        volumeSlider.value = volumeLevel;
-    }
-
-    public void ExtrasScreen()
-    {
-        RedrawMenu(menus[6]);
-        volumeSlider.value = volumeLevel;
     }
 
     public void LocalPlayScreen()
@@ -107,12 +79,10 @@ public class MainMenu : MonoBehaviour
         pim.EnableJoining();
     }
 
-
-
-
-    #endregion
-
-  
+    public void GrabButton(GameObject menu)
+    {
+        mEventSystem.SetSelectedGameObject(menu.GetComponentInChildren<Button>().gameObject);
+    }
 
     public void QuitGame()
     {

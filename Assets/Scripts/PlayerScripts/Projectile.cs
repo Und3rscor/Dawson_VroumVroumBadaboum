@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    [SerializeField] private GameObject impactVFX;
     private AudioSource impactSound;
     private float lifespan;
     private int damage;
@@ -28,6 +29,8 @@ public class Projectile : MonoBehaviour
     private void Die()
     {
         impactSound.Play();
+
+        Instantiate(impactVFX);
 
         GetComponentInChildren<Collider>().enabled = false;
 

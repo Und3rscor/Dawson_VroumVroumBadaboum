@@ -79,6 +79,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c75088ea8998e4d8e3370a04b53e66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  impactVFX: {fileID: 3366660602868927601, guid: db3579d784bbfc443ab3a413ff7ff5ef,
+    type: 3}
 --- !u!82 &7914513800414647312
 AudioSource:
   m_ObjectHideFlags: 0
