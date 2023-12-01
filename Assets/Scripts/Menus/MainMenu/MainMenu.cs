@@ -22,7 +22,7 @@ public class MainMenu : MonoBehaviour
     private PlayerInputManager pim;
     private MultiplayerEventSystem mEventSystem;
 
-    public GameObject[] pressAs;
+    public GameObject[] playerSlots;
 
     private void Awake()
     {
@@ -39,7 +39,7 @@ public class MainMenu : MonoBehaviour
 
         GetComponent<Canvas>().worldCamera = FindObjectOfType<Camera>();
 
-        PlayerConfigManager.Instance.pressAs = pressAs;
+        PlayerConfigManager.Instance.playerSlots = playerSlots;
     }
 
     public void RedrawMenu(GameObject active)

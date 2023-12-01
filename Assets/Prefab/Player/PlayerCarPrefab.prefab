@@ -9839,6 +9839,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VFX: {fileID: 5084440743900039458}
+  matsToChange:
+  - {fileID: 2100000, guid: 890c58d16fd1c6b49b089759f02bf0e9, type: 2}
+  - {fileID: 2100000, guid: 3ee933aa0d539c64c9c904ba6db52330, type: 2}
 --- !u!1 &1925981548005914508
 GameObject:
   m_ObjectHideFlags: 0

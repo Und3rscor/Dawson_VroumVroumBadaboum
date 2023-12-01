@@ -7,6 +7,7 @@ using UnityEngine.VFX;
 public class PlayerColorSetup : MonoBehaviour
 {
     [SerializeField] private GameObject VFX;
+    [SerializeField] private Material[] matsToChange;
 
     private List<MeshRenderer> meshRendererList;
     private List<VisualEffect> vfxList;
@@ -77,13 +78,13 @@ public class PlayerColorSetup : MonoBehaviour
                 Material mat = materials[i]; // Get a reference to the current material
 
                 // Changes all the base mat of the car to the chosen mat
-                if (_primaryColor != null && mat.name == "Synthwave_base (Instance)")
+                if (_primaryColor != null && mat.name == matsToChange[0].name + " (Instance)")
                 {
                     materials[i] = _primaryColor; // Modify the material in the array
                 }
 
                 // Changes all the base neon mat of the car to the chosen neon mat
-                if (mat.name == "Synthwave_neon_base (Instance)")
+                if (mat.name == matsToChange[1].name + " (Instance)")
                 {
                     materials[i].color = _secondaryColor; // Modify the material in the array
                 }
@@ -92,6 +93,9 @@ public class PlayerColorSetup : MonoBehaviour
             // Assign the modified materials array back to the meshRenderer
             meshRenderer.materials = materials;
         }
+
+        //Resets the matsToChange
+        matsToChange[0] = _primaryColor;
 
         //Creates a new gradient for the vfx
         var gradient = new Gradient();

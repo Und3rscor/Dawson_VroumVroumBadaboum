@@ -16,7 +16,7 @@ public class PlayerConfigManager : MonoBehaviour
     [Header("SceneSetup")]
     [SerializeField] private int gameSceneBuildIndex;
 
-    public GameObject[] pressAs;
+    public GameObject[] playerSlots;
 
     //PCmanager Instance
     public static PlayerConfigManager Instance { get; private set; }

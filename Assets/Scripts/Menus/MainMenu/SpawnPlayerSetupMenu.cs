@@ -25,16 +25,23 @@ public class SpawnPlayerSetupMenu : MonoBehaviour
             var rootmenu = GameObject.FindGameObjectWithTag("PlayerSelection");
             if (rootmenu != null)
             {
-                GameObject original = playerSetupMenuPrefab;
-                Vector3 position = PlayerConfigManager.Instance.pressAs[input.playerIndex - 1].transform.position;
-                Quaternion rotation = PlayerConfigManager.Instance.pressAs[input.playerIndex - 1].transform.rotation;
-                Transform parent = rootmenu.transform;
+                //Grab relevant player slot
+                Transform playerSlot = PlayerConfigManager.Instance.playerSlots[input.playerIndex - 1].transform;
 
-                var menu = Instantiate(original, position, rotation, parent);
+                //Grab "Press A"
+                GameObject menuToReplace = playerSlot.transform.GetChild(0).gameObject;
+
+                //Grab values for PlayerSetupMenu
+                GameObject original = playerSetupMenuPrefab;
+                Transform parent = playerSlot.transform;
+
+                //Spawn PlayerSetupMenu
+                var menu = Instantiate(original, parent);
                 input.uiInputModule = menu.GetComponentInChildren<InputSystemUIInputModule>();
                 menu.GetComponent<PlayerSetupMenuController>().SetPlayerIndex(input.playerIndex);
 
-                PlayerConfigManager.Instance.pressAs[input.playerIndex - 1].SetActive(false);
+                //Remove "Press A"
+                Destroy(menuToReplace);
             }
         }
     }

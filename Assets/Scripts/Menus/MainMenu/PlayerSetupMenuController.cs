@@ -33,12 +33,12 @@ public class PlayerSetupMenuController : MonoBehaviour
     {
         playerColor.SetupColor(color, Color.black);
         PlayerConfigManager.Instance.SetPlayerColor(playerIndex, color);
-
-        readyButton.Select();
     }
 
     public void ReadyPlayer()
     {
+        readyButton.interactable = false;
+
         PlayerConfigManager.Instance.ReadyPlayer(playerIndex);
 
         Debug.Log("Player " + playerIndex + " is ready!");
