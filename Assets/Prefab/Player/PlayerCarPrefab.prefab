@@ -33572,8 +33572,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1620367031715394238, guid: a4a756f0668ff30458c323f170715593,
         type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620367031715394238, guid: a4a756f0668ff30458c323f170715593,
+        type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620367031715394238, guid: a4a756f0668ff30458c323f170715593,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 1620367031715394238, guid: a4a756f0668ff30458c323f170715593,
         type: 3}
@@ -33603,7 +33613,7 @@ PrefabInstance:
     - target: {fileID: 1620367031715394238, guid: a4a756f0668ff30458c323f170715593,
         type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].probability
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1620367031715394238, guid: a4a756f0668ff30458c323f170715593,
         type: 3}
