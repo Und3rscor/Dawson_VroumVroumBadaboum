@@ -78,7 +78,6 @@ public class RespawnManager : MonoBehaviour
                 //Sets the respawn point to the previous checkpoint
                 return checkpoints[nextCheckpoint - 1].gameObject;
             }
-            
         }
         else
         {
