@@ -53,4 +53,10 @@ public class CameraExtras : MonoBehaviour
             reverseCam.Priority = 1;
         }
     }
+
+    public void ResetCamsToDefault()
+    {
+        mainCam.Priority = 2;
+        reverseCam.Priority = 1;
+    }
 }

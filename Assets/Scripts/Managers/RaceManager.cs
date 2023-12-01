@@ -179,6 +179,12 @@ public class RaceManager : MonoBehaviour
         //Grabs the respawnManager
         RespawnManager rm = obj.GetComponent<RespawnManager>();
 
+        //Sets first player in first place for initialization
+        if (firstPlacePlayer == null)
+        {
+            firstPlacePlayer = rm;
+        }
+
         //Changes the name of the player object for easier access in debugging
         obj.name = "Player " + playerID;
 

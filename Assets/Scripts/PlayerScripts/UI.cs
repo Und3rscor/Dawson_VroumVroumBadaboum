@@ -150,7 +150,6 @@ public class UI : MonoBehaviour
     {
         score += 1000;
         kills++;
-        Debug.Log(kills);
     }
 
     private void Scoreboard()
