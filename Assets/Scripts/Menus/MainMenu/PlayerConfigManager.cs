@@ -56,6 +56,10 @@ public class PlayerConfigManager : MonoBehaviour
         if (playerConfigs.All(p => p.IsReady == true))
         {
             spawningEnabled = false;
+
+            //Fix main menu visual glitch
+            FindObjectOfType<MainMenu>().FixVisualGlitchBeforeLoad();
+
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
