@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BoostPadManager : MonoBehaviour
 {
@@ -17,6 +18,21 @@ public class BoostPadManager : MonoBehaviour
     public float Lvl1boostForce { get { return lvl1boostForce; } }
     public float Lvl2boostForce { get { return lvl2boostForce; } }
     public BoostPad[] BoostPads { get { return boostPads; } }
+
+    //BoostPadManager Instance
+    public static BoostPadManager Instance { get { return instance; } }
+    private static BoostPadManager instance;
+
+    private void Awake()
+    {
+        //Instance stuff
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()

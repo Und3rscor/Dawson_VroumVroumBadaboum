@@ -405,8 +405,27 @@ public class ArcadeVehicleController : MonoBehaviour
         }
     }
 
-    public void PlayBoostFeedback()
+    public void BoostPlayer(int boostPadLevel, Vector3 direction)
     {
+        float boostForce = 0.0f;
+
+        //Sets the boost force
+        if (boostPadLevel == 0)
+        {
+            boostForce = BoostPadManager.Instance.Lvl0boostForce;
+        }
+        else if (boostPadLevel == 1)
+        {
+            boostForce = BoostPadManager.Instance.Lvl1boostForce;
+        }
+        else if (boostPadLevel == 2)
+        {
+            boostForce = BoostPadManager.Instance.Lvl2boostForce;
+        }
+
+        //Boosts player
+        rb.AddForce(direction * boostForce, ForceMode.Impulse);
+
         BoostFeedback?.PlayFeedbacks(); // call boost feedback
     }
 
@@ -691,6 +710,9 @@ public class ArcadeVehicleController : MonoBehaviour
 
         //Sets the nextCheckpoint to the same as the first player
         respawnManager.NextCheckpoint = RaceManager.Instance.FirstPlacePlayer.NextCheckpoint;
+
+        //Respawn Boost
+        BoostPlayer(0, RaceManager.Instance.RespawnPoint.transform.forward);
     }
 
     private void RespawnToggle(bool toggle)

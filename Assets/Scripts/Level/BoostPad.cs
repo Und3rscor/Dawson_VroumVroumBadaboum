@@ -87,25 +87,7 @@ public class BoostPad : MonoBehaviour
         }
     }
 
-    private void BoostPlayer(Rigidbody rb)
-    {
-        //Sets the boost force
-        if (boostPadLevel == 0)
-        {
-            boostForce = bPM.Lvl0boostForce;
-        }
-        else if (boostPadLevel == 1)
-        {
-            boostForce = bPM.Lvl1boostForce;
-        }
-        else if (boostPadLevel == 2)
-        {
-            boostForce = bPM.Lvl2boostForce;
-        }
-
-        //Boosts player
-        rb.AddForce(-transform.forward * boostForce, ForceMode.Impulse);
-    }
+    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -114,10 +96,8 @@ public class BoostPad : MonoBehaviour
             //Grabs the AVC
             ArcadeVehicleController avc = other.GetComponent<ArcadeVehicleController>();
 
-            //Plays feedback
-            avc.PlayBoostFeedback();
-
-            BoostPlayer(avc.RiBy);
+            //Boosts player
+            avc.BoostPlayer(boostPadLevel, -this.transform.forward);
 
             //If it's the first player, upgrade boostpad
             if (avc.gameObject.GetComponent<RespawnManager>() == RaceManager.Instance.FirstPlacePlayer)
