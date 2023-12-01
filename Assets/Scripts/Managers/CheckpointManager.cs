@@ -10,6 +10,21 @@ public class CheckpointManager : MonoBehaviour
 
     public Checkpoint[] Checkpoints { get { return checkpoints; } }
 
+    //CheckpointManager Instance
+    public static CheckpointManager Instance { get { return instance; } }
+    private static CheckpointManager instance;
+
+    private void Awake()
+    {
+        //Instance stuff
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

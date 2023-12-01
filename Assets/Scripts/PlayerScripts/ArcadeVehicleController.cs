@@ -9,6 +9,8 @@ using UnityEngine.Events;
 
 public class ArcadeVehicleController : MonoBehaviour
 {
+    //HAS THINGS TO DISABLE ON RELEASE
+
     #region Fields
     //Car Stats
     [Header("Stats")]
@@ -139,6 +141,8 @@ public class ArcadeVehicleController : MonoBehaviour
         //UI Setup
         NosToUI();
         HealthToUI();
+
+        Debug.Log("Has things to disable on release");
     }
 
     private void Update()
@@ -156,11 +160,8 @@ public class ArcadeVehicleController : MonoBehaviour
         //Cooling stuff
         CoolingManager();
 
-        //Blow Up Override
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            BlowUp(null);
-        }
+        //DISABLE ON RELEASE
+        DebugInput();
 
         //Spin bump checker
         if (model.transform.localRotation.y != 0)
@@ -170,6 +171,25 @@ public class ArcadeVehicleController : MonoBehaviour
         else
         {
             spinning = false;
+        }
+    }
+
+    private void DebugInput()
+    {
+        //Blow Up Override
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            BlowUp(null);
+        }
+
+        //Fastforward
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            var checkpoints = CheckpointManager.Instance.Checkpoints;
+
+            this.transform.position = checkpoints[checkpoints.Length - 1].transform.position;
+
+            respawnManager.NextCheckpoint = checkpoints.Length - 1;
         }
     }
 

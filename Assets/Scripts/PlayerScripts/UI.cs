@@ -45,6 +45,10 @@ public class UI : MonoBehaviour
     public int RespawnTimer { get { return respawnTimer; } set { respawnTimer = value; } }
     private int respawnTimer;
 
+    //Kills variables
+    public int Kills { get { return kills; } }
+    private int kills;
+
     private TextMeshProUGUI respawnTimerDisplay;
 
     //Blue Zone Damage Visuals variable
@@ -145,6 +149,8 @@ public class UI : MonoBehaviour
     public void Kill()
     {
         score += 1000;
+        kills++;
+        Debug.Log(kills);
     }
 
     private void Scoreboard()

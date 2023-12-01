@@ -45,7 +45,7 @@ public class Checkpoint : MonoBehaviour
                 if (this.gameObject.tag == "Finishline")
                 {
                     //Launch Scoreboard
-                    RaceManager.Instance.FinishScene();
+                    RaceManager.Instance.FinishScene(avc);
                 }
             }
         }

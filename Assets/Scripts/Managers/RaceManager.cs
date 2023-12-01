@@ -13,8 +13,6 @@ public class RaceManager : MonoBehaviour
 {
     [SerializeField] private GameObject respawnPoint;
 
-    private CheckpointManager checkpointManager;
-
     private List<PlayerInput> playerInputs;
 
     private int playerID;
@@ -52,8 +50,6 @@ public class RaceManager : MonoBehaviour
 
     private void Start()
     {
-        checkpointManager = FindObjectOfType<CheckpointManager>();
-
         //Initialize playerList
         playerList = new List<RespawnManager>();
 
@@ -90,16 +86,20 @@ public class RaceManager : MonoBehaviour
         if (player.NextCheckpoint >= firstPlacePlayerNextCheckpoint)
         {
             //Calculates distance to said checkpoint
-            float distance = Vector3.Distance(player.transform.position, checkpointManager.Checkpoints[player.NextCheckpoint].transform.position);
-
-            //Then checks if the distance of the player is smaller than the distance of the player in first place
-            //If it is smaller, assigns that player as the new first place player
-            //If the player if the first place player, assigns it's current distance
-            if (distance < firstPlacePlayerDistanceToFinish || player == firstPlacePlayer)
+            if (player.NextCheckpoint < CheckpointManager.Instance.Checkpoints.Length)
             {
-                firstPlacePlayer = player;
-                firstPlacePlayerDistanceToFinish = distance;
-                firstPlacePlayerNextCheckpoint = player.NextCheckpoint;
+                Vector3 target = CheckpointManager.Instance.Checkpoints[player.NextCheckpoint].transform.position;
+                float distance = Vector3.Distance(player.transform.position, target);
+                
+                //Then checks if the distance of the player is smaller than the distance of the player in first place
+                //If it is smaller, assigns that player as the new first place player
+                //If the player if the first place player, assigns it's current distance
+                if (distance < firstPlacePlayerDistanceToFinish || player == firstPlacePlayer)
+                {
+                    firstPlacePlayer = player;
+                    firstPlacePlayerDistanceToFinish = distance;
+                    firstPlacePlayerNextCheckpoint = player.NextCheckpoint;
+                }
             }
         }
     }
@@ -118,8 +118,31 @@ public class RaceManager : MonoBehaviour
         InputToggle(true);
     }
 
-    public void FinishScene()
+    public void FinishScene(ArcadeVehicleController winningPlayer)
     {
+        var playerConfigs = PlayerConfigManager.Instance.GetPlayerConfigs().ToArray();
+        var players = playerList.ToArray();
+
+        //Gives all ui scores to the player configs
+        for (int i = 0; i < playerConfigs.Length; i++)
+        {
+            var player = players[i].GetComponent<ArcadeVehicleController>();
+
+            Debug.Log(player.UI.Kills);
+            playerConfigs[i].Score = player.UI.Score;
+            playerConfigs[i].Kills = player.UI.Kills;
+            playerConfigs[i].Name = player.gameObject.name;
+
+            if (player == winningPlayer)
+            {
+                playerConfigs[i].FirstPlayer = true;
+            }
+            else
+            {
+                playerConfigs[i].FirstPlayer = false;
+            }
+        }
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -163,7 +186,7 @@ public class RaceManager : MonoBehaviour
         playerList.Add(rm);
 
         //Changes the player's checkpoint list to the list provided
-        rm.UpdateCheckpointList(checkpointManager.Checkpoints);
+        rm.UpdateCheckpointList(CheckpointManager.Instance.Checkpoints);
 
         //Gives the player car a random color
         //Feature removed for the time being
