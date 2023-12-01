@@ -79,9 +79,17 @@ public class MainMenu : MonoBehaviour
         pim.EnableJoining();
     }
 
+    public void FixVisualGlitchBeforeLoad()
+    {
+        RedrawMenu(menus[8]);
+    }
+
     public void GrabButton(GameObject menu)
     {
-        mEventSystem.SetSelectedGameObject(menu.GetComponentInChildren<Button>().gameObject);
+        if (menu.GetComponentInChildren<Button>() != null)
+        {
+            mEventSystem.SetSelectedGameObject(menu.GetComponentInChildren<Button>().gameObject);
+        }        
     }
 
     public void QuitGame()
