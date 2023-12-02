@@ -48,14 +48,6 @@ public class RaceManager : MonoBehaviour
     private float firstPlacePlayerDistanceToFinish = float.MaxValue;
     private int firstPlacePlayerNextCheckpoint = 0;
 
-    private void Start()
-    {
-        //Initialize playerList
-        playerList = new List<RespawnManager>();
-
-        //FindUI();
-    }
-
     private void Awake()
     {
         //Instance stuff
@@ -66,6 +58,9 @@ public class RaceManager : MonoBehaviour
         }
 
         instance = this;
+
+        //Initialize playerList
+        playerList = new List<RespawnManager>();
 
         playerInputs = new List<PlayerInput>();
     }
