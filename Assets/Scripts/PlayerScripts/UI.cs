@@ -143,18 +143,31 @@ public class UI : MonoBehaviour
 
     public void Checkpoint()
     {
-        score += 50;
+        AddScore(50);
     }
 
-    public void Kill()
+    public void Kill(bool latestDamageIsProjectile)
     {
-        score += 1000;
+        if (latestDamageIsProjectile)
+        {
+            AddScore(800);
+        }
+        else
+        {
+            AddScore(1000);
+        }
+        
         kills++;
+    }
+
+    public void AddScore(int scoreToAdd)
+    {
+        score += scoreToAdd;
     }
 
     private void Scoreboard()
     {
-        score += (int)speedometer / 10;
+        AddScore((int)speedometer / 10);
 
         Invoke("Scoreboard", 1.0f);
     }

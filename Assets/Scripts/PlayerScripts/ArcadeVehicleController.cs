@@ -54,6 +54,7 @@ public class ArcadeVehicleController : MonoBehaviour
     [Range(0, 1)] public float minPitch;
     [Range(1, 3)] public float MaxPitch;
     public AudioSource SkidSound;
+    [HideInInspector] public bool latestDamageIsProjectile = true;
 
     //Car variables
     private int speedometer;
@@ -161,7 +162,7 @@ public class ArcadeVehicleController : MonoBehaviour
         CoolingManager();
 
         //DISABLE ON RELEASE
-        DebugInput();
+        //DebugInput();
 
         //Spin bump checker
         if (model.transform.localRotation.y != 0)
@@ -311,6 +312,19 @@ public class ArcadeVehicleController : MonoBehaviour
             rb.velocity = Vector3.Lerp(rb.velocity, rb.velocity + Vector3.down * gravity, Time.deltaTime * gravity);
         }
 
+        CrownScoring();
+
+    }
+
+    /// <summary>
+    /// Add 1 point per frame while you have the crown
+    /// </summary>
+    private void CrownScoring()
+    {
+        if (RaceManager.Instance.FirstPlacePlayer == this)
+        {
+            ui.AddScore(1);
+        }
     }
 
     public void Visuals()
@@ -666,7 +680,7 @@ public class ArcadeVehicleController : MonoBehaviour
             if (damageSource != null)
             {
                 //Gives a kill to the player that killed this player
-                damageSource.ui.Kill();
+                damageSource.ui.Kill(latestDamageIsProjectile);
 
                 //If you died with the audio listener, give it to the player that killed you
                 AudioListener myListener = GetComponentInChildren<AudioListener>();
@@ -788,6 +802,12 @@ public class ArcadeVehicleController : MonoBehaviour
 
                     //Deals damage
                     aVC.TakeDamage(spinDamage, this);
+
+                    //Gives score
+                    ui.AddScore(50);
+
+                    //Switches latest damage
+                    aVC.latestDamageIsProjectile = false;
 
                     //Pushes the enemy
                     Rigidbody riby = aVC.RiBy;

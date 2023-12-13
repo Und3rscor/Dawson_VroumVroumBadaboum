@@ -1,3 +1,4 @@
+using Mono.CompilerServices.SymbolWriter;
 using MoreMountains.Tools;
 using System.Collections;
 using System.Collections.Generic;
@@ -59,8 +60,17 @@ public class Projectile : MonoBehaviour
             //If the projectile collides with a player
             if (coll.transform.tag == "MainPlayer")
             {
+                //Grabs avc
+                var avc = coll.gameObject.GetComponentInParent<ArcadeVehicleController>();
+
                 //Deals damage
-                coll.gameObject.GetComponentInParent<ArcadeVehicleController>().TakeDamage(damage, source);
+                avc.TakeDamage(damage, source);
+
+                //Gives score
+                source.UI.AddScore(5);
+
+                //Switches latest damage source
+                avc.latestDamageIsProjectile = true;
 
                 //Plays the sfx before destroying the projectile
                 Die();
