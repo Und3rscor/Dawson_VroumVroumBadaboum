@@ -72,16 +72,21 @@ public class MainMenu : MonoBehaviour
 
     public void LocalPlayScreen()
     {
-        RedrawMenu(menus[7]);
+        RedrawMenu(menus[2]);
         volumeSlider.value = volumeLevel;
 
         GetComponentInChildren<PlayerSetupMenuController>().SetPlayerIndex(0);
         pim.EnableJoining();
     }
 
+    public void OptionScreen()
+    {
+        RedrawMenu(menus[1]);
+    }
+
     public void FixVisualGlitchBeforeLoad()
     {
-        RedrawMenu(menus[8]);
+        RedrawMenu(menus[3]);
     }
 
     public void GrabButton(GameObject menu)
