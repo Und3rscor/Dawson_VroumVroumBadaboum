@@ -61,6 +61,7 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
+        FixVisualGlitchBeforeLoad();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         AudioListener.volume = volumeLevel;
     }
@@ -84,12 +85,12 @@ public class MainMenu : MonoBehaviour
         RedrawMenu(menus[1]);
     }
 
-    public void FixVisualGlitchBeforeLoad()
+    private void FixVisualGlitchBeforeLoad()
     {
         RedrawMenu(menus[3]);
     }
 
-    public void GrabButton(GameObject menu)
+    private void GrabButton(GameObject menu)
     {
         if (menu.GetComponentInChildren<Button>() != null)
         {

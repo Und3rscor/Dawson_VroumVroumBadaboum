@@ -7,9 +7,9 @@ using UnityEngine.InputSystem.UI;
 
 public class SpawnPlayerSetupMenu : MonoBehaviour
 {
-    public GameObject mainPlayerSetupMenuPrefab;
-    public GameObject playerSetupMenuPrefab;
-    public PlayerInput input;
+    [SerializeField] private GameObject mainPlayerSetupMenuPrefab;
+    [SerializeField] private GameObject playerSetupMenuPrefab;
+    [SerializeField] private PlayerInput input;
 
     private void Awake()
     {
@@ -19,6 +19,7 @@ public class SpawnPlayerSetupMenu : MonoBehaviour
             mainRootMenu.SetActive(false);
             var menu = Instantiate(mainPlayerSetupMenuPrefab);
             input.uiInputModule = menu.GetComponentInChildren<InputSystemUIInputModule>();
+            PlayerConfigManager.Instance.GrabMenu(menu.GetComponent<MainMenu>());
         }
         else
         {

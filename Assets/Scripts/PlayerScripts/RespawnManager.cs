@@ -54,6 +54,9 @@ public class RespawnManager : MonoBehaviour
         this.gameObject.transform.position = respawnPoint.transform.position + (Vector3.up * 10);
         this.gameObject.transform.rotation = spawnRotation;
 
+        //Sets the nextCheckpoint to the same as the first player
+        nextCheckpoint = RaceManager.Instance.FirstPlacePlayer.NextCheckpoint;
+
         //Tells the car to reenable itself
         GetComponent<ArcadeVehicleController>().CarRespawn();
 

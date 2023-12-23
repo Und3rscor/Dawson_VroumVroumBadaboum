@@ -16,6 +16,8 @@ public class PlayerConfigManager : MonoBehaviour
     [Header("SceneSetup")]
     [SerializeField] private int gameSceneBuildIndex;
 
+    private MainMenu mainMenu;
+
     public GameObject[] playerSlots;
 
     public PlayerConfig[] Players { get; private set; }
@@ -54,6 +56,11 @@ public class PlayerConfigManager : MonoBehaviour
         playerConfigs[index].Mat = mat;
     }
 
+    public void GrabMenu(MainMenu menu)
+    {
+        mainMenu = menu;
+    }
+
     public void ReadyPlayer(int index)
     {
         playerConfigs[index].IsReady = true;
@@ -61,13 +68,11 @@ public class PlayerConfigManager : MonoBehaviour
         {
             spawningEnabled = false;
 
-            //Fix main menu visual glitch
-            FindObjectOfType<MainMenu>().FixVisualGlitchBeforeLoad();
-
             //Make the player array
             players = playerConfigs.ToArray();
 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            //Launches the game
+            mainMenu.PlayGame();
         }
     }
 
@@ -75,8 +80,6 @@ public class PlayerConfigManager : MonoBehaviour
     {
         if (spawningEnabled && !playerConfigs.Any(p => p.PlayerIndex == input.playerIndex))
         {
-            Debug.Log("Player Joined " + input.playerIndex.ToString());
-
             input.transform.SetParent(transform);
 
             playerConfigs.Add(new PlayerConfig(input));

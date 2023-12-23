@@ -142,8 +142,6 @@ public class ArcadeVehicleController : MonoBehaviour
         //UI Setup
         NosToUI();
         HealthToUI();
-
-        Debug.Log("Has things to disable on release");
     }
 
     private void Update()
