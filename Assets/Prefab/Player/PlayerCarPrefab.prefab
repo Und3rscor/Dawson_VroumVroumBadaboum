@@ -11644,7 +11644,7 @@ MonoBehaviour:
     - rid: 8466624860495020032
       type: {class: MMF_Graphic, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
-        Active: 1
+        Active: 0
         UniqueID: 307530370
         Label: Graphic_SDI_Top
         ChannelMode: 0
@@ -11749,7 +11749,7 @@ MonoBehaviour:
     - rid: 8466624860495020033
       type: {class: MMF_Graphic, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
-        Active: 1
+        Active: 0
         UniqueID: 233192438
         Label: Graphic_SDI_Bot
         ChannelMode: 0
@@ -17984,10 +17984,10 @@ RectTransform:
   m_Father: {fileID: 2957814748235291979}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 34, y: 50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 100, y: -1012}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3176195321468570410
 CanvasRenderer:
@@ -23936,10 +23936,10 @@ RectTransform:
   m_Father: {fileID: 2957814748235291979}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 9, y: -34}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: -1876, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5210305784235795186
 CanvasRenderer:
@@ -31040,10 +31040,10 @@ RectTransform:
   m_Father: {fileID: 2957814748235291979}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -26, y: 50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 100, y: -1012}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8444216014653091519
 CanvasRenderer:
