@@ -742,9 +742,6 @@ public class ArcadeVehicleController : MonoBehaviour
 
         camExtras.ResetCamsToDefault();
 
-        //Sets the nextCheckpoint to the same as the first player
-        respawnManager.NextCheckpoint = RaceManager.Instance.FirstPlacePlayer.NextCheckpoint;
-
         //Respawn Boost
         BoostPlayer(0, RaceManager.Instance.RespawnPoint.transform.forward);
     }
