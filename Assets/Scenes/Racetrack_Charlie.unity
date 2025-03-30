@@ -18609,10 +18609,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 928243675, guid: b3c3929ae8af3444eaacc02ab85eb5ef, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 928243678, guid: b3c3929ae8af3444eaacc02ab85eb5ef, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -18632,14 +18628,6 @@ PrefabInstance:
     - target: {fileID: 928243678, guid: b3c3929ae8af3444eaacc02ab85eb5ef, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.12761532
-      objectReference: {fileID: 0}
-    - target: {fileID: 1930575057, guid: b3c3929ae8af3444eaacc02ab85eb5ef, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1930575058, guid: b3c3929ae8af3444eaacc02ab85eb5ef, type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1925981547900679243, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
         type: 3}
@@ -18696,11 +18684,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1925981547900679245, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1925981547900679601, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
         type: 3}
       propertyPath: m_Name
@@ -18736,11 +18719,6 @@ PrefabInstance:
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 2268018935610863250, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3274400591295095062, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18766,11 +18744,6 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.2531438
       objectReference: {fileID: 0}
-    - target: {fileID: 3425080455145710082, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3805602943424129796, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -18779,16 +18752,6 @@ PrefabInstance:
     - target: {fileID: 3897323075715477908, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3958748058826485637, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5816559653468482013, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -19624,66 +19587,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1093129488 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1925981547900679601, guid: b3c3929ae8af3444eaacc02ab85eb5ef,
-    type: 3}
-  m_PrefabInstance: {fileID: 856754191}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1093129497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1093129488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efdfaf6364361214db8eaa7f33eb3d39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementMode: 0
-  GroundCheck: 0
-  drivableSurface:
-    serializedVersion: 2
-    m_Bits: 0
-  MaxSpeed: 150
-  accelaration: 15
-  turn: 4.4
-  gravity: 7
-  downforce: 5
-  AirControl: 0
-  kartLike: 0
-  driftMultiplier: 1.5
-  rb: {fileID: 0}
-  carBody: {fileID: 0}
-  frictionCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  turnCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  frictionMaterial: {fileID: 0}
-  BodyMesh: {fileID: 0}
-  FrontWheels:
-  - {fileID: 0}
-  - {fileID: 0}
-  RearWheels:
-  - {fileID: 0}
-  - {fileID: 0}
-  carVelocity: {x: 0, y: 0, z: 0}
-  BodyTilt: 0
-  engineSound: {fileID: 0}
-  minPitch: 0
-  MaxPitch: 0
-  SkidSound: {fileID: 0}
-  skidWidth: 0
 --- !u!1 &1165698868
 GameObject:
   m_ObjectHideFlags: 1
